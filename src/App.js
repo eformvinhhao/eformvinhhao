@@ -22,9 +22,6 @@ function App() {
     { title: "Mã_BM", field: "Mã_BM" },
     { title: "Tên_BM", field: "Tên_BM"},
     { title: "Bộ_phận_ban_hành", field: "Bộ_phận_ban_hành", grouping: true },
-    { title: "Bộ_phận_sử_dụng", field: "Bộ_phận_sử_dụng", grouping: true },
-    { title: "Phiên_bản", field: "Phiên_bản", grouping: false },
-    { title: "Ngày_hiệu_lực", field: "Ngày_hiệu_lực", grouping: false },
     { title: "Link", field: "Link", grouping: false,
     render: (rowData:any) => (<a
         href={rowData.Link}
