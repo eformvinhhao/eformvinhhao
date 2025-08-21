@@ -29,8 +29,6 @@ function App() {
         style={{ textDecoration: 'none' }}>
         {rowData.Link}
       </a>)},
-    { title: "PIC", field: "PIC", grouping: true },
-    { title: "Status", field: "Status", grouping: true },
   ]
   return (
     <div className="App">
