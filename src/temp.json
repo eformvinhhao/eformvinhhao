@@ -1,107 +1,373 @@
 [
   {
-    "Date": "14 Thg5 2025",
-    "Week": "20",
-    "Month": "5",
-    "Year": "2025",
-    "Name_of_material": "Tôm Chiên",
-    "Hazard_category": "Lỗi trong quá trình sản xuất",
-    "Hazard_name": "Lỗi trong quá trình sản xuất",
-    "Defect": "Độ kín bao bì kém",
-    "Acceptance_level": "Ổn định",
-    "Result": "Không ổn định",
-    "Origin_country": "Nhật Bản",
-    "Market": "Nhật Bản",
-    "Link": "https://www.recall.caa.go.jp/result/detail.php?rcl=00000033795&screenkbn=01"
+    "STT": "1",
+    "Mã_BM": "VHW/KTCN/HD-001/BM05",
+    "Tên_BM": "BM ghi nhận quá trình kiểm tra batch/lot, định lượng, giao nhận NVL phụ gia nước giải khát hương chanh có gas Lemona khoáng chanh - 64,000L",
+    "Bộ_phận_ban_hành": "PRODUCTION-PROCESSING",
+    "Link": "https://forms.office.com/r/ZFek437mMU"
   },
   {
-    "Date": "14 Thg5 2025",
-    "Week": "20",
-    "Month": "5",
-    "Year": "2025",
-    "Name_of_material": "Sữa hạnh nhân",
-    "Hazard_category": "Lỗi trong quá trình sản xuất",
-    "Hazard_name": "Lỗi trong quá trình sản xuất",
-    "Defect": "Nhiễm bẩn vi sinh vật",
-    "Acceptance_level": "Ổn định",
-    "Result": "Không ổn định",
-    "Origin_country": "Nhật Bản",
-    "Market": "Nhật Bản",
-    "Link": "https://www.recall.caa.go.jp/result/detail.php?rcl=00000033796&screenkbn=01"
+    "STT": "2",
+    "Mã_BM": "VHW/KTCN/HD-001/BM08",
+    "Tên_BM": "BM ghi nhận quá trình kiểm tra batch/lot, định lượng, giao nhận NVL phụ gia nước giải khát hương chanh có gas Lemona khoáng chanh - 32,000L",
+    "Bộ_phận_ban_hành": "PRODUCTION-PROCESSING",
+    "Link": "https://forms.office.com/r/1G813yMDbm"
   },
   {
-    "Date": "14 Thg5 2025",
-    "Week": "20",
-    "Month": "5",
-    "Year": "2025",
-    "Name_of_material": "Củ cải",
-    "Hazard_category": "Thuốc BVTV",
-    "Hazard_name": "Chlorantranillyprole",
-    "Defect": "Vượt giới hạn",
-    "Acceptance_level": "0,2ppm",
-    "Result": "0,33ppm",
-    "Origin_country": "Nhật Bản",
-    "Market": "Nhật Bản",
-    "Link": "https://www.recall.caa.go.jp/result/detail.php?rcl=00000033797&screenkbn=01"
+    "STT": "3",
+    "Mã_BM": "VHW/KTCN/HD-009/BM01",
+    "Tên_BM": "Biểu mẫu thực hiện công việc pha hóa chất",
+    "Bộ_phận_ban_hành": "PRODUCTION-PROCESSING",
+    "Link": "https://forms.office.com/r/yAhn3zjZVE"
   },
   {
-    "Date": "14 Thg5 2025",
-    "Week": "20",
-    "Month": "5",
-    "Year": "2025",
-    "Name_of_material": "Đậu nành và đậu phụ",
-    "Hazard_category": "Chất gây dị ứng",
-    "Hazard_name": "lúa mì",
-    "Defect": "Không khai báo trên nhãn",
-    "Acceptance_level": "Có ghi nhãn",
-    "Result": "Không ghi nhãn",
-    "Origin_country": "Nhật Bản",
-    "Market": "Nhật Bản",
-    "Link": "https://www.recall.caa.go.jp/result/detail.php?rcl=00000033798&screenkbn=01"
+    "STT": "4",
+    "Mã_BM": "VHW/KTCN/HD-010/BM01",
+    "Tên_BM": "BM thực hiện công việc pha muối",
+    "Bộ_phận_ban_hành": "PRODUCTION-PROCESSING",
+    "Link": "https://forms.office.com/r/Zxcve86h5g"
   },
   {
-    "Date": "14 Thg5 2025",
-    "Week": "20",
-    "Month": "5",
-    "Year": "2025",
-    "Name_of_material": "Trà đen Vân Nam",
-    "Hazard_category": "Thuốc BVTV",
-    "Hazard_name": "anthraquinone",
-    "Defect": "Vượt giới hạn",
-    "Acceptance_level": "0,02 mg/kg - ppm",
-    "Result": "0,057 +/- 0,029 mg/kg - ppm",
-    "Origin_country": "Trung Quốc",
-    "Market": "EU",
-    "Link": "https://webgate.ec.europa.eu/rasff-window/screen/notification/762740"
+    "STT": "5",
+    "Mã_BM": "BM01.VHW/KTCN/HD-005 ",
+    "Tên_BM": "BM theo dõi quá trình tái sinh cột than trong XLN",
+    "Bộ_phận_ban_hành": "PRODUCTION-PROCESSING",
+    "Link": "https://forms.office.com/r/6N3BCVP8MT"
   },
   {
-    "Date": "14 Thg5 2025",
-    "Week": "20",
-    "Month": "5",
-    "Year": "2025",
-    "Name_of_material": "Thức ăn nhẹ ngô",
-    "Hazard_category": "Thuốc BVTV",
-    "Hazard_name": "Imidaclopride",
-    "Defect": "Vượt giới hạn",
-    "Acceptance_level": "KPH",
-    "Result": "1497 +- 449 µg/kg - ppb",
-    "Origin_country": "Ai Cập",
-    "Market": "EU",
-    "Link": "https://webgate.ec.europa.eu/rasff-window/screen/notification/763412"
+    "STT": "6",
+    "Mã_BM": "VHW/KTCN/HD-011/BM01",
+    "Tên_BM": "BM theo dõi quá trình vệ sinh bồn chứa, lọc khu xử lý nước",
+    "Bộ_phận_ban_hành": "PRODUCTION-PROCESSING",
+    "Link": "https://forms.office.com/r/0aHashJDqb"
   },
   {
-    "Date": "13 Thg5 2025",
-    "Week": "20",
-    "Month": "5",
-    "Year": "2025",
-    "Name_of_material": "Bún gạo ",
-    "Hazard_category": "Lỗi trong quá trình sản xuất",
-    "Hazard_name": "Lỗi trong quá trình sản xuất",
-    "Defect": "HSD xác định sai",
-    "Acceptance_level": "In đúng",
-    "Result": "In sai",
-    "Origin_country": "Nhật Bản",
-    "Market": "Nhật Bản",
-    "Link": "https://www.recall.caa.go.jp/result/detail.php?rcl=00000033784&screenkbn=01"
+    "STT": "7",
+    "Mã_BM": "VHW/KTCN/HD-004/BM01",
+    "Tên_BM": "BM theo dõi vệ sinh lọc tại khu vực Chế Biến",
+    "Bộ_phận_ban_hành": "PRODUCTION-PROCESSING",
+    "Link": "https://forms.office.com/r/eXCrvwzbsg"
+  },
+  {
+    "STT": "8",
+    "Mã_BM": "BM01.VH/HACCP-QLCL/15",
+    "Tên_BM": "Biểu mẫu theo dõi hoạt động lọc final Syrup",
+    "Bộ_phận_ban_hành": "PRODUCTION-PROCESSING",
+    "Link": "https://forms.office.com/r/16inF8hZz1"
+  },
+  {
+    "STT": "9",
+    "Mã_BM": "BM01.VH/HD-SX/24",
+    "Tên_BM": "Centerline cụm RO375",
+    "Bộ_phận_ban_hành": "PRODUCTION-PROCESSING",
+    "Link": "https://forms.office.com/r/g9vBMppLxH"
+  },
+  {
+    "STT": "10",
+    "Mã_BM": "VHC/SX-HD-034/BM 01",
+    "Tên_BM": "BM GHI NHẬN THÔNG SỐ VẬN HÀNH XỬ LÝ NƯỚC TDS1900",
+    "Bộ_phận_ban_hành": "PRODUCTION-PROCESSING",
+    "Link": "https://forms.office.com/r/Wa9m6ZbjSj"
+  },
+  {
+    "STT": "11",
+    "Mã_BM": "BM01.VH/HD-SX/40",
+    "Tên_BM": "THÔNG SỐ VẬN HÀNH XỬ LÝ NƯỚC TDS 250",
+    "Bộ_phận_ban_hành": "PRODUCTION-PROCESSING",
+    "Link": "https://forms.office.com/r/g9WALmUXJR"
+  },
+  {
+    "STT": "12",
+    "Mã_BM": "MCH/HR-QĐ-009/BM01",
+    "Tên_BM": "Đơn xin nghỉ phép",
+    "Bộ_phận_ban_hành": "HR",
+    "Link": "https://forms.office.com/r/6ps2fZdMJB"
+  },
+  {
+    "STT": "13",
+    "Mã_BM": "VHW/ATTP/SSOP-003/BM02",
+    "Tên_BM": "Phiếu kiểm tra vệ sinh hằng ngày (Áp dụng cho Khu vực SX)",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/0yDZ0mygav"
+  },
+  {
+    "STT": "14",
+    "Mã_BM": "VHW/ATTP/SSOP-004/BM01",
+    "Tên_BM": "Phiếu kiểm tra vệ sinh hằng ngày (Áp dụng cho vệ sinh cá nhân)",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/Ktm7MBvYgR"
+  },
+  {
+    "STT": "15",
+    "Mã_BM": "Không có mã số VB",
+    "Tên_BM": "Bài kiểm tra kiến thức ATVSTP",
+    "Bộ_phận_ban_hành": "HR",
+    "Link": "https://forms.office.com/r/KP8JGY6LR2"
+  },
+  {
+    "STT": "17",
+    "Mã_BM": "MSC/NS/QĐ-005/BM01",
+    "Tên_BM": "Đơn xin xác nhận ngày công",
+    "Bộ_phận_ban_hành": "HR",
+    "Link": "https://forms.office.com/r/ZbmzsyQrYT"
+  },
+  {
+    "STT": "18",
+    "Mã_BM": "MSC/NS/QĐ-005/BM02",
+    "Tên_BM": "Phiếu xin phép vào trễ, về sớm, ra vào công ty trong giờ làm việc",
+    "Bộ_phận_ban_hành": "HR",
+    "Link": "https://forms.office.com/r/1BZnBwYV4v"
+  },
+  {
+    "STT": "19",
+    "Mã_BM": "BM01.VH/CS-NS/01",
+    "Tên_BM": "Đề nghị trợ cấp điện thoại di động",
+    "Bộ_phận_ban_hành": "HR",
+    "Link": "https://forms.office.com/r/EsVR6fgG7v"
+  },
+  {
+    "STT": "20",
+    "Mã_BM": "VHW/KV/QĐ-005/BM01",
+    "Tên_BM": "Phiếu kiểm tra vệ sinh hàng ngày",
+    "Bộ_phận_ban_hành": "WH",
+    "Link": "https://forms.office.com/r/Gd7795hQL1"
+  },
+  {
+    "STT": "21",
+    "Mã_BM": "VHW/KV/QĐ-005/BM03",
+    "Tên_BM": "Bảng kê nhâp bao bì thu hồi hàng ngày",
+    "Bộ_phận_ban_hành": "WH",
+    "Link": "https://forms.office.com/r/NPLmmSvWjL"
+  },
+  {
+    "STT": "22",
+    "Mã_BM": "VHW/KV/QĐ-03/BM02",
+    "Tên_BM": "Phiếu kiểm tra Pallet ( A5)",
+    "Bộ_phận_ban_hành": "WH",
+    "Link": "https://forms.office.com/r/sSLRBukiNM"
+  },
+  {
+    "STT": "23",
+    "Mã_BM": "VHW/KV/QT-001/BM03",
+    "Tên_BM": "Phiếu kiểm tra Container (A5)",
+    "Bộ_phận_ban_hành": "WH",
+    "Link": "https://forms.office.com/r/J0KZtGJGKJ"
+  },
+  {
+    "STT": "24",
+    "Mã_BM": "VHW/ATTP/SSOP-005/BM01",
+    "Tên_BM": "Điều kiện vệ sinh khu vực bảo quản hóa chất",
+    "Bộ_phận_ban_hành": "WH",
+    "Link": "https://forms.office.com/r/2ULMADSKGh"
+  },
+  {
+    "STT": "25",
+    "Mã_BM": "VHW/ATTP/SSOP-007/BM01",
+    "Tên_BM": "Biểu mẫu kiểm soát động vật gây hại",
+    "Bộ_phận_ban_hành": "WH",
+    "Link": "https://forms.office.com/r/3dktNnsMkc"
+  },
+  {
+    "STT": "26",
+    "Mã_BM": "BM01.VH/HD-SX/16",
+    "Tên_BM": "BM theo dõi vận hành máy chiết Line 1",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/B2v3ecLuxK"
+  },
+  {
+    "STT": "27",
+    "Mã_BM": "BM01.VH/HD-SX/32",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành máy dán nhãn P.E Line 1",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/hNv4PC9YUa"
+  },
+  {
+    "STT": "28",
+    "Mã_BM": "VHC/SX-HD-020/BM01",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành máy in date Laser chai LINE 1",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/SGwWrPwe2Q"
+  },
+  {
+    "STT": "29",
+    "Mã_BM": "VHW/SX/HD-17/BM01",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành cụm máy Chiết Line 2",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/dv14CVUPby"
+  },
+  {
+    "STT": "30",
+    "Mã_BM": "BM02.VH/TT-SX/01",
+    "Tên_BM": "Báo cáo sản xuất hàng ca Line Pet",
+    "Bộ_phận_ban_hành": "PRODUCTION-PET",
+    "Link": "https://forms.office.com/r/aSKUxKgzqn"
+  },
+  {
+    "STT": "31",
+    "Mã_BM": "VHW/SX/HD-14/BM01",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành máy phóng nhãn Line 2",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/10e6jkSVp5"
+  },
+  {
+    "STT": "32",
+    "Mã_BM": "VHW/SX/HD-020/BM02",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành máy in date chai Line 2",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/tMx4VHXSz7"
+  },
+  {
+    "STT": "33",
+    "Mã_BM": "VHW/SX/HD-020/BM03",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành máy in date Laser bình",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/iU2rsTbicg"
+  },
+  {
+    "STT": "34",
+    "Mã_BM": "VHW/SX/HD-020/BM04",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành máy in date laser chai Line Krones",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/Z0zH33bAyg"
+  },
+  {
+    "STT": "35",
+    "Mã_BM": "VHW/SX/HD-025/BM01",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành máy chiết - tráng tinh Line 3",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/epCy1yvcdh"
+  },
+  {
+    "STT": "36",
+    "Mã_BM": "VHW/SX/HD-025/BM02",
+    "Tên_BM": "Biểu mẫu theo dõi công việc pha & sử dụng hóa chất Line 3",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/QYV50KwTnZ"
+  },
+  {
+    "STT": "37",
+    "Mã_BM": "VHW/SX/HD-38/BM01",
+    "Tên_BM": "Hồ sơ theo dõi công đoạn rửa bình Line 3",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/NAHZgRF7nT"
+  },
+  {
+    "STT": "38",
+    "Mã_BM": "VHW/SXL4/HD-04.BM02",
+    "Tên_BM": "Biểu mẫu kiểm tra thông số vận hành máy Contiroll - Conveyor khi đổi sản phẩm",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/4Z8aHPgtkx"
+  },
+  {
+    "STT": "39",
+    "Mã_BM": "VHC/SXL4-HD-004/BM01",
+    "Tên_BM": "Biểu mẫu kiểm tra thông số vận hành máy Contiroll ",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/epxRkH27hp"
+  },
+  {
+    "STT": "40",
+    "Mã_BM": "VHC/SXL4-HD-002/BM01",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành máy Cụm chiết rót line Krones",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/UGVbbCLveL"
+  },
+  {
+    "STT": "41",
+    "Mã_BM": "VHW/SXL4/HD-002/BM02",
+    "Tên_BM": "Biểu mẫu ghi nhận số lượng chai hỏng tại Filler - Checkmat",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/puugTXLSfA"
+  },
+  {
+    "STT": "42",
+    "Mã_BM": "VH/HD-SXL4/05/BM01",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành máy Packer",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/4J4zvNwa4t"
+  },
+  {
+    "STT": "43",
+    "Mã_BM": "VHW/SX/HD-046/BM01",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành máy rã lon",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/8HpcLmVpvZ"
+  },
+  {
+    "STT": "44",
+    "Mã_BM": "VHW/SX/HD-048/BM01",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành cụm máy chiết line 5",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/GqU6sjHpnW"
+  },
+  {
+    "STT": "45",
+    "Mã_BM": "VHW/SX/HD-052/BM01",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành cụm indate lon và đóng Block",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/CM6A58NFei"
+  },
+  {
+    "STT": "46",
+    "Mã_BM": "VHW/SX/HD-055/BM01",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành máy đóng thùng và cân trọng lượng",
+    "Bộ_phận_ban_hành": "PRODUCTION-FILLING",
+    "Link": "https://forms.office.com/r/zu2MLdjbXJ"
+  },
+  {
+    "STT": "47",
+    "Mã_BM": "VHC/SX-HD-001/BM01",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành máy Thủ Công",
+    "Bộ_phận_ban_hành": "PRODUCTION-PET",
+    "Link": "https://forms.office.com/r/UF636f1MF6"
+  },
+  {
+    "STT": "48",
+    "Mã_BM": "VHC/SX-HD-002/BM01",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành máy thổi Chiaming 1",
+    "Bộ_phận_ban_hành": "PRODUCTION-PET",
+    "Link": "https://forms.office.com/r/4QUQfKVcF7"
+  },
+  {
+    "STT": "49",
+    "Mã_BM": "VHC/SX-HD-002/BM02",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành máy thổi Chiaming 2",
+    "Bộ_phận_ban_hành": "PRODUCTION-PET",
+    "Link": "https://forms.office.com/r/YkWtBqG1Tr"
+  },
+  {
+    "STT": "50",
+    "Mã_BM": "BM01.VH/HD-SX/28",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành máy Cấp chai Lanfranchi",
+    "Bộ_phận_ban_hành": "PRODUCTION-PET",
+    "Link": "https://forms.office.com/r/WjN9P2wAUE"
+  },
+  {
+    "STT": "51",
+    "Mã_BM": "BM01.VH/HD-SX/11",
+    "Tên_BM": "Biểu mẫu ghi nhận thông số vận hành máy cấp chai Line 1",
+    "Bộ_phận_ban_hành": "PRODUCTION-PET",
+    "Link": "https://forms.office.com/r/jCA12k293Z"
+  },
+  {
+    "STT": "52",
+    "Mã_BM": "VHW/SX/HD-008.BM01",
+    "Tên_BM": "Nhật ký vận hành máy nén cao áp Fuji",
+    "Bộ_phận_ban_hành": "PRODUCTION-PET",
+    "Link": "https://forms.office.com/r/6iBcWZgfnY"
+  },
+  {
+    "STT": "53",
+    "Mã_BM": "BM01-QĐ/AN-001",
+    "Tên_BM": "BM hàng hóa ra vào cổng",
+    "Bộ_phận_ban_hành": "SECURITY",
+    "Link": "https://forms.office.com/r/e3hq6n9PQU"
+  },
+  {
+    "STT": "54",
+    "Mã_BM": "BM04-QLTSCĐ",
+    "Tên_BM": "BM tài sản ra vào cổng",
+    "Bộ_phận_ban_hành": "SECURITY",
+    "Link": "https://forms.office.com/r/5U7EftSguZ"
   }
 ]
