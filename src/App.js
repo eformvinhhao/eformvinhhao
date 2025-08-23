@@ -41,7 +41,7 @@ function App() {
         options={{
           sorting: true, search: true,
           searchFieldAlignment: "right", searchAutoFocus: true, searchFieldVariant: "standard",
-          filtering: true, paging: true, pageSizeOptions: [25, 50, 100], pageSize: 50,
+          filtering: true, paging: true, pageSizeOptions: [25, 50, 100], pageSize: 100,
           paginationType: "stepped", showFirstLastPageButtons: false, paginationPosition: "both", exportButton: true,
           exportAllData: true, exportFileName: "TableData", actionsColumnIndex: -1, selection: false, index :true,
           showSelectAllCheckbox: false, showTextRowsSelected: false, selectionProps: rowData => ({
