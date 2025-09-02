@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>JobEntry - Job Portal Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+            <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+                <h1 class="m-0 text-primary">JobEntry</h1>
+            </a>
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
+                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Jobs</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="job-list.html" class="dropdown-item active">Job List</a>
+                            <a href="job-detail.html" class="dropdown-item">Job Detail</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="category.html" class="dropdown-item">Job Category</a>
+                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="404.html" class="dropdown-item">404</a>
+                        </div>
+                    </div>
+                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                </div>
+                <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i class="fa fa-arrow-right ms-3"></i></a>
+            </div>
+        </nav>
+        <!-- Navbar End -->
+
+
+        <!-- Header End -->
+        <div class="container-xxl py-5 bg-dark page-header mb-5">
+            <div class="container my-5 pt-5 pb-4">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Job List</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb text-uppercase">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Job List</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- Header End -->
+
+
+        <!-- Jobs Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Danh Mục Biểu Mẫu</h1>
+                <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+                    <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-Filling">
+                                <h6 class="mt-n1 mb-0">Đóng gói</h6>
+                            </a>    
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill" href="#tab-XLN_CB">
+                                <h6 class="mt-n1 mb-0">Xử lý nước/Chế biến</h6>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-PET">
+                                <h6 class="mt-n1 mb-0">PET</h6>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-Security">
+                                <h6 class="mt-n1 mb-0">An ninh</h6>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-HR">
+                                <h6 class="mt-n1 mb-0">Nhân sự</h6>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-Maintenance">
+                                <h6 class="mt-n1 mb-0">Bảo trì</h6>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-QA">
+                                <h6 class="mt-n1 mb-0">QA</h6>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab-Filling" class="tab-pane fade show p-0 active">
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4 ">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/CIP_Expert-icon.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu số 1</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHC-PRODUC-2022</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 04</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" href="">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 01 Jan, 2015</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/com-logo-2.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Marketing Manager</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
+                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
+                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                                            <a class="btn btn-primary" href="">Apply Now</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: 01 Jan, 2045</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/com-logo-3.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Product Designer</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
+                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
+                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                                            <a class="btn btn-primary" href="">Apply Now</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: 01 Jan, 2045</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/com-logo-4.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Creative Director</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
+                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
+                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                                            <a class="btn btn-primary" href="">Apply Now</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: 01 Jan, 2045</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/com-logo-5.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Wordpress Developer</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
+                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
+                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                                            <a class="btn btn-primary" href="">Apply Now</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: 01 Jan, 2045</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-XLN_CB" class="tab-pane fade show p-0">
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/CIP_Expert-icon.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Điều kiện vệ sinh khu vực Sản xuất</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/ATTP/SSOP-003/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 2 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/K1mkkD3ia5?origin=lprLink">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/qacqvh_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7BC2E6B962-8F9C-4479-95AF-948524775335%7D&file=Data-%C2%A0%C4%90i%E1%BB%81u%20ki%E1%BB%87n%20v%E1%BB%87%20sinh%20khu%20v%E1%BB%B1c%20S%E1%BA%A3n%20xu%E1%BA%A5t%201.xlsx&action=default&mobileredirect=true&DefaultItemOpen=1">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45669</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/CIP_Expert-icon.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Phiếu kiểm tra vệ sinh hằng ngày (Áp dụng cho Khu vực SX)</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/ATTP/SSOP-003/BM02</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 3 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/0yDZ0mygav">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/qacqvh_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B1BE8AC22-85AF-4017-8478-2A079BE6BC11%7D&file=Data_SSOP_03_BM02_phi%E1%BA%BFu%20ki%E1%BB%83m%20tra%20v%E1%BB%87%20sinh%20h%C3%A0ng%20ng%C3%A0y.xlsx&action=default&mobileredirect=true&wdOrigin=OUTLOOK-METAOS.FILEBROWSER">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45670</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/CIP_Expert-icon.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Phiếu kiểm tra vệ sinh hằng ngày (Áp dụng cho vệ sinh cá nhân)</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/ATTP/SSOP-004/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 4 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/Ktm7MBvYgR">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/qacqvh_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B47E22B84-ED7A-46D1-AD5D-0A501103FF46%7D&file=VHW_SSOP-ATTP-004_BM01%20-%20PHI%E1%BA%BEU%20KI%E1%BB%82M%20TRA%20V%E1%BB%86%20SINH%20H%E1%BA%B0NG%20NG%C3%80Y%20(VS%20C%C3%81%20NH%C3%82N)%201.xlsx&action=edit&mobileredirect=true&wdMsFormsCorrelationId=6ad25ad7-0a91-485e-a7ab-8c7d0c837588&wdtf=%20Microsoft.Office.Excel.FMsFormsMetadataInWorkbookMetadata%3Atrue">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45671</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/CIP_Expert-icon.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Điều kiện vệ sinh khu vực bảo quản hóa chất</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/ATTP/SSOP-005/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 5 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45672</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/CIP_Expert-icon.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu kiểm soát động vật gây hại</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/ATTP/SSOP-007/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 6 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45673</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/CIP_Expert-icon.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">BM theo dõi vận hành máy chiết Line 1</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: BM01.VH/HD-SX/16</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 7 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/B2v3ecLuxK">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B81682431-ADAA-43CB-94E2-5629F02D96BF%7D&file=VHC_SX-HD-016_BM01%20-%20BI%E1%BB%82U%20M%E1%BA%AAU%20GHI%20NH%E1%BA%ACN%20TH%C3%94NG%20S%E1%BB%90%20V%E1%BA%ACN%20H%C3%80NH%20M%C3%81Y%20CHI%E1%BA%BET%20LINE%201.xlsx&action=edit&mobileredirect=true&wdMsFormsCorrelationId=eb7329d8-e9aa-40bc-af4f-40c20fa292d6&wdtf=%20Microsoft.Office.Excel.FMsFormsMetadataInWorkbookMetadata%3Atrue">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45674</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/CIP_Expert-icon.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận thông số vận hành máy dán nhãn P.E Line 1</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: BM01.VH/HD-SX/32</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 8 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/hNv4PC9YUa?origin=lprLink">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7BE24812D9-DE0D-4D61-9B0D-2BDF53EBAC5B%7D&file=VH_HD-SX-032_BM01%20-%20BI%E1%BB%82U%20M%E1%BA%AAU%20GHI%20NH%E1%BA%ACN%20TH%C3%94NG%20S%E1%BB%90%20V%E1%BA%ACN%20H%C3%80NH%20M%C3%81Y%20D%C3%81N%20NH%C3%83N%20P.E%20LINE%201.xlsx&action=edit&mobileredirect=true&wdMsFormsCorrelationId=ab6a40a8-8418-431f-8082-b139ad036e37&wdtf=%20Microsoft.Office.Excel.FMsFormsMetadataInWorkbookMetadata%3Atrue">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45675</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/CIP_Expert-icon.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận thông số vận hành máy in date Laser chai LINE 1</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHC/SX-HD-020/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 9 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/SGwWrPwe2Q?origin=lprLink">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7BF0A68006-AD7E-4142-A983-8136654BF012%7D&file=VHC_SX-HD-020_BM01%20-%20BI%E1%BB%82U%20M%E1%BA%AAU%20GHI%20NH%E1%BA%ACN%20TH%C3%94NG%20S%E1%BB%90%20V%E1%BA%ACN%20H%C3%80NH%20M%C3%81Y%20IN%20DATE%20LASER%20CHAI.xlsx&action=edit&mobileredirect=true&wdMsFormsCorrelationId=3e3e2fe0-3d92-45d2-9e43-f3af6eeef288&wdtf=%20Microsoft.Office.Excel.FMsFormsMetadataInWorkbookMetadata%3Atrue">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45676</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/CIP_Expert-icon.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận thông số vận hành cụm máy Chiết Line 2</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-17/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 10 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/dv14CVUPby?origin=lprLink">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B936486D4-9CF2-496D-85DC-3C00C2D46A5B%7D&file=VHW_SX-HD-017_BM01%20-%20BI%E1%BB%82U%20M%E1%BA%AAU%20GHI%20NH%E1%BA%ACN%20TH%C3%94NG%20S%E1%BB%90%20V%E1%BA%ACN%20H%C3%80NH%20C%E1%BB%A4M%20CHI%E1%BA%BET%20R%C3%93T%20LINE%202.xlsx&action=edit&mobileredirect=true&wdMsFormsCorrelationId=908d89af-45be-4e47-a1ea-b8d8df344473&wdtf=%20Microsoft.Office.Excel.FMsFormsMetadataInWorkbookMetadata%3Atrue">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45677</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/CIP_Expert-icon.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận thông số vận hành máy phóng nhãn Line 2</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-14/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 11 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/10e6jkSVp5">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7BDD9819FA-AEFD-47C3-95EE-D365AF1B702E%7D&file=Data-Th%C3%B4ng%20s%E1%BB%91%20VH%20m%C3%A1y%20ph%C3%B3ng%20nh%C3%A3n%20line%202.xlsx&action=default&mobileredirect=true">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45678</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/CIP_Expert-icon.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận thông số vận hành máy in date chai Line 2</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-020/BM02</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 12 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/tMx4VHXSz7">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7BFC9144C2-9D47-4F43-A7C9-BE2E119596AB%7D&file=Data_Th%C3%B4ng%20s%E1%BB%91%20VH%20m%C3%A1y%20in%20date%20laser%20line%202.xlsx&action=default&mobileredirect=true">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45679</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/CIP_Expert-icon.jpg" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận thông số vận hành máy in date Laser bình</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-020/BM03</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 13 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/iU2rsTbicg?origin=lprLink">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B47A6979E-BB82-43C5-8613-60E77EB35257%7D&file=VHW_SX_HD-020_BM03%20-%20BI%E1%BB%82U%20M%E1%BA%AAU%20GHI%20NH%E1%BA%ACN%20TH%C3%94NG%20S%E1%BB%90%20V%E1%BA%ACN%20H%C3%80NH%20M%C3%81Y%20IN%20DATE%20LASER%20B%C3%8CNH%2020L%20LINE%203%201.xlsx&action=edit&mobileredirect=true&wdMsFormsCorrelationId=89f85530-0753-42ba-ac51-e7ff7e6a40bc&wdtf=%20Microsoft.Office.Excel.FMsFormsMetadataInWorkbookMetadata%3Atrue">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45680</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận thông số vận hành máy in date laser chai Line Krones</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-020/BM04</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 14 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/Z0zH33bAyg?origin=lprLink">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B4323E1D2-D1FD-4D52-B391-E3154B0D244B%7D&file=Data_TSVH%20m%C3%A1y%20in%20date%20chai%20laser%20line%204.xlsx&action=default&mobileredirect=true">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45681</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận thông số vận hành máy chiết - tráng tinh Line 3</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-025/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 15 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/epCy1yvcdh?origin=lprLink">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/Documents/%C4%90%C3%93NG%20G%C3%93I%20LINE%203-%204-5/data_TSVH_chi%E1%BA%BFt_tr%C3%A1ng_tinh_line3.xlsx?d=w1dde3a56d15349caa7eee4d46f193ed7&csf=1&web=1&e=vmGAZ0">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45682</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu theo dõi công việc pha & sử dụng hóa chất Line 3</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-025/BM02</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 16 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/QYV50KwTnZ?origin=lprLink">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B2D506120-DB9F-4A6A-AFA9-FA35A30E978A%7D&file=VHC_SX-HD-025_BM02%20-%20BI%E1%BB%82U%20M%E1%BA%AAU%20THEO%20D%C3%95I%20C%C3%94NG%20VI%E1%BB%86C%20PHA%20V%C3%80%20S%E1%BB%AC%20D%E1%BB%A4NG%20H%C3%93A%20CH%E1%BA%A4T%20LINE%203%201.xlsx&action=edit&mobileredirect=true&wdMsFormsCorrelationId=80cebea2-8a2e-4cdb-bdfe-b9bc2424eaa0&wdtf=%20Microsoft.Office.Excel.FMsFormsMetadataInWorkbookMetadata%3Atrue">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45683</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Hồ sơ theo dõi công đoạn rửa bình Line 3</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-38/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 17 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/NAHZgRF7nT">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B3E16D2B2-BC93-43B0-87AD-27823A0E2D50%7D&file=VHW_SX_HD-38_BM01%20-%20H%E1%BB%92%20S%C6%A0%20THEO%20D%C3%95I%20C%C3%94NG%20%C4%90O%E1%BA%A0N%20R%E1%BB%ACA%20B%C3%8CNH%20LINE%203%201.xlsx&action=edit&mobileredirect=true&wdMsFormsCorrelationId=e79d61ab-2ee3-450a-8da6-a1b2d29e4a38&wdtf=%20Microsoft.Office.Excel.FMsFormsMetadataInWorkbookMetadata%3Atrue">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45684</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận quá trình CIP 3 bước Chlorine Line 1, 2</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHC/SX-HD-10/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 18 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7BC142F84A-B221-4357-99FB-0968097B625D%7D&file=3B_Chlorine_line%201%2C2.xlsx&action=default&mobileredirect=true">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45685</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận quá trình CIP 3 bước Chlorine Filler - Mixer carbo Line 1, 2</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHC/SX-HD-10/BM02</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 19 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B00B7D3CE-10DB-4DC2-A237-4D7ACA2D52DC%7D&file=Data_3B_Chlorine_Carbo_Mixer_line%202.xlsx&action=default&mobileredirect=true">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45686</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận quá trình CIP 5 bước hóa chất Line 1, 2</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHC/SX-HD-10/BM03</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 20 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7BEA26E18D-E65F-4051-9332-29C1A75BAF1C%7D&file=5B_HC_line12.xlsx&action=default&mobileredirect=true">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45687</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận quá trình CIP 5 bước hóa chất Filler - Mixer carbo Line 1, 2</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHC/SX-HD-10/BM04</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 21 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B1D3834F3-00A1-4F9C-8243-A11F3E57D0D4%7D&file=5B_HC_CarboMixer.xlsx&action=default&mobileredirect=true&wdOrigin=OUTLOOK-METAOS.FILEBROWSER">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45688</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận quá trình CIP 3 bước Chlorine Line 3</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHC/SX/HD-41/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 22 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B939C8BB9-D675-4B39-8298-2CF62465157C%7D&file=3Bchlorine-Line3.xlsx&action=default&mobileredirect=true&DefaultItemOpen=1">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45689</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận quá trình CIP 5 bước acid citric Line 3</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHC/SX/HD-41/BM02</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 23 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B3E57D2C5-E3F4-4A58-AB01-CFA845873699%7D&file=5B_acid_line3.xlsx&action=default&mobileredirect=true">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45690</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận quá trình CIP hệ thống UF line 3</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-41/BM04</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 24 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B9E2D4B9A-75FC-4ED6-88F9-E17EF882A9C1%7D&file=UF_line3.xlsx&action=default&mobileredirect=true">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45691</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận quá trình CIP 7 bước Divo + Acid +UF</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHC/SX-HD-041/BM03</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 25 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B62E0AA5A-CEE0-4FD6-863E-B85F5C9B827A%7D&file=7B_Divo_acid_line3.xlsx&action=default&mobileredirect=true&wdOrigin=OUTLOOK-METAOS.FILEBROWSER">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45692</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận quá trình CIP 3 bước Clorine Line 4</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-044/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 26 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7BF57C76B4-CA9F-4617-8088-F565BC52EC1A%7D&file=3B_Chlorine_Line4.xlsx&action=default&mobileredirect=true&wdOrigin=OUTLOOK-METAOS.FILEBROWSER">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45693</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận quá trình CIP 3 bước nóng Line 4</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-044/BM02</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 27 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B553515A9-7542-4FF3-82E6-30280A96992B%7D&file=3B_No%CC%81ng_Line4.xlsx&action=default&mobileredirect=true&wdOrigin=OUTLOOK-METAOS.FILEBROWSER">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45694</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận quá trình CIP 5 bước hóa chất Line 4</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-044/BM03</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 28 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B299EA704-B396-4F5D-9438-66D8C61B4B62%7D&file=5B_HC_Line4.xlsx&action=default&mobileredirect=true">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45695</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận quá trình CIP 5 bước Cyclodextrin Line 4</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-044/BM04</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 29 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7BD1F96924-C1D7-4E6B-B4E2-72611D8FC20F%7D&file=5B_Cyclodextrin_Line4.xlsx&action=default&mobileredirect=true">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45696</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận quá trình CIP 7 bước Cyclodextrin Line 4</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-044/BM05</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 30 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7BA2E3E5DE-24E2-48EA-9F7A-4B7B8F8A3B05%7D&file=7B_Cyclodextrin_Line4.xlsx&action=default&mobileredirect=true">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45697</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận quá trình CIP 3 bước Divoflow Line 4</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-044/BM06</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 31 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B1C3F1470-C4AF-4250-BCE8-9E5CD66E6176%7D&file=3B_Divoflow_Line4.xlsx&action=default&mobileredirect=true&wdOrigin=OUTLOOK-METAOS.FILEBROWSER">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45698</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">BIỂU MẪU GHI NHẬN QUÁ TRÌNH CIP 3 BƯỚC ACID HCL LINE 4</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-044/BM07</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 32 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B1B3CC1E8-13DD-4DCD-96BF-EEBA57ECCA50%7D&file=3B_HCL_Line4.xlsx&action=default&mobileredirect=true">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45699</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu kiểm tra thông số vận hành máy Contiroll - Conveyor khi đổi sản phẩm</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SXL4/HD-04.BM02</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 33 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/4Z8aHPgtkx">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B68F8F2C8-EDBE-4ADE-9672-9B2E2FEC1A15%7D&file=VHC_SXL4-HD-004_BM02%20-%20BI%E1%BB%82U%20M%E1%BA%AAU%20GHI%20NH%E1%BA%ACN%20TH%C3%94NG%20S%E1%BB%90%20V%E1%BA%ACN%20H%C3%80NH%20M%C3%81Y%20CONTIROLL-CONVEYOR%201.xlsx&action=edit&mobileredirect=true&wdMsFormsCorrelationId=652506e7-7d8c-4b75-a0f8-60e95d6090c5&wdtf=%20Microsoft.Office.Excel.FMsFormsMetadataInWorkbookMetadata%3Atrue">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45700</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu kiểm tra thông số vận hành máy Contiroll </h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHC/SXL4-HD-004/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 34 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/epxRkH27hp?origin=lprLink">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B43E6F428-A42C-4227-97FA-07012F58A829%7D&file=Data_TSVH%20m%C3%A1y%20contiroll%20line%204.xlsx&action=default&mobileredirect=true">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45701</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận thông số vận hành máy Cụm chiết rót line Krones</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHC/SXL4-HD-002/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 35 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/UGVbbCLveL">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7BCD2E634C-CC51-40F4-B4C9-9B1B2879F187%7D&file=VHC_SXL4-HD-002_BM01%20-%20BI%E1%BB%82U%20M%E1%BA%AAU%20GHI%20NH%E1%BA%ACN%20TH%C3%94NG%20S%E1%BB%90%20V%E1%BA%ACN%20H%C3%80NH%20M%C3%81Y%20C%E1%BB%A4M%20CHI%E1%BA%BET%20R%C3%93T%20LINE%20KRONES%202.xlsx&action=edit&mobileredirect=true&wdMsFormsCorrelationId=9e24ee07-3ff7-4583-9082-ec8f537b6a85&wdtf=%20Microsoft.Office.Excel.FMsFormsMetadataInWorkbookMetadata%3Atrue">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45702</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận số lượng chai hỏng tại Filler - Checkmat</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SXL4/HD-002/BM02</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 36 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/puugTXLSfA">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7BDA3E8BD3-9D66-449A-B8FD-7C8F6AE8F227%7D&file=VHC_SXL4-HD-002_BM02%20-%20BI%E1%BB%82U%20M%E1%BA%AAU%20GHI%20NH%E1%BA%ACN%20S%E1%BB%90%20L%C6%AF%E1%BB%A2NG%20CHAI%20H%E1%BB%8ENG%20T%E1%BA%A0I%20M%C3%81Y%20FILLER-CHECKMAT%20LINE%204.xlsx&action=edit&mobileredirect=true&wdMsFormsCorrelationId=e93d5a28-5e2a-4818-bc79-fe1c4602e5b0&wdtf=%20Microsoft.Office.Excel.FMsFormsMetadataInWorkbookMetadata%3Atrue">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45703</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận thông số vận hành máy Packer</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VH/HD-SXL4/05/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 37 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/4J4zvNwa4t?origin=lprLink">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B56212E90-313C-4714-B1B5-28D98D3EF967%7D&file=VHC_SXL4-HD-005_BM01%20-%C2%A0BI%E1%BB%82U%20M%E1%BA%AAU%20TH%C3%94NG%20S%E1%BB%90%20V%E1%BA%ACN%20H%C3%80NH%20M%C3%81Y%20PACKER.xlsx&action=edit&mobileredirect=true&wdMsFormsCorrelationId=a82f74ae-9ae3-4dd9-aa5b-2f499d29f48e&wdtf=%20Microsoft.Office.Excel.FMsFormsMetadataInWorkbookMetadata%3Atrue">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45704</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận thông số vận hành máy rã lon</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-046/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 38 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/8HpcLmVpvZ?origin=lprLink">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B668D6057-0533-452A-A4C1-E4A8D2AFE51A%7D&file=VHW_SX-046_BM01%20-%20BI%E1%BB%82U%20M%E1%BA%AAU%20GHI%20NH%E1%BA%ACN%20TH%C3%94NG%20S%E1%BB%90%20V%E1%BA%ACN%20H%C3%80NH%20M%C3%81Y%20R%C3%83%20LON%201.xlsx&action=edit&mobileredirect=true&wdMsFormsCorrelationId=f1ff3a3b-55d1-443b-a90b-68b50b4c2255&wdtf=%20Microsoft.Office.Excel.FMsFormsMetadataInWorkbookMetadata%3Atrue">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45705</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận thông số vận hành cụm máy chiết line 5</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-048/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 39 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/GqU6sjHpnW?origin=lprLink">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B007D4798-668B-4552-A086-05640DE1A1CB%7D&file=VHC_SX-HD-048_BM01%20-%20BI%E1%BB%82U%20M%E1%BA%AAU%20GHI%20NH%E1%BA%ACN%20TH%C3%94NG%20S%E1%BB%90%20V%E1%BA%ACN%20H%C3%80NH%20C%E1%BB%A4M%20CHI%E1%BA%BET%20R%C3%93T%20LINE%205.xlsx&action=edit&mobileredirect=true&wdMsFormsCorrelationId=8a1cc17c-a4b1-4e9e-adec-949812831553&wdtf=%20Microsoft.Office.Excel.FMsFormsMetadataInWorkbookMetadata%3Atrue">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45706</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận thông số vận hành cụm indate lon và đóng Block</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-052/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 40 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/CM6A58NFei?origin=lprLink">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B54F10A6F-85FF-4899-BA3A-7F3F5B6B6F87%7D&file=VHW_SX_HD-052_BM01%20-%20BI%E1%BB%82U%20M%E1%BA%AAU%20GHI%20NH%E1%BA%ACN%20TH%C3%94NG%20S%E1%BB%90%20C%E1%BB%A4M%20INDATE%20LON%20%26%20%C4%90%C3%93NG%20BLOCK%201.xlsx&action=edit&mobileredirect=true&wdMsFormsCorrelationId=667e7745-b2dc-4ffc-bc08-0e7eae6c2954&wdtf=%20Microsoft.Office.Excel.FMsFormsMetadataInWorkbookMetadata%3Atrue">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45707</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">Biểu mẫu ghi nhận thông số vận hành máy đóng thùng và cân trọng lượng</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-tags text-primary me-2"></i>Mã số: VHW/SX/HD-055/BM01</span>
+                                            <span class="text-truncate me-3"><i class="far fa-paper-plane text-primary me-2"></i>Phiên bản: 41 </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-primary me-3" target="_blank" href="https://forms.office.com/r/zu2MLdjbXJ?origin=lprLink">Sử dụng</a>
+                                            <a class="btn btn-warning" target="_blank"  href="https://masangroup-my.sharepoint.com/:x:/r/personal/e-form_vinhhao_com_vn/_layouts/15/Doc.aspx?sourcedoc=%7B43C34747-02F7-41BF-855D-E315C1E80A82%7D&file=VHW_SX-HD-055_BM01%20-%20BI%E1%BB%82U%20M%E1%BA%AAU%20GHI%20NH%E1%BA%ACN%20TH%C3%94NG%20S%E1%BB%90%20M%C3%81Y%20%C4%90%C3%93NG%20TH%C3%99NG%20V%C3%80%20C%C3%82N%20TR%E1%BB%8CNG%20L%C6%AF%E1%BB%A2NG.xlsx&action=edit&mobileredirect=true&wdMsFormsCorrelationId=14961140-97fe-4c2d-a18e-2c167aff93aa&wdtf=%20Microsoft.Office.Excel.FMsFormsMetadataInWorkbookMetadata%3Atrue">Data</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hiệu lực: 45708</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Jobs End -->
+
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Company</h5>
+                        <a class="btn btn-link text-white-50" href="">About Us</a>
+                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
+                        <a class="btn btn-link text-white-50" href="">Our Services</a>
+                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Quick Links</h5>
+                        <a class="btn btn-link text-white-50" href="">About Us</a>
+                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
+                        <a class="btn btn-link text-white-50" href="">Our Services</a>
+                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Contact</h5>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">Newsletter</h5>
+                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved. 
+							
+							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+							Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="">Home</a>
+                                <a href="">Cookies</a>
+                                <a href="">Help</a>
+                                <a href="">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
