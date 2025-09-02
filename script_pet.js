@@ -13,7 +13,7 @@ searchInput.addEventListener("input", e => {
   })
 })
 
-fetch("https://eformvinhhao.github.io/jsonapi/filling_test.json")
+fetch("https://eformvinhhao.github.io/jsonapi/pet.json")
   .then(res => res.json())
   .then(data => {
     users = data.map(user => {
