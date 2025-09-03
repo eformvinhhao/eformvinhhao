@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+
+<html>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<style>
+	textarea:enabled,
+	input[type=text]:enabled,
+	select:enabled {
+		background-color: beige;
+	}
+
+	textarea:disabled,
+	input[type=text]:disabled,
+	select:disabled {
+		background-color: lightgray;
+	}
+
+	input[type=text],
+	select {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 0;
+		display: block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+	}
+
+	button:enabled {
+		background-color: #4CAF50;
+	}
+
+	button:disabled {
+		background-color: lightgray;
+	}
+
+	* {
+		font-size: 100%;
+		font-family: Tahoma, sans-serif;
+	}
+
+	@media print {
+		.noPrint {
+			display: none;
+		}
+	}
+
+	input[type=button] {
+		width: 20%;
+		background-color: #4CAF50;
+		color: white;
+		padding: 14px 20px;
+		margin: 8px 0;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	button {
+		width: 20%;
+		background-color: #4CAF50;
+		color: white;
+		padding: 14px 20px;
+		margin: 8px 0;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	input[type="submit"][value="Chỉnh sửa"] {
+		background-color: green;
+		color: white;
+	}
+
+	input[type="button"][value="Tạm dừng"] {
+		background-color: red;
+		color: white;
+	}
+
+	input:focus:invalid {
+		box-shadow: none;
+	}
+
+	select {
+		width: 100%;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		height: max-content;
+		overflow: visible;
+		font-size: x-small;
+		word-wrap: break-word;
+		white-space: nowrap;
+		margin: 0%;
+		padding: auto;
+		overflow: visible;
+	}
+
+	select option {
+		margin: 0%;
+		width: 100%;
+		text-overflow: ellipsis;
+		overflow: visible;
+		white-space: nowrap;
+		word-wrap: break-word;
+		overflow: visible;
+	}
+
+	input[type=submit]:hover {
+		background-color: #45a049;
+	}
+
+	tr {
+		height: 50px;
+	}
+
+
+	div {
+		border-radius: 5px;
+		background-color: rgb(255, 255, 255);
+		padding: 20px;
+	}
+
+	.table td {
+		padding: 0.2rem 0.5rem;
+		text-align: center;
+	}
+
+	textarea,
+	input[type=text],
+	input[type=date],
+	select {
+		overflow: inherit;
+		display: block;
+		box-sizing: border-box;
+		border: 0px;
+		resize: none;
+		width: 100%;
+	}
+
+
+	table,
+	th,
+	td {
+		border-collapse: collapse;
+		border: 1px solid;
+		text-align: center;
+	}
+
+	table {
+		width: 100%;
+	}
+	textarea,input[type="date"], input[type="text"] {
+		color: blue;
+
+	}
+
+</style>
+</style>
+<style type="text/css" media="print">
+	@page { size: landscape; }
+  </style>
+
+
+<body>
+	<input onclick="enable_disable()" type="button" class="slide-toggle" value="Chỉnh sửa" style=" float: right;">
+	<form class='form' id="GFG">
+
+		<!--- Sửa phần 1: Phần tiêu đề form
+		Ở file render trên automata, sửa từ:
+			1. <textarea id=" thành @{triggerBody()?['
+			2. "></textarea> thành ']}
+			3. <input type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
+			@{triggerBody()?['Email cá nhân']}
+			4. <input type="date" id="Ngày/ tháng/ năm" required=""> thành
+			@{outputs('Add_a_row_into_a_table')?['body/Ngày~1 tháng~1 năm']}
+			
+		-->
+
+		<table table-layout="fixed">
+			<tr>
+				<td colspan="8" rowspan="4" style="font-weight: bold; ">BIỂU MẪU GHI NHẬN QUÁ TRÌNH KIỂM TRA BATCH/LOT,
+					ĐỊNH LƯỢNG, GIAO NHẬN NGUYÊN LIỆU PHỤ GIA NƯỚC TĂNG LỰC COMPACT VỊ CAFE MẺ 20,000L</td>
+				<td>Mã tài liệu</td>
+				<td>VHC/KTCN/HD-001/BM02</td>
+			</tr>
+			<tr>
+				<td>Lần ban hành</td>
+				<td>02</td>
+			</tr>
+			<tr>
+				<td>Ngày hiệu lực</td>
+				<td>27/02/2025</td>
+			</tr>
+			<tr>
+				<td>Số trang</td>
+				<td>2</td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold; ">Ngày/ tháng/ năm</td>
+				<td><input type="date" id="Ngày/ tháng/ năm" required=""></td>
+				<td style="font-weight: bold; ">Vận hành</td>
+				<td><textarea id="Vận hành"></textarea></td>
+				<td style="font-weight: bold; ">Emai cá nhân</td>
+				<td><input type="text" autocomplete="email" maxlength="60" id="Email cá nhân"
+						pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""></td>
+				<td style="font-weight: bold; ">QC</td>
+				<td><textarea id="QC"></textarea></td>
+				<td style="font-weight: bold; ">Trưởng ca</td>
+				<td><textarea id="Trưởng ca"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="font-weight: bold; ">Kết quả kiểm tra tình trạng hiệu chuẩn của cân</td>
+				<td style="font-weight: bold; ">Loại cân</td>
+				<td><textarea id="Loại cân"></textarea></td>
+				<td style="font-weight: bold; ">Ngày hiệu chuẩn</td>
+				<td><input type="date" id="Ngày hiệu chuẩn" required=""></td>
+				<td style="font-weight: bold; ">Kết luận (Đạt/Không đạt)</td>
+				<td><textarea id="Kết luận (Đạt/Không đạt)"></textarea></td>
+				<td style="font-weight: bold; ">Khu vực</td>
+				<td><textarea id="Khu vực"></textarea></td>
+			</tr>
+		</table>
+
+
+		<!--- Sửa phần 1: Phần tiêu đề form-->
+
+		<br>
+
+		<!--- Sửa phần 2: Phần nội dung form:
+			Ở file render trên automata, sửa từ:
+			1. <textarea id=" thành @{triggerBody()?['
+			2. "></textarea> thành ']}
+			3. <input type="checkbox" id=" thành <input type="checkbox" @{triggerBody()?['
+			4. " value="uncheck" thành ']}
+		-->
+
+		<table table-layout="fixed">
+			<tr style="font-weight: bold; ">
+				<td rowspan="2">STT</td>
+				<td rowspan="2">Tên nguyên liệu (Theo BOM)<br>(Kiểm tra theo BOM cho mỗi lần cân)</td>
+				<td rowspan="2">Số Lot/Batch</td>
+				<td rowspan="2">NSX</td>
+				<td rowspan="2">HSD</td>
+				<td rowspan="2">Đơn vị</td>
+				<td rowspan="2">Số lượng theo BOM</td>
+				<td colspan="3">Mẻ</td>
+			</tr>
+			<tr>
+				<td><textarea id="Mẻ số 1"></textarea></td>
+				<td><textarea id="Mẻ số 2"></textarea></td>
+				<td><textarea id="Mẻ số 3"></textarea></td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>Siro Fructose - Glucose (ADM)</td>
+				<td><textarea id="Đường nước-Lot"></textarea></td>
+				<td><input type="date" id="Đường nước-NSX" required=""></td>
+				<td><input type="date" id="Đường nước-HSD" required=""></td>
+				<td rowspan="13">kg</td>
+				<td>1,800.000</td>
+				<td><textarea id="Mẻ 1-Đường nước-KL"></textarea></td>
+				<td><textarea id="Mẻ 2-Đường nước-KL"></textarea></td>
+				<td><textarea id="Mẻ 3-Đường nước-KL"></textarea></td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>Acid Citric Anhydrous (INS330)</td>
+				<td><textarea id="Citric-Lot"></textarea></td>
+				<td><input type="date" id="Citric-NSX" required=""></td>
+				<td><input type="date" id="Citric-HSD" required=""></td>
+				<td>2.000</td>
+				<td><textarea id="Mẻ 1-Citric-KL"></textarea></td>
+				<td><textarea id="Mẻ 2-Citric-KL"></textarea></td>
+				<td><textarea id="Mẻ 3-Citric-KL"></textarea></td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>Acid Phosphoric 85% min (Food Grade)</td>
+				<td><textarea id="Phosphoric-Lot"></textarea></td>
+				<td><input type="date" id="Phosphoric-NSX" required=""></td>
+				<td><input type="date" id="Phosphoric-HDS" required=""></td>
+				<td>8.000</td>
+				<td><textarea id="Mẻ 1-Phosphoric-KL"></textarea></td>
+				<td><textarea id="Mẻ 2-Phosphoric-KL"></textarea></td>
+				<td><textarea id="Mẻ 3-Phosphoric-KL"></textarea></td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>Potassium sorbate - TC34 (INS 202)</td>
+				<td><textarea id="Sorbate-Lot"></textarea></td>
+				<td><input type="date" id="Sorbate-NSX" required=""></td>
+				<td><input type="date" id="Sorbate-HSD" required=""></td>
+				<td>4.000</td>
+				<td><textarea id="Mẻ 1-Sorbate-KL"></textarea></td>
+				<td><textarea id="Mẻ 2-Sorbate-KL"></textarea></td>
+				<td><textarea id="Mẻ 3-Sorbate-KL"></textarea></td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>Taurine JP17</td>
+				<td><textarea id="Taurine-Lot"></textarea></td>
+				<td><input type="date" id="Taurine-NSX" required=""></td>
+				<td><input type="date" id="Taurine-HSD" required=""></td>
+				<td>4.000</td>
+				<td><textarea id="Mẻ 1-Taurine-KL"></textarea></td>
+				<td><textarea id="Mẻ 2-Taurine-KL"></textarea></td>
+				<td><textarea id="Mẻ 3-Taurine-KL"></textarea></td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>PRMS00753</td>
+				<td><textarea id="753-Lot"></textarea></td>
+				<td><input type="date" id="753-NSX" required=""></td>
+				<td><input type="date" id="753-HSD" required=""></td>
+				<td>2.000</td>
+				<td><textarea id="Mẻ 1-735-KL"></textarea></td>
+				<td><textarea id="Mẻ 2-735-KL"></textarea></td>
+				<td><textarea id="Mẻ 3-735-KL"></textarea></td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td>Muối sấy Trung Quốc</td>
+				<td><textarea id="Muối-Lot"></textarea></td>
+				<td><input type="date" id="Muối-NSX" required=""></td>
+				<td><input type="date" id="Muối-HSD" required=""></td>
+				<td>5.000</td>
+				<td><textarea id="Mẻ 1-Muối-KL"></textarea></td>
+				<td><textarea id="Mẻ 2-Muối-KL"></textarea></td>
+				<td><textarea id="Mẻ 3-Muối-KL"></textarea></td>
+			</tr>
+			<tr>
+				<td>8</td>
+				<td>Màu Caramel S5000 dạng sệt - INS 150d</td>
+				<td><textarea id="Caramel-Lot"></textarea></td>
+				<td><input type="date" id="Caramel-NSX" required=""></td>
+				<td><input type="date" id="Caramel-HSD" required=""></td>
+				<td>70.000</td>
+				<td><textarea id="Mẻ 1-Caramel-KL"></textarea></td>
+				<td><textarea id="Mẻ 2-Caramel-KL"></textarea></td>
+				<td><textarea id="Mẻ 3-Caramel-KL"></textarea></td>
+			</tr>
+			<tr>
+				<td>9</td>
+				<td>Premix PR01023</td>
+				<td><textarea id="1023-Lot"></textarea></td>
+				<td><input type="date" id="1023-NSX" required=""></td>
+				<td><input type="date" id="1023-HSD" required=""></td>
+				<td>9.700</td>
+				<td><textarea id="Mẻ 1-1023-KL"></textarea></td>
+				<td><textarea id="Mẻ 2-1023-KL"></textarea></td>
+				<td><textarea id="Mẻ 3-1023-KL"></textarea></td>
+			</tr>
+			<tr>
+				<td>10</td>
+				<td>Premix PR01030</td>
+				<td><textarea id="1030-Lot"></textarea></td>
+				<td><input type="date" id="1030-NSX" required=""></td>
+				<td><input type="date" id="1030-HSD" required=""></td>
+				<td>13.200</td>
+				<td><textarea id="Mẻ 1-1030-KL"></textarea></td>
+				<td><textarea id="Mẻ 2-1030-KL"></textarea></td>
+				<td><textarea id="Mẻ 3-1030-KL"></textarea></td>
+			</tr>
+			<tr>
+				<td>11</td>
+				<td>Premix PR00298</td>
+				<td><textarea id="298-Lot"></textarea></td>
+				<td><input type="date" id="298-NSX" required=""></td>
+				<td><input type="date" id="298-HSD" required=""></td>
+				<td>27.500</td>
+				<td><textarea id="Mẻ 1-298-KL"></textarea></td>
+				<td><textarea id="Mẻ 2-298-KL"></textarea></td>
+				<td><textarea id="Mẻ 3-298-KL"></textarea></td>
+			</tr>
+			<tr>
+				<td>12</td>
+				<td>Premix PR00138</td>
+				<td><textarea id="130-Lot"></textarea></td>
+				<td><input type="date" id="130-NSX" required=""></td>
+				<td><input type="date" id="130-HSD" required=""></td>
+				<td>4.626</td>
+				<td><textarea id="Mẻ 1-138-KL"></textarea></td>
+				<td><textarea id="Mẻ 2-138-KL"></textarea></td>
+				<td><textarea id="Mẻ 3-138-KL"></textarea></td>
+			</tr>
+			<tr>
+				<td>13</td>
+				<td>Premix PR00135</td>
+				<td><textarea id="135-Lot"></textarea></td>
+				<td><input type="date" id="135-NSX" required=""></td>
+				<td><input type="date" id="135-HSD" required=""></td>
+				<td>0.626</td>
+				<td><textarea id="Mẻ 1-135-KL"></textarea></td>
+				<td><textarea id="Mẻ 2-135-KL"></textarea></td>
+				<td><textarea id="Mẻ 3-135-KL"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2" rowspan="5" style="font-weight: bold; ">Xác nhận</td>
+				<td colspan="5" style="font-weight: bold; ">Thời gian cân</td>
+				<td><textarea id="Mẻ 1-Thời gian cân"></textarea></td>
+				<td><textarea id="Mẻ 2-Thời gian cân"></textarea></td>
+				<td><textarea id="Mẻ 3-Thời gian cân"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="5" style="font-weight: bold; ">Tình trạng NVL, phụ gia (Đạt/ Không đạt)</td>
+				<td><textarea id="Mẻ 1-Tình trạng NVL"></textarea></td>
+				<td><textarea id="Mẻ 2-Tình trạng NVL"></textarea></td>
+				<td><textarea id="Mẻ 3-Tình trạng NVL"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="5" style="font-weight: bold; ">Thời gian giao</td>
+				<td><textarea id="Mẻ 1-Thời gian giao"></textarea></td>
+				<td><textarea id="Mẻ 2-Thời gian giao"></textarea></td>
+				<td><textarea id="Mẻ 3-Thời gian giao"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="5" style="font-weight: bold; ">VH pha syrup</td>
+				<td><textarea id="Mẻ 1-VH pha syrup"></textarea></td>
+				<td><textarea id="Mẻ 2-VH pha syrup"></textarea></td>
+				<td><textarea id="Mẻ 3-VH pha syrup"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="5" style="font-weight: bold; ">QC giám sát cân (Y/N)</td>
+				<td><textarea id="Mẻ 1-QC giám sát cân"></textarea></td>
+				<td><textarea id="Mẻ 2-QC giám sát cân"></textarea></td>
+				<td><textarea id="Mẻ 3-QC giám sát cân"></textarea></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold; ">Ghi chú</td>
+				<td colspan="9"><textarea id="Ghi chú"></textarea></td>
+			</tr>
+		</table>
+
+
+		<br>
+		<p><b>Chi tiết cây phê duyệt</b></p>
+
+		<!--- Sửa phần 3: Chi tiết cây phê duyệt: sửa lại TC line nào trực tiếp
+        Ở file render trên automata, sửa từ:
+		1. <td colspan="5" id="Thời gian nộp phiếu"></td> thành
+    <td colspan="5">@{outputs('Add_a_row_into_a_table')?['body/Thời gian nộp phiếu']}</td>
+        2. id=" thành >@{triggerBody()?['
+        3. "> thành ']}
+        
+-->
+
+		<table table-layout="fixed">
+			<tr>
+				<td style="font-weight: bold; ">Thời gian nộp phiếu</td>
+				<td colspan="5" id="Thời gian nộp phiếu"></td>
+			</tr>
+			<tr style="font-weight: bold; ">
+				<td>Cấp phê duyệt</td>
+				<td>Người phê duyệt</td>
+				<td>Email_NPD</td>
+				<td>Trạng thái</td>
+				<td>Thời gian thao tác</td>
+				<td>Ghi chú</td>
+			</tr>
+			<tr>
+				<td>QC online</td>
+				<td id="Người phê duyệt 1"></td>
+				<td id="Email_NPD1"></td>
+				<td id="Trạng thái_NPD1"></td>
+				<td id="Thời gian thao tác_NPD1"></td>
+				<td id="Ghi chú_NPD1"></td>
+			</tr>
+			<tr>
+				<td>Trưởng ca chế biến</td>
+				<td id="Người phê duyệt 2"></td>
+				<td id="Email_NPD2"></td>
+				<td id="Trạng thái_NPD2"></td>
+				<td id="Thời gian thao tác_NPD2"></td>
+				<td id="Ghi chú_NPD2"></td>
+			</tr>
+		</table>
+
+		<!--- Sửa phần 3: Chi tiết cây phê duyệt: sửa lại TC line nào-->
+
+		<button id='nut' type="submit" style=" float: left;">Nộp kết quả</button>
+	</form>
+
+	<button onclick="window.print();" class="noPrint" style=" float: right; background-color: yellow; color:black">Kiểm
+		tra kết quả</button>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#GFG :input").prop("disabled", true);
+			$(".slide-toggle").click(function () {
+				if (this.value == "Chỉnh sửa") {
+					this.value = "Tạm dừng";
+					$("#GFG :input").prop("disabled", false);
+				}
+				else {
+					this.value = "Chỉnh sửa";
+					$("#GFG :input").prop("disabled", true);
+				}
+			});
+		});
+	</script>
+
+
+	<script>
+		$(":checkbox").change(function () {
+			$(this).val($(this).is(":checked") ? 'checked' : 'unchecked');
+		});
+
+		$(document).ready(function () {
+			$(":checkbox").each(function (index) {
+
+				if ($(this).val() ==
+					"Yes")
+					($(this).prop('checked', true));
+			});
+		});
+
+		const formE1 = document.querySelector('.form');
+		formE1.addEventListener('submit', event => {
+			event.preventDefault();
+			const formData = new FormData(formE1);
+			const submissionTime = new Date().toISOString();
+			const data = new URLSearchParams(formData);
+			fetch('https://prod-31.southeastasia.logic.azure.com:443/workflows/fa2ab7c3b66a4ee68c91d56038623634/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=6NUCZYFJYvDsB-CN3pM-ZNFZo_s8Cnr6nloo2AVi8eU', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					'Email cá nhân': document.getElementById('Email cá nhân').value,
+					'Thời gian nộp phiếu': submissionTime,
+					'Người phê duyệt 1': document.getElementById('QC').value,
+					'Email_NPD1': 'khoaha@vinhhao.com.vn',
+					'Trạng thái_NPD1': 'Pending',
+					'Thời gian thao tác_NPD1': '',
+					'Ghi chú_NPD1': '',
+					'Người phê duyệt 2': document.getElementById('Trưởng ca').value,
+					'Email_NPD2': 'khoaha@vinhhao.com.vn',
+					'Trạng thái_NPD2': 'Waiting',
+					'Thời gian thao tác_NPD2': '',
+					'Ghi chú_NPD2': '',
+					'Trạng thái chung': 'Pending',
+					'Ngày/ tháng/ năm': document.getElementById('Ngày/ tháng/ năm').value,
+					'Vận hành': document.getElementById('Vận hành').value,
+					'QC': document.getElementById('QC').value,
+					'Trưởng ca': document.getElementById('Trưởng ca').value,
+					'Loại cân': document.getElementById('Loại cân').value,
+					'Ngày hiệu chuẩn': document.getElementById('Ngày hiệu chuẩn').value,
+					'Kết luận (Đạt/Không đạt)': document.getElementById('Kết luận (Đạt/Không đạt)').value,
+					'Khu vực': document.getElementById('Khu vực').value,
+					'Mẻ số 1': document.getElementById('Mẻ số 1').value,
+					'Mẻ số 2': document.getElementById('Mẻ số 2').value,
+					'Mẻ số 3': document.getElementById('Mẻ số 3').value,
+					'Đường nước-Lot': document.getElementById('Đường nước-Lot').value,
+					'Đường nước-NSX': document.getElementById('Đường nước-NSX').value,
+					'Đường nước-HSD': document.getElementById('Đường nước-HSD').value,
+					'Mẻ 1-Đường nước-KL': document.getElementById('Mẻ 1-Đường nước-KL').value,
+					'Mẻ 2-Đường nước-KL': document.getElementById('Mẻ 2-Đường nước-KL').value,
+					'Mẻ 3-Đường nước-KL': document.getElementById('Mẻ 3-Đường nước-KL').value,
+					'Citric-Lot': document.getElementById('Citric-Lot').value,
+					'Citric-NSX': document.getElementById('Citric-NSX').value,
+					'Citric-HSD': document.getElementById('Citric-HSD').value,
+					'Mẻ 1-Citric-KL': document.getElementById('Mẻ 1-Citric-KL').value,
+					'Mẻ 2-Citric-KL': document.getElementById('Mẻ 2-Citric-KL').value,
+					'Mẻ 3-Citric-KL': document.getElementById('Mẻ 3-Citric-KL').value,
+					'Phosphoric-Lot': document.getElementById('Phosphoric-Lot').value,
+					'Phosphoric-NSX': document.getElementById('Phosphoric-NSX').value,
+					'Phosphoric-HDS': document.getElementById('Phosphoric-HDS').value,
+					'Mẻ 1-Phosphoric-KL': document.getElementById('Mẻ 1-Phosphoric-KL').value,
+					'Mẻ 2-Phosphoric-KL': document.getElementById('Mẻ 2-Phosphoric-KL').value,
+					'Mẻ 3-Phosphoric-KL': document.getElementById('Mẻ 3-Phosphoric-KL').value,
+					'Sorbate-Lot': document.getElementById('Sorbate-Lot').value,
+					'Sorbate-NSX': document.getElementById('Sorbate-NSX').value,
+					'Sorbate-HSD': document.getElementById('Sorbate-HSD').value,
+					'Mẻ 1-Sorbate-KL': document.getElementById('Mẻ 1-Sorbate-KL').value,
+					'Mẻ 2-Sorbate-KL': document.getElementById('Mẻ 2-Sorbate-KL').value,
+					'Mẻ 3-Sorbate-KL': document.getElementById('Mẻ 3-Sorbate-KL').value,
+					'Taurine-Lot': document.getElementById('Taurine-Lot').value,
+					'Taurine-NSX': document.getElementById('Taurine-NSX').value,
+					'Taurine-HSD': document.getElementById('Taurine-HSD').value,
+					'Mẻ 1-Taurine-KL': document.getElementById('Mẻ 1-Taurine-KL').value,
+					'Mẻ 2-Taurine-KL': document.getElementById('Mẻ 2-Taurine-KL').value,
+					'Mẻ 3-Taurine-KL': document.getElementById('Mẻ 3-Taurine-KL').value,
+					'753-Lot': document.getElementById('753-Lot').value,
+					'753-NSX': document.getElementById('753-NSX').value,
+					'753-HSD': document.getElementById('753-HSD').value,
+					'Mẻ 1-735-KL': document.getElementById('Mẻ 1-735-KL').value,
+					'Mẻ 2-735-KL': document.getElementById('Mẻ 2-735-KL').value,
+					'Mẻ 3-735-KL': document.getElementById('Mẻ 3-735-KL').value,
+					'Muối-Lot': document.getElementById('Muối-Lot').value,
+					'Muối-NSX': document.getElementById('Muối-NSX').value,
+					'Muối-HSD': document.getElementById('Muối-HSD').value,
+					'Mẻ 1-Muối-KL': document.getElementById('Mẻ 1-Muối-KL').value,
+					'Mẻ 2-Muối-KL': document.getElementById('Mẻ 2-Muối-KL').value,
+					'Mẻ 3-Muối-KL': document.getElementById('Mẻ 3-Muối-KL').value,
+					'Caramel-Lot': document.getElementById('Caramel-Lot').value,
+					'Caramel-NSX': document.getElementById('Caramel-NSX').value,
+					'Caramel-HSD': document.getElementById('Caramel-HSD').value,
+					'Mẻ 1-Caramel-KL': document.getElementById('Mẻ 1-Caramel-KL').value,
+					'Mẻ 2-Caramel-KL': document.getElementById('Mẻ 2-Caramel-KL').value,
+					'Mẻ 3-Caramel-KL': document.getElementById('Mẻ 3-Caramel-KL').value,
+					'1023-Lot': document.getElementById('1023-Lot').value,
+					'1023-NSX': document.getElementById('1023-NSX').value,
+					'1023-HSD': document.getElementById('1023-HSD').value,
+					'Mẻ 1-1023-KL': document.getElementById('Mẻ 1-1023-KL').value,
+					'Mẻ 2-1023-KL': document.getElementById('Mẻ 2-1023-KL').value,
+					'Mẻ 3-1023-KL': document.getElementById('Mẻ 3-1023-KL').value,
+					'1030-Lot': document.getElementById('1030-Lot').value,
+					'1030-NSX': document.getElementById('1030-NSX').value,
+					'1030-HSD': document.getElementById('1030-HSD').value,
+					'Mẻ 1-1030-KL': document.getElementById('Mẻ 1-1030-KL').value,
+					'Mẻ 2-1030-KL': document.getElementById('Mẻ 2-1030-KL').value,
+					'Mẻ 3-1030-KL': document.getElementById('Mẻ 3-1030-KL').value,
+					'298-Lot': document.getElementById('298-Lot').value,
+					'298-NSX': document.getElementById('298-NSX').value,
+					'298-HSD': document.getElementById('298-HSD').value,
+					'Mẻ 1-298-KL': document.getElementById('Mẻ 1-298-KL').value,
+					'Mẻ 2-298-KL': document.getElementById('Mẻ 2-298-KL').value,
+					'Mẻ 3-298-KL': document.getElementById('Mẻ 3-298-KL').value,
+					'130-Lot': document.getElementById('130-Lot').value,
+					'130-NSX': document.getElementById('130-NSX').value,
+					'130-HSD': document.getElementById('130-HSD').value,
+					'Mẻ 1-138-KL': document.getElementById('Mẻ 1-138-KL').value,
+					'Mẻ 2-138-KL': document.getElementById('Mẻ 2-138-KL').value,
+					'Mẻ 3-138-KL': document.getElementById('Mẻ 3-138-KL').value,
+					'135-Lot': document.getElementById('135-Lot').value,
+					'135-NSX': document.getElementById('135-NSX').value,
+					'135-HSD': document.getElementById('135-HSD').value,
+					'Mẻ 1-135-KL': document.getElementById('Mẻ 1-135-KL').value,
+					'Mẻ 2-135-KL': document.getElementById('Mẻ 2-135-KL').value,
+					'Mẻ 3-135-KL': document.getElementById('Mẻ 3-135-KL').value,
+					'Mẻ 1-Thời gian cân': document.getElementById('Mẻ 1-Thời gian cân').value,
+					'Mẻ 2-Thời gian cân': document.getElementById('Mẻ 2-Thời gian cân').value,
+					'Mẻ 3-Thời gian cân': document.getElementById('Mẻ 3-Thời gian cân').value,
+					'Mẻ 1-Tình trạng NVL': document.getElementById('Mẻ 1-Tình trạng NVL').value,
+					'Mẻ 2-Tình trạng NVL': document.getElementById('Mẻ 2-Tình trạng NVL').value,
+					'Mẻ 3-Tình trạng NVL': document.getElementById('Mẻ 3-Tình trạng NVL').value,
+					'Mẻ 1-Thời gian giao': document.getElementById('Mẻ 1-Thời gian giao').value,
+					'Mẻ 2-Thời gian giao': document.getElementById('Mẻ 2-Thời gian giao').value,
+					'Mẻ 3-Thời gian giao': document.getElementById('Mẻ 3-Thời gian giao').value,
+					'Mẻ 1-VH pha syrup': document.getElementById('Mẻ 1-VH pha syrup').value,
+					'Mẻ 2-VH pha syrup': document.getElementById('Mẻ 2-VH pha syrup').value,
+					'Mẻ 3-VH pha syrup': document.getElementById('Mẻ 3-VH pha syrup').value,
+					'Mẻ 1-QC giám sát cân': document.getElementById('Mẻ 1-QC giám sát cân').value,
+					'Mẻ 2-QC giám sát cân': document.getElementById('Mẻ 2-QC giám sát cân').value,
+					'Mẻ 3-QC giám sát cân': document.getElementById('Mẻ 3-QC giám sát cân').value,
+					'Ghi chú': document.getElementById('Ghi chú').value,
+				})
+			}).then(res => res.json())
+				.then(data => console.log(data))
+				.catch(error => console.log(error));
+			alert("Đã nộp thành công");
+			window.location.reload();
+		});
+	</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+
+<html>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<style>
+	textarea:enabled,
+	input[type=text]:enabled,
+	select:enabled {
+		background-color: beige;
+	}
+
+	textarea:disabled,
+	input[type=text]:disabled,
+	select:disabled {
+		background-color: lightgray;
+	}
+
+	input[type=text],
+	select {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 0;
+		display: block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+	}
+
+	button:enabled {
+		background-color: #4CAF50;
+	}
+
+	button:disabled {
+		background-color: lightgray;
+	}
+
+	* {
+		font-size: 100%;
+		font-family: Tahoma, sans-serif;
+	}
+
+	@media print {
+		.noPrint {
+			display: none;
+		}
+	}
+
+	input[type=button] {
+		width: 20%;
+		background-color: #4CAF50;
+		color: white;
+		padding: 14px 20px;
+		margin: 8px 0;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+
+	textarea,
+	input[type="date"],
+	input[type="text"] {
+		color: blue;
+
+	}
+
+	button {
+		width: 20%;
+		background-color: #4CAF50;
+		color: white;
+		padding: 14px 20px;
+		margin: 8px 0;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	input[type="submit"][value="Chỉnh sửa"] {
+		background-color: green;
+		color: white;
+	}
+
+	input[type="button"][value="Tạm dừng"] {
+		background-color: red;
+		color: white;
+	}
+
+
+
+	input:focus:invalid {
+		box-shadow: none;
+	}
+
+	select {
+		width: 100%;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		height: max-content;
+		overflow: visible;
+		font-size: x-small;
+		word-wrap: break-word;
+		white-space: nowrap;
+		margin: 0%;
+		padding: auto;
+		overflow: visible;
+	}
+
+	select option {
+		margin: 0%;
+		width: 100%;
+		text-overflow: ellipsis;
+		overflow: visible;
+		white-space: nowrap;
+		word-wrap: break-word;
+		overflow: visible;
+	}
+
+	input[type=submit]:hover {
+		background-color: #45a049;
+	}
+
+	tr {
+		height: 50px;
+	}
+
+
+	div {
+		border-radius: 5px;
+		background-color: rgb(255, 255, 255);
+		padding: 20px;
+	}
+
+	.table td {
+		padding: 0.2rem 0.5rem;
+		text-align: center;
+	}
+
+	textarea,
+	input[type=text],
+	input[type=date],
+	select {
+		overflow: inherit;
+		display: block;
+		box-sizing: border-box;
+		border: 0px;
+		resize: none;
+		width: 100%;
+	}
+
+
+	table,
+	th,
+	td {
+		border-collapse: collapse;
+		border: 1px solid;
+		text-align: center;
+	}
+
+	table {
+		width: 100%;
+	}
+</style>
+<style type="text/css" media="print">
+	@page {
+		size: landscape;
+	}
+</style>
+
+
+<body>
+	<input onclick="enable_disable()" type="button" class="slide-toggle" value="Chỉnh sửa" style=" float: right;">
+	<form class='form' id="GFG">
+
+		<!--- Sửa phần 1: Phần tiêu đề form
+		Ở file render trên automata, sửa từ:
+			1. <textarea id=" thành @{triggerBody()?['
+			2. "></textarea> thành "></textarea>
+			3. <input type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
+			@{triggerBody()?['Email cá nhân"></textarea>
+			4. <input type="date" id="Ngày/ tháng/ năm" required=""> thành
+			@{outputs('Add_a_row_into_a_table')?['body/Ngày~1 tháng~1 năm"></textarea>
+			
+		-->
+
+
+		<table table-layout="fixed">
+			<tr>
+				<td colspan="8" rowspan="4" style="font-weight: bold; ">BIỂU MẪU GHI NHẬN QUÁ TRÌNH CHẾ BIẾN SYRUP NƯỚC
+					TĂNG LỰC COMPACT VỊ CAFE MẺ 20,000L</td>
+				<td>Mã tài liệu</td>
+				<td>VHC/KTCN/GMP-001/BM02</td>
+			</tr>
+			<tr>
+				<td>Lần ban hành</td>
+				<td>03</td>
+			</tr>
+			<tr>
+				<td>Ngày hiệu lực</td>
+				<td>27/02/2025</td>
+			</tr>
+			<tr>
+				<td>Số trang</td>
+				<td>2</td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold; ">Ngày/ tháng/ năm</td>
+				<td><input type="date" id="Ngày/ tháng/ năm" required=""></td>
+				<td style="font-weight: bold; ">Vận hành</td>
+				<td><textarea id="Vận hành"></textarea></td>
+				<td style="font-weight: bold; ">Emai cá nhân</td>
+				<td><input type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""></td>
+				<td style="font-weight: bold; ">QC</td>
+				<td><textarea id="QC"></textarea></td>
+				<td style="font-weight: bold; ">Trưởng ca</td>
+				<td><textarea id="Trưởng ca"></textarea></td>
+			</tr>
+		</table>
+
+		<!--- Sửa phần 1: Phần tiêu đề form-->
+
+		<br>
+
+		<!--- Sửa phần 2: Phần nội dung form:
+			Ở file render trên automata, sửa từ:
+			1. ><textarea id=" thành ><textarea id="
+			2. "></textarea> thành "></textarea>
+			3. <input type="checkbox" id=" thành <input type="checkbox" @{triggerBody()?['
+			4. " value="uncheck" thành "></textarea>
+		-->
+
+
+		<table table-layout="fixed">
+			<tr style="font-weight: bold; ">
+				<td colspan="12">1. SIMPLE SYRUP</td>
+				<td>Mẻ thứ</td>
+				<td><textarea id="Mẻ thứ"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold; ">
+				<td rowspan="2">Tank nấu simple</td>
+				<td rowspan="2">Tên đường RE sử dụng</td>
+				<td rowspan="2">Số lượng<br>(kg)</td>
+				<td rowspan="2">Thể tích nước(lít)</td>
+				<td colspan="4">Symple syrup</td>
+				<td colspan="4">Theo dõi UV</td>
+				<td rowspan="2">Nhân viên syrup</td>
+				<td rowspan="2">QC chế biến</td>
+			</tr>
+			<tr style="font-weight: bold; ">
+				<td>Thời gian nấu</td>
+				<td>Thể tích<br>(lít)</td>
+				<td>Thời gian tuần hoàn</td>
+				<td>Brix</td>
+				<td>Số bóng hoạt động</td>
+				<td>TG bơm<br>qua UV</td>
+				<td>Thời gian kết thúc</td>
+				<td>Hiệu suất UV (%)</td>
+			</tr>
+			<tr>
+				<td><textarea id="Tank nấu simple"></textarea></td>
+				<td>Siro Fructose - Glucose<br>(Bơm HFSC qua UV)</td>
+				<td>1,800</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td><textarea id="Số bóng hoạt động"></textarea></td>
+				<td><textarea id="TG bơm qua UV"></textarea></td>
+				<td><textarea id="Thời gian kết thúc"></textarea></td>
+				<td><textarea id="Hiệu suất UV (%)"></textarea></td>
+				<td><textarea id="Simple-Nhân viên syrup"></textarea></td>
+				<td><textarea id="Simple-QC chế biến"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="14">Tráng 3 lần, 2 lần 300L/lần + ~150L/lần cuối</td>
+			</tr>
+			<tr style="font-weight: bold; ">
+				<td colspan="14">2. HÒA TAN PHỤ GIA và MÀU: PB này - Thay Hỗn hợp Vitamin Premix MS 2811001149 thành
+					PRMS00753</td>
+			</tr>
+			<tr style="font-weight: bold; ">
+				<td rowspan="2">STT</td>
+				<td rowspan="2">Tank hòa phụ gia</td>
+				<td rowspan="2">Tên nguyên liệu<br>(Theo BOM)</td>
+				<td rowspan="2">Số lượng<br>(Kg)</td>
+				<td colspan="2">Thể tích nước (lít)</td>
+				<td colspan="2">Nhiệt độ nước (0C)</td>
+				<td colspan="3">Thời gian hòa tan</td>
+				<td rowspan="2">Hòa tan hoàn toàn (Đạt/Không Đạt)</td>
+				<td rowspan="2">Thời gian bơm vào tank trộn</td>
+				<td rowspan="2">Nhân viên thực hiện</td>
+			</tr>
+			<tr style="font-weight: bold; ">
+				<td>Theo HDSX</td>
+				<td>Thực tế</td>
+				<td>Theo HDSX</td>
+				<td>Thực tế</td>
+				<td>Khuấy HDSX (phút)</td>
+				<td>Bắt đầu</td>
+				<td>Kết thúc</td>
+			</tr>
+			<tr>
+				<td rowspan="5">1</td>
+				<td rowspan="5">PG 3</td>
+				<td>Taurine JP17</td>
+				<td>4.000</td>
+				<td rowspan="4">80</td>
+				<td rowspan="4"><textarea id="1-PG3-Thể tích nước"></textarea></td>
+				<td rowspan="4">60 - 65</td>
+				<td rowspan="4"><textarea id="1-PG3-Nhiệt độ nước"></textarea></td>
+				<td rowspan="4">10 - 15</td>
+				<td rowspan="4"><textarea id="1-PG3-BD"></textarea></td>
+				<td rowspan="4"><textarea id="1-PG3-KT"></textarea></td>
+				<td rowspan="4"><textarea id="1-PG3-KQ hòa tan"></textarea></td>
+				<td rowspan="4"><textarea id="1-PG3-Thời gian bơm vào tank trộn"></textarea></td>
+				<td rowspan="16"><textarea id="NVVH hòa tan phụ gia"></textarea></td>
+			</tr>
+			<tr>
+				<td>Premix PR01023</td>
+				<td>9.700</td>
+			</tr>
+			<tr>
+				<td>Potassium sorbate - TC34 (INS 202)</td>
+				<td>4.000</td>
+			</tr>
+			<tr>
+				<td>Muối sấy Trung Quốc</td>
+				<td>5.000</td>
+			</tr>
+			<tr>
+				<td colspan="11">Tráng 2 lần, lần 25L nước</td>
+			</tr>
+			<tr>
+				<td rowspan="4">2</td>
+				<td rowspan="4">PG 1</td>
+				<td>Acid citric anhydrous Thái Lan (INS 330)</td>
+				<td>2.000</td>
+				<td rowspan="3">80</td>
+				<td rowspan="3"><textarea id="2-PG1-Thể tích nước"></textarea></td>
+				<td rowspan="3">Thường</td>
+				<td rowspan="3"><textarea id="2-PG1-Nhiệt độ nước"></textarea></td>
+				<td rowspan="3">10 - 15</td>
+				<td rowspan="3"><textarea id="2-PG1-BD"></textarea></td>
+				<td rowspan="3"><textarea id="2-PG1-KT"></textarea></td>
+				<td rowspan="3"><textarea id="2-PG1-KQ hòa tan"></textarea></td>
+				<td rowspan="3"><textarea id="2-PG1-Thời gian bơm vào tank trộn"></textarea></td>
+			</tr>
+			<tr>
+				<td>Acid Phosphoric 85% min (Food Grade)</td>
+				<td>8.000</td>
+			</tr>
+			<tr>
+				<td>PRMS00753</td>
+				<td>2.000</td>
+			</tr>
+			<tr>
+				<td colspan="11">Tráng 2 lần, lần 25L nước</td>
+			</tr>
+			<tr>
+				<td rowspan="5">3</td>
+				<td>PG 2</td>
+				<td rowspan="4">Premix PR01030 (trộn đều nvl bột trước khi hòa tan - chia làm 4 tank)<br>Chia tương đối
+					khối lượng premix cho 4 tank<br><br>Đổ từ từ premix vào khu vực cánh khuấy.<br>Khuấy 15 phút kiểm
+					tra trạng thái tan của premix, tan hoàn toàn thì ngừng khuấy,</td>
+				<td rowspan="4">13.200</td>
+				<td rowspan="4">140</td>
+				<td><textarea id="3-1-PG2-Thể tích nước"></textarea></td>
+				<td rowspan="4">60 - 65</td>
+				<td><textarea id="3-1-PG2-Nhiệt độ nước"></textarea></td>
+				<td rowspan="4">15 - 20</td>
+				<td><textarea id="3-1-PG2-BD"></textarea></td>
+				<td><textarea id="3-1-PG2-KT"></textarea></td>
+				<td><textarea id="3-1-PG2-KQ hòa tan"></textarea></td>
+				<td><textarea id="3-1-PG1-Thời gian bơm vào tank trộn"></textarea></td>
+			</tr>
+			<tr>
+				<td>PG 1</td>
+				<td><textarea id="3-2-PG1-Thể tích nước"></textarea></td>
+				<td><textarea id="3-2-PG1-Nhiệt độ nước"></textarea></td>
+				<td><textarea id="3-2-PG1-BD"></textarea></td>
+				<td><textarea id="3-2-PG1-KT"></textarea></td>
+				<td><textarea id="3-2-PG1-KQ hòa tan"></textarea></td>
+				<td><textarea id="3-2-PG1-Thời gian bơm vào tank trộn"></textarea></td>
+			</tr>
+			<tr>
+				<td>PG 2</td>
+				<td><textarea id="3-3-PG2-Thể tích nước"></textarea></td>
+				<td><textarea id="3-3-PG2-Nhiệt độ nước"></textarea></td>
+				<td><textarea id="3-3-PG2-BD"></textarea></td>
+				<td><textarea id="3-3-PG2-KT"></textarea></td>
+				<td><textarea id="3-3-PG2-KQ hòa tan"></textarea></td>
+				<td><textarea id="3-3-PG2-Thời gian bơm vào tank trộn"></textarea></td>
+			</tr>
+			<tr>
+				<td>PG 3</td>
+				<td><textarea id="3-4-PG3-Thể tích nước"></textarea></td>
+				<td><textarea id="3-4-PG3-Nhiệt độ nước"></textarea></td>
+				<td><textarea id="3-4-PG3-BD"></textarea></td>
+				<td><textarea id="3-4-PG3-KT"></textarea></td>
+				<td><textarea id="3-4-PG3-KQ hòa tan"></textarea></td>
+				<td><textarea id="3-4-PG3-Thời gian bơm vào tank trộn"></textarea></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="11">Mỗi tank - Tráng 2 lần, lần 25L nước</td>
+			</tr>
+			<tr>
+				<td rowspan="2">4</td>
+				<td rowspan="2">PG 3</td>
+				<td>Màu Caramel S5000 dạng sệt - INS 150d</td>
+				<td>70.000</td>
+				<td>80</td>
+				<td><textarea id="4-PG3-Thể tích nước"></textarea></td>
+				<td>Thường</td>
+				<td><textarea id="4-PG3-Nhiệt độ nước"></textarea></td>
+				<td>15-20</td>
+				<td><textarea id="4-PG3-BD"></textarea></td>
+				<td><textarea id="4-PG3-KT"></textarea></td>
+				<td><textarea id="4-PG4-KQ hoàn tan"></textarea></td>
+				<td><textarea id="4-PG3-Thời gian bơm vào tank trộn"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="11">Tráng 2 lần, lần 25L nước</td>
+			</tr>
+			<tr>
+				<td colspan="14">Định mức thể tích 3400L, khuấy đều và lấy mẫu final syrup không hương</td>
+			</tr>
+			<tr>
+				<td colspan="14">QCCB kiểm tra 2 mẻ liên tiếp vào đầu chu kì sản xuất và định kì kiểm tra 1 mẻ/ca</td>
+			</tr>
+			<tr style="font-weight: bold; ">
+				<td colspan="14">3. PHỐI TRỘN HƯƠNG LIỆU</td>
+			</tr>
+			<tr style="font-weight: bold; ">
+				<td rowspan="2">STT</td>
+				<td rowspan="2">Tank chứa BTP</td>
+				<td colspan="4" rowspan="2">Tên nguyên liệu ( ghi theo BOM)<br>(Kiểm tra theo BOM cho mỗi lần cân)</td>
+				<td rowspan="2">Số lượng<br>(Kg)</td>
+				<td colspan="2" rowspan="2">Kết quả kiểm tra mùi hương liệu (Đạt/Không đạt)</td>
+				<td colspan="2" rowspan="2">Thời gian đổ</td>
+				<td rowspan="2">Thời gian khuấy trộn (phút)</td>
+				<td rowspan="2">Nhân viên vận hành syrup</td>
+				<td rowspan="2">QC chế biến</td>
+			</tr>
+			<tr>
+			</tr>
+			<tr>
+				<td rowspan="3">6</td>
+				<td rowspan="3"><textarea id="3-Tank chứa BTP"></textarea></td>
+				<td colspan="4">Premix PR00298</td>
+				<td>27.500</td>
+				<td colspan="2" rowspan="3"><textarea id="3-KQ thử mùi hương liệu"></textarea></td>
+				<td colspan="2" rowspan="3"><textarea id="3-TG đổ hương"></textarea></td>
+				<td rowspan="3">15 - 20</td>
+				<td rowspan="3"><textarea id="3-NVVH pha hương"></textarea></td>
+				<td rowspan="3"><textarea id="3-QCCB pha hương"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="4">Premix PR00138</td>
+				<td>4.626</td>
+			</tr>
+			<tr>
+				<td colspan="4">Premix PR00135</td>
+				<td>0.626</td>
+			</tr>
+			<tr>
+				<td colspan="14">Định mức thể tích 3500L, khuấy đều và lấy mẫu final syrup có hương</td>
+			</tr>
+			<tr>
+				<td colspan="14" style="font-weight: bold; ">4. KẾT QUẢ</td>
+			</tr>
+			<tr style="font-weight: bold; ">
+				<td>Tank chứa BTP</td>
+				<td>Thời gian hoàn thành phối trộn</td>
+				<td>Thể tích</td>
+				<td>Độ Brix</td>
+				<td>Kết quả kiểm tra Hóa Lý (Đạt/Không Đạt)</td>
+				<td>Kết quả kiểm tra Sensory<br>( Đạt/Không Đạt)</td>
+				<td colspan="6">Xác nhận của QCCB : ĐẠT, CHO CHIẾT</td>
+				<td colspan="2">Ghi chú</td>
+			</tr>
+			<tr>
+				<td><textarea id="4-Tank chứa BTP"></textarea></td>
+				<td><textarea id="6-TG hoàn thành phối trộn"></textarea></td>
+				<td><textarea id="4-Thể tích"></textarea></td>
+				<td><textarea id="4-Độ Brix"></textarea></td>
+				<td><textarea id="4- KQ hóa lý"></textarea></td>
+				<td><textarea id="4-KQ sensory"></textarea></td>
+				<td colspan="6"><textarea id="4-Xác nhận QCCB"></textarea></td>
+				<td colspan="2" rowspan="2"><textarea id="4-Ghi chú KQ"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2">Thời gian kiểm tra và xác nhận kết quả</td>
+				<td colspan="2"><textarea id="4-TG-Thể tích"></textarea></td>
+				<td><textarea id="4-TG-KQ hóa lý"></textarea></td>
+				<td><textarea id="4-TG- KQ sensory"></textarea></td>
+				<td colspan="6"><textarea id="4-TG-Xác nhận QCCB"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold; ">
+				<td colspan="14">5. CẤP CHIẾT RÓT</td>
+			</tr>
+			<tr style="font-weight: bold; ">
+				<td>Tank chứa Final Syrup</td>
+				<td>Bắt đầu chiết</td>
+				<td>Kết thúc chiết</td>
+				<td colspan="3">Thời gian lưu tank</td>
+				<td colspan="4">Nhân viên cấp</td>
+				<td colspan="4">Xác nhận của đóng gói</td>
+			</tr>
+			<tr>
+				<td><textarea id="5-Tank chứa BTP"></textarea></td>
+				<td><textarea id="5-BD-chiết"></textarea></td>
+				<td><textarea id="5-KT-Chiết"></textarea></td>
+				<td colspan="3"><textarea id="5-TG lưu tank"></textarea></td>
+				<td colspan="4"><textarea id="5-Nhân viên cấp syrup"></textarea></td>
+				<td colspan="4"><textarea id="5-Xác nhận của đóng gói"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold; ">
+				<td colspan="14">6. QUÁ TRÌNH KHUẤY TRỘN TRONG QUÁ TRÌNH CHIẾT</td>
+			</tr>
+			<tr>
+				<td colspan="4" rowspan="4">Tiêu chuẩn theo Hướng Dẫn Sản Xuất sản phẩm<br>(Ghi rõ theo hướng dẫn sản
+					xuất)</td>
+				<td colspan="10">Thực tế: Ghi nhận thời gian khuấy trộn hoặc ngừng khuấy trộn trong quá trình chiết.
+					Ghi nhận hằng giờ.<br>Lưu ý thời gian trước khi chiết/ khi bị treo mẻ/ hụt cánh khuấy.</td>
+			</tr>
+			<tr>
+				<td rowspan="2">Thời gian</td>
+				<td>Trước khi chiết</td>
+				<td colspan="8">Trong quá trình chiết</td>
+			</tr>
+			<tr>
+				<td><textarea id="6-TG-Trước khi chiết"></textarea></td>
+				<td><textarea id="6-1-TG-Trong quá trình chiết 1"></textarea></td>
+				<td><textarea id="6-2-TG-Trong quá trình chiết"></textarea></td>
+				<td><textarea id="6-3-TG-Trong quá trình chiết"></textarea></td>
+				<td><textarea id="6-4-TG-Trong quá trình chiết"></textarea></td>
+				<td><textarea id="6-5-TG-Trong quá trình chiết"></textarea></td>
+				<td><textarea id="6-6-TG-Trong quá trình chiết"></textarea></td>
+				<td><textarea id="6-6-TG-Trong quá trình chiết"></textarea></td>
+				<td><textarea id="6-7-TG-Trong quá trình chiết"></textarea></td>
+			</tr>
+			<tr>
+				<td>Khuấy/Không khuấy (K/KK)</td>
+				<td><textarea id="6-K"></textarea></td>
+				<td><textarea id="6-1-K"></textarea></td>
+				<td><textarea id="6-2-K"></textarea></td>
+				<td><textarea id="6-3-K"></textarea></td>
+				<td><textarea id="6-4-K"></textarea></td>
+				<td><textarea id="6-5-K"></textarea></td>
+				<td><textarea id="6-6-K"></textarea></td>
+				<td><textarea id="6-6-K"></textarea></td>
+				<td><textarea id="6-7-K"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="4">Tình hình hoạt động của quá trình chế biến:</td>
+				<td colspan="10"><textarea id="Tình hình hoạt động của chế biến"></textarea></td>
+			
+			</tr>
+		</table>
+
+
+
+
+
+
+
+
+		<br>
+		<p><b>Chi tiết cây phê duyệt</b></p>
+
+		<!--- Sửa phần 3: Chi tiết cây phê duyệt: sửa lại TC line nào trực tiếp
+        Ở file render trên automata, sửa từ:
+		1. <td colspan="5" id="Thời gian nộp phiếu"></td> thành
+    <td colspan="5">@{outputs('Add_a_row_into_a_table')?['body/Thời gian nộp phiếu"></textarea></td>
+        2. id=" thành >@{triggerBody()?['
+        3. "> thành "></textarea>
+        
+-->
+
+		<table table-layout="fixed">
+			<tr>
+				<td style="font-weight: bold; ">Thời gian nộp phiếu</td>
+				<td colspan="5" id="Thời gian nộp phiếu"></td>
+			</tr>
+			<tr style="font-weight: bold; ">
+				<td>Cấp phê duyệt</td>
+				<td>Người phê duyệt</td>
+				<td>Email_NPD</td>
+				<td>Trạng thái</td>
+				<td>Thời gian thao tác</td>
+				<td>Ghi chú</td>
+			</tr>
+			<tr>
+				<td>QC online</td>
+				<td id="Người phê duyệt 1"></td>
+				<td id="Email_NPD1"></td>
+				<td id="Trạng thái_NPD1"></td>
+				<td id="Thời gian thao tác_NPD1"></td>
+				<td id="Ghi chú_NPD1"></td>
+			</tr>
+			<tr>
+				<td>Trưởng ca chế biến</td>
+				<td id="Người phê duyệt 2"></td>
+				<td id="Email_NPD2"></td>
+				<td id="Trạng thái_NPD2"></td>
+				<td id="Thời gian thao tác_NPD2"></td>
+				<td id="Ghi chú_NPD2"></td>
+			</tr>
+		</table>
+
+		<!--- Sửa phần 3: Chi tiết cây phê duyệt: sửa lại TC line nào-->
+
+		<button id='nut' type="submit" style=" float: left;">Nộp kết quả</button>
+	</form>
+
+	<button onclick="window.print();" class="noPrint" style=" float: right; background-color: yellow; color:black">Kiểm
+		tra kết quả</button>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#GFG :input").prop("disabled", true);
+			$(".slide-toggle").click(function () {
+				if (this.value == "Chỉnh sửa") {
+					this.value = "Tạm dừng";
+					$("#GFG :input").prop("disabled", false);
+				}
+				else {
+					this.value = "Chỉnh sửa";
+					$("#GFG :input").prop("disabled", true);
+				}
+			});
+		});
+	</script>
+
+
+	<script>
+		$(":checkbox").change(function () {
+			$(this).val($(this).is(":checked") ? 'checked' : 'unchecked');
+		});
+
+		$(document).ready(function () {
+			$(":checkbox").each(function (index) {
+
+				if ($(this).val() ==
+					"Yes")
+					($(this).prop('checked', true));
+			});
+		});
+
+		const formE1 = document.querySelector('.form');
+		formE1.addEventListener('submit', event => {
+			event.preventDefault();
+			const formData = new FormData(formE1);
+			const submissionTime = new Date().toISOString();
+			const data = new URLSearchParams(formData);
+			fetch('https://prod-35.southeastasia.logic.azure.com:443/workflows/a30ece3c300048ec9bb8e151485cdbc0/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=y5JLGx2_qIQVVk62WIm0Xu6j614oFx72x9zhdvE7M_U', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					'Email cá nhân': document.getElementById('Email cá nhân').value,
+					'Thời gian nộp phiếu': submissionTime,
+					'Người phê duyệt 1': document.getElementById('QC').value,
+					'Email_NPD1': 'khoaha@vinhhao.com.vn',
+					'Trạng thái_NPD1': 'Pending',
+					'Thời gian thao tác_NPD1': '',
+					'Ghi chú_NPD1': '',
+					'Người phê duyệt 2': document.getElementById('Trưởng ca').value,
+					'Email_NPD2': 'khoaha@vinhhao.com.vn',
+					'Trạng thái_NPD2': 'Waiting',
+					'Thời gian thao tác_NPD2': '',
+					'Ghi chú_NPD2': '',
+					'Trạng thái chung': 'Pending',
+					'Ngày/ tháng/ năm': document.getElementById('Ngày/ tháng/ năm').value,
+					'Vận hành': document.getElementById('Vận hành').value,
+					'QC': document.getElementById('QC').value,
+					'Trưởng ca': document.getElementById('Trưởng ca').value,
+					'Mẻ thứ': document.getElementById('Mẻ thứ').value,
+					'Tank nấu simple': document.getElementById('Tank nấu simple').value,
+					'Số bóng hoạt động': document.getElementById('Số bóng hoạt động').value,
+					'TG bơm qua UV': document.getElementById('TG bơm qua UV').value,
+					'Thời gian kết thúc': document.getElementById('Thời gian kết thúc').value,
+					'Hiệu suất UV (%)': document.getElementById('Hiệu suất UV (%)').value,
+					'Simple-Nhân viên syrup': document.getElementById('Simple-Nhân viên syrup').value,
+					'Simple-QC chế biến': document.getElementById('Simple-QC chế biến').value,
+					'1-PG3-Thể tích nước': document.getElementById('1-PG3-Thể tích nước').value,
+					'1-PG3-Nhiệt độ nước': document.getElementById('1-PG3-Nhiệt độ nước').value,
+					'1-PG3-BD': document.getElementById('1-PG3-BD').value,
+					'1-PG3-KT': document.getElementById('1-PG3-KT').value,
+					'1-PG3-KQ hòa tan': document.getElementById('1-PG3-KQ hòa tan').value,
+					'1-PG3-Thời gian bơm vào tank trộn': document.getElementById('1-PG3-Thời gian bơm vào tank trộn').value,
+					'NVVH hòa tan phụ gia': document.getElementById('NVVH hòa tan phụ gia').value,
+					'2-PG1-Thể tích nước': document.getElementById('2-PG1-Thể tích nước').value,
+					'2-PG1-Nhiệt độ nước': document.getElementById('2-PG1-Nhiệt độ nước').value,
+					'2-PG1-BD': document.getElementById('2-PG1-BD').value,
+					'2-PG1-KT': document.getElementById('2-PG1-KT').value,
+					'2-PG1-KQ hòa tan': document.getElementById('2-PG1-KQ hòa tan').value,
+					'2-PG1-Thời gian bơm vào tank trộn': document.getElementById('2-PG1-Thời gian bơm vào tank trộn').value,
+					'3-1-PG2-Thể tích nước': document.getElementById('3-1-PG2-Thể tích nước').value,
+					'3-1-PG2-Nhiệt độ nước': document.getElementById('3-1-PG2-Nhiệt độ nước').value,
+					'3-1-PG2-BD': document.getElementById('3-1-PG2-BD').value,
+					'3-1-PG2-KT': document.getElementById('3-1-PG2-KT').value,
+					'3-1-PG2-KQ hòa tan': document.getElementById('3-1-PG2-KQ hòa tan').value,
+					'3-1-PG1-Thời gian bơm vào tank trộn': document.getElementById('3-1-PG1-Thời gian bơm vào tank trộn').value,
+					'3-2-PG1-Thể tích nước': document.getElementById('3-2-PG1-Thể tích nước').value,
+					'3-2-PG1-Nhiệt độ nước': document.getElementById('3-2-PG1-Nhiệt độ nước').value,
+					'3-2-PG1-BD': document.getElementById('3-2-PG1-BD').value,
+					'3-2-PG1-KT': document.getElementById('3-2-PG1-KT').value,
+					'3-2-PG1-KQ hòa tan': document.getElementById('3-2-PG1-KQ hòa tan').value,
+					'3-2-PG1-Thời gian bơm vào tank trộn': document.getElementById('3-2-PG1-Thời gian bơm vào tank trộn').value,
+					'3-3-PG2-Thể tích nước': document.getElementById('3-3-PG2-Thể tích nước').value,
+					'3-3-PG2-Nhiệt độ nước': document.getElementById('3-3-PG2-Nhiệt độ nước').value,
+					'3-3-PG2-BD': document.getElementById('3-3-PG2-BD').value,
+					'3-3-PG2-KT': document.getElementById('3-3-PG2-KT').value,
+					'3-3-PG2-KQ hòa tan': document.getElementById('3-3-PG2-KQ hòa tan').value,
+					'3-3-PG2-Thời gian bơm vào tank trộn': document.getElementById('3-3-PG2-Thời gian bơm vào tank trộn').value,
+					'3-4-PG3-Thể tích nước': document.getElementById('3-4-PG3-Thể tích nước').value,
+					'3-4-PG3-Nhiệt độ nước': document.getElementById('3-4-PG3-Nhiệt độ nước').value,
+					'3-4-PG3-BD': document.getElementById('3-4-PG3-BD').value,
+					'3-4-PG3-KT': document.getElementById('3-4-PG3-KT').value,
+					'3-4-PG3-KQ hòa tan': document.getElementById('3-4-PG3-KQ hòa tan').value,
+					'3-4-PG3-Thời gian bơm vào tank trộn': document.getElementById('3-4-PG3-Thời gian bơm vào tank trộn').value,
+					'4-PG3-Thể tích nước': document.getElementById('4-PG3-Thể tích nước').value,
+					'4-PG3-Nhiệt độ nước': document.getElementById('4-PG3-Nhiệt độ nước').value,
+					'4-PG3-BD': document.getElementById('4-PG3-BD').value,
+					'4-PG3-KT': document.getElementById('4-PG3-KT').value,
+					'4-PG4-KQ hoàn tan': document.getElementById('4-PG4-KQ hoàn tan').value,
+					'4-PG3-Thời gian bơm vào tank trộn': document.getElementById('4-PG3-Thời gian bơm vào tank trộn').value,
+					'3-Tank chứa BTP': document.getElementById('3-Tank chứa BTP').value,
+					'3-KQ thử mùi hương liệu': document.getElementById('3-KQ thử mùi hương liệu').value,
+					'3-TG đổ hương': document.getElementById('3-TG đổ hương').value,
+					'3-NVVH pha hương': document.getElementById('3-NVVH pha hương').value,
+					'3-QCCB pha hương': document.getElementById('3-QCCB pha hương').value,
+					'4-Tank chứa BTP': document.getElementById('4-Tank chứa BTP').value,
+					'6-TG hoàn thành phối trộn': document.getElementById('6-TG hoàn thành phối trộn').value,
+					'4-Thể tích': document.getElementById('4-Thể tích').value,
+					'4-Độ Brix': document.getElementById('4-Độ Brix').value,
+					'4- KQ hóa lý': document.getElementById('4- KQ hóa lý').value,
+					'4-KQ sensory': document.getElementById('4-KQ sensory').value,
+					'4-Xác nhận QCCB': document.getElementById('4-Xác nhận QCCB').value,
+					'4-Ghi chú KQ': document.getElementById('4-Ghi chú KQ').value,
+					'4-TG-Thể tích': document.getElementById('4-TG-Thể tích').value,
+					'4-TG-KQ hóa lý': document.getElementById('4-TG-KQ hóa lý').value,
+					'4-TG- KQ sensory': document.getElementById('4-TG- KQ sensory').value,
+					'4-TG-Xác nhận QCCB': document.getElementById('4-TG-Xác nhận QCCB').value,
+					'5-Tank chứa BTP': document.getElementById('5-Tank chứa BTP').value,
+					'5-BD-chiết': document.getElementById('5-BD-chiết').value,
+					'5-KT-Chiết': document.getElementById('5-KT-Chiết').value,
+					'5-TG lưu tank': document.getElementById('5-TG lưu tank').value,
+					'5-Nhân viên cấp syrup': document.getElementById('5-Nhân viên cấp syrup').value,
+					'5-Xác nhận của đóng gói': document.getElementById('5-Xác nhận của đóng gói').value,
+					'6-TG-Trước khi chiết': document.getElementById('6-TG-Trước khi chiết').value,
+					'6-1-TG-Trong quá trình chiết 1': document.getElementById('6-1-TG-Trong quá trình chiết 1').value,
+					'6-2-TG-Trong quá trình chiết': document.getElementById('6-2-TG-Trong quá trình chiết').value,
+					'6-3-TG-Trong quá trình chiết': document.getElementById('6-3-TG-Trong quá trình chiết').value,
+					'6-4-TG-Trong quá trình chiết': document.getElementById('6-4-TG-Trong quá trình chiết').value,
+					'6-5-TG-Trong quá trình chiết': document.getElementById('6-5-TG-Trong quá trình chiết').value,
+					'6-6-TG-Trong quá trình chiết': document.getElementById('6-6-TG-Trong quá trình chiết').value,
+					'6-6-TG-Trong quá trình chiết': document.getElementById('6-6-TG-Trong quá trình chiết').value,
+					'6-7-TG-Trong quá trình chiết': document.getElementById('6-7-TG-Trong quá trình chiết').value,
+					'6-K': document.getElementById('6-K').value,
+					'6-1-K': document.getElementById('6-1-K').value,
+					'6-2-K': document.getElementById('6-2-K').value,
+					'6-3-K': document.getElementById('6-3-K').value,
+					'6-4-K': document.getElementById('6-4-K').value,
+					'6-5-K': document.getElementById('6-5-K').value,
+					'6-6-K': document.getElementById('6-6-K').value,
+					'6-6-K': document.getElementById('6-6-K').value,
+					'6-7-K': document.getElementById('6-7-K').value,
+					'Tình hình hoạt động của chế biến': document.getElementById('Tình hình hoạt động của chế biến').value,
+				})
+			}).then(res => res.json())
+				.then(data => console.log(data))
+				.catch(error => console.log(error));
+			alert("Đã nộp thành công");
+			window.location.reload();
+		});
+	</script>
+
+
+</body>
+
+</html>

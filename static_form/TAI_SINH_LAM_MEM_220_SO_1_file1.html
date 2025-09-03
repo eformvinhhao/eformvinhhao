@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+
+<html>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<style>
+	textarea:enabled,
+	input[type=text]:enabled,
+	select:enabled {
+		background-color: beige;
+	}
+
+	textarea:disabled,
+	input[type=text]:disabled,
+	select:disabled {
+		background-color: lightgray;
+	}
+
+	input[type=text],
+	select {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 0;
+		display: block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+	}
+
+	button:enabled {
+		background-color: #4CAF50;
+	}
+
+	button:disabled {
+		background-color: lightgray;
+	}
+
+	* {
+		font-size: 100%;
+		font-family: Tahoma, sans-serif;
+	}
+
+	@media print {
+		.noPrint {
+			display: none;
+		}
+	}
+
+	input[type=button] {
+		width: 20%;
+		background-color: #4CAF50;
+		color: white;
+		padding: 14px 20px;
+		margin: 8px 0;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	button {
+		width: 20%;
+		background-color: #4CAF50;
+		color: white;
+		padding: 14px 20px;
+		margin: 8px 0;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	input[type="submit"][value="Chỉnh sửa"] {
+		background-color: green;
+		color: white;
+	}
+
+	input[type="button"][value="Tạm dừng"] {
+		background-color: red;
+		color: white;
+	}
+
+	input:focus:invalid {
+		box-shadow: none;
+	}
+
+	select {
+		width: 100%;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		height: max-content;
+		overflow: visible;
+		font-size: x-small;
+		word-wrap: break-word;
+		white-space: nowrap;
+		margin: 0%;
+		padding: auto;
+		overflow: visible;
+	}
+
+	select option {
+		margin: 0%;
+		width: 100%;
+		text-overflow: ellipsis;
+		overflow: visible;
+		white-space: nowrap;
+		word-wrap: break-word;
+		overflow: visible;
+	}
+
+	input[type=submit]:hover {
+		background-color: #45a049;
+	}
+
+	tr {
+		height: 50px;
+	}
+
+
+	div {
+		border-radius: 5px;
+		background-color: rgb(255, 255, 255);
+		padding: 20px;
+	}
+
+	.table td {
+		padding: 0.2rem 0.5rem;
+		text-align: center;
+	}
+
+	textarea,
+	input[type=text],
+	input[type=date],
+	select {
+		overflow: inherit;
+		display: block;
+		box-sizing: border-box;
+		border: 0px;
+		resize: none;
+		width: 100%;
+	}
+
+
+	table,
+	th,
+	td {
+		border-collapse: collapse;
+		border: 1px solid;
+		text-align: center;
+	}
+
+	table {
+		width: 100%;
+	}
+</style>
+
+<body>
+	<input onclick="enable_disable()" type="button" class="slide-toggle" value="Chỉnh sửa" style=" float: right;">
+	<form class='form' id="GFG">
+
+		<!--- Sửa phần 1: Phần tiêu đề form
+		Ở file render trên automata, sửa từ:
+			1. <textarea id=" thành @{triggerBody()?['
+			2. "></textarea> thành ']}
+			3. <input type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
+			@{triggerBody()?['Email cá nhân']}
+			4. <input type="date" id="Ngày/ tháng/ năm" required=""> thành
+			@{outputs('Add_a_row_into_a_table')?['body/Ngày~1 tháng~1 năm']}
+			
+		-->
+
+		<table table-layout="fixed">
+			<tr>
+				<td colspan="8" rowspan="4" style="font-weight: bold; ">PHIẾU KIỂM TRA CÁC BƯỚC KHI THỰC HIỆN TÁI SINH LÀM MỀM 220 SỐ 1 XỬ LÝ NƯỚC</td>
+				<td>Mã tài liệu</td>
+				<td>VHC/KTCN-HD-007/BM01</td>
+			</tr>
+			<tr>
+				<td>Lần ban hành</td>
+				<td>01</td>
+			</tr>
+			<tr>
+				<td>Ngày hiệu lực</td>
+				<td>07/01/2025</td>
+			</tr>
+			<tr>
+				<td>Số trang</td>
+				<td>2</td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold; ">Ngày/ tháng/ năm</td>
+				<td><input type="date" id="Ngày/ tháng/ năm" required=""></td>
+				<td style="font-weight: bold; ">Vận hành</td>
+				<td><textarea id="Vận hành"></textarea></td>
+				<td style="font-weight: bold; ">Email cá nhân</td>
+				<td><input type="text" autocomplete="email" maxlength="60" id="Email cá nhân"
+						pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""></td>
+				<td style="font-weight: bold; ">QC</td>
+				<td><textarea id="QC"></textarea></td>
+				<td style="font-weight: bold; ">Trưởng ca</td>
+				<td><textarea id="Trưởng ca"></textarea></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold; ">Bồn làm mềm số</td>
+				<td colspan="3"><textarea id="Bồn làm mềm số"></textarea></td>
+				<td style="font-weight: bold; ">Ca</td>
+				<td colspan="5"><textarea id="Ca"></textarea></td>
+			</tr>
+		</table>
+
+
+		<!--- Sửa phần 1: Phần tiêu đề form-->
+
+		<br>
+
+		<!--- Sửa phần 2: Phần nội dung form:
+			Ở file render trên automata, sửa từ:
+			1. <textarea id=" thành @{triggerBody()?['
+			2. "></textarea> thành ']}
+			3. <input type="checkbox" id=" thành <input type="checkbox" @{triggerBody()?['
+			4. " value="uncheck" thành ']}
+		-->
+
+
+		<table table-layout="fixed">
+				<tr style="font-weight: bold; ">
+					<td rowspan="2">Bước</td>
+					<td rowspan="2">Mô Tả</td>
+					<td rowspan="2">Chỉ tiêu</td>
+					<td rowspan="2">Xác nhận thực tế</td>
+					<td>Thời gian chuẩn</td>
+					<td>Thời gian thực tế</td>
+					<td colspan="2">Thời gian thực hiện</td>
+				</tr>
+				<tr>
+					<td>(phút)</td>
+					<td>(phút)</td>
+					<td style="font-weight: bold; ">Bắt đầu</td>
+					<td style="font-weight: bold; ">Kết thúc</td>
+				</tr>
+				<tr>
+					<td>B1</td>
+					<td>Kiểm tra bơm nước muối vào bồn chứa nước muối để tái sinh</td>
+					<td>260 L</td>
+					<td><textarea id="B1-Xác nhận TT"></textarea></td>
+					<td rowspan="2">1</td>
+					<td rowspan="2"><textarea id="B1-TT"></textarea></td>
+					<td rowspan="2"><textarea id="B1-BD"></textarea></td>
+					<td rowspan="2"><textarea id="B1-KT"></textarea></td>
+				</tr>
+				<tr>
+					<td>B2</td>
+					<td>Kiểm tra lượng nước trong Tank 100m3 TDS 250 trên HMI 250 mới</td>
+					<td>≥ 30 m³</td>
+					<td><textarea id="B2-Xác nhận TT"></textarea></td>
+				</tr>
+				<tr>
+					<td>B3</td>
+					<td>Bắt đầu quá trình tái sinh tự động 220 số 1</td>
+					<td>58 p</td>
+					<td><input type="checkbox" id="B3-Xác nhận TT" value="uncheck" /></td>
+					<td></td>
+					<td></td>
+					<td><textarea id="B3-BD"></textarea></td>
+					<td><textarea id="B3-KT"></textarea></td>
+				</tr>
+				<tr>
+					<td>B4</td>
+					<td>Rửa ngược</td>
+					<td></td>
+					<td><input type="checkbox" id="B4-Xác nhận TT" value="uncheck" /></td>
+					<td>3</td>
+					<td><textarea id="B4-TT"></textarea></td>
+<td><textarea id="B4-BD"></textarea></td>
+<td><textarea id="B4-KT"></textarea></td>
+				</tr>
+				<tr>
+					<td>B5</td>
+					<td>Kiểm tra: quá trình hút muối</td>
+					<td>35 l/p</td>
+					<td><textarea id="B5-Xác nhận TT"></textarea></td>
+					<td>6</td>
+					<td><textarea id="B5-TT"></textarea></td>
+<td><textarea id="B5-BD"></textarea></td>
+<td><textarea id="B5-KT"></textarea></td>
+				</tr>
+				<tr>
+					<td>B6</td>
+					<td>Mở: Valve cấp nước TDS 220 vào bồn chứa nước muối</td>
+					<td></td>
+					<td><input type="checkbox" id="B6-Xác nhận TT" value="uncheck" /></td>
+					<td rowspan="3">32</td>
+					<td rowspan="3"><textarea id="B7-TT"></textarea></td>
+					<td rowspan="3"><textarea id="B7-BD"></textarea></td>
+					<td rowspan="3"><textarea id="B7-KT"></textarea></td>
+				</tr>
+				<tr>
+					<td>B7</td>
+					<td>Kiểm tra nước TDS 220 đã được cấp vào bồn</td>
+					<td></td>
+					<td><input type="checkbox" id="B7-Xác nhận TT" value="uncheck" /></td>
+				</tr>
+				<tr>
+					<td>B8</td>
+					<td>Đóng: Valve cấp nước TDS 220 khi bơm muối ngừng</td>
+					<td></td>
+					<td><input type="checkbox" id="B8-Xác nhận TT" value="uncheck" /></td>
+				</tr>
+				<tr>
+					<td>B9</td>
+					<td>Rửa nhanh</td>
+					<td></td>
+					<td><input type="checkbox" id="B9-Xác nhận TT" value="uncheck" /></td>
+					<td>15</td>
+					<td><textarea id="B9-TT"></textarea></td>
+<td><textarea id="B9-BD"></textarea></td>
+<td><textarea id="B9-KT"></textarea></td>
+				</tr>
+				<tr>
+					<td>B10</td>
+					<td>Điền đầy</td>
+					<td></td>
+					<td><input type="checkbox" id="B10-Xác nhận TT" value="uncheck" /></td>
+					<td>2</td>
+					<td><textarea id="B10-TT"></textarea></td>
+<td><textarea id="B10-BD"></textarea></td>
+<td><textarea id="B10-KT"></textarea></td>
+				</tr>
+				<tr>
+					<td>B11</td>
+					<td>Mở: Valve xã đáy bồn chứa nước muối cho thoát ra ngoài hết</td>
+					<td></td>
+					<td><input type="checkbox" id="B11-Xác nhận TT" value="uncheck" /></td>
+					<td rowspan="3">5</td>
+					<td rowspan="3"><textarea id="B12-TT"></textarea></td>
+					<td rowspan="3"><textarea id="B12-BD"></textarea></td>
+					<td rowspan="3"><textarea id="B12-KT"></textarea></td>
+				</tr>
+				<tr>
+					<td>B12</td>
+					<td>Đóng: Valve xã đáy bồn chứa nước muối.</td>
+					<td></td>
+					<td><input type="checkbox" id="B12-Xác nhận TT" value="uncheck" /></td>
+				</tr>
+				<tr>
+					<td>B13</td>
+					<td>Bơm nước muối vào bồn chứa muối để tái sinh cho bồn tiếp theo</td>
+					<td>260 L</td>
+					<td><textarea id="B13-Xác nhận TT"></textarea></td>
+				</tr>
+				<tr>
+					<td>B14</td>
+					<td>Mở: Valve lấy mẫu thành phẩm sau bồn làm mềm.</td>
+					<td></td>
+					<td><input type="checkbox" id="B14-Xác nhận TT" value="uncheck" /></td>
+					<td rowspan="3">5</td>
+					<td rowspan="3"><textarea id="B15-TT"></textarea></td>
+					<td rowspan="3"><textarea id="B15-BD"></textarea></td>
+					<td rowspan="3"><textarea id="B15-KT"></textarea></td>
+				</tr>
+				<tr>
+					<td>B15</td>
+					<td>Kiểm tra: mẫu nước TDS 220 sau làm mềm</td>
+					<td>≤ 350 mg/l</td>
+					<td><textarea id="B15-Xác nhận TT"></textarea></td>
+				</tr>
+				<tr>
+					<td>B16</td>
+					<td>Đóng: Valve lấy mẫu thành phẩm sau bồn làm mềm.</td>
+					<td></td>
+					<td><input type="checkbox" id="B16-Xác nhận TT" value="uncheck" /></td>
+				</tr>
+				<tr>
+					<td colspan="4" style="font-weight: bold; ">Tổng thời gian thực hiện (phút)</td>
+					<td>69</td>
+					<td><textarea id="Tổng-TG"></textarea></td>
+<td><textarea id="TG-BD"></textarea></td>
+<td><textarea id="TG-KT"></textarea></td>
+				</tr>
+				<tr style="font-weight: bold; ">
+					<td>Ghi chú</td>
+					<td colspan="7"><textarea id="Ghi chú"></textarea></td>
+				</tr>
+			</table>
+			
+
+
+
+		<br>
+		<p><b>Chi tiết cây phê duyệt</b></p>
+
+		<!--- Sửa phần 3: Chi tiết cây phê duyệt: sửa lại TC line nào trực tiếp
+        Ở file render trên automata, sửa từ:
+		1. <td colspan="5" id="Thời gian nộp phiếu"></td> thành
+    <td colspan="5">@{outputs('Add_a_row_into_a_table')?['body/Thời gian nộp phiếu']}</td>
+        2. id=" thành >@{triggerBody()?['
+        3. "> thành ']}
+        
+-->
+
+		<table table-layout="fixed">
+			<tr>
+				<td style="font-weight: bold; ">Thời gian nộp phiếu</td>
+				<td colspan="5" id="Thời gian nộp phiếu"></td>
+			</tr>
+			<tr style="font-weight: bold; ">
+				<td>Cấp phê duyệt</td>
+				<td>Người phê duyệt</td>
+				<td>Email_NPD</td>
+				<td>Trạng thái</td>
+				<td>Thời gian thao tác</td>
+				<td>Ghi chú</td>
+			</tr>
+			<tr>
+				<td>QC online</td>
+				<td id="Người phê duyệt 1"></td>
+				<td id="Email_NPD1"></td>
+				<td id="Trạng thái_NPD1"></td>
+				<td id="Thời gian thao tác_NPD1"></td>
+				<td id="Ghi chú_NPD1"></td>
+			</tr>
+			<tr>
+				<td>Trưởng ca chế biến</td>
+				<td id="Người phê duyệt 2"></td>
+				<td id="Email_NPD2"></td>
+				<td id="Trạng thái_NPD2"></td>
+				<td id="Thời gian thao tác_NPD2"></td>
+				<td id="Ghi chú_NPD2"></td>
+			</tr>
+		</table>
+
+		<!--- Sửa phần 3: Chi tiết cây phê duyệt: sửa lại TC line nào-->
+
+		<button id='nut' type="submit" style=" float: left;">Nộp kết quả</button>
+	</form>
+
+	<button onclick="window.print();" class="noPrint" style=" float: right; background-color: yellow; color:black">Kiểm
+		tra kết quả</button>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#GFG :input").prop("disabled", true);
+			$(".slide-toggle").click(function () {
+				if (this.value == "Chỉnh sửa") {
+					this.value = "Tạm dừng";
+					$("#GFG :input").prop("disabled", false);
+				}
+				else {
+					this.value = "Chỉnh sửa";
+					$("#GFG :input").prop("disabled", true);
+				}
+			});
+		});
+	</script>
+
+
+	<script>
+		$(":checkbox").change(function () {
+			$(this).val($(this).is(":checked") ? 'checked' : 'unchecked');
+		});
+
+		$(document).ready(function () {
+			$(":checkbox").each(function (index) {
+
+				if ($(this).val() ==
+					"Yes")
+					($(this).prop('checked', true));
+			});
+		});
+
+		const formE1 = document.querySelector('.form');
+		formE1.addEventListener('submit', event => {
+			event.preventDefault();
+			const formData = new FormData(formE1);
+			const submissionTime = new Date().toISOString();
+			const data = new URLSearchParams(formData);
+			fetch('https://prod-16.southeastasia.logic.azure.com:443/workflows/0f1c7233a8f646a0bd786dfc9b87610b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=cBjc6epoUsxAKjdYinoKsn5m0c7PkFpfBGFUg6nmRA4', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					'Email cá nhân': document.getElementById('Email cá nhân').value,
+					'Thời gian nộp phiếu': submissionTime,
+					'Người phê duyệt 1': document.getElementById('QC').value,
+					'Email_NPD1': 'khoaha@vinhhao.com.vn',
+					'Trạng thái_NPD1': 'Pending',
+					'Thời gian thao tác_NPD1': '',
+					'Ghi chú_NPD1': '',
+					'Người phê duyệt 2': document.getElementById('Trưởng ca').value,
+					'Email_NPD2': 'khoaha@vinhhao.com.vn',
+					'Trạng thái_NPD2': 'Waiting',
+					'Thời gian thao tác_NPD2': '',
+					'Ghi chú_NPD2': '',
+					'Trạng thái chung': 'Pending',
+					'Ngày/ tháng/ năm': document.getElementById('Ngày/ tháng/ năm').value,
+					'Vận hành': document.getElementById('Vận hành').value,
+					'QC': document.getElementById('QC').value,
+					'Trưởng ca': document.getElementById('Trưởng ca').value,
+					'Bồn làm mềm số': document.getElementById('Bồn làm mềm số').value,
+'Ca': document.getElementById('Ca').value,
+'B1-Xác nhận TT': document.getElementById('B1-Xác nhận TT').value,
+'B1-TT': document.getElementById('B1-TT').value,
+'B1-BD': document.getElementById('B1-BD').value,
+'B1-KT': document.getElementById('B1-KT').value,
+'B2-Xác nhận TT': document.getElementById('B2-Xác nhận TT').value,
+'B3-BD': document.getElementById('B3-BD').value,
+'B3-KT': document.getElementById('B3-KT').value,
+'B4-TT': document.getElementById('B4-TT').value,
+'B4-BD': document.getElementById('B4-BD').value,
+'B4-KT': document.getElementById('B4-KT').value,
+'B5-Xác nhận TT': document.getElementById('B5-Xác nhận TT').value,
+'B5-TT': document.getElementById('B5-TT').value,
+'B5-BD': document.getElementById('B5-BD').value,
+'B5-KT': document.getElementById('B5-KT').value,
+'B7-TT': document.getElementById('B7-TT').value,
+'B7-BD': document.getElementById('B7-BD').value,
+'B7-KT': document.getElementById('B7-KT').value,
+'B9-TT': document.getElementById('B9-TT').value,
+'B9-BD': document.getElementById('B9-BD').value,
+'B9-KT': document.getElementById('B9-KT').value,
+'B10-TT': document.getElementById('B10-TT').value,
+'B10-BD': document.getElementById('B10-BD').value,
+'B10-KT': document.getElementById('B10-KT').value,
+'B12-TT': document.getElementById('B12-TT').value,
+'B12-BD': document.getElementById('B12-BD').value,
+'B12-KT': document.getElementById('B12-KT').value,
+'B13-Xác nhận TT': document.getElementById('B13-Xác nhận TT').value,
+'B15-Xác nhận TT': document.getElementById('B15-Xác nhận TT').value,
+'B15-TT': document.getElementById('B15-TT').value,
+'B15-BD': document.getElementById('B15-BD').value,
+'B15-KT': document.getElementById('B15-KT').value,
+'Tổng-TG': document.getElementById('Tổng-TG').value,
+'TG-BD': document.getElementById('TG-BD').value,
+'TG-KT': document.getElementById('TG-KT').value,
+'Ghi chú': document.getElementById('Ghi chú').value,
+'B3-Xác nhận TT': document.getElementById('B3-Xác nhận TT').value,
+'B4-Xác nhận TT': document.getElementById('B4-Xác nhận TT').value,
+'B6-Xác nhận TT': document.getElementById('B6-Xác nhận TT').value,
+'B7-Xác nhận TT': document.getElementById('B7-Xác nhận TT').value,
+'B8-Xác nhận TT': document.getElementById('B8-Xác nhận TT').value,
+'B9-Xác nhận TT': document.getElementById('B9-Xác nhận TT').value,
+'B10-Xác nhận TT': document.getElementById('B10-Xác nhận TT').value,
+'B11-Xác nhận TT': document.getElementById('B11-Xác nhận TT').value,
+'B12-Xác nhận TT': document.getElementById('B12-Xác nhận TT').value,
+'B14-Xác nhận TT': document.getElementById('B14-Xác nhận TT').value,
+'B16-Xác nhận TT': document.getElementById('B16-Xác nhận TT').value,
+				})
+			}).then(res => res.json())
+				.then(data => console.log(data))
+				.catch(error => console.log(error));
+			alert("Đã nộp thành công");
+			window.location.reload();
+		});
+	</script>
+
+
+</body>
+
+</html>
