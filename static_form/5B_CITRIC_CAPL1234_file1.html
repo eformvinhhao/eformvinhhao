@@ -1,3 +1,35 @@
+<!--- File excel phải có những trường sau, chính xác từng chữ, không dư thừa dấu cách:
+	Email cá nhân
+	Thời gian nộp phiếu
+	Người phê duyệt 1
+	Email_NPD1
+	Trạng thái_NPD1
+	Thời gian thao tác_NPD1
+	Ghi chú_NPD1
+	Người phê duyệt 2
+	Email_NPD2
+	Trạng thái_NPD2
+	Thời gian thao tác_NPD2
+	Ghi chú_NPD2
+	Trạng thái chung
+	Ngày/ tháng/ năm
+	Vận hành
+	QC
+	Trưởng ca
+-->
+
+<!--- Khi sửa html: gồm 3 file: file 1 giao diện chính để người dùng điền, file 2 chép vào automate, file 3 nháp
+	- Sửa hoàn hảo trên file 1, bật F5 để kiểm tra có lỗi font, giao diện...
+	- Sau khi hoàn chỉnh mới copy file này sang file thứ 2.
+	- Sau đó:
+	 	+	Copy từng phần trên file thứ 2 cần sửa
+		+	Chép ra file 3 nháp
+		+ 	Ctrl F để tìm và sửa
+		+	Dán ngược lại vào file 2 để tránh sửa luôn các phần không cần thiết
+	- Sau khi sửa xong 3 phần, xóa hết phần comment rồi mới chép vào automate
+-->
+
+
 <!DOCTYPE html>
 
 <html>
@@ -153,31 +185,32 @@
 </style>
 
 <body>
-	<input onclick="enable_disable()" type="button" class="slide-toggle" value="Chỉnh sửa" style=" float: right;">
+	<input required onclick="enable_disable()" type="button" class="slide-toggle" value="Chỉnh sửa" style=" float: right;">
 	<form class='form' id="GFG">
+
+
 
 		<!--- Sửa phần 1: Phần tiêu đề form
 		Ở file render trên automata, sửa từ:
-			1. <textarea id=" thành @{triggerBody()?['
+			1. <textarea required id=" thành @{triggerBody()?['
 			2. "></textarea> thành ']}
-			3. <input type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
+			3. <input required type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
 			@{triggerBody()?['Email cá nhân']}
-			4. <input type="date" id="Ngày/ tháng/ năm" required=""> thành
+			4. <input required type="date" id="Ngày/ tháng/ năm" required=""> thành
 			@{outputs('Add_a_row_into_a_table')?['body/Ngày~1 tháng~1 năm']}
 			
 		-->
 
-
 		<table table-layout="fixed">
 			<tr>
-				<td colspan="8" rowspan="4" style="font-weight: bold; ">BIỂU MẪU GHI NHẬN QUÁ TRÌNH CIP 5 BƯỚC DIVOFLOW CẤP LINE 2
+				<td colspan="8" rowspan="4" style="font-weight: bold;">BIỂU MẪU GHI NHẬN QUÁ TRÌNH CIP 5 BƯỚC ACID CITRIC CẤP LINE 1, 2, 3, 4
 				</td>
 				<td>Mã tài liệu</td>
-				<td>VHW/SX/HD-03/BM04</td>
+				<td>VHW/SX/HD-03/BM03</td>
 			</tr>
 			<tr>
 				<td>Lần ban hành</td>
-				<td>03</td>
+				<td>04</td>
 			</tr>
 			<tr>
 				<td>Ngày hiệu lực</td>
@@ -188,29 +221,26 @@
 				<td>4</td>
 			</tr>
 			<tr>
-				<td style="font-weight: bold; ">Ngày/ tháng/ năm</td>
-				<td><input type="date" id="Ngày/ tháng/ năm" required=""></td>
-				<td style="font-weight: bold; ">Vận hành</td>
-				<td><textarea id="Vận hành"></textarea></td>
-				<td style="font-weight: bold; ">Email cá nhân</td>
-				<td><input type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""></td>
-				<td style="font-weight: bold; ">QC</td>
-				<td><textarea id="QC"></textarea></td>
-				<td style="font-weight: bold; ">Trưởng ca</td>
-				<td><textarea id="Trưởng ca"></textarea></td>
+				<td style="font-weight: bold;">Ngày/ tháng/ năm</td>
+				<td><input required type="date" id="Ngày/ tháng/ năm" required=""></td>
+				<td style="font-weight: bold;">Vận hành</td>
+				<td><textarea required id="Vận hành"></textarea></td>
+				<td style="font-weight: bold;">Email cá nhân</td>
+				<td><input required type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""></td>
+				<td style="font-weight: bold;">QC</td>
+				<td><textarea required id="QC"></textarea></td>
+				<td style="font-weight: bold;">Trưởng ca</td>
+				<td><textarea required id="Trưởng ca"></textarea></td>
 			</tr>
 			<tr>
-				<td style="font-weight: bold; ">Từ SKU</td>
-				<td colspan="3"><textarea id="SKU1"></textarea></td>
-				<td style="font-weight: bold; ">sang</td>
-				<td colspan="3"><textarea id="SKU2"></textarea></td>
-				<td style="font-weight: bold; ">Line</td>
-				<td><textarea id="Line"></textarea></td>
+				<td style="font-weight: bold;">Từ SKU</td>
+				<td colspan="3"><textarea required id="SKU1"></textarea></td>
+				<td style="font-weight: bold;">sang</td>
+				<td colspan="3"><textarea required id="SKU2"></textarea></td>
+				<td style="font-weight: bold;">Line</td>
+				<td><textarea required id="Line"></textarea></td>
 			</tr>
 		</table>
-
-	
-
 
 		<!--- Sửa phần 1: Phần tiêu đề form-->
 
@@ -221,43 +251,45 @@
 
 		<!--- Sửa phần 2: Phần nội dung form:
 			Ở file render trên automata, sửa từ:
-			1. <textarea id=" thành @{triggerBody()?['
+			1. <textarea required id=" thành @{triggerBody()?['
 			2. "></textarea> thành ']}
-			3. <input type="checkbox" id=" thành <input type="checkbox" @{triggerBody()?['
+			3. <input required type="checkbox" id=" thành <input required type="checkbox" @{triggerBody()?['
 			4. " value="uncheck" thành ']}
+
 		-->
+
 		<table table-layout="fixed">
-			<tr style="font-weight: bold; ">
+			<tr style="font-weight: bold;">
 				<td rowspan="2">STT</td>
 				<td rowspan="2">Vị trí</td>
-				<td colspan="3" rowspan="2">Mô tả các bước thực hiện<br>- Viết tắt: TC: tiêu chuẩn ; TT: thực tế; KQ:
-					Kết quả; QC: QC chế biến xác nhận;T°: Nhiệt độ<br>- Đánh dấu "V" cho mỗi lần thực hiện khi Đóng - Mở
-					Valve.</td>
-				<td colspan="4">Thời gian (phút)</td>
+				<td colspan="3" rowspan="2">Mô tả các bước thực hiện<br>- Viết tắt: TC: tiêu chuẩn; TT: thực tế; KQ: Kết
+					quả; QC: QC chế biến xác nhận; T°: Nhiệt độ<br>- Đánh dấu "X" cho mỗi lần thực hiện khi Đóng - Mở
+					Valve</td>
+				<td colspan="4">Thời gian</td>
 			</tr>
-			<tr style="font-weight: bold; ">
+			<tr style="font-weight: bold;">
 				<td>TC</td>
 				<td>Bắt đầu</td>
 				<td>Kết thúc</td>
 				<td>Tổng</td>
 			</tr>
-			<tr style="font-weight: bold; ">
+			<tr style="font-weight: bold;">
 				<td>0</td>
 				<td colspan="4">CHUẨN BỊ</td>
 				<td>10</td>
 				<td></td>
 				<td></td>
-				<td><textarea id="0-Tổng"></textarea></td>
+				<td><textarea required id="0-Tổng"></textarea></td>
 			</tr>
 			<tr>
 				<td>0.1</td>
 				<td>Trạm CIP</td>
-				<td colspan="3">Kiểm tra: điện, hơi nóng, nước, khí nén (5,5 - 7 bar), chlorine và Divoflow trong tank
-					CIP đủ nồng độ</td>
+				<td colspan="3">Kiểm tra: điện, hơi nóng, nước, khí nén (5.5 - 7 bar), Chlorine và Acid Citric trong
+					tank CIP đủ nồng độ</td>
 				<td rowspan="8">10</td>
-				<td rowspan="8"><textarea id="0-1-BD"></textarea></td>
-				<td rowspan="8"><textarea id="0-1-KT"></textarea></td>
-				<td rowspan="8"><textarea id="0-1-Tổng"></textarea></td>
+				<td rowspan="8"><textarea required id="0-1-BD"></textarea></td>
+				<td rowspan="8"><textarea required id="0-1-KT"></textarea></td>
+				<td rowspan="8"><textarea required id="0-1-Tổng"></textarea></td>
 			</tr>
 			<tr>
 				<td rowspan="5">0.2</td>
@@ -267,263 +299,255 @@
 			<tr>
 				<td rowspan="4">Kiểm tra mở valve</td>
 				<td>Q6</td>
-				<td><input type="checkbox" id="0-2-Mở valve-Q6" value="uncheck" /></td>
+				<td><input required type="checkbox" id="0-2-Mở valve-Q6" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td>Q9</td>
-				<td><input type="checkbox" id="0-2-Mở valve-Q9" value="uncheck" /></td>
+				<td><input required type="checkbox" id="0-2-Mở valve-Q9" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td>Q7</td>
-				<td><input type="checkbox" id="0-2-Mở valve-Q7" value="uncheck" /></td>
+				<td><input required type="checkbox" id="0-2-Mở valve-Q7" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td>Q10</td>
-				<td><input type="checkbox" id="0-2-Mở valve-Q10" value="uncheck" /></td>
+				<td><input required type="checkbox" id="0-2-Mở valve-Q10" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td rowspan="2">0.3</td>
 				<td rowspan="2">Trạm CIP</td>
 				<td>Mở valve nước giải nhiệt bơm</td>
 				<td>P209</td>
-				<td><input type="checkbox" id="0-3-Mở valve nước giải nhiệt-P209" value="uncheck" /></td>
+				<td><input required type="checkbox" id="0-3-Mở valve-P209" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td>Mở valve</td>
 				<td>Cấp khí nén</td>
-				<td><input type="checkbox" id="0-3-Mở valve cấp khí nén" value="uncheck" /></td>
+				<td><input required type="checkbox" id="0-3-Mở valve-Cấp khí nén" value="uncheck" /></td>
 			</tr>
-			<tr style="font-weight: bold; ">
+			<tr style="font-weight: bold;">
 				<td>1</td>
 				<td colspan="4">TRÁNG BƯỚC ĐẦU BẰNG NƯỚC</td>
 				<td>10</td>
 				<td></td>
 				<td></td>
-				<td><textarea id="1-Tổng"></textarea></td>
+				<td><textarea required id="1-Tổng"></textarea></td>
 			</tr>
 			<tr>
 				<td rowspan="3">1.1</td>
 				<td rowspan="3">Tủ điện CIP</td>
 				<td rowspan="2">Mở valve</td>
 				<td>215</td>
-				<td><input type="checkbox" id="1-1-Mở valve-215" value="uncheck" /></td>
+				<td><input required type="checkbox" id="1-1-Mở valve-215" value="uncheck" /></td>
 				<td rowspan="7">10</td>
-
-				<td rowspan="7"><textarea id="1-1-BD"></textarea></td>
-				<td rowspan="7"><textarea id="1-1-KT"></textarea></td>
-				<td rowspan="7"><textarea id="1-1-Tổng"></textarea></td>
+				<td rowspan="7"><textarea required id="1-1-BD"></textarea></td>
+				<td rowspan="7"><textarea required id="1-1-KT"></textarea></td>
+				<td rowspan="7"><textarea required id="1-1-Tổng"></textarea></td>
 			</tr>
 			<tr>
 				<td>203</td>
-				<td><input type="checkbox" id="1-1-Mở valve-203" value="uncheck" /></td>
+				<td><input required type="checkbox" id="1-1-Mở valve-203" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td>Bật bơm</td>
 				<td>P209</td>
-				<td><input type="checkbox" id="1-1-Bật bơm-P209" value="uncheck" /></td>
+				<td><input required type="checkbox" id="1-1-Bật bơm-P209" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td>1.2</td>
 				<td>Tủ điện CIP</td>
-				<td colspan="2">Nhiệt độ (TC: T° thường)</td>
-				<td><textarea id="1-2-Nhiệt độ"></textarea></td>
+				<td colspan="2">Nhiệt độ (TC: Nhiệt độ thường)</td>
+				<td><textarea required id="1-2-Nhiệt độ"></textarea></td>
 			</tr>
 			<tr>
 				<td rowspan="3">1.3</td>
 				<td rowspan="3">Tủ điện CIP</td>
 				<td>Tắt bơm</td>
 				<td>P209</td>
-				<td><input type="checkbox" id="1-3-Tắt bơm-P209" value="uncheck" /></td>
+				<td><input required type="checkbox" id="1-3-Tắt bơm-P209" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td rowspan="2">Đóng valve</td>
 				<td>203</td>
-				<td><input type="checkbox" id="1-3-Đóng valve-203" value="uncheck" /></td>
+				<td><input required type="checkbox" id="1-3-Đóng valve-203" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td>215</td>
-				<td><input type="checkbox" id="1-3-Đóng valve-215" value="uncheck" /></td>
+				<td><input required type="checkbox" id="1-3-Đóng valve-215" value="uncheck" /></td>
 			</tr>
-			<tr style="font-weight: bold; ">
+			<tr style="font-weight: bold;">
 				<td>2</td>
-				<td colspan="4">NGÂM DIVOFLOW</td>
-				<td>40</td>
+				<td colspan="4">NGÂM ACID CITRIC</td>
+				<td>60</td>
 				<td></td>
 				<td></td>
-				<td><textarea id="2-Tổng"></textarea></td>
+				<td><textarea required id="2-Tổng"></textarea></td>
 			</tr>
 			<tr>
-				<td rowspan="3">2.1</td>
-				<td rowspan="3">Tủ điện CIP</td>
-				<td rowspan="3">Kiểm tra mở valve</td>
-				<td>202</td>
-				<td><input type="checkbox" id="2-1-Mở valve-202" value="uncheck" /></td>
-				<td rowspan="8">40</td>
-				<td rowspan="8"><textarea id="2-1-BD"></textarea></td>
-				<td rowspan="8"><textarea id="2-1-KT"></textarea></td>
-				<td rowspan="8"><textarea id="2-1-Tổng"></textarea></td>
+				<td rowspan="2">2.1</td>
+				<td rowspan="2">Cụm cấp Line</td>
+				<td colspan="2">Mở các valve trên đường ống cấp acid citric qua line</td>
+				<td><input required type="checkbox" id="2-1-Mở valve cấp acid citric qua line" value="uncheck" /></td>
+				<td rowspan="7">60</td>
+				<td rowspan="7"><textarea required id="2-1-BD"></textarea></td>
+				<td rowspan="7"><textarea required id="2-1-KT"></textarea></td>
+				<td rowspan="7"><textarea required id="2-1-Tổng"></textarea></td>
 			</tr>
 			<tr>
-				<td>215</td>
-				<td><input type="checkbox" id="2-1-Mở valve-215" value="uncheck" /></td>
-			</tr>
-			<tr>
-				<td>208</td>
-				<td><input type="checkbox" id="2-1-Mở valve-208" value="uncheck" /></td>
+				<td colspan="2">Bật bơm CIP acid citric</td>
+				<td><input required type="checkbox" id="2-1-Bật bơm CIP acid citric" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td rowspan="2">2.2</td>
 				<td rowspan="2">Tủ điện CIP</td>
-				<td colspan="2">Nhiệt độ (TC: T° thường)</td>
-				<td><textarea id="2-2-Nhiệt độ"></textarea></td>
+				<td colspan="2">Nhiệt độ (TC: Nhiệt độ thường)</td>
+				<td><textarea required id="2-2-Nhiệt độ"></textarea></td>
 			</tr>
 			<tr>
-				<td colspan="2">Nồng độ (TC: 0,7-0,9%)</td>
-				<td><textarea id="2-2-Nồng độ"></textarea></td>
+				<td colspan="2">Nồng độ (TC: 4-6 %)</td>
+				<td><textarea required id="2-2-Nồng độ"></textarea></td>
 			</tr>
 			<tr>
-				<td rowspan="3">2.3</td>
-				<td rowspan="3">Tủ điện CIP</td>
-				<td rowspan="3">Kiểm tra đóng valve</td>
-				<td>202</td>
-				<td><input type="checkbox" id="2-3-Đóng valve-202" value="uncheck" /></td>
+				<td rowspan="2">2.3</td>
+				<td rowspan="2">Cụm cấp Line</td>
+				<td colspan="2">Tắt bơm CIP acid citric</td>
+				<td><input required type="checkbox" id="2-3-Tắt bơm CIP acid citric" value="uncheck" /></td>
 			</tr>
 			<tr>
-				<td>215</td>
-				<td><input type="checkbox" id="2-3-Đóng valve-215" value="uncheck" /></td>
+				<td colspan="2">Đóng valve trên đường ống cấp acid citric qua line</td>
+				<td><input required type="checkbox" id="2-3-Đóng vavle cấp acid citric" value="uncheck" /></td>
 			</tr>
 			<tr>
-				<td>208</td>
-				<td><input type="checkbox" id="2-3-Đóng valve-208" value="uncheck" /></td>
+				<td>2.4</td>
+				<td>Trạm CIP</td>
+				<td colspan="3">Ngâm acid citric đến khi đủ thời gian</td>
 			</tr>
-			<tr style="font-weight: bold; ">
+			<tr style="font-weight: bold;">
 				<td>3</td>
-				<td colspan="4">DÙNG NƯỚC XẢ SẠCH DIVOFLOW</td>
-				<td>10</td>
+				<td colspan="4">DÙNG NƯỚC RO 20 XẢ SẠCH ACID CITRIC</td>
+				<td>15</td>
 				<td></td>
 				<td></td>
-				<td><textarea id="3-Tổng"></textarea></td>
+				<td><textarea required id="3-Tổng"></textarea></td>
 			</tr>
 			<tr>
 				<td rowspan="3">3.1</td>
 				<td rowspan="3">Tủ điện CIP</td>
-				<td rowspan="3">Kiểm tra mở valve</td>
-				<td>103</td>
-				<td><input type="checkbox" id="3-1-Mở valve-103" value="uncheck" /></td>
-				<td rowspan="7">10</td>
-				<td rowspan="7"><textarea id="3-1-BD"></textarea></td>
-				<td rowspan="7"><textarea id="3-1-KT"></textarea></td>
-				<td rowspan="7"><textarea id="3-1-Tổng"></textarea></td>
+				<td rowspan="2">Mở valve:</td>
+				<td>215</td>
+				<td><input required type="checkbox" id="3-1-Mở valve-215" value="uncheck" /></td>
+				<td rowspan="6">15</td>
+				<td rowspan="6"><textarea required id="3-1-BD"></textarea></td>
+				<td rowspan="6"><textarea required id="3-1-KT"></textarea></td>
+				<td rowspan="6"><textarea required id="3-1-Tổng"></textarea></td>
 			</tr>
 			<tr>
-				<td>115</td>
-				<td><input type="checkbox" id="3-1-Mở valve-115" value="uncheck" /></td>
+				<td>203</td>
+				<td><input required type="checkbox" id="3-1-Mở valve-203" value="uncheck" /></td>
 			</tr>
 			<tr>
-				<td>110</td>
-				<td><input type="checkbox" id="3-1-Mở valve-110" value="uncheck" /></td>
+				<td>Bật bơm</td>
+				<td>P209</td>
+				<td><input required type="checkbox" id="3-1-Bật bơm-P209" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td>3.2</td>
 				<td>Tủ điện CIP</td>
-				<td colspan="2">Nhiệt độ (TC: T° thường)</td>
-				<td><textarea id="3-2-Nhiệt độ"></textarea></td>
+				<td colspan="2">Nhiệt độ (TC: Nhiệt độ thường)</td>
+				<td><textarea required id="3-2-Nhiệt độ"></textarea></td>
 			</tr>
 			<tr>
-				<td rowspan="3">3.3</td>
-				<td rowspan="3">Tủ điện CIP</td>
-				<td rowspan="3">Kiểm tra đóng valve</td>
-				<td>103</td>
-				<td><input type="checkbox" id="3-3-Đóng valve-103" value="uncheck" /></td>
+				<td rowspan="2">3.3</td>
+				<td rowspan="2">Tủ điện CIP</td>
+				<td>Tắt bơm</td>
+				<td>P209</td>
+				<td><input required type="checkbox" id="3-3-Tắt bơm-P209" value="uncheck" /></td>
 			</tr>
 			<tr>
-				<td>115</td>
-				<td><input type="checkbox" id="3-3-Đóng valve-115" value="uncheck" /></td>
+				<td>Đóng valve</td>
+				<td>203</td>
+				<td><input required type="checkbox" id="3-3-Đóng valve-203" value="uncheck" /></td>
 			</tr>
-			<tr>
-				<td>110</td>
-				<td><input type="checkbox" id="3-3-Đóng valve-110" value="uncheck" /></td>
-			</tr>
-			<tr style="font-weight: bold; ">
+			<tr style="font-weight: bold;">
 				<td>4</td>
 				<td colspan="4">NGÂM CHLORINE</td>
 				<td>20</td>
 				<td></td>
 				<td></td>
-				<td><textarea id="4-Tổng"></textarea></td>
+				<td><textarea required id="4-Tổng"></textarea></td>
 			</tr>
 			<tr>
 				<td rowspan="2">4.1</td>
 				<td rowspan="2">Tủ điện CIP</td>
-				<td>Mở valve</td>
+				<td>Mở valve:</td>
 				<td>201</td>
-				<td><input type="checkbox" id="4-1-Mở valve-201" value="uncheck" /></td>
+				<td><input required type="checkbox" id="4-1-Mở valve-201" value="uncheck" /></td>
 				<td rowspan="7">20</td>
-				<td rowspan="7"><textarea id="4-1-BD"></textarea></td>
-				<td rowspan="7"><textarea id="4-1-KT"></textarea></td>
-				<td rowspan="7"><textarea id="4-1-Tổng"></textarea></td>
+				<td rowspan="7"><textarea required id="4-1-BD"></textarea></td>
+				<td rowspan="7"><textarea required id="4-1-KT"></textarea></td>
+				<td rowspan="7"><textarea required id="4-1-Tổng"></textarea></td>
 			</tr>
 			<tr>
 				<td>Bật bơm</td>
 				<td>P209</td>
-				<td><input type="checkbox" id="4-1-Bật bơm-P209" value="uncheck" /></td>
+				<td><input required type="checkbox" id="4-1-Bật bơm-P209" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td rowspan="2">4.2</td>
 				<td rowspan="2">Tủ điện CIP</td>
-				<td colspan="2">Nhiệt độ (TC: T° thường)</td>
-				<td><textarea id="4-2-Nhiệt độ"></textarea></td>
+				<td colspan="2">Nhiệt độ (TC: Nhiệt độ thường)</td>
+				<td><textarea required id="4-2-Nhiệt độ"></textarea></td>
 			</tr>
 			<tr>
-				<td colspan="2">Nồng độ (TC: 100-150ppm)</td>
-				<td><textarea id="4-2-Nồng độ"></textarea></td>
+				<td colspan="2">Nồng độ (TC:100-150ppm)</td>
+				<td><textarea required id="4-2-Nồng độ"></textarea></td>
 			</tr>
 			<tr>
 				<td rowspan="2">4.3</td>
 				<td rowspan="2">Tủ điện CIP</td>
-				<td>Tắt bơm</td>
+				<td>Tắt bơm P209</td>
 				<td>P209</td>
-				<td><input type="checkbox" id="4-3-Tắt bơm-P209" value="uncheck" /></td>
+				<td><input required type="checkbox" id="4-3-Tắt bơm-P209" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td>Đóng valve</td>
 				<td>201</td>
-				<td><input type="checkbox" id="4-3-Đóng valve-201" value="uncheck" /></td>
+				<td><input required type="checkbox" id="4-3-Đóng valve-201" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td>4.4</td>
 				<td>Trạm CIP</td>
 				<td colspan="3">Ngâm chlorine đến khi đủ thời gian</td>
 			</tr>
-			<tr style="font-weight: bold; ">
+			<tr style="font-weight: bold;">
 				<td>5</td>
 				<td colspan="4">DÙNG NƯỚC RO 20 XẢ SẠCH CHLORINE</td>
 				<td>40</td>
 				<td></td>
 				<td></td>
-				<td><textarea id="5-Tổng"></textarea></td>
+				<td><textarea required id="5-Tổng"></textarea></td>
 			</tr>
 			<tr>
 				<td rowspan="2">5.1</td>
 				<td rowspan="2">Tủ điện CIP</td>
-				<td>Mở valve</td>
+				<td>Mở valve:</td>
 				<td>203</td>
-				<td><input type="checkbox" id="5-1-Mở valve-203" value="uncheck" /></td>
+				<td><input required type="checkbox" id="5-1-Mở valve-203" value="uncheck" /></td>
 				<td rowspan="9">40</td>
-				<td rowspan="9"><textarea id="5-1-BD"></textarea></td>
-				<td rowspan="9"><textarea id="5-1-KT"></textarea></td>
-				<td rowspan="9"><textarea id="5-1-Tổng"></textarea></td>
+				<td rowspan="9"><textarea required id="5-1-BD"></textarea></td>
+				<td rowspan="9"><textarea required id="5-1-KT"></textarea></td>
+				<td rowspan="9"><textarea required id="5-1-Tổng"></textarea></td>
 			</tr>
 			<tr>
 				<td>Bật bơm</td>
 				<td>P209</td>
-				<td><input type="checkbox" id="5-1-Bật bơm-P209" value="uncheck" /></td>
+				<td><input required type="checkbox" id="5-1-Bật bơm-P209" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td>5.2</td>
 				<td>Tủ điện CIP</td>
-				<td colspan="2">Nhiệt độ (TC: T° thường)</td>
-				<td><textarea id="5-2-Nhiệt độ"></textarea></td>
+				<td colspan="2">Nhiệt độ (TC: Nhiệt độ thường)</td>
+				<td><textarea required id="5-2-Nhiệt độ"></textarea></td>
 			</tr>
 			<tr>
 				<td>5.3</td>
@@ -535,78 +559,82 @@
 				<td rowspan="3">Tủ điện CIP</td>
 				<td>Tắt bơm</td>
 				<td>P209</td>
-				<td><input type="checkbox" id="5-4-Tắt bơm-P209" value="uncheck" /></td>
+				<td><input required type="checkbox" id="5-4-Tắt bơm-P209" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td rowspan="2">Đóng valve</td>
 				<td>203</td>
-				<td><input type="checkbox" id="5-4-Đóng valve-203" value="uncheck" /></td>
+				<td><input required type="checkbox" id="5-4-Đóng valve-203" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td>215</td>
-				<td><input type="checkbox" id="5-4-Đóng valve-215" value="uncheck" /></td>
+				<td><input required type="checkbox" id="5-4-Đóng valve-215" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td rowspan="2">5.5</td>
 				<td rowspan="2">Trạm CIP</td>
 				<td>Đóng valve nước giải nhiệt bơm</td>
 				<td>P209</td>
-				<td><input type="checkbox" id="5-5-Đóng valve giải nhiệt bơm-P209" value="uncheck" /></td>
+				<td><input required type="checkbox" id="5-5-Đóng valve giải nhiệt bơm-P209" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td>Đóng valve</td>
 				<td>Cấp khí nén</td>
-				<td><input type="checkbox" id="5-5-Đóng valve cấp khí nén" value="uncheck" /></td>
+				<td><input required type="checkbox" id="5-5-Đóng valve-Cấp khí nén" value="uncheck" /></td>
 			</tr>
-			<tr style="font-weight: bold; ">
+			<tr style="font-weight: bold;">
 				<td>6</td>
 				<td colspan="4">CHUẨN BỊ SẢN XUẤT</td>
 				<td>5</td>
 				<td></td>
 				<td></td>
-				<td><textarea id="6-Tổng"></textarea></td>
+				<td><textarea required id="6-Tổng"></textarea></td>
 			</tr>
 			<tr>
 				<td rowspan="4">6.1</td>
 				<td rowspan="4">Cụm cấp Line</td>
 				<td rowspan="4">Đóng van ở trạng thái sản xuất</td>
 				<td>Q6</td>
-				<td><input type="checkbox" id="6-1-Đóng valve-Q6" value="uncheck" /></td>
+				<td><input required type="checkbox" id="6-1-Đóng valve-Q6" value="uncheck" /></td>
 				<td rowspan="5">5</td>
-				<td rowspan="5"><textarea id="6-1-BD"></textarea></td>
-				<td rowspan="5"><textarea id="6-1-KT"></textarea></td>
-				<td rowspan="5"><textarea id="6-1-Tổng"></textarea></td>
+				<td rowspan="5"><textarea required id="6-1-BD"></textarea></td>
+				<td rowspan="5"><textarea required id="6-1-KT"></textarea></td>
+				<td rowspan="5"><textarea required id="6-1-Tổng"></textarea></td>
 			</tr>
 			<tr>
 				<td>Q9</td>
-				<td><input type="checkbox" id="6-1-Đóng valve-Q9" value="uncheck" /></td>
+				<td><input required type="checkbox" id="6-1-Đóng valve-Q9" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td>Q7</td>
-				<td><input type="checkbox" id="6-1-Đóng valve-Q7" value="uncheck" /></td>
+				<td><input required type="checkbox" id="6-1-Đóng valve-Q7" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td>Q10</td>
-				<td><input type="checkbox" id="6-1-Đóng valve-Q10" value="uncheck" /></td>
+				<td><input required type="checkbox" id="6-1-Đóng valve-Q10" value="uncheck" /></td>
 			</tr>
 			<tr>
 				<td>6.2</td>
 				<td>Cụm cấp Line</td>
 				<td colspan="2">Tháo đường ống cấp CIP ra khỏi đường ống cấp line</td>
-				<td><textarea id="6-2-Tháo đường ống cấp CIP ra khỏi đường ống cấp line"></textarea></td>
+				<td><textarea required id="6-2-Line cấp"></textarea></td>
 			</tr>
-			<tr style="font-weight: bold; ">
+			<tr style="font-weight: bold;">
 				<td colspan="5">TỔNG THỜI GIAN THỰC HIỆN</td>
-				<td>135</td>
-				<td><textarea id="Tổng-BD"></textarea></td>
-				<td><textarea id="Tổng-KT"></textarea></td>
-				<td><textarea id="Tổng-Tổng"></textarea></td>
+				<td>160</td>
+				<td><textarea required id="Tổng thời gian-BD"></textarea></td>
+				<td><textarea required id="Tổng thời gian-KT"></textarea></td>
+				<td><textarea required id="Tổng thời gian-Tổng"></textarea></td>
 			</tr>
 			<tr>
-				<td style="font-weight: bold; ">Ghi chú</td>
+				<td style="font-weight: bold;">Ghi chú</td>
 				<td colspan="8"><textarea id="Ghi chú"></textarea></td>
 			</tr>
 		</table>
+
+		</table>
+
+
 
 		<br>
 		<p><b>Chi tiết cây phê duyệt</b></p>
@@ -616,15 +644,15 @@
         1. id=" thành >@{triggerBody()?['
         2. "> thành ']}
         3. <td colspan="5" id="Thời gian nộp phiếu"></td> thành
-    <td colspan="5">@{outputs('Add_a_row_into_a_table')?['body/Thời gian nộp phiếu']}</td>
+    @{outputs('Add_a_row_into_a_table')?['body/Thời gian nộp phiếu']}
 -->
 
-		<table  table-layout="fixed">
+		<table>
 			<tr>
-				<td style="font-weight: bold; ">Thời gian nộp phiếu</td>
+				<td style="font-weight: bold;">Thời gian nộp phiếu</td>
 				<td colspan="5" id="Thời gian nộp phiếu"></td>
 			</tr>
-			<tr style="font-weight: bold; ">
+			<tr style="font-weight: bold;">
 				<td>Cấp phê duyệt</td>
 				<td>Người phê duyệt</td>
 				<td>Email_NPD</td>
@@ -675,6 +703,7 @@
 	</script>
 
 
+
 	<script>
 		$(":checkbox").change(function () {
 			$(this).val($(this).is(":checked") ? 'checked' : 'unchecked');
@@ -695,7 +724,7 @@
 			const formData = new FormData(formE1);
 			const submissionTime = new Date().toISOString();
 			const data = new URLSearchParams(formData);
-			fetch('https://prod-05.southeastasia.logic.azure.com:443/workflows/50cb82f69ebc4cb090e6506df4246157/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=S9iXybcKVdO_dp7s60ohcWjjksYoJxZPIAlQSSSpdHw', {
+			fetch('https://prod-08.southeastasia.logic.azure.com:443/workflows/382f44b9fa904fab8f08baa45f09e9ec/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=lWqokWWUHq2CdTfO7FT97GA7zLkwk7MJ0DRSFe_XJ6M', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -721,6 +750,7 @@
 					'SKU1': document.getElementById('SKU1').value,
 					'SKU2': document.getElementById('SKU2').value,
 					'Line': document.getElementById('Line').value,
+
 					'0-Tổng': document.getElementById('0-Tổng').value,
 					'0-1-BD': document.getElementById('0-1-BD').value,
 					'0-1-KT': document.getElementById('0-1-KT').value,
@@ -756,35 +786,32 @@
 					'6-1-BD': document.getElementById('6-1-BD').value,
 					'6-1-KT': document.getElementById('6-1-KT').value,
 					'6-1-Tổng': document.getElementById('6-1-Tổng').value,
-					'6-2-Tháo đường ống cấp CIP ra khỏi đường ống cấp line': document.getElementById('6-2-Tháo đường ống cấp CIP ra khỏi đường ống cấp line').value,
-					'Tổng-BD': document.getElementById('Tổng-BD').value,
-					'Tổng-KT': document.getElementById('Tổng-KT').value,
-					'Tổng-Tổng': document.getElementById('Tổng-Tổng').value,
+					'6-2-Line cấp': document.getElementById('6-2-Line cấp').value,
+					'Tổng thời gian-BD': document.getElementById('Tổng thời gian-BD').value,
+					'Tổng thời gian-KT': document.getElementById('Tổng thời gian-KT').value,
+					'Tổng thời gian-KT': document.getElementById('Tổng thời gian-Tổng').value,
 					'Ghi chú': document.getElementById('Ghi chú').value,
 					'0-2-Mở valve-Q6': document.getElementById('0-2-Mở valve-Q6').value,
 					'0-2-Mở valve-Q9': document.getElementById('0-2-Mở valve-Q9').value,
 					'0-2-Mở valve-Q7': document.getElementById('0-2-Mở valve-Q7').value,
 					'0-2-Mở valve-Q10': document.getElementById('0-2-Mở valve-Q10').value,
-					'0-3-Mở valve nước giải nhiệt-P209': document.getElementById('0-3-Mở valve nước giải nhiệt-P209').value,
-					'0-3-Mở valve cấp khí nén': document.getElementById('0-3-Mở valve cấp khí nén').value,
+					'0-3-Mở valve-P209': document.getElementById('0-3-Mở valve-P209').value,
+					'0-3-Mở valve-Cấp khí nén': document.getElementById('0-3-Mở valve-Cấp khí nén').value,
 					'1-1-Mở valve-215': document.getElementById('1-1-Mở valve-215').value,
 					'1-1-Mở valve-203': document.getElementById('1-1-Mở valve-203').value,
 					'1-1-Bật bơm-P209': document.getElementById('1-1-Bật bơm-P209').value,
 					'1-3-Tắt bơm-P209': document.getElementById('1-3-Tắt bơm-P209').value,
 					'1-3-Đóng valve-203': document.getElementById('1-3-Đóng valve-203').value,
 					'1-3-Đóng valve-215': document.getElementById('1-3-Đóng valve-215').value,
-					'2-1-Mở valve-202': document.getElementById('2-1-Mở valve-202').value,
-					'2-1-Mở valve-215': document.getElementById('2-1-Mở valve-215').value,
-					'2-1-Mở valve-208': document.getElementById('2-1-Mở valve-208').value,
-					'2-3-Đóng valve-202': document.getElementById('2-3-Đóng valve-202').value,
-					'2-3-Đóng valve-215': document.getElementById('2-3-Đóng valve-215').value,
-					'2-3-Đóng valve-208': document.getElementById('2-3-Đóng valve-208').value,
-					'3-1-Mở valve-103': document.getElementById('3-1-Mở valve-103').value,
-					'3-1-Mở valve-115': document.getElementById('3-1-Mở valve-115').value,
-					'3-1-Mở valve-110': document.getElementById('3-1-Mở valve-110').value,
-					'3-3-Đóng valve-103': document.getElementById('3-3-Đóng valve-103').value,
-					'3-3-Đóng valve-115': document.getElementById('3-3-Đóng valve-115').value,
-					'3-3-Đóng valve-110': document.getElementById('3-3-Đóng valve-110').value,
+					'2-1-Mở valve cấp acid citric qua line': document.getElementById('2-1-Mở valve cấp acid citric qua line').value,
+					'2-1-Bật bơm CIP acid citric': document.getElementById('2-1-Bật bơm CIP acid citric').value,
+					'2-3-Tắt bơm CIP acid citric': document.getElementById('2-3-Tắt bơm CIP acid citric').value,
+					'2-3-Đóng vavle cấp acid citric': document.getElementById('2-3-Đóng vavle cấp acid citric').value,
+					'3-1-Mở valve-215': document.getElementById('3-1-Mở valve-215').value,
+					'3-1-Mở valve-203': document.getElementById('3-1-Mở valve-203').value,
+					'3-1-Bật bơm-P209': document.getElementById('3-1-Bật bơm-P209').value,
+					'3-3-Tắt bơm-P209': document.getElementById('3-3-Tắt bơm-P209').value,
+					'3-3-Đóng valve-203': document.getElementById('3-3-Đóng valve-203').value,
 					'4-1-Mở valve-201': document.getElementById('4-1-Mở valve-201').value,
 					'4-1-Bật bơm-P209': document.getElementById('4-1-Bật bơm-P209').value,
 					'4-3-Tắt bơm-P209': document.getElementById('4-3-Tắt bơm-P209').value,
@@ -795,12 +822,11 @@
 					'5-4-Đóng valve-203': document.getElementById('5-4-Đóng valve-203').value,
 					'5-4-Đóng valve-215': document.getElementById('5-4-Đóng valve-215').value,
 					'5-5-Đóng valve giải nhiệt bơm-P209': document.getElementById('5-5-Đóng valve giải nhiệt bơm-P209').value,
-					'5-5-Đóng valve cấp khí nén': document.getElementById('5-5-Đóng valve cấp khí nén').value,
+					'5-5-Đóng valve-Cấp khí nén': document.getElementById('5-5-Đóng valve-Cấp khí nén').value,
 					'6-1-Đóng valve-Q6': document.getElementById('6-1-Đóng valve-Q6').value,
 					'6-1-Đóng valve-Q9': document.getElementById('6-1-Đóng valve-Q9').value,
 					'6-1-Đóng valve-Q7': document.getElementById('6-1-Đóng valve-Q7').value,
 					'6-1-Đóng valve-Q10': document.getElementById('6-1-Đóng valve-Q10').value,
-
 				})
 			}).then(res => res.json())
 				.then(data => console.log(data))

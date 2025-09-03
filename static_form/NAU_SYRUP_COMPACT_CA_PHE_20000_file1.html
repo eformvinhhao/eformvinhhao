@@ -174,11 +174,11 @@
 
 		<!--- Sửa phần 1: Phần tiêu đề form
 		Ở file render trên automata, sửa từ:
-			1. <textarea id=" thành @{triggerBody()?['
+			1. <textarea requiredid=" thành @{triggerBody()?['
 			2. "></textarea> thành "></textarea>
-			3. <input type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
+			3. <input requried type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
 			@{triggerBody()?['Email cá nhân"></textarea>
-			4. <input type="date" id="Ngày/ tháng/ năm" required=""> thành
+			4. <input requried type="date" id="Ngày/ tháng/ năm" required=""> thành
 			@{outputs('Add_a_row_into_a_table')?['body/Ngày~1 tháng~1 năm"></textarea>
 			
 		-->
@@ -186,8 +186,7 @@
 
 		<table table-layout="fixed">
 			<tr>
-				<td colspan="8" rowspan="4" style="font-weight: bold; ">BIỂU MẪU GHI NHẬN QUÁ TRÌNH CHẾ BIẾN SYRUP NƯỚC
-					TĂNG LỰC COMPACT VỊ CAFE MẺ 20,000L</td>
+				<td colspan="8" rowspan="4" style="font-weight: bold; ">BIỂU MẪU GHI NHẬN QUÁ TRÌNH CHẾ BIẾN SYRUP NƯỚC TĂNG LỰC COMPACT VỊ CAFE MẺ 20,000L</td>
 				<td>Mã tài liệu</td>
 				<td>VHC/KTCN/GMP-001/BM02</td>
 			</tr>
@@ -201,19 +200,19 @@
 			</tr>
 			<tr>
 				<td>Số trang</td>
-				<td>2</td>
+				<td>5</td>
 			</tr>
 			<tr>
 				<td style="font-weight: bold; ">Ngày/ tháng/ năm</td>
-				<td><input type="date" id="Ngày/ tháng/ năm" required=""></td>
+				<td><input requried type="date" id="Ngày/ tháng/ năm" required=""></td>
 				<td style="font-weight: bold; ">Vận hành</td>
-				<td><textarea id="Vận hành"></textarea></td>
+				<td><textarea requiredid="Vận hành"></textarea></td>
 				<td style="font-weight: bold; ">Emai cá nhân</td>
-				<td><input type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""></td>
+				<td><input requried type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""></td>
 				<td style="font-weight: bold; ">QC</td>
-				<td><textarea id="QC"></textarea></td>
+				<td><textarea requiredid="QC"></textarea></td>
 				<td style="font-weight: bold; ">Trưởng ca</td>
-				<td><textarea id="Trưởng ca"></textarea></td>
+				<td><textarea requiredid="Trưởng ca"></textarea></td>
 			</tr>
 		</table>
 
@@ -223,9 +222,9 @@
 
 		<!--- Sửa phần 2: Phần nội dung form:
 			Ở file render trên automata, sửa từ:
-			1. ><textarea id=" thành ><textarea id="
+			1. ><textarea requiredid=" thành ><textarea requiredid="
 			2. "></textarea> thành "></textarea>
-			3. <input type="checkbox" id=" thành <input type="checkbox" @{triggerBody()?['
+			3. <input requried type="checkbox" id=" thành <input requried type="checkbox" @{triggerBody()?['
 			4. " value="uncheck" thành "></textarea>
 		-->
 
@@ -234,7 +233,7 @@
 			<tr style="font-weight: bold; ">
 				<td colspan="12">1. SIMPLE SYRUP</td>
 				<td>Mẻ thứ</td>
-				<td><textarea id="Mẻ thứ"></textarea></td>
+				<td><textarea requiredid="Mẻ thứ"></textarea></td>
 			</tr>
 			<tr style="font-weight: bold; ">
 				<td rowspan="2">Tank nấu simple</td>
@@ -257,7 +256,7 @@
 				<td>Hiệu suất UV (%)</td>
 			</tr>
 			<tr>
-				<td><textarea id="Tank nấu simple"></textarea></td>
+				<td><textarea requiredid="Tank nấu simple"></textarea></td>
 				<td>Siro Fructose - Glucose<br>(Bơm HFSC qua UV)</td>
 				<td>1,800</td>
 				<td>N/A</td>
@@ -265,12 +264,12 @@
 				<td>N/A</td>
 				<td>N/A</td>
 				<td>N/A</td>
-				<td><textarea id="Số bóng hoạt động"></textarea></td>
-				<td><textarea id="TG bơm qua UV"></textarea></td>
-				<td><textarea id="Thời gian kết thúc"></textarea></td>
-				<td><textarea id="Hiệu suất UV (%)"></textarea></td>
-				<td><textarea id="Simple-Nhân viên syrup"></textarea></td>
-				<td><textarea id="Simple-QC chế biến"></textarea></td>
+				<td><textarea requiredid="Số bóng hoạt động"></textarea></td>
+				<td><textarea requiredid="TG bơm qua UV"></textarea></td>
+				<td><textarea requiredid="Thời gian kết thúc"></textarea></td>
+				<td><textarea requiredid="Hiệu suất UV (%)"></textarea></td>
+				<td><textarea requiredid="Simple-Nhân viên syrup"></textarea></td>
+				<td><textarea requiredid="Simple-QC chế biến"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="14">Tráng 3 lần, 2 lần 300L/lần + ~150L/lần cuối</td>
@@ -306,15 +305,15 @@
 				<td>Taurine JP17</td>
 				<td>4.000</td>
 				<td rowspan="4">80</td>
-				<td rowspan="4"><textarea id="1-PG3-Thể tích nước"></textarea></td>
+				<td rowspan="4"><textarea requiredid="1-PG3-Thể tích nước"></textarea></td>
 				<td rowspan="4">60 - 65</td>
-				<td rowspan="4"><textarea id="1-PG3-Nhiệt độ nước"></textarea></td>
+				<td rowspan="4"><textarea requiredid="1-PG3-Nhiệt độ nước"></textarea></td>
 				<td rowspan="4">10 - 15</td>
-				<td rowspan="4"><textarea id="1-PG3-BD"></textarea></td>
-				<td rowspan="4"><textarea id="1-PG3-KT"></textarea></td>
-				<td rowspan="4"><textarea id="1-PG3-KQ hòa tan"></textarea></td>
-				<td rowspan="4"><textarea id="1-PG3-Thời gian bơm vào tank trộn"></textarea></td>
-				<td rowspan="16"><textarea id="NVVH hòa tan phụ gia"></textarea></td>
+				<td rowspan="4"><textarea requiredid="1-PG3-BD"></textarea></td>
+				<td rowspan="4"><textarea requiredid="1-PG3-KT"></textarea></td>
+				<td rowspan="4"><textarea requiredid="1-PG3-KQ hòa tan"></textarea></td>
+				<td rowspan="4"><textarea requiredid="1-PG3-Thời gian bơm vào tank trộn"></textarea></td>
+				<td rowspan="16"><textarea requiredid="NVVH hòa tan phụ gia"></textarea></td>
 			</tr>
 			<tr>
 				<td>Premix PR01023</td>
@@ -337,14 +336,14 @@
 				<td>Acid citric anhydrous Thái Lan (INS 330)</td>
 				<td>2.000</td>
 				<td rowspan="3">80</td>
-				<td rowspan="3"><textarea id="2-PG1-Thể tích nước"></textarea></td>
+				<td rowspan="3"><textarea requiredid="2-PG1-Thể tích nước"></textarea></td>
 				<td rowspan="3">Thường</td>
-				<td rowspan="3"><textarea id="2-PG1-Nhiệt độ nước"></textarea></td>
+				<td rowspan="3"><textarea requiredid="2-PG1-Nhiệt độ nước"></textarea></td>
 				<td rowspan="3">10 - 15</td>
-				<td rowspan="3"><textarea id="2-PG1-BD"></textarea></td>
-				<td rowspan="3"><textarea id="2-PG1-KT"></textarea></td>
-				<td rowspan="3"><textarea id="2-PG1-KQ hòa tan"></textarea></td>
-				<td rowspan="3"><textarea id="2-PG1-Thời gian bơm vào tank trộn"></textarea></td>
+				<td rowspan="3"><textarea requiredid="2-PG1-BD"></textarea></td>
+				<td rowspan="3"><textarea requiredid="2-PG1-KT"></textarea></td>
+				<td rowspan="3"><textarea requiredid="2-PG1-KQ hòa tan"></textarea></td>
+				<td rowspan="3"><textarea requiredid="2-PG1-Thời gian bơm vào tank trộn"></textarea></td>
 			</tr>
 			<tr>
 				<td>Acid Phosphoric 85% min (Food Grade)</td>
@@ -365,41 +364,41 @@
 					tra trạng thái tan của premix, tan hoàn toàn thì ngừng khuấy,</td>
 				<td rowspan="4">13.200</td>
 				<td rowspan="4">140</td>
-				<td><textarea id="3-1-PG2-Thể tích nước"></textarea></td>
+				<td><textarea requiredid="3-1-PG2-Thể tích nước"></textarea></td>
 				<td rowspan="4">60 - 65</td>
-				<td><textarea id="3-1-PG2-Nhiệt độ nước"></textarea></td>
+				<td><textarea requiredid="3-1-PG2-Nhiệt độ nước"></textarea></td>
 				<td rowspan="4">15 - 20</td>
-				<td><textarea id="3-1-PG2-BD"></textarea></td>
-				<td><textarea id="3-1-PG2-KT"></textarea></td>
-				<td><textarea id="3-1-PG2-KQ hòa tan"></textarea></td>
-				<td><textarea id="3-1-PG1-Thời gian bơm vào tank trộn"></textarea></td>
+				<td><textarea requiredid="3-1-PG2-BD"></textarea></td>
+				<td><textarea requiredid="3-1-PG2-KT"></textarea></td>
+				<td><textarea requiredid="3-1-PG2-KQ hòa tan"></textarea></td>
+				<td><textarea requiredid="3-1-PG1-Thời gian bơm vào tank trộn"></textarea></td>
 			</tr>
 			<tr>
 				<td>PG 1</td>
-				<td><textarea id="3-2-PG1-Thể tích nước"></textarea></td>
-				<td><textarea id="3-2-PG1-Nhiệt độ nước"></textarea></td>
-				<td><textarea id="3-2-PG1-BD"></textarea></td>
-				<td><textarea id="3-2-PG1-KT"></textarea></td>
-				<td><textarea id="3-2-PG1-KQ hòa tan"></textarea></td>
-				<td><textarea id="3-2-PG1-Thời gian bơm vào tank trộn"></textarea></td>
+				<td><textarea requiredid="3-2-PG1-Thể tích nước"></textarea></td>
+				<td><textarea requiredid="3-2-PG1-Nhiệt độ nước"></textarea></td>
+				<td><textarea requiredid="3-2-PG1-BD"></textarea></td>
+				<td><textarea requiredid="3-2-PG1-KT"></textarea></td>
+				<td><textarea requiredid="3-2-PG1-KQ hòa tan"></textarea></td>
+				<td><textarea requiredid="3-2-PG1-Thời gian bơm vào tank trộn"></textarea></td>
 			</tr>
 			<tr>
 				<td>PG 2</td>
-				<td><textarea id="3-3-PG2-Thể tích nước"></textarea></td>
-				<td><textarea id="3-3-PG2-Nhiệt độ nước"></textarea></td>
-				<td><textarea id="3-3-PG2-BD"></textarea></td>
-				<td><textarea id="3-3-PG2-KT"></textarea></td>
-				<td><textarea id="3-3-PG2-KQ hòa tan"></textarea></td>
-				<td><textarea id="3-3-PG2-Thời gian bơm vào tank trộn"></textarea></td>
+				<td><textarea requiredid="3-3-PG2-Thể tích nước"></textarea></td>
+				<td><textarea requiredid="3-3-PG2-Nhiệt độ nước"></textarea></td>
+				<td><textarea requiredid="3-3-PG2-BD"></textarea></td>
+				<td><textarea requiredid="3-3-PG2-KT"></textarea></td>
+				<td><textarea requiredid="3-3-PG2-KQ hòa tan"></textarea></td>
+				<td><textarea requiredid="3-3-PG2-Thời gian bơm vào tank trộn"></textarea></td>
 			</tr>
 			<tr>
 				<td>PG 3</td>
-				<td><textarea id="3-4-PG3-Thể tích nước"></textarea></td>
-				<td><textarea id="3-4-PG3-Nhiệt độ nước"></textarea></td>
-				<td><textarea id="3-4-PG3-BD"></textarea></td>
-				<td><textarea id="3-4-PG3-KT"></textarea></td>
-				<td><textarea id="3-4-PG3-KQ hòa tan"></textarea></td>
-				<td><textarea id="3-4-PG3-Thời gian bơm vào tank trộn"></textarea></td>
+				<td><textarea requiredid="3-4-PG3-Thể tích nước"></textarea></td>
+				<td><textarea requiredid="3-4-PG3-Nhiệt độ nước"></textarea></td>
+				<td><textarea requiredid="3-4-PG3-BD"></textarea></td>
+				<td><textarea requiredid="3-4-PG3-KT"></textarea></td>
+				<td><textarea requiredid="3-4-PG3-KQ hòa tan"></textarea></td>
+				<td><textarea requiredid="3-4-PG3-Thời gian bơm vào tank trộn"></textarea></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -411,14 +410,14 @@
 				<td>Màu Caramel S5000 dạng sệt - INS 150d</td>
 				<td>70.000</td>
 				<td>80</td>
-				<td><textarea id="4-PG3-Thể tích nước"></textarea></td>
+				<td><textarea requiredid="4-PG3-Thể tích nước"></textarea></td>
 				<td>Thường</td>
-				<td><textarea id="4-PG3-Nhiệt độ nước"></textarea></td>
+				<td><textarea requiredid="4-PG3-Nhiệt độ nước"></textarea></td>
 				<td>15-20</td>
-				<td><textarea id="4-PG3-BD"></textarea></td>
-				<td><textarea id="4-PG3-KT"></textarea></td>
-				<td><textarea id="4-PG4-KQ hoàn tan"></textarea></td>
-				<td><textarea id="4-PG3-Thời gian bơm vào tank trộn"></textarea></td>
+				<td><textarea requiredid="4-PG3-BD"></textarea></td>
+				<td><textarea requiredid="4-PG3-KT"></textarea></td>
+				<td><textarea requiredid="4-PG4-KQ hoàn tan"></textarea></td>
+				<td><textarea requiredid="4-PG3-Thời gian bơm vào tank trộn"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="11">Tráng 2 lần, lần 25L nước</td>
@@ -447,14 +446,14 @@
 			</tr>
 			<tr>
 				<td rowspan="3">6</td>
-				<td rowspan="3"><textarea id="3-Tank chứa BTP"></textarea></td>
+				<td rowspan="3"><textarea requiredid="3-Tank chứa BTP"></textarea></td>
 				<td colspan="4">Premix PR00298</td>
 				<td>27.500</td>
-				<td colspan="2" rowspan="3"><textarea id="3-KQ thử mùi hương liệu"></textarea></td>
-				<td colspan="2" rowspan="3"><textarea id="3-TG đổ hương"></textarea></td>
+				<td colspan="2" rowspan="3"><textarea requiredid="3-KQ thử mùi hương liệu"></textarea></td>
+				<td colspan="2" rowspan="3"><textarea requiredid="3-TG đổ hương"></textarea></td>
 				<td rowspan="3">15 - 20</td>
-				<td rowspan="3"><textarea id="3-NVVH pha hương"></textarea></td>
-				<td rowspan="3"><textarea id="3-QCCB pha hương"></textarea></td>
+				<td rowspan="3"><textarea requiredid="3-NVVH pha hương"></textarea></td>
+				<td rowspan="3"><textarea requiredid="3-QCCB pha hương"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="4">Premix PR00138</td>
@@ -481,21 +480,21 @@
 				<td colspan="2">Ghi chú</td>
 			</tr>
 			<tr>
-				<td><textarea id="4-Tank chứa BTP"></textarea></td>
-				<td><textarea id="6-TG hoàn thành phối trộn"></textarea></td>
-				<td><textarea id="4-Thể tích"></textarea></td>
-				<td><textarea id="4-Độ Brix"></textarea></td>
-				<td><textarea id="4- KQ hóa lý"></textarea></td>
-				<td><textarea id="4-KQ sensory"></textarea></td>
-				<td colspan="6"><textarea id="4-Xác nhận QCCB"></textarea></td>
-				<td colspan="2" rowspan="2"><textarea id="4-Ghi chú KQ"></textarea></td>
+				<td><textarea requiredid="4-Tank chứa BTP"></textarea></td>
+				<td><textarea requiredid="6-TG hoàn thành phối trộn"></textarea></td>
+				<td><textarea requiredid="4-Thể tích"></textarea></td>
+				<td><textarea requiredid="4-Độ Brix"></textarea></td>
+				<td><textarea requiredid="4- KQ hóa lý"></textarea></td>
+				<td><textarea requiredid="4-KQ sensory"></textarea></td>
+				<td colspan="6"><textarea requiredid="4-Xác nhận QCCB"></textarea></td>
+				<td colspan="2" rowspan="2"><textarea id="4-TG-KQ hóa lý"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2">Thời gian kiểm tra và xác nhận kết quả</td>
-				<td colspan="2"><textarea id="4-TG-Thể tích"></textarea></td>
-				<td><textarea id="4-TG-KQ hóa lý"></textarea></td>
-				<td><textarea id="4-TG- KQ sensory"></textarea></td>
-				<td colspan="6"><textarea id="4-TG-Xác nhận QCCB"></textarea></td>
+				<td colspan="2"><textarea requiredid="4-TG-Thể tích"></textarea></td>
+				<td><textarea requiredid="4-TG-KQ hóa lý"></textarea></td>
+				<td><textarea requiredid="4-TG- KQ sensory"></textarea></td>
+				<td colspan="6"><textarea requiredid="4-TG-Xác nhận QCCB"></textarea></td>
 			</tr>
 			<tr style="font-weight: bold; ">
 				<td colspan="14">5. CẤP CHIẾT RÓT</td>
@@ -509,12 +508,12 @@
 				<td colspan="4">Xác nhận của đóng gói</td>
 			</tr>
 			<tr>
-				<td><textarea id="5-Tank chứa BTP"></textarea></td>
-				<td><textarea id="5-BD-chiết"></textarea></td>
-				<td><textarea id="5-KT-Chiết"></textarea></td>
-				<td colspan="3"><textarea id="5-TG lưu tank"></textarea></td>
-				<td colspan="4"><textarea id="5-Nhân viên cấp syrup"></textarea></td>
-				<td colspan="4"><textarea id="5-Xác nhận của đóng gói"></textarea></td>
+				<td><textarea requiredid="5-Tank chứa BTP"></textarea></td>
+				<td><textarea requiredid="5-BD-chiết"></textarea></td>
+				<td><textarea requiredid="5-KT-Chiết"></textarea></td>
+				<td colspan="3"><textarea requiredid="5-TG lưu tank"></textarea></td>
+				<td colspan="4"><textarea requiredid="5-Nhân viên cấp syrup"></textarea></td>
+				<td colspan="4"><textarea requiredid="5-Xác nhận của đóng gói"></textarea></td>
 			</tr>
 			<tr style="font-weight: bold; ">
 				<td colspan="14">6. QUÁ TRÌNH KHUẤY TRỘN TRONG QUÁ TRÌNH CHIẾT</td>
@@ -531,11 +530,11 @@
 				<td colspan="8">Trong quá trình chiết</td>
 			</tr>
 			<tr>
-				<td><textarea id="6-TG-Trước khi chiết"></textarea></td>
-				<td><textarea id="6-1-TG-Trong quá trình chiết 1"></textarea></td>
-				<td><textarea id="6-2-TG-Trong quá trình chiết"></textarea></td>
-				<td><textarea id="6-3-TG-Trong quá trình chiết"></textarea></td>
-				<td><textarea id="6-4-TG-Trong quá trình chiết"></textarea></td>
+				<td><textarea requiredid="6-TG-Trước khi chiết"></textarea></td>
+				<td><textarea requiredid="6-1-TG-Trong quá trình chiết"></textarea></td>
+				<td><textarea requiredid="6-2-TG-Trong quá trình chiết"></textarea></td>
+				<td><textarea requiredid="6-3-TG-Trong quá trình chiết"></textarea></td>
+				<td><textarea requiredid="6-4-TG-Trong quá trình chiết"></textarea></td>
 				<td><textarea id="6-5-TG-Trong quá trình chiết"></textarea></td>
 				<td><textarea id="6-6-TG-Trong quá trình chiết"></textarea></td>
 				<td><textarea id="6-6-TG-Trong quá trình chiết"></textarea></td>
@@ -543,11 +542,11 @@
 			</tr>
 			<tr>
 				<td>Khuấy/Không khuấy (K/KK)</td>
-				<td><textarea id="6-K"></textarea></td>
-				<td><textarea id="6-1-K"></textarea></td>
-				<td><textarea id="6-2-K"></textarea></td>
-				<td><textarea id="6-3-K"></textarea></td>
-				<td><textarea id="6-4-K"></textarea></td>
+				<td><textarea requiredid="6-K"></textarea></td>
+				<td><textarea requiredid="6-1-K"></textarea></td>
+				<td><textarea requiredid="6-2-K"></textarea></td>
+				<td><textarea requiredid="6-3-K"></textarea></td>
+				<td><textarea requiredid="6-4-K"></textarea></td>
 				<td><textarea id="6-5-K"></textarea></td>
 				<td><textarea id="6-6-K"></textarea></td>
 				<td><textarea id="6-6-K"></textarea></td>
@@ -664,12 +663,12 @@
 					'Email cá nhân': document.getElementById('Email cá nhân').value,
 					'Thời gian nộp phiếu': submissionTime,
 					'Người phê duyệt 1': document.getElementById('QC').value,
-					'Email_NPD1': 'khoaha@vinhhao.com.vn',
+					'Email_NPD1': 'vhc-qc-chebien@vinhhao.com.vn',
 					'Trạng thái_NPD1': 'Pending',
 					'Thời gian thao tác_NPD1': '',
 					'Ghi chú_NPD1': '',
 					'Người phê duyệt 2': document.getElementById('Trưởng ca').value,
-					'Email_NPD2': 'khoaha@vinhhao.com.vn',
+					'Email_NPD2': 'tuanpt@vinhhao.com.vn',
 					'Trạng thái_NPD2': 'Waiting',
 					'Thời gian thao tác_NPD2': '',
 					'Ghi chú_NPD2': '',
@@ -753,7 +752,7 @@
 					'5-Nhân viên cấp syrup': document.getElementById('5-Nhân viên cấp syrup').value,
 					'5-Xác nhận của đóng gói': document.getElementById('5-Xác nhận của đóng gói').value,
 					'6-TG-Trước khi chiết': document.getElementById('6-TG-Trước khi chiết').value,
-					'6-1-TG-Trong quá trình chiết 1': document.getElementById('6-1-TG-Trong quá trình chiết 1').value,
+					'6-1-TG-Trong quá trình chiết': document.getElementById('6-1-TG-Trong quá trình chiết').value,
 					'6-2-TG-Trong quá trình chiết': document.getElementById('6-2-TG-Trong quá trình chiết').value,
 					'6-3-TG-Trong quá trình chiết': document.getElementById('6-3-TG-Trong quá trình chiết').value,
 					'6-4-TG-Trong quá trình chiết': document.getElementById('6-4-TG-Trong quá trình chiết').value,

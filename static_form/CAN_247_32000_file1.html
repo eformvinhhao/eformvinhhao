@@ -150,7 +150,6 @@
 	table {
 		width: 100%;
 	}
-
 	textarea,input[type="date"], input[type="text"] {
 		color: blue;
 
@@ -181,18 +180,17 @@
 		<table table-layout="fixed">
 			<tr>
 				<td colspan="8" rowspan="4" style="font-weight: bold; ">BIỂU MẪU GHI NHẬN QUÁ TRÌNH KIỂM TRA BATCH/LOT,
-					ĐỊNH LƯỢNG, GIAO NHẬN NGUYÊN LIỆU PHỤ GIA NƯỚC GIẢI KHÁT HƯƠNG CHANH CÓ GAS LEMONA KHOÁNG CHANH MẺ
-					32.000L</td>
+					ĐỊNH LƯỢNG, GIAO NHẬN NGUYÊN LIỆU PHỤ GIA NƯỚC TĂNG LỰC VỊ CÀ PHÊ WAKE-UP 247 MẺ 32,000L</td>
 				<td>Mã tài liệu</td>
-				<td>VHW/KTCN/HD-001/BM08</td>
+				<td>VHW/KTCN/GMP-001/BM03</td>
 			</tr>
 			<tr>
 				<td>Lần ban hành</td>
-				<td>03</td>
+				<td>04</td>
 			</tr>
 			<tr>
 				<td>Ngày hiệu lực</td>
-				<td>06/09/2022</td>
+				<td>15/11/2024</td>
 			</tr>
 			<tr>
 				<td>Số trang</td>
@@ -224,7 +222,6 @@
 			</tr>
 		</table>
 
-
 		<!--- Sửa phần 1: Phần tiêu đề form-->
 
 		<br>
@@ -237,7 +234,7 @@
 			4. " value="uncheck" thành ']}
 		-->
 
-		<table table-layout="fixed">
+		<table>
 			<tr style="font-weight: bold; ">
 				<td rowspan="2">STT</td>
 				<td rowspan="2">Tên nguyên liệu (Theo BOM)<br>(Kiểm tra theo BOM cho mỗi lần cân)</td>
@@ -246,9 +243,9 @@
 				<td rowspan="2">HSD</td>
 				<td rowspan="2">Đơn vị</td>
 				<td rowspan="2">Số lượng theo BOM</td>
-				<td colspan="3">Số mẻ</td>
+				<td colspan="3">Mẻ</td>
 			</tr>
-			<tr style="font-weight: bold; ">
+			<tr>
 				<td><textarea required id="Mẻ số 1"></textarea></td>
 				<td><textarea required id="Mẻ số 2"></textarea></td>
 				<td><textarea required id="Mẻ số 3"></textarea></td>
@@ -259,88 +256,121 @@
 				<td><textarea required id="Đường RE-Lot"></textarea></td>
 				<td><input required type="date" id="Đường RE-NSX" required=""></td>
 				<td><input required type="date" id="Đường RE-HSD" required=""></td>
-				<td rowspan="8">Kg</td>
-				<td>2804.00</td>
+				<td rowspan="11">Kg</td>
+				<td>5408.00</td>
 				<td><textarea required id="Mẻ 1-Đường RE-KL"></textarea></td>
 				<td><textarea required id="Mẻ 2-Đường RE-KL"></textarea></td>
 				<td><textarea required id="Mẻ 3-Đường RE-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>2</td>
-				<td>Acid citric monohydrate (INS 330)</td>
-				<td><textarea required id="Acid citric monohydrate-Lot"></textarea></td>
-				<td><input required type="date" id="Acid citric monohydrate-NSX" required=""></td>
-				<td><input required type="date" id="Acid citric monohydrate-HSD" required=""></td>
-				<td>63.360</td>
-				<td><textarea required id="Mẻ 1-Acid citric monohydrate-KL"></textarea></td>
-				<td><textarea required id="Mẻ 2-Acid citric monohydrate-KL"></textarea></td>
-				<td><textarea required id="Mẻ 3-Acid citric monohydrate-KL"></textarea></td>
+				<td>Acid citric anhydrous (INS 330)</td>
+				<td><textarea required id="Acid citric-Lot"></textarea></td>
+				<td><input required type="date" id="Acid citric-NSX" required=""></td>
+				<td><input required type="date" id="Acid citric-HSD" required=""></td>
+				<td>6.000</td>
+				<td><textarea required id="Mẻ 1-Acid citric-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Acid citric-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Acid citric-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>3</td>
-				<td>Sodium benzoate - TC34 Purox (INS 211)</td>
-				<td><textarea required id="Sodium benzoate-Lot"></textarea></td>
-				<td><input required type="date" id="Sodium benzoate-NSX" required=""></td>
-				<td><input required type="date" id="Sodium benzoate-HSD" required=""></td>
-				<td>8.000</td>
-				<td><textarea required id="Mẻ 1-Sodium benzoate-KL"></textarea></td>
-				<td><textarea required id="Mẻ 2-Sodium benzoate-KL"></textarea></td>
-				<td><textarea required id="Mẻ 3-Sodium benzoate-KL"></textarea></td>
+				<td>Acid phosphoric 85% (INS 338)</td>
+				<td><textarea required id="Acid phosphoric -Lot"></textarea></td>
+				<td><input required type="date" id="Acid phosphoric -NSX" required=""></td>
+				<td><input required type="date" id="Acid phosphoric -HSD" required=""></td>
+				<td>13.000</td>
+				<td><textarea required id="Mẻ 1-Acid phosphoric-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Acid phosphoric-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Acid phosphoric-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>4</td>
-				<td>Sodium Citrate</td>
-				<td><textarea required id="Sodium Citrate-Lot"></textarea></td>
-				<td><input required type="date" id="Sodium Citrate-NSX" required=""></td>
-				<td><input required type="date" id="Sodium Citrate-HSD" required=""></td>
-				<td>19.840</td>
-				<td><textarea required id="Mẻ 1-Sodium Citrate-KL"></textarea></td>
-				<td><textarea required id="Mẻ 2-Sodium Citrate-KL"></textarea></td>
-				<td><textarea required id="Mẻ 3-Sodium Citrate-KL"></textarea></td>
+				<td>Premix PR01017</td>
+				<td><textarea required id="R01017-Lot"></textarea></td>
+				<td><input required type="date" id="R01017-NSX" required=""></td>
+				<td><input required type="date" id="R01017-HSD" required=""></td>
+				<td>25.200</td>
+				<td><textarea required id="Mẻ 1-R01017-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-R01017-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-R01017-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>5</td>
-				<td>Chất tạo ngọt Acesulfame K</td>
-				<td><textarea required id="Acesulfame K-Lot"></textarea></td>
-				<td><input required type="date" id="Acesulfame K-NSX" required=""></td>
-				<td><input required type="date" id="Acesulfame K-HSD" required=""></td>
-				<td>1.550</td>
-				<td><textarea required id="Mẻ 1-Acesulfame K-KL"></textarea></td>
-				<td><textarea required id="Mẻ 2-Acesulfame K-KL"></textarea></td>
-				<td><textarea required id="Mẻ 3-Acesulfame K-KL"></textarea></td>
+				<td>Caffeine anhydrous dạng bột</td>
+				<td><textarea required id="Caffeine-Lot"></textarea></td>
+				<td><input required type="date" id="Caffeine-NSX" required=""></td>
+				<td><input required type="date" id="Caffeine-HSD" required=""></td>
+				<td>1.600</td>
+				<td><textarea required id="Mẻ 1-Caffeine-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Caffeine-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Caffeine-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>6</td>
-				<td>Đường Aspartame dạng hạt</td>
-				<td><textarea required id="Đường Aspartame-Lot"></textarea></td>
-				<td><input required type="date" id="Đường Aspartame-NSX" required=""></td>
-				<td><input required type="date" id="Đường Aspartame-HSD" required=""></td>
-				<td>2.740</td>
-				<td><textarea required id="Mẻ 1-Đường Aspartame-KL"></textarea></td>
-				<td><textarea required id="Mẻ 2-Đường Aspartame-KL"></textarea></td>
-				<td><textarea required id="Mẻ 3-Đường Aspartame-KL"></textarea></td>
+				<td>Hỗn hợp premix MS Edrink</td>
+				<td><textarea required id="MS Edrink-Lot"></textarea></td>
+				<td><input required type="date" id="MS Edrink-NSX" required=""></td>
+				<td><input required type="date" id="MS Edrink-HSD" required=""></td>
+				<td>19.000</td>
+				<td><textarea required id="Mẻ 1-MS Edrink-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-MS Edrink-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-MS Edrink-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>7</td>
-				<td>Hương chanh A1182689 dạng lỏng</td>
-				<td><textarea required id="A1182689-Lot"></textarea></td>
-				<td><input required type="date" id="A1182689-NSX" required=""></td>
-				<td><input required type="date" id="A1182689-HSD" required=""></td>
-				<td>24.750</td>
-				<td><textarea required id="Mẻ 1-A1182689-KL"></textarea></td>
-				<td><textarea required id="Mẻ 2-A1182689-KL"></textarea></td>
-				<td><textarea required id="Mẻ 3-A1182689-KL"></textarea></td>
+				<td>Màu Caramel S5000 dạng sệt</td>
+				<td><textarea required id="Màu-Lot"></textarea></td>
+				<td><input required type="date" id="Màu-NSX" required=""></td>
+				<td><input required type="date" id="Màu-HSD" required=""></td>
+				<td>112.000</td>
+				<td><textarea required id="Mẻ 1-Màu-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Màu-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Màu-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>8</td>
-				<td>Hương chanh SJV13030 dạng lỏng</td>
-				<td><textarea required id="SJV13030-Lot"></textarea></td>
-				<td><input required type="date" id="SJV13030-NSX" required=""></td>
-				<td><input required type="date" id="SJV13030-HSD" required=""></td>
-				<td>8.220</td>
-				<td><textarea required id="Mẻ 1-SJV13030-KL"></textarea></td>
-				<td><textarea required id="Mẻ 2-SJV13030-KL"></textarea></td>
-				<td><textarea required id="Mẻ 3-SJV13030-KL"></textarea></td>
+				<td>Dextrose monohydrate dạng bột</td>
+				<td><textarea required id="Dextrose-Lot"></textarea></td>
+				<td><input required type="date" id="Dextrose-NSX" required=""></td>
+				<td><input required type="date" id="Dextrose-HSD" required=""></td>
+				<td>70.000</td>
+				<td><textarea required id="Mẻ 1-Dextrose-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Dextrose-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Dextrose-KL"></textarea></td>
+			</tr>
+			<tr>
+				<td>9</td>
+				<td>Premix PR00298</td>
+				<td><textarea required id="PR00298-Lot"></textarea></td>
+				<td><input required type="date" id="PR00298-NSX" required=""></td>
+				<td><input required type="date" id="PR00298-HSD" required=""></td>
+				<td>44.000</td>
+				<td><textarea required id="Mẻ 1 -PR00298-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2 -PR00298-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3 -PR00298-KL"></textarea></td>
+			</tr>
+			<tr>
+				<td>10</td>
+				<td>Premix PR00138</td>
+				<td><textarea required id="PR00138-Lot"></textarea></td>
+				<td><input required type="date" id="PR00138-NSX" required=""></td>
+				<td><input required type="date" id="PR00138-HSD" required=""></td>
+				<td>7.400</td>
+				<td><textarea required id="Mẻ 1-PR00138-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-PR00138-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-PR00138-KL"></textarea></td>
+			</tr>
+			<tr>
+				<td>11</td>
+				<td>Premix PR00135</td>
+				<td><textarea required id="PR00135-Lot"></textarea></td>
+				<td><input required type="date" id="PR00135-NSX" required=""></td>
+				<td><input required type="date" id="PR00135-HSD" required=""></td>
+				<td>1.000</td>
+				<td><textarea required id="Mẻ 1-PR00135-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-PR00135-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-PR00135-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" rowspan="5" style="font-weight: bold; ">Xác nhận</td>
@@ -378,7 +408,6 @@
 				<td colspan="9"><textarea id="Ghi chú"></textarea></td>
 			</tr>
 		</table>
-
 
 		<br>
 		<p><b>Chi tiết cây phê duyệt</b></p>
@@ -447,7 +476,6 @@
 		});
 	</script>
 
-
 	<script>
 		$(":checkbox").change(function () {
 			$(this).val($(this).is(":checked") ? 'checked' : 'unchecked');
@@ -468,7 +496,7 @@
 			const formData = new FormData(formE1);
 			const submissionTime = new Date().toISOString();
 			const data = new URLSearchParams(formData);
-			fetch('https://prod-83.southeastasia.logic.azure.com:443/workflows/1d3dc57f58264943bc554da21e40ae58/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=UAjyPwIausMBST6PTORubjFnBFi-p1taXyQJWPn1S60', {
+			fetch('https://prod-24.southeastasia.logic.azure.com:443/workflows/7a7a15dbc8844124a096287cb8029a2b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=-Z_5opE0mpnnsHyyRTB487QkGw2DOsV_Vd5l1nG9uXE', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -504,48 +532,66 @@
 					'Mẻ 1-Đường RE-KL': document.getElementById('Mẻ 1-Đường RE-KL').value,
 					'Mẻ 2-Đường RE-KL': document.getElementById('Mẻ 2-Đường RE-KL').value,
 					'Mẻ 3-Đường RE-KL': document.getElementById('Mẻ 3-Đường RE-KL').value,
-					'Acid citric monohydrate-Lot': document.getElementById('Acid citric monohydrate-Lot').value,
-					'Acid citric monohydrate-NSX': document.getElementById('Acid citric monohydrate-NSX').value,
-					'Acid citric monohydrate-HSD': document.getElementById('Acid citric monohydrate-HSD').value,
-					'Mẻ 1-Acid citric monohydrate-KL': document.getElementById('Mẻ 1-Acid citric monohydrate-KL').value,
-					'Mẻ 2-Acid citric monohydrate-KL': document.getElementById('Mẻ 2-Acid citric monohydrate-KL').value,
-					'Mẻ 3-Acid citric monohydrate-KL': document.getElementById('Mẻ 3-Acid citric monohydrate-KL').value,
-					'Sodium benzoate-Lot': document.getElementById('Sodium benzoate-Lot').value,
-					'Sodium benzoate-NSX': document.getElementById('Sodium benzoate-NSX').value,
-					'Sodium benzoate-HSD': document.getElementById('Sodium benzoate-HSD').value,
-					'Mẻ 1-Sodium benzoate-KL': document.getElementById('Mẻ 1-Sodium benzoate-KL').value,
-					'Mẻ 2-Sodium benzoate-KL': document.getElementById('Mẻ 2-Sodium benzoate-KL').value,
-					'Mẻ 3-Sodium benzoate-KL': document.getElementById('Mẻ 3-Sodium benzoate-KL').value,
-					'Sodium Citrate-Lot': document.getElementById('Sodium Citrate-Lot').value,
-					'Sodium Citrate-NSX': document.getElementById('Sodium Citrate-NSX').value,
-					'Sodium Citrate-HSD': document.getElementById('Sodium Citrate-HSD').value,
-					'Mẻ 1-Sodium Citrate-KL': document.getElementById('Mẻ 1-Sodium Citrate-KL').value,
-					'Mẻ 2-Sodium Citrate-KL': document.getElementById('Mẻ 2-Sodium Citrate-KL').value,
-					'Mẻ 3-Sodium Citrate-KL': document.getElementById('Mẻ 3-Sodium Citrate-KL').value,
-					'Acesulfame K-Lot': document.getElementById('Acesulfame K-Lot').value,
-					'Acesulfame K-NSX': document.getElementById('Acesulfame K-NSX').value,
-					'Acesulfame K-HSD': document.getElementById('Acesulfame K-HSD').value,
-					'Mẻ 1-Acesulfame K-KL': document.getElementById('Mẻ 1-Acesulfame K-KL').value,
-					'Mẻ 2-Acesulfame K-KL': document.getElementById('Mẻ 2-Acesulfame K-KL').value,
-					'Mẻ 3-Acesulfame K-KL': document.getElementById('Mẻ 3-Acesulfame K-KL').value,
-					'Đường Aspartame-Lot': document.getElementById('Đường Aspartame-Lot').value,
-					'Đường Aspartame-NSX': document.getElementById('Đường Aspartame-NSX').value,
-					'Đường Aspartame-HSD': document.getElementById('Đường Aspartame-HSD').value,
-					'Mẻ 1-Đường Aspartame-KL': document.getElementById('Mẻ 1-Đường Aspartame-KL').value,
-					'Mẻ 2-Đường Aspartame-KL': document.getElementById('Mẻ 2-Đường Aspartame-KL').value,
-					'Mẻ 3-Đường Aspartame-KL': document.getElementById('Mẻ 3-Đường Aspartame-KL').value,
-					'A1182689-Lot': document.getElementById('A1182689-Lot').value,
-					'A1182689-NSX': document.getElementById('A1182689-NSX').value,
-					'A1182689-HSD': document.getElementById('A1182689-HSD').value,
-					'Mẻ 1-A1182689-KL': document.getElementById('Mẻ 1-A1182689-KL').value,
-					'Mẻ 2-A1182689-KL': document.getElementById('Mẻ 2-A1182689-KL').value,
-					'Mẻ 3-A1182689-KL': document.getElementById('Mẻ 3-A1182689-KL').value,
-					'SJV13030-Lot': document.getElementById('SJV13030-Lot').value,
-					'SJV13030-NSX': document.getElementById('SJV13030-NSX').value,
-					'SJV13030-HSD': document.getElementById('SJV13030-HSD').value,
-					'Mẻ 1-SJV13030-KL': document.getElementById('Mẻ 1-SJV13030-KL').value,
-					'Mẻ 2-SJV13030-KL': document.getElementById('Mẻ 2-SJV13030-KL').value,
-					'Mẻ 3-SJV13030-KL': document.getElementById('Mẻ 3-SJV13030-KL').value,
+					'Acid citric-Lot': document.getElementById('Acid citric-Lot').value,
+					'Acid citric-NSX': document.getElementById('Acid citric-NSX').value,
+					'Acid citric-HSD': document.getElementById('Acid citric-HSD').value,
+					'Mẻ 1-Acid citric-KL': document.getElementById('Mẻ 1-Acid citric-KL').value,
+					'Mẻ 2-Acid citric-KL': document.getElementById('Mẻ 2-Acid citric-KL').value,
+					'Mẻ 3-Acid citric-KL': document.getElementById('Mẻ 3-Acid citric-KL').value,
+					'Acid phosphoric -Lot': document.getElementById('Acid phosphoric -Lot').value,
+					'Acid phosphoric -NSX': document.getElementById('Acid phosphoric -NSX').value,
+					'Acid phosphoric -HSD': document.getElementById('Acid phosphoric -HSD').value,
+					'Mẻ 1-Acid phosphoric-KL': document.getElementById('Mẻ 1-Acid phosphoric-KL').value,
+					'Mẻ 2-Acid phosphoric-KL': document.getElementById('Mẻ 2-Acid phosphoric-KL').value,
+					'Mẻ 3-Acid phosphoric-KL': document.getElementById('Mẻ 3-Acid phosphoric-KL').value,
+					'R01017-Lot': document.getElementById('R01017-Lot').value,
+					'R01017-NSX': document.getElementById('R01017-NSX').value,
+					'R01017-HSD': document.getElementById('R01017-HSD').value,
+					'Mẻ 1-R01017-KL': document.getElementById('Mẻ 1-R01017-KL').value,
+					'Mẻ 2-R01017-KL': document.getElementById('Mẻ 2-R01017-KL').value,
+					'Mẻ 3-R01017-KL': document.getElementById('Mẻ 3-R01017-KL').value,
+					'Caffeine-Lot': document.getElementById('Caffeine-Lot').value,
+					'Caffeine-NSX': document.getElementById('Caffeine-NSX').value,
+					'Caffeine-HSD': document.getElementById('Caffeine-HSD').value,
+					'Mẻ 1-Caffeine-KL': document.getElementById('Mẻ 1-Caffeine-KL').value,
+					'Mẻ 2-Caffeine-KL': document.getElementById('Mẻ 2-Caffeine-KL').value,
+					'Mẻ 3-Caffeine-KL': document.getElementById('Mẻ 3-Caffeine-KL').value,
+					'MS Edrink-Lot': document.getElementById('MS Edrink-Lot').value,
+					'MS Edrink-NSX': document.getElementById('MS Edrink-NSX').value,
+					'MS Edrink-HSD': document.getElementById('MS Edrink-HSD').value,
+					'Mẻ 1-MS Edrink-KL': document.getElementById('Mẻ 1-MS Edrink-KL').value,
+					'Mẻ 2-MS Edrink-KL': document.getElementById('Mẻ 2-MS Edrink-KL').value,
+					'Mẻ 3-MS Edrink-KL': document.getElementById('Mẻ 3-MS Edrink-KL').value,
+					'Màu-Lot': document.getElementById('Màu-Lot').value,
+					'Màu-NSX': document.getElementById('Màu-NSX').value,
+					'Màu-HSD': document.getElementById('Màu-HSD').value,
+					'Mẻ 1-Màu-KL': document.getElementById('Mẻ 1-Màu-KL').value,
+					'Mẻ 2-Màu-KL': document.getElementById('Mẻ 2-Màu-KL').value,
+					'Mẻ 3-Màu-KL': document.getElementById('Mẻ 3-Màu-KL').value,
+					'Dextrose-Lot': document.getElementById('Dextrose-Lot').value,
+					'Dextrose-NSX': document.getElementById('Dextrose-NSX').value,
+					'Dextrose-HSD': document.getElementById('Dextrose-HSD').value,
+					'Mẻ 1-Dextrose-KL': document.getElementById('Mẻ 1-Dextrose-KL').value,
+					'Mẻ 2-Dextrose-KL': document.getElementById('Mẻ 2-Dextrose-KL').value,
+					'Mẻ 3-Dextrose-KL': document.getElementById('Mẻ 3-Dextrose-KL').value,
+					'PR00298-Lot': document.getElementById('PR00298-Lot').value,
+					'PR00298-NSX': document.getElementById('PR00298-NSX').value,
+					'PR00298-HSD': document.getElementById('PR00298-HSD').value,
+					'Mẻ 1 -PR00298-KL': document.getElementById('Mẻ 1 -PR00298-KL').value,
+					'Mẻ 2 -PR00298-KL': document.getElementById('Mẻ 2 -PR00298-KL').value,
+					'Mẻ 3 -PR00298-KL': document.getElementById('Mẻ 3 -PR00298-KL').value,
+					'PR00138-Lot': document.getElementById('PR00138-Lot').value,
+					'PR00138-NSX': document.getElementById('PR00138-NSX').value,
+					'PR00138-HSD': document.getElementById('PR00138-HSD').value,
+					'Mẻ 1-PR00138-KL': document.getElementById('Mẻ 1-PR00138-KL').value,
+					'Mẻ 2-PR00138-KL': document.getElementById('Mẻ 2-PR00138-KL').value,
+					'Mẻ 3-PR00138-KL': document.getElementById('Mẻ 3-PR00138-KL').value,
+					'PR00135-Lot': document.getElementById('PR00135-Lot').value,
+					'PR00135-NSX': document.getElementById('PR00135-NSX').value,
+					'PR00135-HSD': document.getElementById('PR00135-HSD').value,
+					'Mẻ 1-PR00135-KL': document.getElementById('Mẻ 1-PR00135-KL').value,
+					'Mẻ 2-PR00135-KL': document.getElementById('Mẻ 2-PR00135-KL').value,
+					'Mẻ 3-PR00135-KL': document.getElementById('Mẻ 3-PR00135-KL').value,
 					'Mẻ 1-Thời gian cân': document.getElementById('Mẻ 1-Thời gian cân').value,
 					'Mẻ 2-Thời gian cân': document.getElementById('Mẻ 2-Thời gian cân').value,
 					'Mẻ 3-Thời gian cân': document.getElementById('Mẻ 3-Thời gian cân').value,

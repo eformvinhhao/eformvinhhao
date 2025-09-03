@@ -1,0 +1,906 @@
+<!--- File excel phải có những trường sau, chính xác từng chữ, không dư thừa dấu cách:
+	Id
+	Email cá nhân
+	Thời gian nộp phiếu
+	Người phê duyệt 1
+	Email_NPD1
+	Trạng thái_NPD1
+	Thời gian thao tác_NPD1
+	Ghi chú_NPD1
+	Người phê duyệt 2
+	Email_NPD2
+	Trạng thái_NPD2
+	Thời gian thao tác_NPD2
+	Ghi chú_NPD2
+	Trạng thái chung
+	Ngày/ tháng/ năm
+	Vận hành
+	QC
+	Trưởng ca
+-->
+
+<!--- Khi sửa html: gồm 3 file: file 1 giao diện chính để người dùng điền, file 2 chép vào automate, file 3 nháp
+	- Sửa hoàn hảo trên file 1, bật F5 để kiểm tra có lỗi font, giao diện...
+	- Sau khi hoàn chỉnh mới copy file này sang file thứ 2.
+	- Sau đó:
+	 	+	Copy từng phần trên file thứ 2 cần sửa
+		+	Chép ra file 3 nháp
+		+ 	Ctrl F để tìm và sửa
+		+	Dán ngược lại vào file 2 để tránh sửa luôn các phần không cần thiết
+	- Sau khi sửa xong 3 phần, xóa hết phần comment rồi mới chép vào automate
+-->
+
+<!DOCTYPE html>
+
+<html>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<style>
+    textarea:enabled,
+    input[type=text]:enabled,
+    select:enabled {
+        background-color: beige;
+    }
+
+    textarea:disabled,
+    input[type=text]:disabled,
+    select:disabled {
+        background-color: lightgray;
+    }
+
+    input[type=text],
+    select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 0;
+        display: block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button:enabled {
+        background-color: #4CAF50;
+    }
+
+    button:disabled {
+        background-color: lightgray;
+    }
+
+    * {
+        font-size: 100%;
+        font-family: Tahoma, sans-serif;
+    }
+
+    @media print {
+        .noPrint {
+            display: none;
+        }
+    }
+
+    input[type=button] {
+        width: 20%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button {
+        width: 20%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type="submit"][value="Chỉnh sửa"] {
+        background-color: green;
+        color: white;
+    }
+
+    input[type="button"][value="Tạm dừng"] {
+        background-color: red;
+        color: white;
+    }
+
+    input:focus:invalid {
+        box-shadow: none;
+    }
+
+    select {
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        height: max-content;
+        overflow: visible;
+        font-size: x-small;
+        word-wrap: break-word;
+        white-space: nowrap;
+        margin: 0%;
+        padding: auto;
+        overflow: visible;
+    }
+
+    select option {
+        margin: 0%;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: visible;
+        white-space: nowrap;
+        word-wrap: break-word;
+        overflow: visible;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+    tr {
+        height: 50px;
+    }
+
+
+    div {
+        border-radius: 5px;
+        background-color: rgb(255, 255, 255);
+        padding: 20px;
+    }
+
+    .table td {
+        padding: 0.2rem 0.5rem;
+        text-align: center;
+    }
+
+    textarea,
+    input[type=text],
+    input[type=date],
+    select {
+        overflow: inherit;
+        display: block;
+        box-sizing: border-box;
+        border: 0px;
+        resize: none;
+        width: 100%;
+    }
+
+
+    table,
+    th,
+    td {
+        border-collapse: collapse;
+        border: 1px solid;
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+    }
+</style>
+
+<body>
+    <input onclick="enable_disable()" type="button" class="slide-toggle" value="Chỉnh sửa" style=" float: right;">
+    <form class='form' id="GFG">
+
+
+
+        <!--- Sửa phần 1: Phần tiêu đề form
+		Ở file render trên automata, sửa từ:
+			1. <textarea required id=" thành @{triggerBody()?['
+			2. "></textarea> thành ']}
+			3. <input required type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
+			@{triggerBody()?['Email cá nhân']}
+			4. <input required type="date" id="Ngày/ tháng/ năm" required=""> thành
+			@{outputs('Add_a_row_into_a_table')?['body/Ngày~1 tháng~1 năm']}
+		-->
+
+        <table table-layout="fixed">
+            <tr>
+                <td colspan="8" rowspan="4">
+                    <h1>NHẬT KÝ VẬN HÀNH MÁY PHÁT ĐIỆN</h1>
+                </td>
+                <td>Mã biểu mẫu:</td>
+                <td>VHW/BT/HD-018/BM01</td>
+            </tr>
+            <tr>
+                <td>Lần ban hành:</td>
+                <td>01</td>
+            </tr>
+            <tr>
+                <td>Ngày hiệu lực:</td>
+                <td>23/06/2023</td>
+            </tr>
+            <tr>
+                <td>Số trang:</td>
+                <td>02</td>
+            </tr>
+            <tr>
+                <td width="5%" style="font-weight: bold; overflow:auto;word-break:normal;">Ngày/ tháng/ năm</td>
+                <td><input required type="date" id="Ngày/ tháng/ năm" required=""></td>
+                <td width="5%" style="font-weight: bold;">Vận hành</td>
+                <td>
+                    <textarea required id="Vận hành"></textarea>
+                </td>
+                <td width="5%" style="font-weight: bold;">Email cá nhân</td>
+                <td>
+                    <input required type="text" autocomplete="email" maxlength="60" id="Email cá nhân"
+                        pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required="">
+                </td>
+                <td width="5%" style="font-weight: bold;">Ca</td>
+                <td>
+                    <textarea required id="Ca"></textarea>
+                </td>
+                <td width="5%" style="font-weight: bold;">Trưởng ca</td>
+                <td>
+                    <textarea required id="Trưởng ca"></textarea>
+                </td>
+            </tr>
+        </table>
+
+        <!--- Sửa phần 1: Phần tiêu đề form-->
+
+
+        <br>
+
+
+
+        <!--- Sửa phần 2: Phần nội dung form:
+			Ở file render trên automata, sửa từ:
+			1. <textarea required id=" thành @{triggerBody()?['
+			2. "></textarea> thành ']}
+		-->
+
+        <table>
+            <tr style="font-weight: bold;">
+                <td rowspan="2">Giờ kiểm tra<br>( Tần suất: 30p/lần)</td>
+                <td colspan="2">Số giờ hoạt động</td>
+                <td colspan="3">Dòng điện (&lt;2000A)</td>
+                <td colspan="3">Điện áp (380&lt;UU&lt;410V)</td>
+                <td rowspan="2">Áp nhớt<br>(&gt;4 kg/cm2)</td>
+                <td rowspan="2">Nhiệt độ nhớt<br>&lt;70</td>
+                <td rowspan="2">Đồng hồ KW</td>
+                <td rowspan="2">Lượng dầu tiêu thụ</td>
+                <td rowspan="2">Tồn</td>
+                <td rowspan="2">Nhập</td>
+                <td rowspan="2">Sự cố &amp; cách xử lý</td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td>Bắt đầu</td>
+                <td>Kết thúc</td>
+                <td>I1</td>
+                <td>I2</td>
+                <td>I3</td>
+                <td>U1</td>
+                <td>U2</td>
+                <td>U3</td>
+            </tr>
+            <tr>
+                <td><textarea required id="1-TG-KT"></textarea></td>
+                <td><textarea required id="1-số giờ-BD"></textarea></td>
+                <td><textarea required id="1-số giờ-KT"></textarea></td>
+                <td><textarea required id="1-dòng điện-I1"></textarea></td>
+                <td><textarea required id="1-dòng điện-I2"></textarea></td>
+                <td><textarea required id="1-dòng điện-I3"></textarea></td>
+                <td><textarea required id="1-điện áp-U1"></textarea></td>
+                <td><textarea required id="1-điện áp-U2"></textarea></td>
+                <td><textarea required id="1-điện áp-U3"></textarea></td>
+                <td><textarea required id="1-áp nhớt"></textarea></td>
+                <td><textarea required id="1-nhiệt độ nhớt"></textarea></td>
+                <td><textarea required id="1-đồng hồ"></textarea></td>
+                <td><textarea required id="1-dầu"></textarea></td>
+                <td><textarea required id="1-tồn "></textarea></td>
+                <td><textarea required id="1-nhập "></textarea></td>
+                <td rowspan="16"><textarea id="Sự cố và cách xử lý"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea required id="2-TG-KT"></textarea></td>
+                <td><textarea required id="2-số giờ-BD"></textarea></td>
+                <td><textarea required id="2-số giờ-KT"></textarea></td>
+                <td><textarea required id="2-dòng điện-I1"></textarea></td>
+                <td><textarea required id="2-dòng điện-I2"></textarea></td>
+                <td><textarea required id="2-dòng điện-I3"></textarea></td>
+                <td><textarea required id="2-điện áp-U1"></textarea></td>
+                <td><textarea required id="2-điện áp-U2"></textarea></td>
+                <td><textarea required id="2-điện áp-U3"></textarea></td>
+                <td><textarea required id="2-áp nhớt"></textarea></td>
+                <td><textarea required id="2-nhiệt độ nhớt"></textarea></td>
+                <td><textarea required id="2-đồng hồ"></textarea></td>
+                <td><textarea required id="2-dầu"></textarea></td>
+                <td><textarea required id="2-tồn "></textarea></td>
+                <td><textarea required id="2-nhập "></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea required id="3-TG-KT"></textarea></td>
+                <td><textarea required id="3-số giờ-BD"></textarea></td>
+                <td><textarea required id="3-số giờ-KT"></textarea></td>
+                <td><textarea required id="3-dòng điện-I1"></textarea></td>
+                <td><textarea required id="3-dòng điện-I2"></textarea></td>
+                <td><textarea required id="3-dòng điện-I3"></textarea></td>
+                <td><textarea required id="3-điện áp-U1"></textarea></td>
+                <td><textarea required id="3-điện áp-U2"></textarea></td>
+                <td><textarea required id="3-điện áp-U3"></textarea></td>
+                <td><textarea required id="3-áp nhớt"></textarea></td>
+                <td><textarea required id="3-nhiệt độ nhớt"></textarea></td>
+                <td><textarea required id="3-đồng hồ"></textarea></td>
+                <td><textarea required id="3-dầu"></textarea></td>
+                <td><textarea required id="3-tồn "></textarea></td>
+                <td><textarea required id="3-nhập "></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea required id="4-TG-KT"></textarea></td>
+                <td><textarea required id="4-số giờ-BD"></textarea></td>
+                <td><textarea required id="4-số giờ-KT"></textarea></td>
+                <td><textarea required id="4-dòng điện-I1"></textarea></td>
+                <td><textarea required id="4-dòng điện-I2"></textarea></td>
+                <td><textarea required id="4-dòng điện-I3"></textarea></td>
+                <td><textarea required id="4-điện áp-U1"></textarea></td>
+                <td><textarea required id="4-điện áp-U2"></textarea></td>
+                <td><textarea required id="4-điện áp-U3"></textarea></td>
+                <td><textarea required id="4-áp nhớt"></textarea></td>
+                <td><textarea required id="4-nhiệt độ nhớt"></textarea></td>
+                <td><textarea required id="4-đồng hồ"></textarea></td>
+                <td><textarea required id="4-dầu"></textarea></td>
+                <td><textarea required id="4-tồn "></textarea></td>
+                <td><textarea required id="4-nhập "></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea required id="5-TG-KT"></textarea></td>
+                <td><textarea required id="5-số giờ-BD"></textarea></td>
+                <td><textarea required id="5-số giờ-KT"></textarea></td>
+                <td><textarea required id="5-dòng điện-I1"></textarea></td>
+                <td><textarea required id="5-dòng điện-I2"></textarea></td>
+                <td><textarea required id="5-dòng điện-I3"></textarea></td>
+                <td><textarea required id="5-điện áp-U1"></textarea></td>
+                <td><textarea required id="5-điện áp-U2"></textarea></td>
+                <td><textarea required id="5-điện áp-U3"></textarea></td>
+                <td><textarea required id="5-áp nhớt"></textarea></td>
+                <td><textarea required id="5-nhiệt độ nhớt"></textarea></td>
+                <td><textarea required id="5-đồng hồ"></textarea></td>
+                <td><textarea required id="5-dầu"></textarea></td>
+                <td><textarea required id="5-tồn "></textarea></td>
+                <td><textarea required id="5-nhập "></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea required id="6-TG-KT"></textarea></td>
+                <td><textarea required id="6-số giờ-BD"></textarea></td>
+                <td><textarea required id="6-số giờ-KT"></textarea></td>
+                <td><textarea required id="6-dòng điện-I1"></textarea></td>
+                <td><textarea required id="6-dòng điện-I2"></textarea></td>
+                <td><textarea required id="6-dòng điện-I3"></textarea></td>
+                <td><textarea required id="6-điện áp-U1"></textarea></td>
+                <td><textarea required id="6-điện áp-U2"></textarea></td>
+                <td><textarea required id="6-điện áp-U3"></textarea></td>
+                <td><textarea required id="6-áp nhớt"></textarea></td>
+                <td><textarea required id="6-nhiệt độ nhớt"></textarea></td>
+                <td><textarea required id="6-đồng hồ"></textarea></td>
+                <td><textarea required id="6-dầu"></textarea></td>
+                <td><textarea required id="6-tồn "></textarea></td>
+                <td><textarea required id="6-nhập "></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea required id="7-TG-KT"></textarea></td>
+                <td><textarea required id="7-số giờ-BD"></textarea></td>
+                <td><textarea required id="7-số giờ-KT"></textarea></td>
+                <td><textarea required id="7-dòng điện-I1"></textarea></td>
+                <td><textarea required id="7-dòng điện-I2"></textarea></td>
+                <td><textarea required id="7-dòng điện-I3"></textarea></td>
+                <td><textarea required id="7-điện áp-U1"></textarea></td>
+                <td><textarea required id="7-điện áp-U2"></textarea></td>
+                <td><textarea required id="7-điện áp-U3"></textarea></td>
+                <td><textarea required id="7-áp nhớt"></textarea></td>
+                <td><textarea required id="7-nhiệt độ nhớt"></textarea></td>
+                <td><textarea required id="7-đồng hồ"></textarea></td>
+                <td><textarea required id="7-dầu"></textarea></td>
+                <td><textarea required id="7-tồn "></textarea></td>
+                <td><textarea required id="7-nhập "></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea required id="8-TG-KT"></textarea></td>
+                <td><textarea required id="8-số giờ-BD"></textarea></td>
+                <td><textarea required id="8-số giờ-KT"></textarea></td>
+                <td><textarea required id="8-dòng điện-I1"></textarea></td>
+                <td><textarea required id="8-dòng điện-I2"></textarea></td>
+                <td><textarea required id="8-dòng điện-I3"></textarea></td>
+                <td><textarea required id="8-điện áp-U1"></textarea></td>
+                <td><textarea required id="8-điện áp-U2"></textarea></td>
+                <td><textarea required id="8-điện áp-U3"></textarea></td>
+                <td><textarea required id="8-áp nhớt"></textarea></td>
+                <td><textarea required id="8-nhiệt độ nhớt"></textarea></td>
+                <td><textarea required id="8-đồng hồ"></textarea></td>
+                <td><textarea required id="8-dầu"></textarea></td>
+                <td><textarea required id="8-tồn "></textarea></td>
+                <td><textarea required id="8-nhập "></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea required id="9-TG-KT"></textarea></td>
+                <td><textarea required id="9-số giờ-BD"></textarea></td>
+                <td><textarea required id="9-số giờ-KT"></textarea></td>
+                <td><textarea required id="9-dòng điện-I1"></textarea></td>
+                <td><textarea required id="9-dòng điện-I2"></textarea></td>
+                <td><textarea required id="9-dòng điện-I3"></textarea></td>
+                <td><textarea required id="9-điện áp-U1"></textarea></td>
+                <td><textarea required id="9-điện áp-U2"></textarea></td>
+                <td><textarea required id="9-điện áp-U3"></textarea></td>
+                <td><textarea required id="9-áp nhớt"></textarea></td>
+                <td><textarea required id="9-nhiệt độ nhớt"></textarea></td>
+                <td><textarea required id="9-đồng hồ"></textarea></td>
+                <td><textarea required id="9-dầu"></textarea></td>
+                <td><textarea required id="9-tồn "></textarea></td>
+                <td><textarea required id="9-nhập "></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea required id="10-TG-KT"></textarea></td>
+                <td><textarea required id="10-số giờ-BD"></textarea></td>
+                <td><textarea required id="10-số giờ-KT"></textarea></td>
+                <td><textarea required id="10-dòng điện-I1"></textarea></td>
+                <td><textarea required id="10-dòng điện-I2"></textarea></td>
+                <td><textarea required id="10-dòng điện-I3"></textarea></td>
+                <td><textarea required id="10-điện áp-U1"></textarea></td>
+                <td><textarea required id="10-điện áp-U2"></textarea></td>
+                <td><textarea required id="10-điện áp-U3"></textarea></td>
+                <td><textarea required id="10-áp nhớt"></textarea></td>
+                <td><textarea required id="10-nhiệt độ nhớt"></textarea></td>
+                <td><textarea required id="10-đồng hồ"></textarea></td>
+                <td><textarea required id="10-dầu"></textarea></td>
+                <td><textarea required id="10-tồn "></textarea></td>
+                <td><textarea required id="10-nhập "></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea required id="11-TG-KT"></textarea></td>
+                <td><textarea required id="11-số giờ-BD"></textarea></td>
+                <td><textarea required id="11-số giờ-KT"></textarea></td>
+                <td><textarea required id="11-dòng điện-I1"></textarea></td>
+                <td><textarea required id="11-dòng điện-I2"></textarea></td>
+                <td><textarea required id="11-dòng điện-I3"></textarea></td>
+                <td><textarea required id="11-điện áp-U1"></textarea></td>
+                <td><textarea required id="11-điện áp-U2"></textarea></td>
+                <td><textarea required id="11-điện áp-U3"></textarea></td>
+                <td><textarea required id="11-áp nhớt"></textarea></td>
+                <td><textarea required id="11-nhiệt độ nhớt"></textarea></td>
+                <td><textarea required id="11-đồng hồ"></textarea></td>
+                <td><textarea required id="11-dầu"></textarea></td>
+                <td><textarea required id="11-tồn "></textarea></td>
+                <td><textarea required id="11-nhập "></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea required id="12-TG-KT"></textarea></td>
+                <td><textarea required id="12-số giờ-BD"></textarea></td>
+                <td><textarea required id="12-số giờ-KT"></textarea></td>
+                <td><textarea required id="12-dòng điện-I1"></textarea></td>
+                <td><textarea required id="12-dòng điện-I2"></textarea></td>
+                <td><textarea required id="12-dòng điện-I3"></textarea></td>
+                <td><textarea required id="12-điện áp-U1"></textarea></td>
+                <td><textarea required id="12-điện áp-U2"></textarea></td>
+                <td><textarea required id="12-điện áp-U3"></textarea></td>
+                <td><textarea required id="12-áp nhớt"></textarea></td>
+                <td><textarea required id="12-nhiệt độ nhớt"></textarea></td>
+                <td><textarea required id="12-đồng hồ"></textarea></td>
+                <td><textarea required id="12-dầu"></textarea></td>
+                <td><textarea required id="12-tồn "></textarea></td>
+                <td><textarea required id="12-nhập "></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea required id="13-TG-KT"></textarea></td>
+                <td><textarea required id="13-số giờ-BD"></textarea></td>
+                <td><textarea required id="13-số giờ-KT"></textarea></td>
+                <td><textarea required id="13-dòng điện-I1"></textarea></td>
+                <td><textarea required id="13-dòng điện-I2"></textarea></td>
+                <td><textarea required id="13-dòng điện-I3"></textarea></td>
+                <td><textarea required id="13-điện áp-U1"></textarea></td>
+                <td><textarea required id="13-điện áp-U2"></textarea></td>
+                <td><textarea required id="13-điện áp-U3"></textarea></td>
+                <td><textarea required id="13-áp nhớt"></textarea></td>
+                <td><textarea required id="13-nhiệt độ nhớt"></textarea></td>
+                <td><textarea required id="13-đồng hồ"></textarea></td>
+                <td><textarea required id="13-dầu"></textarea></td>
+                <td><textarea required id="13-tồn "></textarea></td>
+                <td><textarea required id="13-nhập "></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea required id="14-TG-KT"></textarea></td>
+                <td><textarea required id="14-số giờ-BD"></textarea></td>
+                <td><textarea required id="14-số giờ-KT"></textarea></td>
+                <td><textarea required id="14-dòng điện-I1"></textarea></td>
+                <td><textarea required id="14-dòng điện-I2"></textarea></td>
+                <td><textarea required id="14-dòng điện-I3"></textarea></td>
+                <td><textarea required id="14-điện áp-U1"></textarea></td>
+                <td><textarea required id="14-điện áp-U2"></textarea></td>
+                <td><textarea required id="14-điện áp-U3"></textarea></td>
+                <td><textarea required id="14-áp nhớt"></textarea></td>
+                <td><textarea required id="14-nhiệt độ nhớt"></textarea></td>
+                <td><textarea required id="14-đồng hồ"></textarea></td>
+                <td><textarea required id="14-dầu"></textarea></td>
+                <td><textarea required id="14-tồn "></textarea></td>
+                <td><textarea required id="14-nhập "></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea required id="15-TG-KT"></textarea></td>
+                <td><textarea required id="15-số giờ-BD"></textarea></td>
+                <td><textarea required id="15-số giờ-KT"></textarea></td>
+                <td><textarea required id="15-dòng điện-I1"></textarea></td>
+                <td><textarea required id="15-dòng điện-I2"></textarea></td>
+                <td><textarea required id="15-dòng điện-I3"></textarea></td>
+                <td><textarea required id="15-điện áp-U1"></textarea></td>
+                <td><textarea required id="15-điện áp-U2"></textarea></td>
+                <td><textarea required id="15-điện áp-U3"></textarea></td>
+                <td><textarea required id="15-áp nhớt"></textarea></td>
+                <td><textarea required id="15-nhiệt độ nhớt"></textarea></td>
+                <td><textarea required id="15-đồng hồ"></textarea></td>
+                <td><textarea required id="15-dầu"></textarea></td>
+                <td><textarea required id="15-tồn "></textarea></td>
+                <td><textarea required id="15-nhập "></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea required id="16-TG-KT"></textarea></td>
+                <td><textarea required id="16-số giờ-BD"></textarea></td>
+                <td><textarea required id="16-số giờ-KT"></textarea></td>
+                <td><textarea required id="16-dòng điện-I1"></textarea></td>
+                <td><textarea required id="16-dòng điện-I2"></textarea></td>
+                <td><textarea required id="16-dòng điện-I3"></textarea></td>
+                <td><textarea required id="16-điện áp-U1"></textarea></td>
+                <td><textarea required id="16-điện áp-U2"></textarea></td>
+                <td><textarea required id="16-điện áp-U3"></textarea></td>
+                <td><textarea required id="16-áp nhớt"></textarea></td>
+                <td><textarea required id="16-nhiệt độ nhớt"></textarea></td>
+                <td><textarea required id="16-đồng hồ"></textarea></td>
+                <td><textarea required id="16-dầu"></textarea></td>
+                <td><textarea required id="16-tồn "></textarea></td>
+                <td><textarea required id="16-nhập "></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">Ghi chú</td>
+                <td colspan="15"><textarea id="Ghi chú"></textarea></td>
+            </tr>
+        </table>
+
+
+        <!--- Sửa phần 2: Phần nội dung form-->
+
+
+
+
+        <br>
+        <p><b>Chi tiết cây phê duyệt</b></p>
+
+        <!--- Sửa phần 3: Đối với file gốc: Chi tiết cây phê duyệt: sửa lại TC line nào trực tiếp
+				Đối với file render trên automata, sửa từ:
+				1. id=" thành >@{triggerBody()?['
+				2. "> thành ']}
+				3. <td colspan="5" id="Thời gian nộp phiếu"></td> thành
+			@{outputs('Add_a_row_into_a_table')?['body/Thời gian nộp phiếu']}
+		-->
+
+        <table>
+            <tr>
+                <td style="font-weight: bold;">Thời gian nộp phiếu</td>
+                <td colspan="5" id="Thời gian nộp phiếu"></td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td>Cấp phê duyệt</td>
+                <td>Người phê duyệt</td>
+                <td>Email</td>
+                <td>Trạng thái</td>
+                <td>Thời gian thao tác</td>
+                <td>Ghi chú NPD</td>
+            </tr>
+            <tr>
+                <td>Phó TBP Utilyti</td>
+                <td id="Người phê duyệt"></td>
+                <td id="Email"></td>
+                <td id="Trạng thái"></td>
+                <td id="Thời gian thao tác"></td>
+                <td id="Ghi chú NPD"></td>
+            </tr>
+        </table>
+
+        <!--- Sửa phần 3: Chi tiết cây phê duyệt: sửa lại TC line nào-->
+
+        <button id='nut' type="submit" style=" float: left;">Nộp kết quả</button>
+    </form>
+
+    <button onclick="window.print();" class="noPrint" style=" float: right; background-color: yellow; color:black">Kiểm
+        tra kết quả</button>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#GFG :input").prop("disabled", true);
+            $(".slide-toggle").click(function () {
+                if (this.value == "Chỉnh sửa") {
+                    this.value = "Tạm dừng";
+                    $("#GFG :input").prop("disabled", false);
+                }
+                else {
+                    this.value = "Chỉnh sửa";
+                    $("#GFG :input").prop("disabled", true);
+                }
+            });
+        });
+    </script>
+
+    <!--- Sửa phần 4: Đối với file gốc: Sửa lại tất cả các trường cho đúng với tên cột ở file excel-->
+    <script>
+        const formE1 = document.querySelector('.form');
+        formE1.addEventListener('submit', event => {
+            event.preventDefault();
+            const formData = new FormData(formE1);
+            const submissionTime = new Date().toISOString();
+            const data = new URLSearchParams(formData);
+
+            fetch('https://default810604757e7f4ede8d8dbf61f53ca5.28.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/f787c4161d684427826ea1a54f17b2b4/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ULfjylJcBEVKUQaKb3WPryEdwOorstjA6iS8wlHkCgw', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'Email cá nhân': document.getElementById('Email cá nhân').value,
+                    'Thời gian nộp phiếu': submissionTime,
+                    'Người phê duyệt': document.getElementById('Trưởng ca').value,
+                    'Email': 'quynt@vinhhao.com.vn',
+                    'Trạng thái': 'Pending',
+                    'Thời gian thao tác': '',
+                    'Ghi chú NPD': '',
+                    'Ngày/ tháng/ năm': document.getElementById('Ngày/ tháng/ năm').value,
+                    'Vận hành': document.getElementById('Vận hành').value,
+                    'Trưởng ca': document.getElementById('Trưởng ca').value,
+                    'Ca': document.getElementById('Ca').value,
+                    '1-áp nhớt': document.getElementById('1-áp nhớt').value,
+                    '1-dầu': document.getElementById('1-dầu').value,
+                    '1-điện áp-U1': document.getElementById('1-điện áp-U1').value,
+                    '1-điện áp-U2': document.getElementById('1-điện áp-U2').value,
+                    '1-điện áp-U3': document.getElementById('1-điện áp-U3').value,
+                    '1-dòng điện-I1': document.getElementById('1-dòng điện-I1').value,
+                    '1-dòng điện-I2': document.getElementById('1-dòng điện-I2').value,
+                    '1-dòng điện-I3': document.getElementById('1-dòng điện-I3').value,
+                    '1-đồng hồ': document.getElementById('1-đồng hồ').value,
+                    '1-nhập ': document.getElementById('1-nhập ').value,
+                    '1-nhiệt độ nhớt': document.getElementById('1-nhiệt độ nhớt').value,
+                    '1-số giờ-BD': document.getElementById('1-số giờ-BD').value,
+                    '1-số giờ-KT': document.getElementById('1-số giờ-KT').value,
+                    '1-TG-KT': document.getElementById('1-TG-KT').value,
+                    '1-tồn ': document.getElementById('1-tồn ').value,
+                    '2-áp nhớt': document.getElementById('2-áp nhớt').value,
+                    '2-dầu': document.getElementById('2-dầu').value,
+                    '2-điện áp-U1': document.getElementById('2-điện áp-U1').value,
+                    '2-điện áp-U2': document.getElementById('2-điện áp-U2').value,
+                    '2-điện áp-U3': document.getElementById('2-điện áp-U3').value,
+                    '2-dòng điện-I1': document.getElementById('2-dòng điện-I1').value,
+                    '2-dòng điện-I2': document.getElementById('2-dòng điện-I2').value,
+                    '2-dòng điện-I3': document.getElementById('2-dòng điện-I3').value,
+                    '2-đồng hồ': document.getElementById('2-đồng hồ').value,
+                    '2-nhập ': document.getElementById('2-nhập ').value,
+                    '2-nhiệt độ nhớt': document.getElementById('2-nhiệt độ nhớt').value,
+                    '2-số giờ-BD': document.getElementById('2-số giờ-BD').value,
+                    '2-số giờ-KT': document.getElementById('2-số giờ-KT').value,
+                    '2-TG-KT': document.getElementById('2-TG-KT').value,
+                    '2-tồn ': document.getElementById('2-tồn ').value,
+                    '3-áp nhớt': document.getElementById('3-áp nhớt').value,
+                    '3-dầu': document.getElementById('3-dầu').value,
+                    '3-điện áp-U1': document.getElementById('3-điện áp-U1').value,
+                    '3-điện áp-U2': document.getElementById('3-điện áp-U2').value,
+                    '3-điện áp-U3': document.getElementById('3-điện áp-U3').value,
+                    '3-dòng điện-I1': document.getElementById('3-dòng điện-I1').value,
+                    '3-dòng điện-I2': document.getElementById('3-dòng điện-I2').value,
+                    '3-dòng điện-I3': document.getElementById('3-dòng điện-I3').value,
+                    '3-đồng hồ': document.getElementById('3-đồng hồ').value,
+                    '3-nhập ': document.getElementById('3-nhập ').value,
+                    '3-nhiệt độ nhớt': document.getElementById('3-nhiệt độ nhớt').value,
+                    '3-số giờ-BD': document.getElementById('3-số giờ-BD').value,
+                    '3-số giờ-KT': document.getElementById('3-số giờ-KT').value,
+                    '3-TG-KT': document.getElementById('3-TG-KT').value,
+                    '3-tồn ': document.getElementById('3-tồn ').value,
+                    '4-áp nhớt': document.getElementById('4-áp nhớt').value,
+                    '4-dầu': document.getElementById('4-dầu').value,
+                    '4-điện áp-U1': document.getElementById('4-điện áp-U1').value,
+                    '4-điện áp-U2': document.getElementById('4-điện áp-U2').value,
+                    '4-điện áp-U3': document.getElementById('4-điện áp-U3').value,
+                    '4-dòng điện-I1': document.getElementById('4-dòng điện-I1').value,
+                    '4-dòng điện-I2': document.getElementById('4-dòng điện-I2').value,
+                    '4-dòng điện-I3': document.getElementById('4-dòng điện-I3').value,
+                    '4-đồng hồ': document.getElementById('4-đồng hồ').value,
+                    '4-nhập ': document.getElementById('4-nhập ').value,
+                    '4-nhiệt độ nhớt': document.getElementById('4-nhiệt độ nhớt').value,
+                    '4-số giờ-BD': document.getElementById('4-số giờ-BD').value,
+                    '4-số giờ-KT': document.getElementById('4-số giờ-KT').value,
+                    '4-TG-KT': document.getElementById('4-TG-KT').value,
+                    '4-tồn ': document.getElementById('4-tồn ').value,
+                    '5-áp nhớt': document.getElementById('5-áp nhớt').value,
+                    '5-dầu': document.getElementById('5-dầu').value,
+                    '5-điện áp-U1': document.getElementById('5-điện áp-U1').value,
+                    '5-điện áp-U2': document.getElementById('5-điện áp-U2').value,
+                    '5-điện áp-U3': document.getElementById('5-điện áp-U3').value,
+                    '5-dòng điện-I1': document.getElementById('5-dòng điện-I1').value,
+                    '5-dòng điện-I2': document.getElementById('5-dòng điện-I2').value,
+                    '5-dòng điện-I3': document.getElementById('5-dòng điện-I3').value,
+                    '5-đồng hồ': document.getElementById('5-đồng hồ').value,
+                    '5-nhập ': document.getElementById('5-nhập ').value,
+                    '5-nhiệt độ nhớt': document.getElementById('5-nhiệt độ nhớt').value,
+                    '5-số giờ-BD': document.getElementById('5-số giờ-BD').value,
+                    '5-số giờ-KT': document.getElementById('5-số giờ-KT').value,
+                    '5-TG-KT': document.getElementById('5-TG-KT').value,
+                    '5-tồn ': document.getElementById('5-tồn ').value,
+                    '6-áp nhớt': document.getElementById('6-áp nhớt').value,
+                    '6-dầu': document.getElementById('6-dầu').value,
+                    '6-điện áp-U1': document.getElementById('6-điện áp-U1').value,
+                    '6-điện áp-U2': document.getElementById('6-điện áp-U2').value,
+                    '6-điện áp-U3': document.getElementById('6-điện áp-U3').value,
+                    '6-dòng điện-I1': document.getElementById('6-dòng điện-I1').value,
+                    '6-dòng điện-I2': document.getElementById('6-dòng điện-I2').value,
+                    '6-dòng điện-I3': document.getElementById('6-dòng điện-I3').value,
+                    '6-đồng hồ': document.getElementById('6-đồng hồ').value,
+                    '6-nhập ': document.getElementById('6-nhập ').value,
+                    '6-nhiệt độ nhớt': document.getElementById('6-nhiệt độ nhớt').value,
+                    '6-số giờ-BD': document.getElementById('6-số giờ-BD').value,
+                    '6-số giờ-KT': document.getElementById('6-số giờ-KT').value,
+                    '6-TG-KT': document.getElementById('6-TG-KT').value,
+                    '6-tồn ': document.getElementById('6-tồn ').value,
+                    '7-áp nhớt': document.getElementById('7-áp nhớt').value,
+                    '7-dầu': document.getElementById('7-dầu').value,
+                    '7-điện áp-U1': document.getElementById('7-điện áp-U1').value,
+                    '7-điện áp-U2': document.getElementById('7-điện áp-U2').value,
+                    '7-điện áp-U3': document.getElementById('7-điện áp-U3').value,
+                    '7-dòng điện-I1': document.getElementById('7-dòng điện-I1').value,
+                    '7-dòng điện-I2': document.getElementById('7-dòng điện-I2').value,
+                    '7-dòng điện-I3': document.getElementById('7-dòng điện-I3').value,
+                    '7-đồng hồ': document.getElementById('7-đồng hồ').value,
+                    '7-nhập ': document.getElementById('7-nhập ').value,
+                    '7-nhiệt độ nhớt': document.getElementById('7-nhiệt độ nhớt').value,
+                    '7-số giờ-BD': document.getElementById('7-số giờ-BD').value,
+                    '7-số giờ-KT': document.getElementById('7-số giờ-KT').value,
+                    '7-TG-KT': document.getElementById('7-TG-KT').value,
+                    '7-tồn ': document.getElementById('7-tồn ').value,
+                    '8-áp nhớt': document.getElementById('8-áp nhớt').value,
+                    '8-dầu': document.getElementById('8-dầu').value,
+                    '8-điện áp-U1': document.getElementById('8-điện áp-U1').value,
+                    '8-điện áp-U2': document.getElementById('8-điện áp-U2').value,
+                    '8-điện áp-U3': document.getElementById('8-điện áp-U3').value,
+                    '8-dòng điện-I1': document.getElementById('8-dòng điện-I1').value,
+                    '8-dòng điện-I2': document.getElementById('8-dòng điện-I2').value,
+                    '8-dòng điện-I3': document.getElementById('8-dòng điện-I3').value,
+                    '8-đồng hồ': document.getElementById('8-đồng hồ').value,
+                    '8-nhập ': document.getElementById('8-nhập ').value,
+                    '8-nhiệt độ nhớt': document.getElementById('8-nhiệt độ nhớt').value,
+                    '8-số giờ-BD': document.getElementById('8-số giờ-BD').value,
+                    '8-số giờ-KT': document.getElementById('8-số giờ-KT').value,
+                    '8-TG-KT': document.getElementById('8-TG-KT').value,
+                    '8-tồn ': document.getElementById('8-tồn ').value,
+                    '9-áp nhớt': document.getElementById('9-áp nhớt').value,
+                    '9-dầu': document.getElementById('9-dầu').value,
+                    '9-điện áp-U1': document.getElementById('9-điện áp-U1').value,
+                    '9-điện áp-U2': document.getElementById('9-điện áp-U2').value,
+                    '9-điện áp-U3': document.getElementById('9-điện áp-U3').value,
+                    '9-dòng điện-I1': document.getElementById('9-dòng điện-I1').value,
+                    '9-dòng điện-I2': document.getElementById('9-dòng điện-I2').value,
+                    '9-dòng điện-I3': document.getElementById('9-dòng điện-I3').value,
+                    '9-đồng hồ': document.getElementById('9-đồng hồ').value,
+                    '9-nhập ': document.getElementById('9-nhập ').value,
+                    '9-nhiệt độ nhớt': document.getElementById('9-nhiệt độ nhớt').value,
+                    '9-số giờ-BD': document.getElementById('9-số giờ-BD').value,
+                    '9-số giờ-KT': document.getElementById('9-số giờ-KT').value,
+                    '9-TG-KT': document.getElementById('9-TG-KT').value,
+                    '9-tồn ': document.getElementById('9-tồn ').value,
+                    '10-áp nhớt': document.getElementById('10-áp nhớt').value,
+                    '10-dầu': document.getElementById('10-dầu').value,
+                    '10-điện áp-U1': document.getElementById('10-điện áp-U1').value,
+                    '10-điện áp-U2': document.getElementById('10-điện áp-U2').value,
+                    '10-điện áp-U3': document.getElementById('10-điện áp-U3').value,
+                    '10-dòng điện-I1': document.getElementById('10-dòng điện-I1').value,
+                    '10-dòng điện-I2': document.getElementById('10-dòng điện-I2').value,
+                    '10-dòng điện-I3': document.getElementById('10-dòng điện-I3').value,
+                    '10-đồng hồ': document.getElementById('10-đồng hồ').value,
+                    '10-nhập ': document.getElementById('10-nhập ').value,
+                    '10-nhiệt độ nhớt': document.getElementById('10-nhiệt độ nhớt').value,
+                    '10-số giờ-BD': document.getElementById('10-số giờ-BD').value,
+                    '10-số giờ-KT': document.getElementById('10-số giờ-KT').value,
+                    '10-TG-KT': document.getElementById('10-TG-KT').value,
+                    '10-tồn ': document.getElementById('10-tồn ').value,
+                    '11-áp nhớt': document.getElementById('11-áp nhớt').value,
+                    '11-dầu': document.getElementById('11-dầu').value,
+                    '11-điện áp-U1': document.getElementById('11-điện áp-U1').value,
+                    '11-điện áp-U2': document.getElementById('11-điện áp-U2').value,
+                    '11-điện áp-U3': document.getElementById('11-điện áp-U3').value,
+                    '11-dòng điện-I1': document.getElementById('11-dòng điện-I1').value,
+                    '11-dòng điện-I2': document.getElementById('11-dòng điện-I2').value,
+                    '11-dòng điện-I3': document.getElementById('11-dòng điện-I3').value,
+                    '11-đồng hồ': document.getElementById('11-đồng hồ').value,
+                    '11-nhập ': document.getElementById('11-nhập ').value,
+                    '11-nhiệt độ nhớt': document.getElementById('11-nhiệt độ nhớt').value,
+                    '11-số giờ-BD': document.getElementById('11-số giờ-BD').value,
+                    '11-số giờ-KT': document.getElementById('11-số giờ-KT').value,
+                    '11-TG-KT': document.getElementById('11-TG-KT').value,
+                    '11-tồn ': document.getElementById('11-tồn ').value,
+                    '12-áp nhớt': document.getElementById('12-áp nhớt').value,
+                    '12-dầu': document.getElementById('12-dầu').value,
+                    '12-điện áp-U1': document.getElementById('12-điện áp-U1').value,
+                    '12-điện áp-U2': document.getElementById('12-điện áp-U2').value,
+                    '12-điện áp-U3': document.getElementById('12-điện áp-U3').value,
+                    '12-dòng điện-I1': document.getElementById('12-dòng điện-I1').value,
+                    '12-dòng điện-I2': document.getElementById('12-dòng điện-I2').value,
+                    '12-dòng điện-I3': document.getElementById('12-dòng điện-I3').value,
+                    '12-đồng hồ': document.getElementById('12-đồng hồ').value,
+                    '12-nhập ': document.getElementById('12-nhập ').value,
+                    '12-nhiệt độ nhớt': document.getElementById('12-nhiệt độ nhớt').value,
+                    '12-số giờ-BD': document.getElementById('12-số giờ-BD').value,
+                    '12-số giờ-KT': document.getElementById('12-số giờ-KT').value,
+                    '12-TG-KT': document.getElementById('12-TG-KT').value,
+                    '12-tồn ': document.getElementById('12-tồn ').value,
+                    '13-áp nhớt': document.getElementById('13-áp nhớt').value,
+                    '13-dầu': document.getElementById('13-dầu').value,
+                    '13-điện áp-U1': document.getElementById('13-điện áp-U1').value,
+                    '13-điện áp-U2': document.getElementById('13-điện áp-U2').value,
+                    '13-điện áp-U3': document.getElementById('13-điện áp-U3').value,
+                    '13-dòng điện-I1': document.getElementById('13-dòng điện-I1').value,
+                    '13-dòng điện-I2': document.getElementById('13-dòng điện-I2').value,
+                    '13-dòng điện-I3': document.getElementById('13-dòng điện-I3').value,
+                    '13-đồng hồ': document.getElementById('13-đồng hồ').value,
+                    '13-nhập ': document.getElementById('13-nhập ').value,
+                    '13-nhiệt độ nhớt': document.getElementById('13-nhiệt độ nhớt').value,
+                    '13-số giờ-BD': document.getElementById('13-số giờ-BD').value,
+                    '13-số giờ-KT': document.getElementById('13-số giờ-KT').value,
+                    '13-TG-KT': document.getElementById('13-TG-KT').value,
+                    '13-tồn ': document.getElementById('13-tồn ').value,
+                    '14-áp nhớt': document.getElementById('14-áp nhớt').value,
+                    '14-dầu': document.getElementById('14-dầu').value,
+                    '14-điện áp-U1': document.getElementById('14-điện áp-U1').value,
+                    '14-điện áp-U2': document.getElementById('14-điện áp-U2').value,
+                    '14-điện áp-U3': document.getElementById('14-điện áp-U3').value,
+                    '14-dòng điện-I1': document.getElementById('14-dòng điện-I1').value,
+                    '14-dòng điện-I2': document.getElementById('14-dòng điện-I2').value,
+                    '14-dòng điện-I3': document.getElementById('14-dòng điện-I3').value,
+                    '14-đồng hồ': document.getElementById('14-đồng hồ').value,
+                    '14-nhập ': document.getElementById('14-nhập ').value,
+                    '14-nhiệt độ nhớt': document.getElementById('14-nhiệt độ nhớt').value,
+                    '14-số giờ-BD': document.getElementById('14-số giờ-BD').value,
+                    '14-số giờ-KT': document.getElementById('14-số giờ-KT').value,
+                    '14-TG-KT': document.getElementById('14-TG-KT').value,
+                    '14-tồn ': document.getElementById('14-tồn ').value,
+                    '15-áp nhớt': document.getElementById('15-áp nhớt').value,
+                    '15-dầu': document.getElementById('15-dầu').value,
+                    '15-điện áp-U1': document.getElementById('15-điện áp-U1').value,
+                    '15-điện áp-U2': document.getElementById('15-điện áp-U2').value,
+                    '15-điện áp-U3': document.getElementById('15-điện áp-U3').value,
+                    '15-dòng điện-I1': document.getElementById('15-dòng điện-I1').value,
+                    '15-dòng điện-I2': document.getElementById('15-dòng điện-I2').value,
+                    '15-dòng điện-I3': document.getElementById('15-dòng điện-I3').value,
+                    '15-đồng hồ': document.getElementById('15-đồng hồ').value,
+                    '15-nhập ': document.getElementById('15-nhập ').value,
+                    '15-nhiệt độ nhớt': document.getElementById('15-nhiệt độ nhớt').value,
+                    '15-số giờ-BD': document.getElementById('15-số giờ-BD').value,
+                    '15-số giờ-KT': document.getElementById('15-số giờ-KT').value,
+                    '15-TG-KT': document.getElementById('15-TG-KT').value,
+                    '15-tồn ': document.getElementById('15-tồn ').value,
+                    '16-áp nhớt': document.getElementById('16-áp nhớt').value,
+                    '16-dầu': document.getElementById('16-dầu').value,
+                    '16-điện áp-U1': document.getElementById('16-điện áp-U1').value,
+                    '16-điện áp-U2': document.getElementById('16-điện áp-U2').value,
+                    '16-điện áp-U3': document.getElementById('16-điện áp-U3').value,
+                    '16-dòng điện-I1': document.getElementById('16-dòng điện-I1').value,
+                    '16-dòng điện-I2': document.getElementById('16-dòng điện-I2').value,
+                    '16-dòng điện-I3': document.getElementById('16-dòng điện-I3').value,
+                    '16-đồng hồ': document.getElementById('16-đồng hồ').value,
+                    '16-nhập ': document.getElementById('16-nhập ').value,
+                    '16-nhiệt độ nhớt': document.getElementById('16-nhiệt độ nhớt').value,
+                    '16-số giờ-BD': document.getElementById('16-số giờ-BD').value,
+                    '16-số giờ-KT': document.getElementById('16-số giờ-KT').value,
+                    '16-TG-KT': document.getElementById('16-TG-KT').value,
+                    '16-tồn ': document.getElementById('16-tồn ').value,
+                    'Sự cố và cách xử lý': document.getElementById('Sự cố và cách xử lý').value,
+                    'Ghi chú': document.getElementById('Ghi chú').value,
+                })
+            }).then(res => res.json())
+                .then(data => console.log(data))
+                .catch(error => console.log(error));
+            alert("Đã nộp thành công");
+            window.location.reload();
+        });
+    </script>
+
+
+</body>
+
+</html>

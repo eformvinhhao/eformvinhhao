@@ -168,11 +168,11 @@
 
 		<!--- Sửa phần 1: Phần tiêu đề form
 		Ở file render trên automata, sửa từ:
-			1. <textarea id=" thành @{triggerBody()?['
+			1. <textarea required id=" thành @{triggerBody()?['
 			2. "></textarea> thành ']}
-			3. <input type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
+			3. <input required type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
 			@{triggerBody()?['Email cá nhân']}
-			4. <input type="date" id="Ngày/ tháng/ năm" required=""> thành
+			4. <input required type="date" id="Ngày/ tháng/ năm" required=""> thành
 			@{outputs('Add_a_row_into_a_table')?['body/Ngày~1 tháng~1 năm']}
 			
 		-->
@@ -198,27 +198,27 @@
 			</tr>
 			<tr>
 				<td style="font-weight: bold; ">Ngày/ tháng/ năm</td>
-				<td><input type="date" id="Ngày/ tháng/ năm" required=""></td>
+				<td><input required type="date" id="Ngày/ tháng/ năm" required=""></td>
 				<td style="font-weight: bold; ">Vận hành</td>
-				<td><textarea id="Vận hành"></textarea></td>
+				<td><textarea required id="Vận hành"></textarea></td>
 				<td style="font-weight: bold; ">Emai cá nhân</td>
-				<td><input type="text" autocomplete="email" maxlength="60" id="Email cá nhân"
+				<td><input required type="text" autocomplete="email" maxlength="60" id="Email cá nhân"
 						pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""></td>
 				<td style="font-weight: bold; ">QC</td>
-				<td><textarea id="QC"></textarea></td>
+				<td><textarea required id="QC"></textarea></td>
 				<td style="font-weight: bold; ">Trưởng ca</td>
-				<td><textarea id="Trưởng ca"></textarea></td>
+				<td><textarea required id="Trưởng ca"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="font-weight: bold; ">Kết quả kiểm tra tình trạng hiệu chuẩn của cân</td>
 				<td style="font-weight: bold; ">Loại cân</td>
-				<td><textarea id="Loại cân"></textarea></td>
+				<td><textarea required id="Loại cân"></textarea></td>
 				<td style="font-weight: bold; ">Ngày hiệu chuẩn</td>
-				<td><input type="date" id="Ngày hiệu chuẩn" required=""></td>
+				<td><input required type="date" id="Ngày hiệu chuẩn" required=""></td>
 				<td style="font-weight: bold; ">Kết luận (Đạt/Không đạt)</td>
-				<td><textarea id="Kết luận (Đạt/Không đạt)"></textarea></td>
+				<td><textarea required id="Kết luận (Đạt/Không đạt)"></textarea></td>
 				<td style="font-weight: bold; ">Khu vực</td>
-				<td><textarea id="Khu vực"></textarea></td>
+				<td><textarea required id="Khu vực"></textarea></td>
 			</tr>
 		</table>
 
@@ -229,14 +229,14 @@
 
 		<!--- Sửa phần 2: Phần nội dung form:
 			Ở file render trên automata, sửa từ:
-			1. <textarea id=" thành @{triggerBody()?['
+			1. <textarea required id=" thành @{triggerBody()?['
 			2. "></textarea> thành ']}
-			3. <input type="checkbox" id=" thành <input type="checkbox" @{triggerBody()?['
+			3. <input required type="checkbox" id=" thành <input required type="checkbox" @{triggerBody()?['
 			4. " value="uncheck" thành ']}
 		-->
 
 		<table table-layout="fixed">
-			<tr style="font-weight: bold; ">
+			<tr>
 				<td rowspan="2">STT</td>
 				<td rowspan="2">Tên nguyên liệu (Theo BOM)<br>(Kiểm tra theo BOM cho mỗi lần cân)</td>
 				<td rowspan="2">Số Lot/Batch</td>
@@ -247,187 +247,187 @@
 				<td colspan="3">Mẻ</td>
 			</tr>
 			<tr>
-				<td><textarea id="Mẻ số 1"></textarea></td>
-				<td><textarea id="Mẻ số 2"></textarea></td>
-				<td><textarea id="Mẻ số 3"></textarea></td>
+				<td><textarea required id="Mẻ số 1"></textarea></td>
+				<td><textarea required id="Mẻ số 2"></textarea></td>
+				<td><textarea required id="Mẻ số 3"></textarea></td>
 			</tr>
 			<tr>
 				<td>1</td>
 				<td>Siro Fructose - Glucose (ADM)</td>
-				<td><textarea id="Đường nước-Lot"></textarea></td>
-				<td><input type="date" id="Đường nước-NSX" required=""></td>
-				<td><input type="date" id="Đường nước-HSD" required=""></td>
+				<td><textarea required id="Đường nước-Lot"></textarea></td>
+				<td><input required type="date" id="Đường nước-NSX" required=""></td>
+				<td><input required type="date" id="Đường nước-HSD" required=""></td>
 				<td rowspan="13">kg</td>
 				<td>1,800.000</td>
-				<td><textarea id="Mẻ 1-Đường nước-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-Đường nước-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-Đường nước-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-Đường nước-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Đường nước-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Đường nước-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>2</td>
 				<td>Acid Citric Anhydrous (INS330)</td>
-				<td><textarea id="Citric-Lot"></textarea></td>
-				<td><input type="date" id="Citric-NSX" required=""></td>
-				<td><input type="date" id="Citric-HSD" required=""></td>
+				<td><textarea required id="Citric-Lot"></textarea></td>
+				<td><input required type="date" id="Citric-NSX" required=""></td>
+				<td><input required type="date" id="Citric-HSD" required=""></td>
 				<td>2.000</td>
-				<td><textarea id="Mẻ 1-Citric-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-Citric-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-Citric-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-Citric-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Citric-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Citric-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>3</td>
 				<td>Acid Phosphoric 85% min (Food Grade)</td>
-				<td><textarea id="Phosphoric-Lot"></textarea></td>
-				<td><input type="date" id="Phosphoric-NSX" required=""></td>
-				<td><input type="date" id="Phosphoric-HDS" required=""></td>
+				<td><textarea required id="Phosphoric-Lot"></textarea></td>
+				<td><input required type="date" id="Phosphoric-NSX" required=""></td>
+				<td><input required type="date" id="Phosphoric-HDS" required=""></td>
 				<td>8.000</td>
-				<td><textarea id="Mẻ 1-Phosphoric-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-Phosphoric-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-Phosphoric-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-Phosphoric-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Phosphoric-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Phosphoric-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>4</td>
 				<td>Potassium sorbate - TC34 (INS 202)</td>
-				<td><textarea id="Sorbate-Lot"></textarea></td>
-				<td><input type="date" id="Sorbate-NSX" required=""></td>
-				<td><input type="date" id="Sorbate-HSD" required=""></td>
+				<td><textarea required id="Sorbate-Lot"></textarea></td>
+				<td><input required type="date" id="Sorbate-NSX" required=""></td>
+				<td><input required type="date" id="Sorbate-HSD" required=""></td>
 				<td>4.000</td>
-				<td><textarea id="Mẻ 1-Sorbate-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-Sorbate-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-Sorbate-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-Sorbate-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Sorbate-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Sorbate-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>5</td>
 				<td>Taurine JP17</td>
-				<td><textarea id="Taurine-Lot"></textarea></td>
-				<td><input type="date" id="Taurine-NSX" required=""></td>
-				<td><input type="date" id="Taurine-HSD" required=""></td>
+				<td><textarea required id="Taurine-Lot"></textarea></td>
+				<td><input required type="date" id="Taurine-NSX" required=""></td>
+				<td><input required type="date" id="Taurine-HSD" required=""></td>
 				<td>4.000</td>
-				<td><textarea id="Mẻ 1-Taurine-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-Taurine-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-Taurine-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-Taurine-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Taurine-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Taurine-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>6</td>
 				<td>PRMS00753</td>
-				<td><textarea id="753-Lot"></textarea></td>
-				<td><input type="date" id="753-NSX" required=""></td>
-				<td><input type="date" id="753-HSD" required=""></td>
+				<td><textarea required id="753-Lot"></textarea></td>
+				<td><input required type="date" id="753-NSX" required=""></td>
+				<td><input required type="date" id="753-HSD" required=""></td>
 				<td>2.000</td>
-				<td><textarea id="Mẻ 1-735-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-735-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-735-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-735-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-735-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-735-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>7</td>
 				<td>Muối sấy Trung Quốc</td>
-				<td><textarea id="Muối-Lot"></textarea></td>
-				<td><input type="date" id="Muối-NSX" required=""></td>
-				<td><input type="date" id="Muối-HSD" required=""></td>
+				<td><textarea required id="Muối-Lot"></textarea></td>
+				<td><input required type="date" id="Muối-NSX" required=""></td>
+				<td><input required type="date" id="Muối-HSD" required=""></td>
 				<td>5.000</td>
-				<td><textarea id="Mẻ 1-Muối-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-Muối-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-Muối-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-Muối-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Muối-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Muối-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>8</td>
 				<td>Màu Caramel S5000 dạng sệt - INS 150d</td>
-				<td><textarea id="Caramel-Lot"></textarea></td>
-				<td><input type="date" id="Caramel-NSX" required=""></td>
-				<td><input type="date" id="Caramel-HSD" required=""></td>
+				<td><textarea required id="Caramel-Lot"></textarea></td>
+				<td><input required type="date" id="Caramel-NSX" required=""></td>
+				<td><input required type="date" id="Caramel-HSD" required=""></td>
 				<td>70.000</td>
-				<td><textarea id="Mẻ 1-Caramel-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-Caramel-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-Caramel-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-Caramel-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Caramel-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Caramel-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>9</td>
 				<td>Premix PR01023</td>
-				<td><textarea id="1023-Lot"></textarea></td>
-				<td><input type="date" id="1023-NSX" required=""></td>
-				<td><input type="date" id="1023-HSD" required=""></td>
+				<td><textarea required id="1023-Lot"></textarea></td>
+				<td><input required type="date" id="1023-NSX" required=""></td>
+				<td><input required type="date" id="1023-HSD" required=""></td>
 				<td>9.700</td>
-				<td><textarea id="Mẻ 1-1023-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-1023-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-1023-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-1023-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-1023-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-1023-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>10</td>
 				<td>Premix PR01030</td>
-				<td><textarea id="1030-Lot"></textarea></td>
-				<td><input type="date" id="1030-NSX" required=""></td>
-				<td><input type="date" id="1030-HSD" required=""></td>
+				<td><textarea required id="1030-Lot"></textarea></td>
+				<td><input required type="date" id="1030-NSX" required=""></td>
+				<td><input required type="date" id="1030-HSD" required=""></td>
 				<td>13.200</td>
-				<td><textarea id="Mẻ 1-1030-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-1030-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-1030-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-1030-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-1030-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-1030-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>11</td>
 				<td>Premix PR00298</td>
-				<td><textarea id="298-Lot"></textarea></td>
-				<td><input type="date" id="298-NSX" required=""></td>
-				<td><input type="date" id="298-HSD" required=""></td>
+				<td><textarea required id="298-Lot"></textarea></td>
+				<td><input required type="date" id="298-NSX" required=""></td>
+				<td><input required type="date" id="298-HSD" required=""></td>
 				<td>27.500</td>
-				<td><textarea id="Mẻ 1-298-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-298-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-298-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-298-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-298-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-298-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>12</td>
 				<td>Premix PR00138</td>
-				<td><textarea id="130-Lot"></textarea></td>
-				<td><input type="date" id="130-NSX" required=""></td>
-				<td><input type="date" id="130-HSD" required=""></td>
+				<td><textarea required id="130-Lot"></textarea></td>
+				<td><input required type="date" id="130-NSX" required=""></td>
+				<td><input required type="date" id="130-HSD" required=""></td>
 				<td>4.626</td>
-				<td><textarea id="Mẻ 1-138-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-138-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-138-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-138-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-138-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-138-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>13</td>
 				<td>Premix PR00135</td>
-				<td><textarea id="135-Lot"></textarea></td>
-				<td><input type="date" id="135-NSX" required=""></td>
-				<td><input type="date" id="135-HSD" required=""></td>
+				<td><textarea required id="135-Lot"></textarea></td>
+				<td><input required type="date" id="135-NSX" required=""></td>
+				<td><input required type="date" id="135-HSD" required=""></td>
 				<td>0.626</td>
-				<td><textarea id="Mẻ 1-135-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-135-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-135-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-135-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-135-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-135-KL"></textarea></td>
 			</tr>
 			<tr>
-				<td colspan="2" rowspan="5" style="font-weight: bold; ">Xác nhận</td>
-				<td colspan="5" style="font-weight: bold; ">Thời gian cân</td>
-				<td><textarea id="Mẻ 1-Thời gian cân"></textarea></td>
-				<td><textarea id="Mẻ 2-Thời gian cân"></textarea></td>
-				<td><textarea id="Mẻ 3-Thời gian cân"></textarea></td>
+				<td colspan="2" rowspan="5">Xác nhận</td>
+				<td colspan="5">Thời gian cân</td>
+				<td><textarea required id="Mẻ 1-Thời gian cân"></textarea></td>
+				<td><textarea required id="Mẻ 2-Thời gian cân"></textarea></td>
+				<td><textarea required id="Mẻ 3-Thời gian cân"></textarea></td>
 			</tr>
 			<tr>
-				<td colspan="5" style="font-weight: bold; ">Tình trạng NVL, phụ gia (Đạt/ Không đạt)</td>
-				<td><textarea id="Mẻ 1-Tình trạng NVL"></textarea></td>
-				<td><textarea id="Mẻ 2-Tình trạng NVL"></textarea></td>
-				<td><textarea id="Mẻ 3-Tình trạng NVL"></textarea></td>
+				<td colspan="5">Tình trạng NVL, phụ gia (Đạt/ Không đạt)</td>
+				<td><textarea required id="Mẻ 1-Tình trạng NVL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Tình trạng NVL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Tình trạng NVL"></textarea></td>
 			</tr>
 			<tr>
-				<td colspan="5" style="font-weight: bold; ">Thời gian giao</td>
-				<td><textarea id="Mẻ 1-Thời gian giao"></textarea></td>
-				<td><textarea id="Mẻ 2-Thời gian giao"></textarea></td>
-				<td><textarea id="Mẻ 3-Thời gian giao"></textarea></td>
+				<td colspan="5">Thời gian giao</td>
+				<td><textarea required id="Mẻ 1-Thời gian giao"></textarea></td>
+				<td><textarea required id="Mẻ 2-Thời gian giao"></textarea></td>
+				<td><textarea required id="Mẻ 3-Thời gian giao"></textarea></td>
 			</tr>
 			<tr>
-				<td colspan="5" style="font-weight: bold; ">VH pha syrup</td>
-				<td><textarea id="Mẻ 1-VH pha syrup"></textarea></td>
-				<td><textarea id="Mẻ 2-VH pha syrup"></textarea></td>
-				<td><textarea id="Mẻ 3-VH pha syrup"></textarea></td>
+				<td colspan="5">VH pha syrup</td>
+				<td><textarea required id="Mẻ 1-VH pha syrup"></textarea></td>
+				<td><textarea required id="Mẻ 2-VH pha syrup"></textarea></td>
+				<td><textarea required id="Mẻ 3-VH pha syrup"></textarea></td>
 			</tr>
 			<tr>
-				<td colspan="5" style="font-weight: bold; ">QC giám sát cân (Y/N)</td>
-				<td><textarea id="Mẻ 1-QC giám sát cân"></textarea></td>
-				<td><textarea id="Mẻ 2-QC giám sát cân"></textarea></td>
-				<td><textarea id="Mẻ 3-QC giám sát cân"></textarea></td>
+				<td colspan="5">QC giám sát cân (Y/N)</td>
+				<td><textarea required id="Mẻ 1-QC giám sát cân"></textarea></td>
+				<td><textarea required id="Mẻ 2-QC giám sát cân"></textarea></td>
+				<td><textarea required id="Mẻ 3-QC giám sát cân"></textarea></td>
 			</tr>
 			<tr>
-				<td style="font-weight: bold; ">Ghi chú</td>
+				<td>Ghi chú</td>
 				<td colspan="9"><textarea id="Ghi chú"></textarea></td>
 			</tr>
 		</table>
@@ -530,12 +530,12 @@
 					'Email cá nhân': document.getElementById('Email cá nhân').value,
 					'Thời gian nộp phiếu': submissionTime,
 					'Người phê duyệt 1': document.getElementById('QC').value,
-					'Email_NPD1': 'khoaha@vinhhao.com.vn',
+					'Email_NPD1': 'vhc-qc-chebien@vinhhao.com.vn',
 					'Trạng thái_NPD1': 'Pending',
 					'Thời gian thao tác_NPD1': '',
 					'Ghi chú_NPD1': '',
 					'Người phê duyệt 2': document.getElementById('Trưởng ca').value,
-					'Email_NPD2': 'khoaha@vinhhao.com.vn',
+					'Email_NPD2': 'tuanpt@vinhhao.com.vn',
 					'Trạng thái_NPD2': 'Waiting',
 					'Thời gian thao tác_NPD2': '',
 					'Ghi chú_NPD2': '',

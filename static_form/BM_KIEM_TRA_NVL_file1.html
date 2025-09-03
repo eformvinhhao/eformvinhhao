@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+
+<html>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<style>
+    textarea:enabled,
+    input[type=text]:enabled,
+    select:enabled {
+        background-color: beige;
+    }
+
+    textarea:disabled,
+    input[type=text]:disabled,
+    select:disabled {
+        background-color: lightgray;
+    }
+
+    input[type=text],
+    select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 0;
+        display: block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button:enabled {
+        background-color: #4CAF50;
+    }
+
+    button:disabled {
+        background-color: lightgray;
+    }
+
+    * {
+        font-size: 100%;
+        font-family: Tahoma, sans-serif;
+    }
+
+    @media print {
+        .noPrint {
+            display: none;
+        }
+    }
+
+    input[type=button] {
+        width: 20%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button {
+        width: 20%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type="submit"][value="Chỉnh sửa"] {
+        background-color: green;
+        color: white;
+    }
+
+    input[type="button"][value="Tạm dừng"] {
+        background-color: red;
+        color: white;
+    }
+
+    input:focus:invalid {
+        box-shadow: none;
+    }
+
+    select {
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        height: max-content;
+        overflow: visible;
+        font-size: x-small;
+        word-wrap: break-word;
+        white-space: nowrap;
+        margin: 0%;
+        padding: auto;
+        overflow: visible;
+    }
+
+    select option {
+        margin: 0%;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: visible;
+        white-space: nowrap;
+        word-wrap: break-word;
+        overflow: visible;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+    tr {
+        height: 50px;
+    }
+
+
+    div {
+        border-radius: 5px;
+        background-color: rgb(255, 255, 255);
+        padding: 20px;
+    }
+
+    .table td {
+        padding: 0.2rem 0.5rem;
+        text-align: center;
+    }
+
+    textarea,
+    input[type=text],
+    input[type=date],
+    select {
+        overflow: inherit;
+        display: block;
+        box-sizing: border-box;
+        border: 0px;
+        resize: none;
+        width: 100%;
+    }
+
+
+    table,
+    th,
+    td {
+        border-collapse: collapse;
+        border: 1px solid;
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    textarea,
+    input[type="date"],
+    input[type="text"] {
+        color: blue;
+
+    }
+</style>
+</style>
+<style type="text/css" media="print">
+    @page {
+        size: landscape;
+    }
+</style>
+
+<body>
+    <input onclick="enable_disable()" type="button" class="slide-toggle" value="Chỉnh sửa" style=" float: right;">
+    <form class='form' id="GFG">
+
+        <!--- Sửa phần 1: Phần tiêu đề form
+		Ở file render trên automata, sửa từ:
+			1. <textarea required id=" thành @{triggerBody()?['
+			2. "></textarea> thành ']}
+			3. <input required type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
+			@{triggerBody()?['Email cá nhân']}
+			4. <input required type="date" id="Ngày/ tháng/ năm" required=""> thành
+			@{outputs('Add_a_row_into_a_table')?['body/Ngày~1 tháng~1 năm']}
+			
+		-->
+
+
+        <table table-layout="fixed">
+            <tr>
+                <td colspan="8" rowspan="4" style="font-weight: bold; ">BIỂU MẪU KIỂM TRA NHẬP NGUYÊN LIỆU PHỤ GIA</td>
+                <td>Mã tài liệu</td>
+                <td>VHW/KTCN/HD-001/BM01</td>
+            </tr>
+            <tr>
+                <td>Lần ban hành</td>
+                <td>02</td>
+            </tr>
+            <tr>
+                <td>Ngày hiệu lực</td>
+                <td>06/09/2022</td>
+            </tr>
+            <tr>
+                <td>Số trang</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold; ">Ngày/ tháng/ năm</td>
+                <td><input required type="date" id="Ngày/ tháng/ năm" required=""></td>
+                <td style="font-weight: bold; ">Vận hành</td>
+                <td><textarea required id="Vận hành"></textarea></td>
+                <td style="font-weight: bold; ">Emai cá nhân</td>
+                <td><input required type="text" autocomplete="email" maxlength="60" id="Email cá nhân"
+                        pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""></td>
+                <td style="font-weight: bold; ">QC</td>
+                <td><textarea required id="QC"></textarea></td>
+                <td style="font-weight: bold; ">Trưởng ca</td>
+                <td><textarea required id="Trưởng ca"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2">Nguyên liệu phụ gia sử dụng cho sản phẩm</td>
+                <td colspan="6"><textarea required id="Nguyên liệu phụ gia sử dụng cho sản phẩm"></textarea></td>
+                <td>Khu vực</td>
+                <td><textarea required id="Khu vực"></textarea></td>
+            </tr>
+        </table>
+
+        <!--- Sửa phần 1: Phần tiêu đề form-->
+
+        <br>
+
+        <!--- Sửa phần 2: Phần nội dung form:
+			Ở file render trên automata, sửa từ:
+			1. <textarea required id=" thành @{triggerBody()?['
+			2. "></textarea> thành ']}
+			3. <input required type="checkbox" id=" thành <input required type="checkbox" @{triggerBody()?['
+			4. " value="uncheck" thành ']}
+		-->
+
+        <table>
+            <tr style="font-weight: bold;">
+                <td colspan="7">Thông tin kiểm tra trên phiểu liên hồng</td>
+                <td colspan="5">Thông tin kiểm tra thực tế</td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td rowspan="2">STT</td>
+                <td rowspan="2">Mã Item</td>
+                <td rowspan="2">Tên nguyên liệu (Theo liên hồng)</td>
+                <td rowspan="2">Số lot</td>
+                <td rowspan="2">Hạn sử dụng</td>
+                <td rowspan="2">ĐVT</td>
+                <td rowspan="2">Số lượng</td>
+                <td colspan="5">Các chỉ tiêu kiểm tra và ghi nhận</td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td>Tình trạng</td>
+                <td>NSX</td>
+                <td>HSD</td>
+                <td>Số Bacth/lot</td>
+                <td>Kết luận (đạt/không đạt)</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">1</td>
+                <td><textarea id="1-Mã Item"></textarea></td>
+                <td><textarea id="1-Tên NVL"></textarea></td>
+                <td><textarea id="1-Số lot"></textarea></td>
+                <td><textarea id="1-Hạn sử dụng"></textarea></td>
+                <td><textarea id="1-ĐVT"></textarea></td>
+                <td><textarea id="1-Số lượng"></textarea></td>
+                <td><textarea id="1-Tình trạng"></textarea></td>
+                <td><textarea id="1-NSX"></textarea></td>
+                <td><textarea id="1-HSD"></textarea></td>
+                <td><textarea id="1-Số Bacth/lot"></textarea></td>
+                <td><textarea id="1-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">2</td>
+                <td><textarea id="2-Mã Item"></textarea></td>
+                <td><textarea id="2-Tên NVL"></textarea></td>
+                <td><textarea id="2-Số lot"></textarea></td>
+                <td><textarea id="2-Hạn sử dụng"></textarea></td>
+                <td><textarea id="2-ĐVT"></textarea></td>
+                <td><textarea id="2-Số lượng"></textarea></td>
+                <td><textarea id="2-Tình trạng"></textarea></td>
+                <td><textarea id="2-NSX"></textarea></td>
+                <td><textarea id="2-HSD"></textarea></td>
+                <td><textarea id="2-Số Bacth/lot"></textarea></td>
+                <td><textarea id="2-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">3</td>
+                <td><textarea id="3-Mã Item"></textarea></td>
+                <td><textarea id="3-Tên NVL"></textarea></td>
+                <td><textarea id="3-Số lot"></textarea></td>
+                <td><textarea id="3-Hạn sử dụng"></textarea></td>
+                <td><textarea id="3-ĐVT"></textarea></td>
+                <td><textarea id="3-Số lượng"></textarea></td>
+                <td><textarea id="3-Tình trạng"></textarea></td>
+                <td><textarea id="3-NSX"></textarea></td>
+                <td><textarea id="3-HSD"></textarea></td>
+                <td><textarea id="3-Số Bacth/lot"></textarea></td>
+                <td><textarea id="3-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">4</td>
+                <td><textarea id="4-Mã Item"></textarea></td>
+                <td><textarea id="4-Tên NVL"></textarea></td>
+                <td><textarea id="4-Số lot"></textarea></td>
+                <td><textarea id="4-Hạn sử dụng"></textarea></td>
+                <td><textarea id="4-ĐVT"></textarea></td>
+                <td><textarea id="4-Số lượng"></textarea></td>
+                <td><textarea id="4-Tình trạng"></textarea></td>
+                <td><textarea id="4-NSX"></textarea></td>
+                <td><textarea id="4-HSD"></textarea></td>
+                <td><textarea id="4-Số Bacth/lot"></textarea></td>
+                <td><textarea id="4-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">5</td>
+                <td><textarea id="5-Mã Item"></textarea></td>
+                <td><textarea id="5-Tên NVL"></textarea></td>
+                <td><textarea id="5-Số lot"></textarea></td>
+                <td><textarea id="5-Hạn sử dụng"></textarea></td>
+                <td><textarea id="5-ĐVT"></textarea></td>
+                <td><textarea id="5-Số lượng"></textarea></td>
+                <td><textarea id="5-Tình trạng"></textarea></td>
+                <td><textarea id="5-NSX"></textarea></td>
+                <td><textarea id="5-HSD"></textarea></td>
+                <td><textarea id="5-Số Bacth/lot"></textarea></td>
+                <td><textarea id="5-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">6</td>
+                <td><textarea id="6-Mã Item"></textarea></td>
+                <td><textarea id="6-Tên NVL"></textarea></td>
+                <td><textarea id="6-Số lot"></textarea></td>
+                <td><textarea id="6-Hạn sử dụng"></textarea></td>
+                <td><textarea id="6-ĐVT"></textarea></td>
+                <td><textarea id="6-Số lượng"></textarea></td>
+                <td><textarea id="6-Tình trạng"></textarea></td>
+                <td><textarea id="6-NSX"></textarea></td>
+                <td><textarea id="6-HSD"></textarea></td>
+                <td><textarea id="6-Số Bacth/lot"></textarea></td>
+                <td><textarea id="6-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">7</td>
+                <td><textarea id="7-Mã Item"></textarea></td>
+                <td><textarea id="7-Tên NVL"></textarea></td>
+                <td><textarea id="7-Số lot"></textarea></td>
+                <td><textarea id="7-Hạn sử dụng"></textarea></td>
+                <td><textarea id="7-ĐVT"></textarea></td>
+                <td><textarea id="7-Số lượng"></textarea></td>
+                <td><textarea id="7-Tình trạng"></textarea></td>
+                <td><textarea id="7-NSX"></textarea></td>
+                <td><textarea id="7-HSD"></textarea></td>
+                <td><textarea id="7-Số Bacth/lot"></textarea></td>
+                <td><textarea id="7-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">8</td>
+                <td><textarea id="8-Mã Item"></textarea></td>
+                <td><textarea id="8-Tên NVL"></textarea></td>
+                <td><textarea id="8-Số lot"></textarea></td>
+                <td><textarea id="8-Hạn sử dụng"></textarea></td>
+                <td><textarea id="8-ĐVT"></textarea></td>
+                <td><textarea id="8-Số lượng"></textarea></td>
+                <td><textarea id="8-Tình trạng"></textarea></td>
+                <td><textarea id="8-NSX"></textarea></td>
+                <td><textarea id="8-HSD"></textarea></td>
+                <td><textarea id="8-Số Bacth/lot"></textarea></td>
+                <td><textarea id="8-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">9</td>
+                <td><textarea id="9-Mã Item"></textarea></td>
+                <td><textarea id="9-Tên NVL"></textarea></td>
+                <td><textarea id="9-Số lot"></textarea></td>
+                <td><textarea id="9-Hạn sử dụng"></textarea></td>
+                <td><textarea id="9-ĐVT"></textarea></td>
+                <td><textarea id="9-Số lượng"></textarea></td>
+                <td><textarea id="9-Tình trạng"></textarea></td>
+                <td><textarea id="9-NSX"></textarea></td>
+                <td><textarea id="9-HSD"></textarea></td>
+                <td><textarea id="9-Số Bacth/lot"></textarea></td>
+                <td><textarea id="9-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">10</td>
+                <td><textarea id="10-Mã Item"></textarea></td>
+                <td><textarea id="10-Tên NVL"></textarea></td>
+                <td><textarea id="10-Số lot"></textarea></td>
+                <td><textarea id="10-Hạn sử dụng"></textarea></td>
+                <td><textarea id="10-ĐVT"></textarea></td>
+                <td><textarea id="10-Số lượng"></textarea></td>
+                <td><textarea id="10-Tình trạng"></textarea></td>
+                <td><textarea id="10-NSX"></textarea></td>
+                <td><textarea id="10-HSD"></textarea></td>
+                <td><textarea id="10-Số Bacth/lot"></textarea></td>
+                <td><textarea id="10-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">11</td>
+                <td><textarea id="11-Mã Item"></textarea></td>
+                <td><textarea id="11-Tên NVL"></textarea></td>
+                <td><textarea id="11-Số lot"></textarea></td>
+                <td><textarea id="11-Hạn sử dụng"></textarea></td>
+                <td><textarea id="11-ĐVT"></textarea></td>
+                <td><textarea id="11-Số lượng"></textarea></td>
+                <td><textarea id="11-Tình trạng"></textarea></td>
+                <td><textarea id="11-NSX"></textarea></td>
+                <td><textarea id="11-HSD"></textarea></td>
+                <td><textarea id="11-Số Bacth/lot"></textarea></td>
+                <td><textarea id="11-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">12</td>
+                <td><textarea id="12-Mã Item"></textarea></td>
+                <td><textarea id="12-Tên NVL"></textarea></td>
+                <td><textarea id="12-Số lot"></textarea></td>
+                <td><textarea id="12-Hạn sử dụng"></textarea></td>
+                <td><textarea id="12-ĐVT"></textarea></td>
+                <td><textarea id="12-Số lượng"></textarea></td>
+                <td><textarea id="12-Tình trạng"></textarea></td>
+                <td><textarea id="12-NSX"></textarea></td>
+                <td><textarea id="12-HSD"></textarea></td>
+                <td><textarea id="12-Số Bacth/lot"></textarea></td>
+                <td><textarea id="12-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">13</td>
+                <td><textarea id="13-Mã Item"></textarea></td>
+                <td><textarea id="13-Tên NVL"></textarea></td>
+                <td><textarea id="13-Số lot"></textarea></td>
+                <td><textarea id="13-Hạn sử dụng"></textarea></td>
+                <td><textarea id="13-ĐVT"></textarea></td>
+                <td><textarea id="13-Số lượng"></textarea></td>
+                <td><textarea id="13-Tình trạng"></textarea></td>
+                <td><textarea id="13-NSX"></textarea></td>
+                <td><textarea id="13-HSD"></textarea></td>
+                <td><textarea id="13-Số Bacth/lot"></textarea></td>
+                <td><textarea id="13-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">14</td>
+                <td><textarea id="14-Mã Item"></textarea></td>
+                <td><textarea id="14-Tên NVL"></textarea></td>
+                <td><textarea id="14-Số lot"></textarea></td>
+                <td><textarea id="14-Hạn sử dụng"></textarea></td>
+                <td><textarea id="14-ĐVT"></textarea></td>
+                <td><textarea id="14-Số lượng"></textarea></td>
+                <td><textarea id="14-Tình trạng"></textarea></td>
+                <td><textarea id="14-NSX"></textarea></td>
+                <td><textarea id="14-HSD"></textarea></td>
+                <td><textarea id="14-Số Bacth/lot"></textarea></td>
+                <td><textarea id="14-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">15</td>
+                <td><textarea id="15-Mã Item"></textarea></td>
+                <td><textarea id="15-Tên NVL"></textarea></td>
+                <td><textarea id="15-Số lot"></textarea></td>
+                <td><textarea id="15-Hạn sử dụng"></textarea></td>
+                <td><textarea id="15-ĐVT"></textarea></td>
+                <td><textarea id="15-Số lượng"></textarea></td>
+                <td><textarea id="15-Tình trạng"></textarea></td>
+                <td><textarea id="15-NSX"></textarea></td>
+                <td><textarea id="15-HSD"></textarea></td>
+                <td><textarea id="15-Số Bacth/lot"></textarea></td>
+                <td><textarea id="15-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">16</td>
+                <td><textarea id="16-Mã Item"></textarea></td>
+                <td><textarea id="16-Tên NVL"></textarea></td>
+                <td><textarea id="16-Số lot"></textarea></td>
+                <td><textarea id="16-Hạn sử dụng"></textarea></td>
+                <td><textarea id="16-ĐVT"></textarea></td>
+                <td><textarea id="16-Số lượng"></textarea></td>
+                <td><textarea id="16-Tình trạng"></textarea></td>
+                <td><textarea id="16-NSX"></textarea></td>
+                <td><textarea id="16-HSD"></textarea></td>
+                <td><textarea id="16-Số Bacth/lot"></textarea></td>
+                <td><textarea id="16-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">17</td>
+                <td><textarea id="17-Mã Item"></textarea></td>
+                <td><textarea id="17-Tên NVL"></textarea></td>
+                <td><textarea id="17-Số lot"></textarea></td>
+                <td><textarea id="17-Hạn sử dụng"></textarea></td>
+                <td><textarea id="17-ĐVT"></textarea></td>
+                <td><textarea id="17-Số lượng"></textarea></td>
+                <td><textarea id="17-Tình trạng"></textarea></td>
+                <td><textarea id="17-NSX"></textarea></td>
+                <td><textarea id="17-HSD"></textarea></td>
+                <td><textarea id="17-Số Bacth/lot"></textarea></td>
+                <td><textarea id="17-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">18</td>
+                <td><textarea id="18-Mã Item"></textarea></td>
+                <td><textarea id="18-Tên NVL"></textarea></td>
+                <td><textarea id="18-Số lot"></textarea></td>
+                <td><textarea id="18-Hạn sử dụng"></textarea></td>
+                <td><textarea id="18-ĐVT"></textarea></td>
+                <td><textarea id="18-Số lượng"></textarea></td>
+                <td><textarea id="18-Tình trạng"></textarea></td>
+                <td><textarea id="18-NSX"></textarea></td>
+                <td><textarea id="18-HSD"></textarea></td>
+                <td><textarea id="18-Số Bacth/lot"></textarea></td>
+                <td><textarea id="18-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">19</td>
+                <td><textarea id="19-Mã Item"></textarea></td>
+                <td><textarea id="19-Tên NVL"></textarea></td>
+                <td><textarea id="19-Số lot"></textarea></td>
+                <td><textarea id="19-Hạn sử dụng"></textarea></td>
+                <td><textarea id="19-ĐVT"></textarea></td>
+                <td><textarea id="19-Số lượng"></textarea></td>
+                <td><textarea id="19-Tình trạng"></textarea></td>
+                <td><textarea id="19-NSX"></textarea></td>
+                <td><textarea id="19-HSD"></textarea></td>
+                <td><textarea id="19-Số Bacth/lot"></textarea></td>
+                <td><textarea id="19-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">20</td>
+                <td><textarea id="20-Mã Item"></textarea></td>
+                <td><textarea id="20-Tên NVL"></textarea></td>
+                <td><textarea id="20-Số lot"></textarea></td>
+                <td><textarea id="20-Hạn sử dụng"></textarea></td>
+                <td><textarea id="20-ĐVT"></textarea></td>
+                <td><textarea id="20-Số lượng"></textarea></td>
+                <td><textarea id="20-Tình trạng"></textarea></td>
+                <td><textarea id="20-NSX"></textarea></td>
+                <td><textarea id="20-HSD"></textarea></td>
+                <td><textarea id="20-Số Bacth/lot"></textarea></td>
+                <td><textarea id="20-KL"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="12">Phía chế biến có trách nhiệm kiểm tra 100% tất cả lô hàng bao gồm loại và số lượng.
+                    Phía QCCB có kiểm tra ít nhất 1 mẫu/loại nguyên liệu/lô hàng nhận</td>
+            </tr>
+        </table>
+
+
+
+
+        <br>
+        <p><b>Chi tiết cây phê duyệt</b></p>
+
+        <!--- Sửa phần 3: Chi tiết cây phê duyệt: sửa lại TC line nào trực tiếp
+        Ở file render trên automata, sửa từ:
+		1. <td colspan="5" id="Thời gian nộp phiếu"></td> thành
+    <td colspan="5">@{outputs('Add_a_row_into_a_table')?['body/Thời gian nộp phiếu']}</td>
+        2. id=" thành >@{triggerBody()?['
+        3. "> thành ']}
+        
+-->
+
+        <table table-layout="fixed">
+            <tr>
+                <td style="font-weight: bold; ">Thời gian nộp phiếu</td>
+                <td colspan="5" id="Thời gian nộp phiếu"></td>
+            </tr>
+            <tr style="font-weight: bold; ">
+                <td>Cấp phê duyệt</td>
+                <td>Người phê duyệt</td>
+                <td>Email_NPD</td>
+                <td>Trạng thái</td>
+                <td>Thời gian thao tác</td>
+                <td>Ghi chú</td>
+            </tr>
+            <tr>
+                <td>QC online</td>
+                <td id="Người phê duyệt 1"></td>
+                <td id="Email_NPD1"></td>
+                <td id="Trạng thái_NPD1"></td>
+                <td id="Thời gian thao tác_NPD1"></td>
+                <td id="Ghi chú_NPD1"></td>
+            </tr>
+            <tr>
+                <td>Trưởng ca chế biến</td>
+                <td id="Người phê duyệt 2"></td>
+                <td id="Email_NPD2"></td>
+                <td id="Trạng thái_NPD2"></td>
+                <td id="Thời gian thao tác_NPD2"></td>
+                <td id="Ghi chú_NPD2"></td>
+            </tr>
+        </table>
+
+        <!--- Sửa phần 3: Chi tiết cây phê duyệt: sửa lại TC line nào-->
+
+        <button id='nut' type="submit" style=" float: left;">Nộp kết quả</button>
+    </form>
+
+    <button onclick="window.print();" class="noPrint" style=" float: right; background-color: yellow; color:black">Kiểm
+        tra kết quả</button>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#GFG :input").prop("disabled", true);
+            $(".slide-toggle").click(function () {
+                if (this.value == "Chỉnh sửa") {
+                    this.value = "Tạm dừng";
+                    $("#GFG :input").prop("disabled", false);
+                }
+                else {
+                    this.value = "Chỉnh sửa";
+                    $("#GFG :input").prop("disabled", true);
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(":checkbox").change(function () {
+            $(this).val($(this).is(":checked") ? 'checked' : 'unchecked');
+        });
+
+        $(document).ready(function () {
+            $(":checkbox").each(function (index) {
+
+                if ($(this).val() ==
+                    "Yes")
+                    ($(this).prop('checked', true));
+            });
+        });
+
+        const formE1 = document.querySelector('.form');
+        formE1.addEventListener('submit', event => {
+            event.preventDefault();
+            const formData = new FormData(formE1);
+            const submissionTime = new Date().toISOString();
+            const data = new URLSearchParams(formData);
+            fetch('https://default810604757e7f4ede8d8dbf61f53ca5.28.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/5d2e3f648c8c4b4fa9c4c2f33d83d8ee/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=t0QM4sROg7tjohUJoABdKJhWW1-IgQmpqUvuAZs3EL4', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'Email cá nhân': document.getElementById('Email cá nhân').value,
+                    'Thời gian nộp phiếu': submissionTime,
+                    'Người phê duyệt 1': document.getElementById('QC').value,
+                    'Email_NPD1': 'vhc-qc-chebien@vinhhao.com.vn',
+                    'Trạng thái_NPD1': 'Pending',
+                    'Thời gian thao tác_NPD1': '',
+                    'Ghi chú_NPD1': '',
+                    'Người phê duyệt 2': document.getElementById('Trưởng ca').value,
+                    'Email_NPD2': 'tuanpt@vinhhao.com.vn',
+                    'Trạng thái_NPD2': 'Waiting',
+                    'Thời gian thao tác_NPD2': '',
+                    'Ghi chú_NPD2': '',
+                    'Trạng thái chung': 'Pending',
+                    'Ngày/ tháng/ năm': document.getElementById('Ngày/ tháng/ năm').value,
+                    'Vận hành': document.getElementById('Vận hành').value,
+                    'QC': document.getElementById('QC').value,
+                    'Trưởng ca': document.getElementById('Trưởng ca').value,
+                    'Nguyên liệu phụ gia sử dụng cho sản phẩm': document.getElementById('Nguyên liệu phụ gia sử dụng cho sản phẩm').value,
+                    'Khu vực': document.getElementById('Khu vực').value,
+                    '1-Mã Item': document.getElementById('1-Mã Item').value,
+                    '1-Tên NVL': document.getElementById('1-Tên NVL').value,
+                    '1-Số lot': document.getElementById('1-Số lot').value,
+                    '1-Hạn sử dụng': document.getElementById('1-Hạn sử dụng').value,
+                    '1-ĐVT': document.getElementById('1-ĐVT').value,
+                    '1-Số lượng': document.getElementById('1-Số lượng').value,
+                    '1-Tình trạng': document.getElementById('1-Tình trạng').value,
+                    '1-NSX': document.getElementById('1-NSX').value,
+                    '1-HSD': document.getElementById('1-HSD').value,
+                    '1-Số Bacth/lot': document.getElementById('1-Số Bacth/lot').value,
+                    '1-KL': document.getElementById('1-KL').value,
+                    '2-Mã Item': document.getElementById('2-Mã Item').value,
+                    '2-Tên NVL': document.getElementById('2-Tên NVL').value,
+                    '2-Số lot': document.getElementById('2-Số lot').value,
+                    '2-Hạn sử dụng': document.getElementById('2-Hạn sử dụng').value,
+                    '2-ĐVT': document.getElementById('2-ĐVT').value,
+                    '2-Số lượng': document.getElementById('2-Số lượng').value,
+                    '2-Tình trạng': document.getElementById('2-Tình trạng').value,
+                    '2-NSX': document.getElementById('2-NSX').value,
+                    '2-HSD': document.getElementById('2-HSD').value,
+                    '2-Số Bacth/lot': document.getElementById('2-Số Bacth/lot').value,
+                    '2-KL': document.getElementById('2-KL').value,
+                    '3-Mã Item': document.getElementById('3-Mã Item').value,
+                    '3-Tên NVL': document.getElementById('3-Tên NVL').value,
+                    '3-Số lot': document.getElementById('3-Số lot').value,
+                    '3-Hạn sử dụng': document.getElementById('3-Hạn sử dụng').value,
+                    '3-ĐVT': document.getElementById('3-ĐVT').value,
+                    '3-Số lượng': document.getElementById('3-Số lượng').value,
+                    '3-Tình trạng': document.getElementById('3-Tình trạng').value,
+                    '3-NSX': document.getElementById('3-NSX').value,
+                    '3-HSD': document.getElementById('3-HSD').value,
+                    '3-Số Bacth/lot': document.getElementById('3-Số Bacth/lot').value,
+                    '3-KL': document.getElementById('3-KL').value,
+                    '4-Mã Item': document.getElementById('4-Mã Item').value,
+                    '4-Tên NVL': document.getElementById('4-Tên NVL').value,
+                    '4-Số lot': document.getElementById('4-Số lot').value,
+                    '4-Hạn sử dụng': document.getElementById('4-Hạn sử dụng').value,
+                    '4-ĐVT': document.getElementById('4-ĐVT').value,
+                    '4-Số lượng': document.getElementById('4-Số lượng').value,
+                    '4-Tình trạng': document.getElementById('4-Tình trạng').value,
+                    '4-NSX': document.getElementById('4-NSX').value,
+                    '4-HSD': document.getElementById('4-HSD').value,
+                    '4-Số Bacth/lot': document.getElementById('4-Số Bacth/lot').value,
+                    '4-KL': document.getElementById('4-KL').value,
+                    '5-Mã Item': document.getElementById('5-Mã Item').value,
+                    '5-Tên NVL': document.getElementById('5-Tên NVL').value,
+                    '5-Số lot': document.getElementById('5-Số lot').value,
+                    '5-Hạn sử dụng': document.getElementById('5-Hạn sử dụng').value,
+                    '5-ĐVT': document.getElementById('5-ĐVT').value,
+                    '5-Số lượng': document.getElementById('5-Số lượng').value,
+                    '5-Tình trạng': document.getElementById('5-Tình trạng').value,
+                    '5-NSX': document.getElementById('5-NSX').value,
+                    '5-HSD': document.getElementById('5-HSD').value,
+                    '5-Số Bacth/lot': document.getElementById('5-Số Bacth/lot').value,
+                    '5-KL': document.getElementById('5-KL').value,
+                    '6-Mã Item': document.getElementById('6-Mã Item').value,
+                    '6-Tên NVL': document.getElementById('6-Tên NVL').value,
+                    '6-Số lot': document.getElementById('6-Số lot').value,
+                    '6-Hạn sử dụng': document.getElementById('6-Hạn sử dụng').value,
+                    '6-ĐVT': document.getElementById('6-ĐVT').value,
+                    '6-Số lượng': document.getElementById('6-Số lượng').value,
+                    '6-Tình trạng': document.getElementById('6-Tình trạng').value,
+                    '6-NSX': document.getElementById('6-NSX').value,
+                    '6-HSD': document.getElementById('6-HSD').value,
+                    '6-Số Bacth/lot': document.getElementById('6-Số Bacth/lot').value,
+                    '6-KL': document.getElementById('6-KL').value,
+                    '7-Mã Item': document.getElementById('7-Mã Item').value,
+                    '7-Tên NVL': document.getElementById('7-Tên NVL').value,
+                    '7-Số lot': document.getElementById('7-Số lot').value,
+                    '7-Hạn sử dụng': document.getElementById('7-Hạn sử dụng').value,
+                    '7-ĐVT': document.getElementById('7-ĐVT').value,
+                    '7-Số lượng': document.getElementById('7-Số lượng').value,
+                    '7-Tình trạng': document.getElementById('7-Tình trạng').value,
+                    '7-NSX': document.getElementById('7-NSX').value,
+                    '7-HSD': document.getElementById('7-HSD').value,
+                    '7-Số Bacth/lot': document.getElementById('7-Số Bacth/lot').value,
+                    '7-KL': document.getElementById('7-KL').value,
+                    '8-Mã Item': document.getElementById('8-Mã Item').value,
+                    '8-Tên NVL': document.getElementById('8-Tên NVL').value,
+                    '8-Số lot': document.getElementById('8-Số lot').value,
+                    '8-Hạn sử dụng': document.getElementById('8-Hạn sử dụng').value,
+                    '8-ĐVT': document.getElementById('8-ĐVT').value,
+                    '8-Số lượng': document.getElementById('8-Số lượng').value,
+                    '8-Tình trạng': document.getElementById('8-Tình trạng').value,
+                    '8-NSX': document.getElementById('8-NSX').value,
+                    '8-HSD': document.getElementById('8-HSD').value,
+                    '8-Số Bacth/lot': document.getElementById('8-Số Bacth/lot').value,
+                    '8-KL': document.getElementById('8-KL').value,
+                    '9-Mã Item': document.getElementById('9-Mã Item').value,
+                    '9-Tên NVL': document.getElementById('9-Tên NVL').value,
+                    '9-Số lot': document.getElementById('9-Số lot').value,
+                    '9-Hạn sử dụng': document.getElementById('9-Hạn sử dụng').value,
+                    '9-ĐVT': document.getElementById('9-ĐVT').value,
+                    '9-Số lượng': document.getElementById('9-Số lượng').value,
+                    '9-Tình trạng': document.getElementById('9-Tình trạng').value,
+                    '9-NSX': document.getElementById('9-NSX').value,
+                    '9-HSD': document.getElementById('9-HSD').value,
+                    '9-Số Bacth/lot': document.getElementById('9-Số Bacth/lot').value,
+                    '9-KL': document.getElementById('9-KL').value,
+                    '10-Mã Item': document.getElementById('10-Mã Item').value,
+                    '10-Tên NVL': document.getElementById('10-Tên NVL').value,
+                    '10-Số lot': document.getElementById('10-Số lot').value,
+                    '10-Hạn sử dụng': document.getElementById('10-Hạn sử dụng').value,
+                    '10-ĐVT': document.getElementById('10-ĐVT').value,
+                    '10-Số lượng': document.getElementById('10-Số lượng').value,
+                    '10-Tình trạng': document.getElementById('10-Tình trạng').value,
+                    '10-NSX': document.getElementById('10-NSX').value,
+                    '10-HSD': document.getElementById('10-HSD').value,
+                    '10-Số Bacth/lot': document.getElementById('10-Số Bacth/lot').value,
+                    '10-KL': document.getElementById('10-KL').value,
+                    '11-Mã Item': document.getElementById('11-Mã Item').value,
+                    '11-Tên NVL': document.getElementById('11-Tên NVL').value,
+                    '11-Số lot': document.getElementById('11-Số lot').value,
+                    '11-Hạn sử dụng': document.getElementById('11-Hạn sử dụng').value,
+                    '11-ĐVT': document.getElementById('11-ĐVT').value,
+                    '11-Số lượng': document.getElementById('11-Số lượng').value,
+                    '11-Tình trạng': document.getElementById('11-Tình trạng').value,
+                    '11-NSX': document.getElementById('11-NSX').value,
+                    '11-HSD': document.getElementById('11-HSD').value,
+                    '11-Số Bacth/lot': document.getElementById('11-Số Bacth/lot').value,
+                    '11-KL': document.getElementById('11-KL').value,
+                    '12-Mã Item': document.getElementById('12-Mã Item').value,
+                    '12-Tên NVL': document.getElementById('12-Tên NVL').value,
+                    '12-Số lot': document.getElementById('12-Số lot').value,
+                    '12-Hạn sử dụng': document.getElementById('12-Hạn sử dụng').value,
+                    '12-ĐVT': document.getElementById('12-ĐVT').value,
+                    '12-Số lượng': document.getElementById('12-Số lượng').value,
+                    '12-Tình trạng': document.getElementById('12-Tình trạng').value,
+                    '12-NSX': document.getElementById('12-NSX').value,
+                    '12-HSD': document.getElementById('12-HSD').value,
+                    '12-Số Bacth/lot': document.getElementById('12-Số Bacth/lot').value,
+                    '12-KL': document.getElementById('12-KL').value,
+                    '13-Mã Item': document.getElementById('13-Mã Item').value,
+                    '13-Tên NVL': document.getElementById('13-Tên NVL').value,
+                    '13-Số lot': document.getElementById('13-Số lot').value,
+                    '13-Hạn sử dụng': document.getElementById('13-Hạn sử dụng').value,
+                    '13-ĐVT': document.getElementById('13-ĐVT').value,
+                    '13-Số lượng': document.getElementById('13-Số lượng').value,
+                    '13-Tình trạng': document.getElementById('13-Tình trạng').value,
+                    '13-NSX': document.getElementById('13-NSX').value,
+                    '13-HSD': document.getElementById('13-HSD').value,
+                    '13-Số Bacth/lot': document.getElementById('13-Số Bacth/lot').value,
+                    '13-KL': document.getElementById('13-KL').value,
+                    '14-Mã Item': document.getElementById('14-Mã Item').value,
+                    '14-Tên NVL': document.getElementById('14-Tên NVL').value,
+                    '14-Số lot': document.getElementById('14-Số lot').value,
+                    '14-Hạn sử dụng': document.getElementById('14-Hạn sử dụng').value,
+                    '14-ĐVT': document.getElementById('14-ĐVT').value,
+                    '14-Số lượng': document.getElementById('14-Số lượng').value,
+                    '14-Tình trạng': document.getElementById('14-Tình trạng').value,
+                    '14-NSX': document.getElementById('14-NSX').value,
+                    '14-HSD': document.getElementById('14-HSD').value,
+                    '14-Số Bacth/lot': document.getElementById('14-Số Bacth/lot').value,
+                    '14-KL': document.getElementById('14-KL').value,
+                    '15-Mã Item': document.getElementById('15-Mã Item').value,
+                    '15-Tên NVL': document.getElementById('15-Tên NVL').value,
+                    '15-Số lot': document.getElementById('15-Số lot').value,
+                    '15-Hạn sử dụng': document.getElementById('15-Hạn sử dụng').value,
+                    '15-ĐVT': document.getElementById('15-ĐVT').value,
+                    '15-Số lượng': document.getElementById('15-Số lượng').value,
+                    '15-Tình trạng': document.getElementById('15-Tình trạng').value,
+                    '15-NSX': document.getElementById('15-NSX').value,
+                    '15-HSD': document.getElementById('15-HSD').value,
+                    '15-Số Bacth/lot': document.getElementById('15-Số Bacth/lot').value,
+                    '15-KL': document.getElementById('15-KL').value,
+                    '16-Mã Item': document.getElementById('16-Mã Item').value,
+                    '16-Tên NVL': document.getElementById('16-Tên NVL').value,
+                    '16-Số lot': document.getElementById('16-Số lot').value,
+                    '16-Hạn sử dụng': document.getElementById('16-Hạn sử dụng').value,
+                    '16-ĐVT': document.getElementById('16-ĐVT').value,
+                    '16-Số lượng': document.getElementById('16-Số lượng').value,
+                    '16-Tình trạng': document.getElementById('16-Tình trạng').value,
+                    '16-NSX': document.getElementById('16-NSX').value,
+                    '16-HSD': document.getElementById('16-HSD').value,
+                    '16-Số Bacth/lot': document.getElementById('16-Số Bacth/lot').value,
+                    '16-KL': document.getElementById('16-KL').value,
+                    '17-Mã Item': document.getElementById('17-Mã Item').value,
+                    '17-Tên NVL': document.getElementById('17-Tên NVL').value,
+                    '17-Số lot': document.getElementById('17-Số lot').value,
+                    '17-Hạn sử dụng': document.getElementById('17-Hạn sử dụng').value,
+                    '17-ĐVT': document.getElementById('17-ĐVT').value,
+                    '17-Số lượng': document.getElementById('17-Số lượng').value,
+                    '17-Tình trạng': document.getElementById('17-Tình trạng').value,
+                    '17-NSX': document.getElementById('17-NSX').value,
+                    '17-HSD': document.getElementById('17-HSD').value,
+                    '17-Số Bacth/lot': document.getElementById('17-Số Bacth/lot').value,
+                    '17-KL': document.getElementById('17-KL').value,
+                    '18-Mã Item': document.getElementById('18-Mã Item').value,
+                    '18-Tên NVL': document.getElementById('18-Tên NVL').value,
+                    '18-Số lot': document.getElementById('18-Số lot').value,
+                    '18-Hạn sử dụng': document.getElementById('18-Hạn sử dụng').value,
+                    '18-ĐVT': document.getElementById('18-ĐVT').value,
+                    '18-Số lượng': document.getElementById('18-Số lượng').value,
+                    '18-Tình trạng': document.getElementById('18-Tình trạng').value,
+                    '18-NSX': document.getElementById('18-NSX').value,
+                    '18-HSD': document.getElementById('18-HSD').value,
+                    '18-Số Bacth/lot': document.getElementById('18-Số Bacth/lot').value,
+                    '18-KL': document.getElementById('18-KL').value,
+                    '19-Mã Item': document.getElementById('19-Mã Item').value,
+                    '19-Tên NVL': document.getElementById('19-Tên NVL').value,
+                    '19-Số lot': document.getElementById('19-Số lot').value,
+                    '19-Hạn sử dụng': document.getElementById('19-Hạn sử dụng').value,
+                    '19-ĐVT': document.getElementById('19-ĐVT').value,
+                    '19-Số lượng': document.getElementById('19-Số lượng').value,
+                    '19-Tình trạng': document.getElementById('19-Tình trạng').value,
+                    '19-NSX': document.getElementById('19-NSX').value,
+                    '19-HSD': document.getElementById('19-HSD').value,
+                    '19-Số Bacth/lot': document.getElementById('19-Số Bacth/lot').value,
+                    '19-KL': document.getElementById('19-KL').value,
+                    '20-Mã Item': document.getElementById('20-Mã Item').value,
+                    '20-Tên NVL': document.getElementById('20-Tên NVL').value,
+                    '20-Số lot': document.getElementById('20-Số lot').value,
+                    '20-Hạn sử dụng': document.getElementById('20-Hạn sử dụng').value,
+                    '20-ĐVT': document.getElementById('20-ĐVT').value,
+                    '20-Số lượng': document.getElementById('20-Số lượng').value,
+                    '20-Tình trạng': document.getElementById('20-Tình trạng').value,
+                    '20-NSX': document.getElementById('20-NSX').value,
+                    '20-HSD': document.getElementById('20-HSD').value,
+                    '20-Số Bacth/lot': document.getElementById('20-Số Bacth/lot').value,
+                    '20-KL': document.getElementById('20-KL').value,
+                })
+            }).then(res => res.json())
+                .then(data => console.log(data))
+                .catch(error => console.log(error));
+            alert("Đã nộp thành công");
+            window.location.reload();
+        });
+    </script>
+
+
+</body>
+
+</html>

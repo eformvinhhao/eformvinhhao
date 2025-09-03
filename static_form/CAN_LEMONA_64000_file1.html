@@ -167,11 +167,11 @@
 
 		<!--- Sửa phần 1: Phần tiêu đề form
 		Ở file render trên automata, sửa từ:
-			1. <textarea id=" thành @{triggerBody()?['
+			1. <textarea required id=" thành @{triggerBody()?['
 			2. "></textarea> thành ']}
-			3. <input type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
+			3. <input required type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
 			@{triggerBody()?['Email cá nhân']}
-			4. <input type="date" id="Ngày/ tháng/ năm" required=""> thành
+			4. <input required type="date" id="Ngày/ tháng/ năm" required=""> thành
 			@{outputs('Add_a_row_into_a_table')?['body/Ngày~1 tháng~1 năm']}
 			
 		-->
@@ -199,27 +199,27 @@
 			</tr>
 			<tr>
 				<td style="font-weight: bold; ">Ngày/ tháng/ năm</td>
-				<td><input type="date" id="Ngày/ tháng/ năm" required=""></td>
+				<td><input required type="date" id="Ngày/ tháng/ năm" required=""></td>
 				<td style="font-weight: bold; ">Vận hành</td>
-				<td><textarea id="Vận hành"></textarea></td>
+				<td><textarea required id="Vận hành"></textarea></td>
 				<td style="font-weight: bold; ">Emai cá nhân</td>
-				<td><input type="text" autocomplete="email" maxlength="60" id="Email cá nhân"
+				<td><input required type="text" autocomplete="email" maxlength="60" id="Email cá nhân"
 						pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""></td>
 				<td style="font-weight: bold; ">QC</td>
-				<td><textarea id="QC"></textarea></td>
+				<td><textarea required id="QC"></textarea></td>
 				<td style="font-weight: bold; ">Trưởng ca</td>
-				<td><textarea id="Trưởng ca"></textarea></td>
+				<td><textarea required id="Trưởng ca"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="font-weight: bold; ">Kết quả kiểm tra tình trạng hiệu chuẩn của cân</td>
 				<td style="font-weight: bold; ">Loại cân</td>
-				<td><textarea id="Loại cân"></textarea></td>
+				<td><textarea required id="Loại cân"></textarea></td>
 				<td style="font-weight: bold; ">Ngày hiệu chuẩn</td>
-				<td><input type="date" id="Ngày hiệu chuẩn" required=""></td>
+				<td><input required type="date" id="Ngày hiệu chuẩn" required=""></td>
 				<td style="font-weight: bold; ">Kết luận (Đạt/Không đạt)</td>
-				<td><textarea id="Kết luận (Đạt/Không đạt)"></textarea></td>
+				<td><textarea required id="Kết luận (Đạt/Không đạt)"></textarea></td>
 				<td style="font-weight: bold; ">Khu vực</td>
-				<td><textarea id="Khu vực"></textarea></td>
+				<td><textarea required id="Khu vực"></textarea></td>
 			</tr>
 		</table>
 
@@ -230,9 +230,9 @@
 
 		<!--- Sửa phần 2: Phần nội dung form:
 			Ở file render trên automata, sửa từ:
-			1. <textarea id=" thành @{triggerBody()?['
+			1. <textarea required id=" thành @{triggerBody()?['
 			2. "></textarea> thành ']}
-			3. <input type="checkbox" id=" thành <input type="checkbox" @{triggerBody()?['
+			3. <input required type="checkbox" id=" thành <input required type="checkbox" @{triggerBody()?['
 			4. " value="uncheck" thành ']}
 		-->
 
@@ -248,129 +248,129 @@
 				<td colspan="3">Số mẻ</td>
 			</tr>
 			<tr style="font-weight: bold; ">
-				<td><textarea id="Mẻ số 1"></textarea></td>
-				<td><textarea id="Mẻ số 2"></textarea></td>
-				<td><textarea id="Mẻ số 3"></textarea></td>
+				<td><textarea required id="Mẻ số 1"></textarea></td>
+				<td><textarea required id="Mẻ số 2"></textarea></td>
+				<td><textarea required id="Mẻ số 3"></textarea></td>
 			</tr>
 			<tr>
 				<td>1</td>
 				<td>Đường cát trắng RE loại 1 (Pass Floc Test)</td>
-				<td><textarea id="Đường RE-Lot"></textarea></td>
-				<td><input type="date" id="Đường RE-NSX" required=""></td>
-				<td><input type="date" id="Đường RE-HSD" required=""></td>
+				<td><textarea required id="Đường RE-Lot"></textarea></td>
+				<td><input required type="date" id="Đường RE-NSX" required=""></td>
+				<td><input required type="date" id="Đường RE-HSD" required=""></td>
 				<td rowspan="8">Kg</td>
 				<td>5609.00</td>
-				<td><textarea id="Mẻ 1-Đường RE-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-Đường RE-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-Đường RE-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-Đường RE-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Đường RE-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Đường RE-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>2</td>
 				<td>Acid citric monohydrate (INS 330)</td>
-				<td><textarea id="Acid citric monohydrate-Lot"></textarea></td>
-				<td><input type="date" id="Acid citric monohydrate-NSX" required=""></td>
-				<td><input type="date" id="Acid citric monohydrate-HSD" required=""></td>
+				<td><textarea required id="Acid citric monohydrate-Lot"></textarea></td>
+				<td><input required type="date" id="Acid citric monohydrate-NSX" required=""></td>
+				<td><input required type="date" id="Acid citric monohydrate-HSD" required=""></td>
 				<td>126.720</td>
-				<td><textarea id="Mẻ 1-Acid citric monohydrate-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-Acid citric monohydrate-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-Acid citric monohydrate-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-Acid citric monohydrate-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Acid citric monohydrate-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Acid citric monohydrate-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>3</td>
 				<td>Sodium benzoate - TC34 Purox (INS 211)</td>
-				<td><textarea id="Sodium benzoate-Lot"></textarea></td>
-				<td><input type="date" id="Sodium benzoate-NSX" required=""></td>
-				<td><input type="date" id="Sodium benzoate-HSD" required=""></td>
+				<td><textarea required id="Sodium benzoate-Lot"></textarea></td>
+				<td><input required type="date" id="Sodium benzoate-NSX" required=""></td>
+				<td><input required type="date" id="Sodium benzoate-HSD" required=""></td>
 				<td>16.000</td>
-				<td><textarea id="Mẻ 1-Sodium benzoate-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-Sodium benzoate-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-Sodium benzoate-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-Sodium benzoate-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Sodium benzoate-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Sodium benzoate-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>4</td>
 				<td>Sodium Citrate</td>
-				<td><textarea id="Sodium Citrate-Lot"></textarea></td>				
-				<td><input type="date" id="Sodium Citrate-NSX" required=""></td>
-				<td><input type="date" id="Sodium Citrate-HSD" required=""></td>
+				<td><textarea required id="Sodium Citrate-Lot"></textarea></td>				
+				<td><input required type="date" id="Sodium Citrate-NSX" required=""></td>
+				<td><input required type="date" id="Sodium Citrate-HSD" required=""></td>
 				<td>39.680</td>
-				<td><textarea id="Mẻ 1-Sodium Citrate-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-Sodium Citrate-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-Sodium Citrate-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-Sodium Citrate-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Sodium Citrate-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Sodium Citrate-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>5</td>
 				<td>Chất tạo ngọt Acesulfame K</td>
-				<td><textarea id="Acesulfame K-Lot"></textarea></td>
-				<td><input type="date" id="Acesulfame K-NSX" required=""></td>
-				<td><input type="date" id="Acesulfame K-HSD" required=""></td>
+				<td><textarea required id="Acesulfame K-Lot"></textarea></td>
+				<td><input required type="date" id="Acesulfame K-NSX" required=""></td>
+				<td><input required type="date" id="Acesulfame K-HSD" required=""></td>
 				<td>3.090</td>
-				<td><textarea id="Mẻ 1-Acesulfame K-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-Acesulfame K-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-Acesulfame K-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-Acesulfame K-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Acesulfame K-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Acesulfame K-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>6</td>
 				<td>Đường Aspartame dạng hạt</td>
-				<td><textarea id="Đường Aspartame-Lot"></textarea></td>
-				<td><input type="date" id="Đường Aspartame-NSX" required=""></td>
-				<td><input type="date" id="Đường Aspartame-HSD" required=""></td>
+				<td><textarea required id="Đường Aspartame-Lot"></textarea></td>
+				<td><input required type="date" id="Đường Aspartame-NSX" required=""></td>
+				<td><input required type="date" id="Đường Aspartame-HSD" required=""></td>
 				<td>5.480</td>
-				<td><textarea id="Mẻ 1-Đường Aspartame-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-Đường Aspartame-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-Đường Aspartame-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-Đường Aspartame-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Đường Aspartame-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Đường Aspartame-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>7</td>
 				<td>Hương chanh A1182689 dạng lỏng</td>
-				<td><textarea id="A1182689-Lot"></textarea></td>
-				<td><input type="date" id="A1182689-NSX" required=""></td>
-				<td><input type="date" id="A1182689-HSD" required=""></td>
+				<td><textarea required id="A1182689-Lot"></textarea></td>
+				<td><input required type="date" id="A1182689-NSX" required=""></td>
+				<td><input required type="date" id="A1182689-HSD" required=""></td>
 				<td>49.500</td>
-				<td><textarea id="Mẻ 1-A1182689-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-A1182689-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-A1182689-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-A1182689-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-A1182689-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-A1182689-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td>8</td>
 				<td>Hương chanh SJV13030 dạng lỏng</td>
-				<td><textarea id="SJV13030-Lot"></textarea></td>
-				<td><input type="date" id="SJV13030-NSX" required=""></td>
-				<td><input type="date" id="SJV13030-HSD" required=""></td>
+				<td><textarea required id="SJV13030-Lot"></textarea></td>
+				<td><input required type="date" id="SJV13030-NSX" required=""></td>
+				<td><input required type="date" id="SJV13030-HSD" required=""></td>
 				<td>16.440</td>
-				<td><textarea id="Mẻ 1-SJV13030-KL"></textarea></td>
-				<td><textarea id="Mẻ 2-SJV13030-KL"></textarea></td>
-				<td><textarea id="Mẻ 3-SJV13030-KL"></textarea></td>
+				<td><textarea required id="Mẻ 1-SJV13030-KL"></textarea></td>
+				<td><textarea required id="Mẻ 2-SJV13030-KL"></textarea></td>
+				<td><textarea required id="Mẻ 3-SJV13030-KL"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" rowspan="5" style="font-weight: bold; ">Xác nhận</td>
 				<td colspan="5" style="font-weight: bold; ">Thời gian cân</td>
-				<td><textarea id="Mẻ 1-Thời gian cân"></textarea></td>
-				<td><textarea id="Mẻ 2-Thời gian cân"></textarea></td>
-				<td><textarea id="Mẻ 3-Thời gian cân"></textarea></td>
+				<td><textarea required id="Mẻ 1-Thời gian cân"></textarea></td>
+				<td><textarea required id="Mẻ 2-Thời gian cân"></textarea></td>
+				<td><textarea required id="Mẻ 3-Thời gian cân"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="5" style="font-weight: bold; ">Tình trạng NVL, phụ gia (Đạt/ Không đạt)</td>
-				<td><textarea id="Mẻ 1-Tình trạng NVL"></textarea></td>
-				<td><textarea id="Mẻ 2-Tình trạng NVL"></textarea></td>
-				<td><textarea id="Mẻ 3-Tình trạng NVL"></textarea></td>
+				<td><textarea required id="Mẻ 1-Tình trạng NVL"></textarea></td>
+				<td><textarea required id="Mẻ 2-Tình trạng NVL"></textarea></td>
+				<td><textarea required id="Mẻ 3-Tình trạng NVL"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="5" style="font-weight: bold; ">Thời gian giao</td>
-				<td><textarea id="Mẻ 1-Thời gian giao"></textarea></td>
-				<td><textarea id="Mẻ 2-Thời gian giao"></textarea></td>
-				<td><textarea id="Mẻ 3-Thời gian giao"></textarea></td>
+				<td><textarea required id="Mẻ 1-Thời gian giao"></textarea></td>
+				<td><textarea required id="Mẻ 2-Thời gian giao"></textarea></td>
+				<td><textarea required id="Mẻ 3-Thời gian giao"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="5" style="font-weight: bold; ">VH pha syrup</td>
-				<td><textarea id="Mẻ 1-VH pha syrup"></textarea></td>
-				<td><textarea id="Mẻ 2-VH pha syrup"></textarea></td>
-				<td><textarea id="Mẻ 3-VH pha syrup"></textarea></td>
+				<td><textarea required id="Mẻ 1-VH pha syrup"></textarea></td>
+				<td><textarea required id="Mẻ 2-VH pha syrup"></textarea></td>
+				<td><textarea required id="Mẻ 3-VH pha syrup"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="5" style="font-weight: bold; ">QC giám sát cân (Y/N)</td>
-				<td><textarea id="Mẻ 1-QC giám sát cân"></textarea></td>
-				<td><textarea id="Mẻ 2-QC giám sát cân"></textarea></td>
-				<td><textarea id="Mẻ 3-QC giám sát cân"></textarea></td>
+				<td><textarea required id="Mẻ 1-QC giám sát cân"></textarea></td>
+				<td><textarea required id="Mẻ 2-QC giám sát cân"></textarea></td>
+				<td><textarea required id="Mẻ 3-QC giám sát cân"></textarea></td>
 			</tr>
 			<tr>
 				<td style="font-weight: bold; ">Ghi chú</td>
@@ -476,12 +476,12 @@
 					'Email cá nhân': document.getElementById('Email cá nhân').value,
 					'Thời gian nộp phiếu': submissionTime,
 					'Người phê duyệt 1': document.getElementById('QC').value,
-					'Email_NPD1': 'khoaha@vinhhao.com.vn',
+					'Email_NPD1': 'vhc-qc-chebien@vinhhao.com.vn',
 					'Trạng thái_NPD1': 'Pending',
 					'Thời gian thao tác_NPD1': '',
 					'Ghi chú_NPD1': '',
 					'Người phê duyệt 2': document.getElementById('Trưởng ca').value,
-					'Email_NPD2': 'khoaha@vinhhao.com.vn',
+					'Email_NPD2': 'tuanpt@vinhhao.com.vn',
 					'Trạng thái_NPD2': 'Waiting',
 					'Thời gian thao tác_NPD2': '',
 					'Ghi chú_NPD2': '',

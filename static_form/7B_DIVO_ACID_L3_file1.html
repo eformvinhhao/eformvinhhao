@@ -1,0 +1,1471 @@
+<!--- File excel phải có những trường sau, chính xác từng chữ, không dư thừa dấu cách:
+	Email cá nhân
+	Thời gian nộp phiếu
+	Người phê duyệt 1
+	Email_NPD1
+	Trạng thái_NPD1
+	Thời gian thao tác_NPD1
+	Ghi chú_NPD1
+	Người phê duyệt 2
+	Email_NPD2
+	Trạng thái_NPD2
+	Thời gian thao tác_NPD2
+	Ghi chú_NPD2
+	Trạng thái chung
+	Ngày/ tháng/ năm
+	Vận hành
+	QC
+	Trưởng ca
+-->
+
+<!--- Khi sửa html: gồm 3 file: file 1 giao diện chính để người dùng điền, file 2 chép vào automate, file 3 nháp
+	- Sửa hoàn hảo trên file 1, bật F5 để kiểm tra có lỗi font, giao diện...
+	- Sau khi hoàn chỉnh mới copy file này sang file thứ 2.
+	- Sau đó:
+	 	+	Copy từng phần trên file thứ 2 cần sửa
+		+	Chép ra file 3 nháp
+		+ 	Ctrl F để tìm và sửa
+		+	Dán ngược lại vào file 2 để tránh sửa luôn các phần không cần thiết
+	- Sau khi sửa xong 3 phần, xóa hết phần comment rồi mới chép vào automate
+-->
+
+<!DOCTYPE html>
+
+<html>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<style>
+	textarea:enabled,
+	input[type=text]:enabled,
+	select:enabled {
+		background-color: beige;
+	}
+
+	textarea:disabled,
+	input[type=text]:disabled,
+	select:disabled {
+		background-color: lightgray;
+	}
+
+	input[type=text],
+	select {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 0;
+		display: block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+	}
+
+	button:enabled {
+		background-color: #4CAF50;
+	}
+
+	button:disabled {
+		background-color: lightgray;
+	}
+
+	* {
+		font-size: 100%;
+		font-family: Tahoma, sans-serif;
+	}
+
+	@media print {
+		.noPrint {
+			display: none;
+		}
+	}
+
+	input[type=button] {
+		width: 20%;
+		background-color: #4CAF50;
+		color: white;
+		padding: 14px 20px;
+		margin: 8px 0;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	button {
+		width: 20%;
+		background-color: #4CAF50;
+		color: white;
+		padding: 14px 20px;
+		margin: 8px 0;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	input[type="submit"][value="Chỉnh sửa"] {
+		background-color: green;
+		color: white;
+	}
+
+	input[type="button"][value="Tạm dừng"] {
+		background-color: red;
+		color: white;
+	}
+
+	input:focus:invalid {
+		box-shadow: none;
+	}
+
+	select {
+		width: 100%;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		height: max-content;
+		overflow: visible;
+		font-size: x-small;
+		word-wrap: break-word;
+		white-space: nowrap;
+		margin: 0%;
+		padding: auto;
+		overflow: visible;
+	}
+
+	select option {
+		margin: 0%;
+		width: 100%;
+		text-overflow: ellipsis;
+		overflow: visible;
+		white-space: nowrap;
+		word-wrap: break-word;
+		overflow: visible;
+	}
+
+	input[type=submit]:hover {
+		background-color: #45a049;
+	}
+
+	tr {
+		height: 50px;
+	}
+
+
+	div {
+		border-radius: 5px;
+		background-color: rgb(255, 255, 255);
+		padding: 20px;
+	}
+
+	.table td {
+		padding: 0.2rem 0.5rem;
+		text-align: center;
+	}
+
+	textarea,
+	input[type=text],
+	input[type=date],
+	select {
+		overflow: inherit;
+		display: block;
+		box-sizing: border-box;
+		border: 0px;
+		resize: none;
+		width: 100%;
+	}
+
+
+	table,
+	th,
+	td {
+		border-collapse: collapse;
+		border: 1px solid;
+		text-align: center;
+	}
+
+	table {
+		width: 100%;
+	}
+</style>
+
+<body>
+	<input required onclick="enable_disable()" type="button" class="slide-toggle" value="Chỉnh sửa" style=" float: right;">
+	<form class='form' id="GFG">
+
+
+
+		<!--- Sửa phần 1: Phần tiêu đề form
+		Ở file render trên automata, sửa từ:
+			1. <textarea required id=" thành @{triggerBody()?['
+			2. "></textarea> thành ']}
+			3. <input required type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
+			@{triggerBody()?['Email cá nhân']}
+			4. <input required type="date" id="Ngày/ tháng/ năm" required=""> thành
+			@{outputs('Add_a_row_into_a_table')?['body/Ngày~1 tháng~1 năm']}
+		-->
+
+		<table table-layout="fixed">
+			<tr>
+				<td colspan="8" rowspan="4">
+					<h1>BIỂU MẪU GHI NHẬN QUÁ TRÌNH CIP 3 BƯỚC UF + 7 BƯỚC DIVOFLOW + ACID CITRIC LINE 3</h1>
+				</td>
+				<td>Mã biểu mẫu:</td>
+				<td>VHC/SX-HD-041/BM03</td>
+			</tr>
+			<tr>
+				<td>Lần ban hành:</td>
+				<td>03</td>
+			</tr>
+			<tr>
+				<td>Ngày hiệu lực:</td>
+				<td>04/08/2025</td>
+			</tr>
+			<tr>
+				<td>Số trang:</td>
+				<td>2/2</td>
+			</tr>
+			<tr>
+				<td width="5%" style="font-weight: bold; overflow:auto;word-break:normal;">Ngày/ tháng/ năm</td>
+				<td><input required type="date" id="Ngày/ tháng/ năm" required=""></td>
+				<td width="5%" style="font-weight: bold;">Vận hành</td>
+				<td>
+					<textarea required id="Vận hành"></textarea>
+				</td>
+				<td width="5%" style="font-weight: bold;">Email cá nhân</td>
+				<td>
+					<input required type="text" autocomplete="email" maxlength="60" id="Email cá nhân"
+						pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required="">
+				</td>
+				<td width="5%" style="font-weight: bold;">QC</td>
+				<td>
+					<textarea required id="QC"></textarea>
+				</td>
+				<td width="5%" style="font-weight: bold;">Trưởng ca</td>
+				<td>
+					<textarea required id="Trưởng ca"></textarea>
+				</td>
+			</tr>
+		</table>
+
+		<!--- Sửa phần 1: Phần tiêu đề form-->
+
+
+		<br>
+
+
+
+		<!--- Sửa phần 2: Phần nội dung form:
+			Ở file render trên automata, sửa từ:
+			1. <textarea required id=" thành @{triggerBody()?['
+			2. "></textarea> thành ']}
+		-->
+
+		<table>
+			<tr>
+				<td rowspan="2">STT</td>
+				<td rowspan="2">Vị trí</td>
+				<td colspan="4" rowspan="2">Mô tả các bước thực hiện<br>- Viết tắt: TT: thực tế; KT : kiểm tra ; Đ
+					:đạt<br>- Tíc
+					"V" cho mỗi lần thực hiện khi Đóng-Mở Valve.</td>
+				<td colspan="4">Thời gian (phút)</td>
+			</tr>
+			<tr>
+				<td>TC</td>
+				<td>Bắt đầu</td>
+				<td>Kết thúc</td>
+				<td>Tổng</td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>0</td>
+				<td colspan="5">CHUẨN BỊ</td>
+				<td>20</td>
+				<td></td>
+				<td></td>
+				<td><textarea required id="0-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>0.1</td>
+				<td>Filler</td>
+				<td colspan="4">Lấy 5 bình đặt vào vị trí 5 vòi chiết ,mở khí nén</td>
+				<td>4</td>
+				<td><textarea required id="0-1-BD"></textarea></td>
+				<td><textarea required id="0-1-KT"></textarea></td>
+				<td><textarea required id="0-1-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>0.2</td>
+				<td>HMI Filler</td>
+				<td colspan="4">Khởi động màn hình</td>
+				<td>1</td>
+				<td><textarea required id="0-2-BD"></textarea></td>
+				<td><textarea required id="0-2-KT"></textarea></td>
+				<td><textarea required id="0-2-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>0.3</td>
+				<td>Lọc UF</td>
+				<td colspan="4">Tháo van số 4 ra ,lắp đường ống xã ngược</td>
+				<td>5</td>
+				<td><textarea required id="0-3-BD"></textarea></td>
+				<td><textarea required id="0-3-KT"></textarea></td>
+				<td><textarea required id="0-3-Tổng"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>1</td>
+				<td>Lọc UF</td>
+				<td colspan="4">Báo chế biến cấp nước RO 20 để tráng lọc UF</td>
+				<td>10</td>
+				<td><textarea required id="1-BD"></textarea></td>
+				<td><textarea required id="1-KT"></textarea></td>
+				<td><textarea required id="1-Tổng"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>2</td>
+				<td colspan="5">TUẦN HOÀN PRINCIPAL 65</td>
+				<td>80</td>
+				<td></td>
+				<td></td>
+				<td><textarea required id="2-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>2.1</td>
+				<td>Bồn hóa chất</td>
+				<td colspan="4">Pha 2,5 kg principal + 200 lit nước</td>
+				<td>5</td>
+				<td><textarea required id="2-1-BD"></textarea></td>
+				<td><textarea required id="2-1-KT"></textarea></td>
+				<td><textarea required id="2-1-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td rowspan="2">2.2</td>
+				<td rowspan="2">Bồn hóa chất</td>
+				<td>Nồng độ Principal 65<br>(TC: 0.3% - 0.5% pH: 11-12)</td>
+				<td colspan="3"><textarea required id="Nồng độ principal"></textarea></td>
+				<td rowspan="2">10</td>
+				<td rowspan="2"><textarea required id="2-2-BD"></textarea></td>
+				<td rowspan="2"><textarea required id="2-2-KT"></textarea></td>
+				<td rowspan="2"><textarea required id="2-2-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>Nhiệt độ (TC: T° thường)</td>
+				<td colspan="3"><textarea required id="Nhiệt độ principal"></textarea></td>
+			</tr>
+			<tr>
+				<td>2.3</td>
+				<td rowspan="4">Lọc UF</td>
+				<td rowspan="2">Mở Valve :Q</td>
+				<td>9</td>
+				<td colspan="2">Mở vale số 9 để tuần hoàn hóa chất vào UF</td>
+				<td rowspan="2">2</td>
+				<td><textarea required id="2-3-BD"></textarea></td>
+				<td><textarea required id="2-3-KT"></textarea></td>
+				<td><textarea required id="2-3-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>2.4</td>
+				<td>11</td>
+				<td colspan="2">Mở vale số 11 để tuần hoàn hóa chất vào UF</td>
+				<td><textarea required id="2-4-BD"></textarea></td>
+				<td><textarea required id="2-4-KT"></textarea></td>
+				<td><textarea required id="2-4-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>2.5</td>
+				<td>Mở Valve :Q</td>
+				<td>7</td>
+				<td colspan="2">Mở vale số 7 để hồi hóa chất về bồn</td>
+				<td>1</td>
+				<td><textarea required id="2-5-BD"></textarea></td>
+				<td><textarea required id="2-5-KT"></textarea></td>
+				<td><textarea required id="2-5-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>2.6</td>
+				<td>Đóng Valve :Q</td>
+				<td>13</td>
+				<td colspan="2">Đóng vale số 13</td>
+				<td>1</td>
+				<td><textarea required id="2-6-BD"></textarea></td>
+				<td><textarea required id="2-6-KT"></textarea></td>
+				<td><textarea required id="2-6-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>2.7</td>
+				<td>Tủ điều khiển</td>
+				<td colspan="4">Bật công tắc sang chế độ PUM để tuần hoàn</td>
+				<td>60</td>
+				<td><textarea required id="2-7-BD"></textarea></td>
+				<td><textarea required id="2-7-KT"></textarea></td>
+				<td><textarea required id="2-7-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>2.8</td>
+				<td>Tủ điều khiển</td>
+				<td colspan="4">Chuyển công tắc sang chế độ AUTO để ngắt bơm</td>
+				<td>1</td>
+				<td><textarea required id="2-8-BD"></textarea></td>
+				<td><textarea required id="2-8-KT"></textarea></td>
+				<td><textarea required id="2-8-Tổng"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>3</td>
+				<td colspan="5">XẢ SẠCH PRINCIPAL 65</td>
+				<td>60</td>
+				<td></td>
+				<td></td>
+				<td><textarea required id="3-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>3.1</td>
+				<td rowspan="9">Lọc UF</td>
+				<td colspan="4">Báo chế biến cấp nước RO 20 để xã sạch hóa chất</td>
+				<td>5</td>
+				<td><textarea required id="3-1-BD"></textarea></td>
+				<td><textarea required id="3-1-KT"></textarea></td>
+				<td><textarea required id="3-1-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>3.2</td>
+				<td colspan="4">Tháo đường ống vale số 5 ra và lắp đường ống nối từ vale số 4 về số 5 để xã ngược lọc UF
+				</td>
+				<td>3</td>
+				<td><textarea required id="3-2-BD"></textarea></td>
+				<td><textarea required id="3-2-KT"></textarea></td>
+				<td><textarea required id="3-2-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>3.3</td>
+				<td colspan="4">Bật công tắc sang chế độ MAN để bật bơm</td>
+				<td>30</td>
+				<td><textarea required id="3-3-BD"></textarea></td>
+				<td><textarea required id="3-3-KT"></textarea></td>
+				<td><textarea required id="3-3-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>3.5</td>
+				<td colspan="4">Lấy mẫu nước xã để lấy mẫu QC kiểm tra</td>
+				<td>2</td>
+				<td><textarea required id="3-5-BD"></textarea></td>
+				<td><textarea required id="3-5-KT"></textarea></td>
+				<td><textarea required id="3-5-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td rowspan="2">3.6</td>
+				<td>pH (TC: 6-8)</td>
+				<td colspan="3"><textarea required id="pH xả principal"></textarea></td>
+				<td rowspan="2">5</td>
+				<td rowspan="2"><textarea required id="3-6-BD"></textarea></td>
+				<td rowspan="2"><textarea required id="3-6-KT"></textarea></td>
+				<td rowspan="2"><textarea required id="3-6-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>Nhiệt độ (TC: T° thường)</td>
+				<td colspan="3"><textarea required id="Nhiệt độ xả principal"></textarea></td>
+			</tr>
+			<tr>
+				<td>3.7</td>
+				<td colspan="4">Lắp lại đường ống kết nối từ van số 4</td>
+				<td>5</td>
+				<td><textarea required id="3-7-BD"></textarea></td>
+				<td><textarea required id="3-7-KT"></textarea></td>
+				<td><textarea required id="3-7-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>3.8</td>
+				<td colspan="4">Lắp lại đường ống kết nối từ van số 5 vào máy chiết</td>
+				<td>5</td>
+				<td><textarea required id="3-8-BD"></textarea></td>
+				<td><textarea required id="3-8-KT"></textarea></td>
+				<td><textarea required id="3-8-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>3.9</td>
+				<td colspan="4">Đóng Valve : 7.9.11.12 để CIP máy chiết</td>
+				<td>5</td>
+				<td><textarea required id="3-9-BD"></textarea></td>
+				<td><textarea required id="3-9-KT"></textarea></td>
+				<td><textarea required id="3-9-Tổng"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>4</td>
+				<td colspan="5">TUẦN HOÀN DIVOFLOW 185</td>
+				<td>70</td>
+				<td></td>
+				<td></td>
+				<td><textarea required id="4-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>4.1</td>
+				<td>Chế biến</td>
+				<td colspan="4">Liên hệ chế biến cấp hóa chất Divoflow 185</td>
+				<td>5</td>
+				<td><textarea required id="4-1-BD"></textarea></td>
+				<td><textarea required id="4-1-KT"></textarea></td>
+				<td><textarea required id="4-1-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>4.2</td>
+				<td rowspan="4">Tank thành<br>phẩm</td>
+				<td>Mở Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Mở valve số 1 để xả hết nước còn trong đường ống ra ngoài</td>
+				<td>1</td>
+				<td><textarea required id="4-2-BD"></textarea></td>
+				<td><textarea required id="4-2-KT"></textarea></td>
+				<td><textarea required id="4-2-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>4.3</td>
+				<td>Đóng Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Đóng valve số 1 lại để chuẩn bị hóa chất để tuần hoàn divoflow</td>
+				<td>1</td>
+				<td><textarea required id="4-3-BD"></textarea></td>
+				<td><textarea required id="4-3-KT"></textarea></td>
+				<td><textarea required id="4-3-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td rowspan="2">4.4</td>
+				<td>Nồng độ<br>divoflow<br>(TC: 0,7-0,9%)</td>
+				<td colspan="3"><textarea required id="Nồng độ divo"></textarea></td>
+				<td rowspan="2">15</td>
+				<td rowspan="2"><textarea required id="4-4-BD"></textarea></td>
+				<td rowspan="2"><textarea required id="4-4-KT"></textarea></td>
+				<td rowspan="2"><textarea required id="4-4-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>Nhiệt độ (TC: T° thường)</td>
+				<td colspan="3"><textarea required id="Nhiệt độ divo"></textarea></td>
+			</tr>
+			<tr>
+				<td>4.5</td>
+				<td>HMI Filler</td>
+				<td colspan="4">Chọn : BẮT ĐẦU : Ngâm tuần hoàn hóa chất</td>
+				<td>40</td>
+				<td><textarea required id="4-5-BD"></textarea></td>
+				<td><textarea required id="4-5-KT"></textarea></td>
+				<td><textarea required id="4-5-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>4.6</td>
+				<td>Tank thành<br>phẩm</td>
+				<td>Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Mở valve số 1 để xả hết hóa chất bên trong tank</td>
+				<td>2</td>
+				<td><textarea required id="4-6-BD"></textarea></td>
+				<td><textarea required id="4-6-KT"></textarea></td>
+				<td><textarea required id="4-6-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>4.7</td>
+				<td>HMI Filler</td>
+				<td colspan="4">Chọn : KẾT THÚC: Chương trình tuần hoàn divoflow 185</td>
+				<td>1</td>
+				<td><textarea required id="4-7-BD"></textarea></td>
+				<td><textarea required id="4-7-KT"></textarea></td>
+				<td><textarea required id="4-7-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>4.8</td>
+				<td>HMI Filler</td>
+				<td colspan="4">Đổ nước trong 5 bình ra hết rồi đặt lại đúng vị trí 5 vòi chiết</td>
+				<td>4</td>
+				<td><textarea required id="4-8-BD"></textarea></td>
+				<td><textarea required id="4-8-KT"></textarea></td>
+				<td><textarea required id="4-8-Tổng"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>5</td>
+				<td colspan="5">XẢ SẠCH DIVOFLOW 185</td>
+				<td>25</td>
+				<td></td>
+				<td></td>
+				<td><textarea required id="5-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>5.1</td>
+				<td>Chế biến</td>
+				<td colspan="4">Liên hệ chế biến cấp nước RO 20</td>
+				<td>5</td>
+				<td><textarea required id="5-1-BD"></textarea></td>
+				<td><textarea required id="5-1-KT"></textarea></td>
+				<td><textarea required id="5-1-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>5.2</td>
+				<td>HMI Filler</td>
+				<td colspan="4">Chọn : BẮT ĐẦU Chương trình xả sạch divoflow</td>
+				<td>1</td>
+				<td><textarea required id="5-2-BD"></textarea></td>
+				<td><textarea required id="5-2-KT"></textarea></td>
+				<td><textarea required id="5-2-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>5.3</td>
+				<td rowspan="4">Tank thành<br>phẩm</td>
+				<td>Đóng Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Đóng valve số 1 lại để tuần hoàn nước RO 20</td>
+				<td>1</td>
+				<td><textarea required id="5-3-BD"></textarea></td>
+				<td><textarea required id="5-3-KT"></textarea></td>
+				<td><textarea required id="5-3-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>5.4</td>
+				<td>Mở Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Mở valve số 1 ra để xả hết nước RO 20 ( lấy mẫu nước tráng )</td>
+				<td>3</td>
+				<td><textarea required id="5-4-BD"></textarea></td>
+				<td><textarea required id="5-4-KT"></textarea></td>
+				<td><textarea required id="5-4-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td rowspan="2">5.5</td>
+				<td>pH (TC: pH nước đầu vào ± 0.5)</td>
+				<td colspan="3"><textarea required id="pH xả divo"></textarea></td>
+				<td rowspan="2">15</td>
+				<td rowspan="2"><textarea required id="5-5-BD"></textarea></td>
+				<td rowspan="2"><textarea required id="5-5-KT"></textarea></td>
+				<td rowspan="2"><textarea required id="5-5-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>Nhiệt độ (TC: T° thường)</td>
+				<td colspan="3"><textarea required id="Nhiệt độ xả divo"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>6</td>
+				<td colspan="5">TUẦN HOÀN ACID CITRIC</td>
+				<td>80</td>
+				<td></td>
+				<td></td>
+				<td><textarea required id="6-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>6.1</td>
+				<td>Chế biến</td>
+				<td colspan="4">Liên hệ chế biến cấp hóa chất acid citric</td>
+				<td>5</td>
+				<td><textarea required id="6-1-BD"></textarea></td>
+				<td><textarea required id="6-1-KT"></textarea></td>
+				<td><textarea required id="6-1-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>6.2</td>
+				<td rowspan="2">Tank thành<br>phẩm</td>
+				<td rowspan="2">Đóng Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Đóng valve số 1 để lấy hóa chất</td>
+				<td rowspan="2">2</td>
+				<td><textarea required id="6-2-BD"></textarea></td>
+				<td><textarea required id="6-2-KT"></textarea></td>
+				<td><textarea required id="6-2-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>6.3</td>
+				<td>19</td>
+				<td colspan="2">Đóng valve số 19 để nước qua quả cầu CIP</td>
+				<td><textarea required id="6-3-BD"></textarea></td>
+				<td><textarea required id="6-3-KT"></textarea></td>
+				<td><textarea required id="6-3-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>6.4</td>
+				<td>HMI Filler</td>
+				<td colspan="4">Chọn : Password '8888' -&gt; CIP -&gt; CIP 5 BƯỚC -&gt; ON -&gt; BẮT ĐẦU.</td>
+				<td>1</td>
+				<td><textarea required id="6-4-BD"></textarea></td>
+				<td><textarea required id="6-4-KT"></textarea></td>
+				<td><textarea required id="6-4-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>6.5</td>
+				<td>HMI Filler</td>
+				<td colspan="4">Chọn : KẾT THÚC (chương trình tráng đầu )</td>
+				<td>1</td>
+				<td><textarea required id="6-5-BD"></textarea></td>
+				<td><textarea required id="6-5-KT"></textarea></td>
+				<td><textarea required id="6-5-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>6.6</td>
+				<td rowspan="4">Tank thành<br>phẩm</td>
+				<td>Mở Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Mở valve số 1 để xả hóa chất mới cấp qua lấy mẫu giao QC</td>
+				<td>3</td>
+				<td><textarea required id="6-6-BD"></textarea></td>
+				<td><textarea required id="6-6-KT"></textarea></td>
+				<td><textarea required id="6-6-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>6.8</td>
+				<td>Đóng Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Đóng valve số 1 lại bơm đầy hóa chất để chuẩn bị tuần hoàn acid citric</td>
+				<td>1</td>
+				<td><textarea required id="6-8-BD"></textarea></td>
+				<td><textarea required id="6-8-KT"></textarea></td>
+				<td><textarea required id="6-8-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td rowspan="2">6.10</td>
+				<td>Nồng độ<br>acid citric (TC:4-6%)</td>
+				<td colspan="3"><textarea required id="Nồng độ acid"></textarea></td>
+				<td rowspan="2">5</td>
+				<td rowspan="2"><textarea required id="6-10-BD"></textarea></td>
+				<td rowspan="2"><textarea required id="6-10-KT"></textarea></td>
+				<td rowspan="2"><textarea required id="6-10-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>Nhiệt độ (TC: T° thường)</td>
+				<td colspan="3"><textarea required id="Nhiệt độ acid"></textarea></td>
+			</tr>
+			<tr>
+				<td>6.11</td>
+				<td>HMI Filler</td>
+				<td colspan="4">Chọn : BẮT ĐẦU (Ngâm tuần hoàn acid citric)</td>
+				<td>60</td>
+				<td><textarea required id="6-11-BD"></textarea></td>
+				<td><textarea required id="6-11-KT"></textarea></td>
+				<td><textarea required id="6-11-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>6.12</td>
+				<td>Tank thành<br>phẩm</td>
+				<td>Mở Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Mở valve số 1 để xả hết acid citric ra ngoài sau khi tuần hoàn xong</td>
+				<td>1</td>
+				<td><textarea required id="6-12-BD"></textarea></td>
+				<td><textarea required id="6-12-KT"></textarea></td>
+				<td><textarea required id="6-12-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>6.14</td>
+				<td>HMI Filler</td>
+				<td colspan="4">Chọn : KẾT THÚC :Chương trình tuần hoàn acid citric</td>
+				<td>1</td>
+				<td><textarea required id="6-14-BD"></textarea></td>
+				<td><textarea required id="6-14-KT"></textarea></td>
+				<td><textarea required id="6-14-Tổng"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>7</td>
+				<td colspan="5">XẢ SẠCH ACID CITRIC</td>
+				<td>35</td>
+				<td></td>
+				<td></td>
+				<td><textarea required id="7-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>7.1</td>
+				<td>Chế biến</td>
+				<td colspan="4">Liên hệ chế biến cấp nước RO 20</td>
+				<td rowspan="2">5</td>
+				<td><textarea required id="7-1-BD"></textarea></td>
+				<td><textarea required id="7-1-KT"></textarea></td>
+				<td><textarea required id="7-1-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>7.2</td>
+				<td>HMI Filler</td>
+				<td colspan="4">Chọn : BẮT ĐẦU Chương trình xả sạch acid citric</td>
+				<td><textarea required id="7-2-BD"></textarea></td>
+				<td><textarea required id="7-2-KT"></textarea></td>
+				<td><textarea required id="7-2-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>7.3</td>
+				<td rowspan="4">Tank thành<br>phẩm</td>
+				<td>Đóng Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Đóng valve số 1 lại để tuần hoàn nước RO 20</td>
+				<td>15</td>
+				<td><textarea required id="7-3-BD"></textarea></td>
+				<td><textarea required id="7-3-KT"></textarea></td>
+				<td><textarea required id="7-3-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>7.5</td>
+				<td>Mở Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Mở valve số 1 ra để xả hết nước RO 20 ( lấy mẫu nước tráng )</td>
+				<td>5</td>
+				<td><textarea required id="7-5-BD"></textarea></td>
+				<td><textarea required id="7-5-KT"></textarea></td>
+				<td><textarea required id="7-5-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td rowspan="2">7.7</td>
+				<td>pH (TC: pH nước đầu vào ± 0.5)</td>
+				<td colspan="3"><textarea required id="pH xả acid"></textarea></td>
+				<td rowspan="2">10</td>
+				<td rowspan="2"><textarea required id="7-7-BD"></textarea></td>
+				<td rowspan="2"><textarea required id="7-7-KT"></textarea></td>
+				<td rowspan="2"><textarea required id="7-7-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>Nhiệt độ (TC: T° thường)</td>
+				<td colspan="3"><textarea required id="Nhiệt độ xả acid"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>8</td>
+				<td colspan="5">TUẦN HOÀN CHLORINE</td>
+				<td>45</td>
+				<td></td>
+				<td></td>
+				<td><textarea required id="8-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>8.1</td>
+				<td>Chế biến</td>
+				<td colspan="4">Liên hệ chế biến cấp hóa chất chlorine</td>
+				<td>5</td>
+				<td><textarea required id="8-1-BD"></textarea></td>
+				<td><textarea required id="8-1-KT"></textarea></td>
+				<td><textarea required id="8-1-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>8.2</td>
+				<td rowspan="4">Tank thành<br>phẩm</td>
+				<td>Mở Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Mở valve số 1 để xả hết nước còn trong đường ống ra ngoài</td>
+				<td>3</td>
+				<td><textarea required id="8-2-BD"></textarea></td>
+				<td><textarea required id="8-2-KT"></textarea></td>
+				<td><textarea required id="8-2-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>8.4</td>
+				<td>Đóng Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Đóng valve số 1 lại để chuẩn bị hóa chất để tuần hoàn chlorine</td>
+				<td>3</td>
+				<td><textarea required id="8-4-BD"></textarea></td>
+				<td><textarea required id="8-4-KT"></textarea></td>
+				<td><textarea required id="8-4-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td rowspan="2">8.6</td>
+				<td>Nồng độ<br>chlorine (TC: 100-150ppm)</td>
+				<td colspan="3"><textarea required id="Nồng độ Chlorine"></textarea></td>
+				<td rowspan="2">10</td>
+				<td rowspan="2"><textarea required id="8-6-BD"></textarea></td>
+				<td rowspan="2"><textarea required id="8-6-KT"></textarea></td>
+				<td rowspan="2"><textarea required id="8-6-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>Nhiệt độ (TC: T° thường)</td>
+				<td colspan="3"><textarea required id="Nhiệt độ Chlorine"></textarea></td>
+			</tr>
+			<tr>
+				<td>8.7</td>
+				<td>HMI Filler</td>
+				<td colspan="4">Chọn : BẮT ĐẦU : Ngâm tuần hoàn hóa chất</td>
+				<td>20</td>
+				<td><textarea required id="8-7-BD"></textarea></td>
+				<td><textarea required id="8-7-KT"></textarea></td>
+				<td><textarea required id="8-7-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>8.8</td>
+				<td>Tank thành<br>phẩm</td>
+				<td>Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Mở valve số 1 để xả hết hóa chất bên trong tank</td>
+				<td>1</td>
+				<td><textarea required id="8-8-BD"></textarea></td>
+				<td><textarea required id="8-8-KT"></textarea></td>
+				<td><textarea required id="8-8-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>8.10</td>
+				<td>HMI Filler</td>
+				<td colspan="4">Chọn : KẾT THÚC :Chương trình tuần hoàn chlorine</td>
+				<td>1</td>
+				<td><textarea required id="8-10-BD"></textarea></td>
+				<td><textarea required id="8-10-KT"></textarea></td>
+				<td><textarea required id="8-10-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>8.11</td>
+				<td>HMI Filler</td>
+				<td colspan="4">Đổ nước trong 5 bình ra hết rồi đặt lại đúng vị trí 5 vòi chiết</td>
+				<td>2</td>
+				<td><textarea required id="8-11-BD"></textarea></td>
+				<td><textarea required id="8-11-KT"></textarea></td>
+				<td><textarea required id="8-11-Tổng"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>9</td>
+				<td colspan="5">XẢ SẠCH CHLORINE</td>
+				<td>90</td>
+				<td></td>
+				<td></td>
+				<td><textarea required id="9-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>9.1</td>
+				<td>Chế biến</td>
+				<td colspan="4">Liên hệ chế biến cấp nước RO 20</td>
+				<td rowspan="2">5</td>
+				<td><textarea required id="9-1-BD"></textarea></td>
+				<td><textarea required id="9-1-KT"></textarea></td>
+				<td><textarea required id="9-1-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>9.2</td>
+				<td>HMI Filler</td>
+				<td colspan="4">Chọn : BẮT ĐẦU : Chương trình xả sạch chlorine</td>
+				<td><textarea required id="9-2-BD"></textarea></td>
+				<td><textarea required id="9-2-KT"></textarea></td>
+				<td><textarea required id="9-2-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>9.3</td>
+				<td rowspan="9">Tank thành<br>phẩm</td>
+				<td>Đóng Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Đóng valve số 1 để tuần hoàn nước RO 20</td>
+				<td>10</td>
+				<td><textarea required id="9-3-BD"></textarea></td>
+				<td><textarea required id="9-3-KT"></textarea></td>
+				<td><textarea required id="9-3-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>9.5</td>
+				<td rowspan="2">Mở Valve :Q</td>
+				<td rowspan="2">1</td>
+				<td colspan="2">Mở valve số 1 để xả nước lấy mẫu kiểm tra màu</td>
+				<td rowspan="2">2</td>
+				<td rowspan="2"><textarea required id="9-5-BD"></textarea></td>
+				<td rowspan="2"><textarea required id="9-5-KT"></textarea></td>
+				<td rowspan="2"><textarea required id="9-5-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>9.6</td>
+				<td>Kết quả (Màu đậm/ màu nhạt/không màu)</td>
+				<td><textarea required id="Kết quả màu"></textarea></td>
+			</tr>
+			<tr>
+				<td>9.7</td>
+				<td>Đóng Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Đóng valve số 1 để tuần hoàn nước RO 20</td>
+				<td>20</td>
+				<td><textarea required id="9-7-BD"></textarea></td>
+				<td><textarea required id="9-7-KT"></textarea></td>
+				<td><textarea required id="9-7-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>9.9</td>
+				<td>Mở Valve :Q</td>
+				<td>1.1</td>
+				<td colspan="2">Mở valve số 1.1 để bật bơm thu hồi số 2 về hồ 100m3</td>
+				<td>1</td>
+				<td><textarea required id="9-9-BD"></textarea></td>
+				<td><textarea required id="9-9-KT"></textarea></td>
+				<td><textarea required id="9-9-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>9.11</td>
+				<td>Mở Valve :Q</td>
+				<td>1</td>
+				<td colspan="2">Mở valve số 1 để lấy mẫu nước tráng cuối</td>
+				<td>2</td>
+				<td><textarea required id="9-11-BD"></textarea></td>
+				<td><textarea required id="9-11-KT"></textarea></td>
+				<td><textarea required id="9-11-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>9.13</td>
+				<td>pH (TC: pH nước đầu vào ± 0.5)</td>
+				<td colspan="3"><textarea required id="pH nước tráng"></textarea></td>
+				<td rowspan="3">45</td>
+				<td rowspan="3"><textarea required id="9-13-BD"></textarea></td>
+				<td rowspan="3"><textarea required id="9-13-KT"></textarea></td>
+				<td rowspan="3"><textarea required id="9-13-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td rowspan="2">9.14</td>
+				<td>HCHC nước tráng (TC: ≤0.5 mgO2/lit )</td>
+				<td colspan="3"><textarea required id="HCHC nước tráng"></textarea></td>
+			</tr>
+			<tr>
+				<td>Nhiệt độ (TC: T° thường)</td>
+				<td colspan="3"><textarea required id="Nhiệt độ nước tráng"></textarea></td>
+			</tr>
+			<tr>
+				<td>9.15</td>
+				<td>HMI Filler</td>
+				<td colspan="4">Đổ nước trong 5 bình ra hết và dọn dẹp để cấp nước thành phẩm</td>
+				<td>5</td>
+				<td><textarea required id="9-15-BD"></textarea></td>
+				<td><textarea required id="9-15-KT"></textarea></td>
+				<td><textarea required id="9-15-Tổng"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>10</td>
+				<td colspan="5">XÔNG PHÒNG, ĐO CHỈ TIÊU ( HCHC ,TDS...)</td>
+				<td>55</td>
+				<td></td>
+				<td></td>
+				<td><textarea required id="10-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>10.1</td>
+				<td>Chế biến</td>
+				<td colspan="4">Liên hệ chế biến cấp nước thành phẩm</td>
+				<td>5</td>
+				<td><textarea required id="10-1-BD"></textarea></td>
+				<td><textarea required id="10-1-KT"></textarea></td>
+				<td><textarea required id="10-1-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>10.2</td>
+				<td>Phòng chiết</td>
+				<td colspan="4">Xông phòng chiết</td>
+				<td>5</td>
+				<td><textarea required id="10-2-BD"></textarea></td>
+				<td><textarea required id="10-2-KT"></textarea></td>
+				<td><textarea required id="10-2-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td>10.3</td>
+				<td rowspan="3">Tank thành<br>phẩm</td>
+				<td>TDS 375 (TC: 355-395 mg/l)</td>
+				<td colspan="3"><textarea required id="TDS"></textarea></td>
+				<td rowspan="3">45</td>
+				<td rowspan="3"><textarea required id="10-3-BD"></textarea></td>
+				<td rowspan="3"><textarea required id="10-3-KT"></textarea></td>
+				<td rowspan="3"><textarea required id="10-3-Tổng"></textarea></td>
+			</tr>
+			<tr>
+				<td rowspan="2">10.4</td>
+				<td>HCHC<br>thành phẩm (TC: ≤0.5 mgO2/lít)</td>
+				<td colspan="3"><textarea required id="HCHC TDS"></textarea></td>
+			</tr>
+			<tr>
+				<td>Nhiệt độ (TC: T° thường)</td>
+				<td colspan="3"><textarea required id="Nhiệt độ TDS"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>11</td>
+				<td colspan="5">CHỜ BAY MÙI SAU KHI XÔNG PHÒNG (Bỏ qua nếu không có )</td>
+				<td>45</td>
+				<td><textarea required id="11-BD"></textarea></td>
+				<td><textarea required id="11-KT"></textarea></td>
+				<td><textarea required id="11-Tổng"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>12</td>
+				<td colspan="5">LẤY MẪU VI SINH (Bỏ qua nếu không có )</td>
+				<td>45</td>
+				<td><textarea required id="12-BD"></textarea></td>
+				<td><textarea required id="12-KT"></textarea></td>
+				<td><textarea required id="12-Tổng"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>13</td>
+				<td colspan="5">KIỂM TRA CÁC VALVE VÀ CÁC ĐIỀU KIỆN TRƯỚC KHI SẢN XUẤT</td>
+				<td>10</td>
+				<td><textarea required id="13-BD"></textarea></td>
+				<td><textarea required id="13-KT"></textarea></td>
+				<td><textarea required id="13-Tổng"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>14</td>
+				<td colspan="5">KIỂM CẶN, KIỂM DATE ĐẦU CA (Bỏ qua nếu không có )</td>
+				<td>10</td>
+				<td><textarea required id="14-BD"></textarea></td>
+				<td><textarea required id="14-KT"></textarea></td>
+				<td><textarea required id="14-Tổng"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>15</td>
+				<td colspan="5">RA BÌNH BẮT ĐẦU SẢN XUẤT (Bỏ qua nếu không có )</td>
+				<td>10</td>
+				<td><textarea required id="15-BD"></textarea></td>
+				<td><textarea required id="15-KT"></textarea></td>
+				<td><textarea required id="15-Tổng"></textarea></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td colspan="6">TỔNG THỜI GIAN</td>
+				<td>680</td>
+				<td></td>
+				<td></td>
+				<td><textarea required id="Tổng thời gian"></textarea></td>
+			</tr>
+			<tr>
+				<td>Ghi chú</td>
+				<td colspan="9"><textarea id="Ghi chú"></textarea></td>
+			</tr>
+		</table>
+		<!--- Sửa phần 2: Phần nội dung form-->
+
+
+
+
+		<br>
+		<p><b>Chi tiết cây phê duyệt</b></p>
+
+		<!--- Sửa phần 3: Chi tiết cây phê duyệt: sửa lại TC line nào trực tiếp
+				Ở file render trên automata, sửa từ:
+				1. id=" thành >@{triggerBody()?['
+				2. "> thành ']}
+				3. <td colspan="5" id="Thời gian nộp phiếu"></td> thành
+			@{outputs('Add_a_row_into_a_table')?['body/Thời gian nộp phiếu']}
+		-->
+
+		<table>
+			<tr>
+				<td style="font-weight: bold;">Thời gian nộp phiếu</td>
+				<td colspan="5" id="Thời gian nộp phiếu"></td>
+			</tr>
+			<tr style="font-weight: bold;">
+				<td>Cấp phê duyệt</td>
+				<td>Người phê duyệt</td>
+				<td>Email_NPD</td>
+				<td>Trạng thái</td>
+				<td>Thời gian thao tác</td>
+				<td>Ghi chú</td>
+			</tr>
+			<tr>
+				<td>QC online</td>
+				<td id="Người phê duyệt 1"></td>
+				<td id="Email_NPD1"></td>
+				<td id="Trạng thái_NPD1"></td>
+				<td id="Thời gian thao tác_NPD1"></td>
+				<td id="Ghi chú_NPD1"></td>
+			</tr>
+			<tr>
+				<td>Trưởng ca line 3</td>
+				<td id="Người phê duyệt 2"></td>
+				<td id="Email_NPD2"></td>
+				<td id="Trạng thái_NPD2"></td>
+				<td id="Thời gian thao tác_NPD2"></td>
+				<td id="Ghi chú_NPD2"></td>
+			</tr>
+		</table>
+
+		<!--- Sửa phần 3: Chi tiết cây phê duyệt: sửa lại TC line nào-->
+
+		<button id='nut' type="submit" style=" float: left;">Nộp kết quả</button>
+	</form>
+
+	<button onclick="window.print();" class="noPrint" style=" float: right; background-color: yellow; color:black">Kiểm
+		tra kết quả</button>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#GFG :input").prop("disabled", true);
+			$(".slide-toggle").click(function () {
+				if (this.value == "Chỉnh sửa") {
+					this.value = "Tạm dừng";
+					$("#GFG :input").prop("disabled", false);
+				}
+				else {
+					this.value = "Chỉnh sửa";
+					$("#GFG :input").prop("disabled", true);
+				}
+			});
+		});
+	</script>
+
+
+
+	<script>
+		const formE1 = document.querySelector('.form');
+		formE1.addEventListener('submit', event => {
+			event.preventDefault();
+			const formData = new FormData(formE1);
+			const submissionTime = new Date().toISOString();
+			const data = new URLSearchParams(formData);
+
+			fetch('https://prod-17.southeastasia.logic.azure.com:443/workflows/5be2ebfe5d744f8a89fdd30530961446/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=0pUBHlzKQe_z-gNU-EYPd3bEQ2A3s06FlsiAgBrtDZA', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					'Email cá nhân': document.getElementById('Email cá nhân').value,
+					'Thời gian nộp phiếu': submissionTime,
+					'Người phê duyệt 1': document.getElementById('QC').value,
+					'Email_NPD1': 'qcvhpleader@vinhhao.com.vn',
+					'Trạng thái_NPD1': 'Pending',
+					'Thời gian thao tác_NPD1': '',
+					'Ghi chú_NPD1': '',
+					'Người phê duyệt 2': document.getElementById('Trưởng ca').value,
+					'Email_NPD2': 'truongca.L123@vinhhao.com.vn',
+					'Trạng thái_NPD2': 'Waiting',
+					'Thời gian thao tác_NPD2': '',
+					'Ghi chú_NPD2': '',
+					'Trạng thái chung': 'Pending',
+					'Ngày/ tháng/ năm': document.getElementById('Ngày/ tháng/ năm').value,
+					'Vận hành': document.getElementById('Vận hành').value,
+					'QC': document.getElementById('QC').value,
+					'Trưởng ca': document.getElementById('Trưởng ca').value,
+					'0-Tổng': document.getElementById('0-Tổng').value,
+					'0-1-BD': document.getElementById('0-1-BD').value,
+					'0-1-KT': document.getElementById('0-1-KT').value,
+					'0-1-Tổng': document.getElementById('0-1-Tổng').value,
+					'0-2-BD': document.getElementById('0-2-BD').value,
+					'0-2-KT': document.getElementById('0-2-KT').value,
+					'0-2-Tổng': document.getElementById('0-2-Tổng').value,
+					'0-3-BD': document.getElementById('0-3-BD').value,
+					'0-3-KT': document.getElementById('0-3-KT').value,
+					'0-3-Tổng': document.getElementById('0-3-Tổng').value,
+					'1-BD': document.getElementById('1-BD').value,
+					'1-KT': document.getElementById('1-KT').value,
+					'1-Tổng': document.getElementById('1-Tổng').value,
+					'2-Tổng': document.getElementById('2-Tổng').value,
+					'2-1-BD': document.getElementById('2-1-BD').value,
+					'2-1-KT': document.getElementById('2-1-KT').value,
+					'2-1-Tổng': document.getElementById('2-1-Tổng').value,
+					'2-2-BD': document.getElementById('2-2-BD').value,
+					'2-2-KT': document.getElementById('2-2-KT').value,
+					'2-2-Tổng': document.getElementById('2-2-Tổng').value,
+					'2-3-BD': document.getElementById('2-3-BD').value,
+					'2-3-KT': document.getElementById('2-3-KT').value,
+					'2-3-Tổng': document.getElementById('2-3-Tổng').value,
+					'2-4-BD': document.getElementById('2-4-BD').value,
+					'2-4-KT': document.getElementById('2-4-KT').value,
+					'2-4-Tổng': document.getElementById('2-4-Tổng').value,
+					'2-5-BD': document.getElementById('2-5-BD').value,
+					'2-5-KT': document.getElementById('2-5-KT').value,
+					'2-5-Tổng': document.getElementById('2-5-Tổng').value,
+					'2-6-BD': document.getElementById('2-6-BD').value,
+					'2-6-KT': document.getElementById('2-6-KT').value,
+					'2-6-Tổng': document.getElementById('2-6-Tổng').value,
+					'2-7-BD': document.getElementById('2-7-BD').value,
+					'2-7-KT': document.getElementById('2-7-KT').value,
+					'2-7-Tổng': document.getElementById('2-7-Tổng').value,
+					'2-8-BD': document.getElementById('2-8-BD').value,
+					'2-8-KT': document.getElementById('2-8-KT').value,
+					'2-8-Tổng': document.getElementById('2-8-Tổng').value,
+					'3-Tổng': document.getElementById('3-Tổng').value,
+					'3-1-BD': document.getElementById('3-1-BD').value,
+					'3-1-KT': document.getElementById('3-1-KT').value,
+					'3-1-Tổng': document.getElementById('3-1-Tổng').value,
+					'3-2-BD': document.getElementById('3-2-BD').value,
+					'3-2-KT': document.getElementById('3-2-KT').value,
+					'3-2-Tổng': document.getElementById('3-2-Tổng').value,
+					'3-3-BD': document.getElementById('3-3-BD').value,
+					'3-3-KT': document.getElementById('3-3-KT').value,
+					'3-3-Tổng': document.getElementById('3-3-Tổng').value,
+					'3-5-BD': document.getElementById('3-5-BD').value,
+					'3-5-KT': document.getElementById('3-5-KT').value,
+					'3-5-Tổng': document.getElementById('3-5-Tổng').value,
+					'3-6-BD': document.getElementById('3-6-BD').value,
+					'3-6-KT': document.getElementById('3-6-KT').value,
+					'3-6-Tổng': document.getElementById('3-6-Tổng').value,
+					'3-7-BD': document.getElementById('3-7-BD').value,
+					'3-7-KT': document.getElementById('3-7-KT').value,
+					'3-7-Tổng': document.getElementById('3-7-Tổng').value,
+					'3-8-BD': document.getElementById('3-8-BD').value,
+					'3-8-KT': document.getElementById('3-8-KT').value,
+					'3-8-Tổng': document.getElementById('3-8-Tổng').value,
+					'3-9-BD': document.getElementById('3-9-BD').value,
+					'3-9-KT': document.getElementById('3-9-KT').value,
+					'3-9-Tổng': document.getElementById('3-9-Tổng').value,
+					'4-Tổng': document.getElementById('4-Tổng').value,
+					'4-1-BD': document.getElementById('4-1-BD').value,
+					'4-1-KT': document.getElementById('4-1-KT').value,
+					'4-1-Tổng': document.getElementById('4-1-Tổng').value,
+					'4-2-BD': document.getElementById('4-2-BD').value,
+					'4-2-KT': document.getElementById('4-2-KT').value,
+					'4-2-Tổng': document.getElementById('4-2-Tổng').value,
+					'4-3-BD': document.getElementById('4-3-BD').value,
+					'4-3-KT': document.getElementById('4-3-KT').value,
+					'4-3-Tổng': document.getElementById('4-3-Tổng').value,
+					'4-4-BD': document.getElementById('4-4-BD').value,
+					'4-4-KT': document.getElementById('4-4-KT').value,
+					'4-4-Tổng': document.getElementById('4-4-Tổng').value,
+					'4-5-BD': document.getElementById('4-5-BD').value,
+					'4-5-KT': document.getElementById('4-5-KT').value,
+					'4-5-Tổng': document.getElementById('4-5-Tổng').value,
+					'4-6-BD': document.getElementById('4-6-BD').value,
+					'4-6-KT': document.getElementById('4-6-KT').value,
+					'4-6-Tổng': document.getElementById('4-6-Tổng').value,
+					'4-7-BD': document.getElementById('4-7-BD').value,
+					'4-7-KT': document.getElementById('4-7-KT').value,
+					'4-7-Tổng': document.getElementById('4-7-Tổng').value,
+					'4-8-BD': document.getElementById('4-8-BD').value,
+					'4-8-KT': document.getElementById('4-8-KT').value,
+					'4-8-Tổng': document.getElementById('4-8-Tổng').value,
+					'5-Tổng': document.getElementById('5-Tổng').value,
+					'5-1-BD': document.getElementById('5-1-BD').value,
+					'5-1-KT': document.getElementById('5-1-KT').value,
+					'5-1-Tổng': document.getElementById('5-1-Tổng').value,
+					'5-2-BD': document.getElementById('5-2-BD').value,
+					'5-2-KT': document.getElementById('5-2-KT').value,
+					'5-2-Tổng': document.getElementById('5-2-Tổng').value,
+					'5-3-BD': document.getElementById('5-3-BD').value,
+					'5-3-KT': document.getElementById('5-3-KT').value,
+					'5-3-Tổng': document.getElementById('5-3-Tổng').value,
+					'5-4-BD': document.getElementById('5-4-BD').value,
+					'5-4-KT': document.getElementById('5-4-KT').value,
+					'5-4-Tổng': document.getElementById('5-4-Tổng').value,
+					'5-5-BD': document.getElementById('5-5-BD').value,
+					'5-5-KT': document.getElementById('5-5-KT').value,
+					'5-5-Tổng': document.getElementById('5-5-Tổng').value,
+					'6-Tổng': document.getElementById('6-Tổng').value,
+					'6-1-BD': document.getElementById('6-1-BD').value,
+					'6-1-KT': document.getElementById('6-1-KT').value,
+					'6-1-Tổng': document.getElementById('6-1-Tổng').value,
+					'6-2-BD': document.getElementById('6-2-BD').value,
+					'6-2-KT': document.getElementById('6-2-KT').value,
+					'6-2-Tổng': document.getElementById('6-2-Tổng').value,
+					'6-4-BD': document.getElementById('6-4-BD').value,
+					'6-4-KT': document.getElementById('6-4-KT').value,
+					'6-4-Tổng': document.getElementById('6-4-Tổng').value,
+					'6-5-BD': document.getElementById('6-5-BD').value,
+					'6-5-KT': document.getElementById('6-5-KT').value,
+					'6-5-Tổng': document.getElementById('6-5-Tổng').value,
+					'6-6-BD': document.getElementById('6-6-BD').value,
+					'6-6-KT': document.getElementById('6-6-KT').value,
+					'6-6-Tổng': document.getElementById('6-6-Tổng').value,
+					'6-8-BD': document.getElementById('6-8-BD').value,
+					'6-8-KT': document.getElementById('6-8-KT').value,
+					'6-8-Tổng': document.getElementById('6-8-Tổng').value,
+					'6-10-BD': document.getElementById('6-10-BD').value,
+					'6-10-KT': document.getElementById('6-10-KT').value,
+					'6-10-Tổng': document.getElementById('6-10-Tổng').value,
+					'6-11-BD': document.getElementById('6-11-BD').value,
+					'6-11-KT': document.getElementById('6-11-KT').value,
+					'6-11-Tổng': document.getElementById('6-11-Tổng').value,
+					'6-12-BD': document.getElementById('6-12-BD').value,
+					'6-12-KT': document.getElementById('6-12-KT').value,
+					'6-12-Tổng': document.getElementById('6-12-Tổng').value,
+					'6-14-BD': document.getElementById('6-14-BD').value,
+					'6-14-KT': document.getElementById('6-14-KT').value,
+					'6-14-Tổng': document.getElementById('6-14-Tổng').value,
+					'7-Tổng': document.getElementById('7-Tổng').value,
+					'7-1-BD': document.getElementById('7-1-BD').value,
+					'7-1-KT': document.getElementById('7-1-KT').value,
+					'7-1-Tổng': document.getElementById('7-1-Tổng').value,
+					'7-2-BD': document.getElementById('7-2-BD').value,
+					'7-2-KT': document.getElementById('7-2-KT').value,
+					'7-2-Tổng': document.getElementById('7-2-Tổng').value,
+					'7-3-BD': document.getElementById('7-3-BD').value,
+					'7-3-KT': document.getElementById('7-3-KT').value,
+					'7-3-Tổng': document.getElementById('7-3-Tổng').value,
+					'7-5-BD': document.getElementById('7-5-BD').value,
+					'7-5-KT': document.getElementById('7-5-KT').value,
+					'7-5-Tổng': document.getElementById('7-5-Tổng').value,
+					'7-7-BD': document.getElementById('7-7-BD').value,
+					'7-7-KT': document.getElementById('7-7-KT').value,
+					'7-7-Tổng': document.getElementById('7-7-Tổng').value,
+					'8-Tổng': document.getElementById('8-Tổng').value,
+					'8-1-BD': document.getElementById('8-1-BD').value,
+					'8-1-KT': document.getElementById('8-1-KT').value,
+					'8-1-Tổng': document.getElementById('8-1-Tổng').value,
+					'8-2-BD': document.getElementById('8-2-BD').value,
+					'8-2-KT': document.getElementById('8-2-KT').value,
+					'8-2-Tổng': document.getElementById('8-2-Tổng').value,
+					'8-4-BD': document.getElementById('8-4-BD').value,
+					'8-4-KT': document.getElementById('8-4-KT').value,
+					'8-4-Tổng': document.getElementById('8-4-Tổng').value,
+					'8-6-BD': document.getElementById('8-6-BD').value,
+					'8-6-KT': document.getElementById('8-6-KT').value,
+					'8-6-Tổng': document.getElementById('8-6-Tổng').value,
+					'8-7-BD': document.getElementById('8-7-BD').value,
+					'8-7-KT': document.getElementById('8-7-KT').value,
+					'8-7-Tổng': document.getElementById('8-7-Tổng').value,
+					'8-8-BD': document.getElementById('8-8-BD').value,
+					'8-8-KT': document.getElementById('8-8-KT').value,
+					'8-8-Tổng': document.getElementById('8-8-Tổng').value,
+					'8-10-BD': document.getElementById('8-10-BD').value,
+					'8-10-KT': document.getElementById('8-10-KT').value,
+					'8-10-Tổng': document.getElementById('8-10-Tổng').value,
+					'8-11-BD': document.getElementById('8-11-BD').value,
+					'8-11-KT': document.getElementById('8-11-KT').value,
+					'8-11-Tổng': document.getElementById('8-11-Tổng').value,
+					'9-Tổng': document.getElementById('9-Tổng').value,
+					'9-1-BD': document.getElementById('9-1-BD').value,
+					'9-1-KT': document.getElementById('9-1-KT').value,
+					'9-1-Tổng': document.getElementById('9-1-Tổng').value,
+					'9-2-BD': document.getElementById('9-2-BD').value,
+					'9-2-KT': document.getElementById('9-2-KT').value,
+					'9-2-Tổng': document.getElementById('9-2-Tổng').value,
+					'9-3-BD': document.getElementById('9-3-BD').value,
+					'9-3-KT': document.getElementById('9-3-KT').value,
+					'9-3-Tổng': document.getElementById('9-3-Tổng').value,
+					'9-5-BD': document.getElementById('9-5-BD').value,
+					'9-5-KT': document.getElementById('9-5-KT').value,
+					'9-5-Tổng': document.getElementById('9-5-Tổng').value,
+					'9-7-BD': document.getElementById('9-7-BD').value,
+					'9-7-KT': document.getElementById('9-7-KT').value,
+					'9-7-Tổng': document.getElementById('9-7-Tổng').value,
+					'9-9-BD': document.getElementById('9-9-BD').value,
+					'9-9-KT': document.getElementById('9-9-KT').value,
+					'9-9-Tổng': document.getElementById('9-9-Tổng').value,
+					'9-11-BD': document.getElementById('9-11-BD').value,
+					'9-11-KT': document.getElementById('9-11-KT').value,
+					'9-11-Tổng': document.getElementById('9-11-Tổng').value,
+					'9-13-BD': document.getElementById('9-13-BD').value,
+					'9-13-KT': document.getElementById('9-13-KT').value,
+					'9-13-Tổng': document.getElementById('9-13-Tổng').value,
+					'9-15-BD': document.getElementById('9-15-BD').value,
+					'9-15-KT': document.getElementById('9-15-KT').value,
+					'9-15-Tổng': document.getElementById('9-15-Tổng').value,
+					'10-Tổng': document.getElementById('10-Tổng').value,
+					'10-1-BD': document.getElementById('10-1-BD').value,
+					'10-1-KT': document.getElementById('10-1-KT').value,
+					'10-1-Tổng': document.getElementById('10-1-Tổng').value,
+					'10-2-BD': document.getElementById('10-2-BD').value,
+					'10-2-KT': document.getElementById('10-2-KT').value,
+					'10-2-Tổng': document.getElementById('10-2-Tổng').value,
+					'10-3-BD': document.getElementById('10-3-BD').value,
+					'10-3-KT': document.getElementById('10-3-KT').value,
+					'10-3-Tổng': document.getElementById('10-3-Tổng').value,
+					'11-BD': document.getElementById('11-BD').value,
+					'11-KT': document.getElementById('11-KT').value,
+					'11-Tổng': document.getElementById('11-Tổng').value,
+					'12-BD': document.getElementById('12-BD').value,
+					'12-KT': document.getElementById('12-KT').value,
+					'12-Tổng': document.getElementById('12-Tổng').value,
+					'13-BD': document.getElementById('13-BD').value,
+					'13-KT': document.getElementById('13-KT').value,
+					'13-Tổng': document.getElementById('13-Tổng').value,
+					'14-BD': document.getElementById('14-BD').value,
+					'14-KT': document.getElementById('14-KT').value,
+					'14-Tổng': document.getElementById('14-Tổng').value,
+					'15-BD': document.getElementById('15-BD').value,
+					'15-KT': document.getElementById('15-KT').value,
+					'15-Tổng': document.getElementById('15-Tổng').value,
+					'Tổng thời gian': document.getElementById('Tổng thời gian').value,
+					'Ghi chú': document.getElementById('Ghi chú').value,
+					'Nồng độ principal': document.getElementById('Nồng độ principal').value,
+					'Nhiệt độ principal': document.getElementById('Nhiệt độ principal').value,
+					'pH xả principal': document.getElementById('pH xả principal').value,
+					'Nhiệt độ xả principal': document.getElementById('Nhiệt độ xả principal').value,
+					'Nồng độ divo': document.getElementById('Nồng độ divo').value,
+					'Nhiệt độ divo': document.getElementById('Nhiệt độ divo').value,
+					'pH xả divo': document.getElementById('pH xả divo').value,
+					'Nhiệt độ xả divo': document.getElementById('Nhiệt độ xả divo').value,
+					'Nồng độ acid': document.getElementById('Nồng độ acid').value,
+					'Nhiệt độ acid': document.getElementById('Nhiệt độ acid').value,
+					'pH xả acid': document.getElementById('pH xả acid').value,
+					'Nhiệt độ xả acid': document.getElementById('Nhiệt độ xả acid').value,
+					'Nồng độ Chlorine': document.getElementById('Nồng độ Chlorine').value,
+					'Nhiệt độ Chlorine': document.getElementById('Nhiệt độ Chlorine').value,
+					'Kết quả màu': document.getElementById('Kết quả màu').value,
+					'pH nước tráng': document.getElementById('pH nước tráng').value,
+					'HCHC nước tráng': document.getElementById('HCHC nước tráng').value,
+					'Nhiệt độ nước tráng': document.getElementById('Nhiệt độ nước tráng').value,
+					'TDS': document.getElementById('TDS').value,
+					'HCHC TDS': document.getElementById('HCHC TDS').value,
+					'Nhiệt độ TDS': document.getElementById('Nhiệt độ TDS').value,
+				})
+			}).then(res => res.json())
+				.then(data => console.log(data))
+				.catch(error => console.log(error));
+			alert("Đã nộp thành công");
+			window.location.reload();
+		});
+	</script>
+
+
+</body>
+
+</html>
