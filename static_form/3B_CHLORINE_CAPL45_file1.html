@@ -641,9 +641,9 @@
 			fetch('https://prod-07.southeastasia.logic.azure.com:443/workflows/69a1972f5f5e4169b28d835ce23e08e7/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=EIm79zJUqwF6uP452AOIYckUlgyEbCrL863YHWjC--A', {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
+					'Content-Type': 'application/json' 
+				}, 
+				body: JSON.stringify({ 
 					'Email cá nhân': document.getElementById('Email cá nhân').value,
 					'Thời gian nộp phiếu': submissionTime,
 					'Người phê duyệt 1': document.getElementById('QC').value,
