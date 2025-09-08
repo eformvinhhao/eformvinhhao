@@ -158,7 +158,7 @@
 
 		<!--- Sửa phần 1: Phần tiêu đề form
 		Ở file render trên automata, sửa từ:
-			1. <textarea id=" thành @{triggerBody()?['
+			1. <textarea required id=" thành @{triggerBody()?['
 			2. "></textarea> thành ']}
 			3. <input type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
 			@{triggerBody()?['Email cá nhân']}
@@ -189,20 +189,20 @@
 				<td style="font-weight: bold; ">Ngày/ tháng/ năm</td>
 				<td><input type="date" id="Ngày/ tháng/ năm" required=""></td>
 				<td style="font-weight: bold; ">Vận hành</td>
-				<td><textarea id="Vận hành"></textarea></td>
+				<td><textarea required id="Vận hành"></textarea></td>
 				<td style="font-weight: bold; ">Email cá nhân</td>
 				<td><input type="text" autocomplete="email" maxlength="60" id="Email cá nhân"
 						pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""></td>
 				<td style="font-weight: bold; ">QC</td>
-				<td><textarea id="QC"></textarea></td>
+				<td><textarea required id="QC"></textarea></td>
 				<td style="font-weight: bold; ">Trưởng ca</td>
-				<td><textarea id="Trưởng ca"></textarea></td>
+				<td><textarea required id="Trưởng ca"></textarea></td>
 			</tr>
 			<tr>
 				<td style="font-weight: bold; ">Bồn làm mềm số</td>
-				<td colspan="3"><textarea id="Bồn làm mềm số"></textarea></td>
+				<td colspan="3"><textarea required id="Bồn làm mềm số"></textarea></td>
 				<td style="font-weight: bold; ">Ca</td>
-				<td colspan="5"><textarea id="Ca"></textarea></td>
+				<td colspan="5"><textarea required id="Ca"></textarea></td>
 			</tr>
 		</table>
 
@@ -213,9 +213,9 @@
 
 		<!--- Sửa phần 2: Phần nội dung form:
 			Ở file render trên automata, sửa từ:
-			1. <textarea id=" thành @{triggerBody()?['
+			1. <textarea required id=" thành @{triggerBody()?['
 			2. "></textarea> thành ']}
-			3. <input type="checkbox" id=" thành <input type="checkbox" @{triggerBody()?['
+			3. <input type="checkbox" required id=" thành <input type="checkbox" required @{triggerBody()?['
 			4. " value="uncheck" thành ']}
 		-->
 
@@ -240,144 +240,144 @@
 					<td>B1</td>
 					<td>Kiểm tra bơm nước muối vào bồn chứa nước muối để tái sinh</td>
 					<td>260 L</td>
-					<td><textarea id="B1-Xác nhận TT"></textarea></td>
+					<td><textarea required id="B1-Xác nhận TT"></textarea></td>
 					<td rowspan="2">1</td>
-					<td rowspan="2"><textarea id="B1-TT"></textarea></td>
-					<td rowspan="2"><textarea id="B1-BD"></textarea></td>
-					<td rowspan="2"><textarea id="B1-KT"></textarea></td>
+					<td rowspan="2"><textarea required id="B1-TT"></textarea></td>
+					<td rowspan="2"><textarea required id="B1-BD"></textarea></td>
+					<td rowspan="2"><textarea required id="B1-KT"></textarea></td>
 				</tr>
 				<tr>
 					<td>B2</td>
 					<td>Kiểm tra lượng nước trong Tank 100m3 TDS 250 trên HMI 250 mới</td>
 					<td>≥ 30 m³</td>
-					<td><textarea id="B2-Xác nhận TT"></textarea></td>
+					<td><textarea required id="B2-Xác nhận TT"></textarea></td>
 				</tr>
 				<tr>
 					<td>B3</td>
 					<td>Bắt đầu quá trình tái sinh tự động 220 số 1</td>
 					<td>58 p</td>
-					<td><input type="checkbox" id="B3-Xác nhận TT" value="uncheck" /></td>
+					<td><input type="checkbox" required id="B3-Xác nhận TT" value="uncheck" /></td>
 					<td></td>
 					<td></td>
-					<td><textarea id="B3-BD"></textarea></td>
-					<td><textarea id="B3-KT"></textarea></td>
+					<td><textarea required id="B3-BD"></textarea></td>
+					<td><textarea required id="B3-KT"></textarea></td>
 				</tr>
 				<tr>
 					<td>B4</td>
 					<td>Rửa ngược</td>
 					<td></td>
-					<td><input type="checkbox" id="B4-Xác nhận TT" value="uncheck" /></td>
+					<td><input type="checkbox" required id="B4-Xác nhận TT" value="uncheck" /></td>
 					<td>3</td>
-					<td><textarea id="B4-TT"></textarea></td>
-<td><textarea id="B4-BD"></textarea></td>
-<td><textarea id="B4-KT"></textarea></td>
+					<td><textarea required id="B4-TT"></textarea></td>
+<td><textarea required id="B4-BD"></textarea></td>
+<td><textarea required id="B4-KT"></textarea></td>
 				</tr>
 				<tr>
 					<td>B5</td>
 					<td>Kiểm tra: quá trình hút muối</td>
 					<td>35 l/p</td>
-					<td><textarea id="B5-Xác nhận TT"></textarea></td>
+					<td><textarea required id="B5-Xác nhận TT"></textarea></td>
 					<td>6</td>
-					<td><textarea id="B5-TT"></textarea></td>
-<td><textarea id="B5-BD"></textarea></td>
-<td><textarea id="B5-KT"></textarea></td>
+					<td><textarea required id="B5-TT"></textarea></td>
+<td><textarea required id="B5-BD"></textarea></td>
+<td><textarea required id="B5-KT"></textarea></td>
 				</tr>
 				<tr>
 					<td>B6</td>
 					<td>Mở: Valve cấp nước TDS 220 vào bồn chứa nước muối</td>
 					<td></td>
-					<td><input type="checkbox" id="B6-Xác nhận TT" value="uncheck" /></td>
+					<td><input type="checkbox" required id="B6-Xác nhận TT" value="uncheck" /></td>
 					<td rowspan="3">32</td>
-					<td rowspan="3"><textarea id="B7-TT"></textarea></td>
-					<td rowspan="3"><textarea id="B7-BD"></textarea></td>
-					<td rowspan="3"><textarea id="B7-KT"></textarea></td>
+					<td rowspan="3"><textarea required id="B7-TT"></textarea></td>
+					<td rowspan="3"><textarea required id="B7-BD"></textarea></td>
+					<td rowspan="3"><textarea required id="B7-KT"></textarea></td>
 				</tr>
 				<tr>
 					<td>B7</td>
 					<td>Kiểm tra nước TDS 220 đã được cấp vào bồn</td>
 					<td></td>
-					<td><input type="checkbox" id="B7-Xác nhận TT" value="uncheck" /></td>
+					<td><input type="checkbox" required id="B7-Xác nhận TT" value="uncheck" /></td>
 				</tr>
 				<tr>
 					<td>B8</td>
 					<td>Đóng: Valve cấp nước TDS 220 khi bơm muối ngừng</td>
 					<td></td>
-					<td><input type="checkbox" id="B8-Xác nhận TT" value="uncheck" /></td>
+					<td><input type="checkbox" required id="B8-Xác nhận TT" value="uncheck" /></td>
 				</tr>
 				<tr>
 					<td>B9</td>
 					<td>Rửa nhanh</td>
 					<td></td>
-					<td><input type="checkbox" id="B9-Xác nhận TT" value="uncheck" /></td>
+					<td><input type="checkbox" required id="B9-Xác nhận TT" value="uncheck" /></td>
 					<td>15</td>
-					<td><textarea id="B9-TT"></textarea></td>
-<td><textarea id="B9-BD"></textarea></td>
-<td><textarea id="B9-KT"></textarea></td>
+					<td><textarea required id="B9-TT"></textarea></td>
+<td><textarea required id="B9-BD"></textarea></td>
+<td><textarea required id="B9-KT"></textarea></td>
 				</tr>
 				<tr>
 					<td>B10</td>
 					<td>Điền đầy</td>
 					<td></td>
-					<td><input type="checkbox" id="B10-Xác nhận TT" value="uncheck" /></td>
+					<td><input type="checkbox" required id="B10-Xác nhận TT" value="uncheck" /></td>
 					<td>2</td>
-					<td><textarea id="B10-TT"></textarea></td>
-<td><textarea id="B10-BD"></textarea></td>
-<td><textarea id="B10-KT"></textarea></td>
+					<td><textarea required id="B10-TT"></textarea></td>
+<td><textarea required id="B10-BD"></textarea></td>
+<td><textarea required id="B10-KT"></textarea></td>
 				</tr>
 				<tr>
 					<td>B11</td>
 					<td>Mở: Valve xã đáy bồn chứa nước muối cho thoát ra ngoài hết</td>
 					<td></td>
-					<td><input type="checkbox" id="B11-Xác nhận TT" value="uncheck" /></td>
+					<td><input type="checkbox" required id="B11-Xác nhận TT" value="uncheck" /></td>
 					<td rowspan="3">5</td>
-					<td rowspan="3"><textarea id="B12-TT"></textarea></td>
-					<td rowspan="3"><textarea id="B12-BD"></textarea></td>
-					<td rowspan="3"><textarea id="B12-KT"></textarea></td>
+					<td rowspan="3"><textarea required id="B12-TT"></textarea></td>
+					<td rowspan="3"><textarea required id="B12-BD"></textarea></td>
+					<td rowspan="3"><textarea required id="B12-KT"></textarea></td>
 				</tr>
 				<tr>
 					<td>B12</td>
 					<td>Đóng: Valve xã đáy bồn chứa nước muối.</td>
 					<td></td>
-					<td><input type="checkbox" id="B12-Xác nhận TT" value="uncheck" /></td>
+					<td><input type="checkbox" required id="B12-Xác nhận TT" value="uncheck" /></td>
 				</tr>
 				<tr>
 					<td>B13</td>
 					<td>Bơm nước muối vào bồn chứa muối để tái sinh cho bồn tiếp theo</td>
 					<td>260 L</td>
-					<td><textarea id="B13-Xác nhận TT"></textarea></td>
+					<td><textarea required id="B13-Xác nhận TT"></textarea></td>
 				</tr>
 				<tr>
 					<td>B14</td>
 					<td>Mở: Valve lấy mẫu thành phẩm sau bồn làm mềm.</td>
 					<td></td>
-					<td><input type="checkbox" id="B14-Xác nhận TT" value="uncheck" /></td>
+					<td><input type="checkbox" required id="B14-Xác nhận TT" value="uncheck" /></td>
 					<td rowspan="3">5</td>
-					<td rowspan="3"><textarea id="B15-TT"></textarea></td>
-					<td rowspan="3"><textarea id="B15-BD"></textarea></td>
-					<td rowspan="3"><textarea id="B15-KT"></textarea></td>
+					<td rowspan="3"><textarea required id="B15-TT"></textarea></td>
+					<td rowspan="3"><textarea required id="B15-BD"></textarea></td>
+					<td rowspan="3"><textarea required id="B15-KT"></textarea></td>
 				</tr>
 				<tr>
 					<td>B15</td>
 					<td>Kiểm tra: mẫu nước TDS 220 sau làm mềm</td>
 					<td>≤ 350 mg/l</td>
-					<td><textarea id="B15-Xác nhận TT"></textarea></td>
+					<td><textarea required id="B15-Xác nhận TT"></textarea></td>
 				</tr>
 				<tr>
 					<td>B16</td>
 					<td>Đóng: Valve lấy mẫu thành phẩm sau bồn làm mềm.</td>
 					<td></td>
-					<td><input type="checkbox" id="B16-Xác nhận TT" value="uncheck" /></td>
+					<td><input type="checkbox" required id="B16-Xác nhận TT" value="uncheck" /></td>
 				</tr>
 				<tr>
 					<td colspan="4" style="font-weight: bold; ">Tổng thời gian thực hiện (phút)</td>
 					<td>69</td>
-					<td><textarea id="Tổng-TG"></textarea></td>
-<td><textarea id="TG-BD"></textarea></td>
-<td><textarea id="TG-KT"></textarea></td>
+					<td><textarea required id="Tổng-TG"></textarea></td>
+<td><textarea required id="TG-BD"></textarea></td>
+<td><textarea required id="TG-KT"></textarea></td>
 				</tr>
 				<tr style="font-weight: bold; ">
 					<td>Ghi chú</td>
-					<td colspan="7"><textarea id="Ghi chú"></textarea></td>
+					<td colspan="7"><textarea required id="Ghi chú"></textarea></td>
 				</tr>
 			</table>
 			
