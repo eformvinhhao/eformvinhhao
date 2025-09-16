@@ -1,0 +1,1065 @@
+<!--- File excel phải có những trường sau, chính xác từng chữ, không dư thừa dấu cách:
+	Id
+	Email cá nhân
+	Thời gian nộp phiếu
+	Người phê duyệt 1
+	Email_NPD1
+	Trạng thái_NPD1
+	Thời gian thao tác_NPD1
+	Ghi chú_NPD1
+	Người phê duyệt 2
+	Email_NPD2
+	Trạng thái_NPD2
+	Thời gian thao tác_NPD2
+	Ghi chú_NPD2
+	Trạng thái chung
+	Ngày/ tháng/ năm
+	Vận hành
+	QC
+	Trưởng ca
+-->
+
+<!--- Khi sửa html: gồm 3 file: file 1 giao diện chính để người dùng điền, file 2 chép vào automate, file 3 nháp
+	- Sửa hoàn hảo trên file 1, bật F5 để kiểm tra có lỗi font, giao diện...
+	- Sau khi hoàn chỉnh mới copy file này sang file thứ 2.
+	- Sau đó:
+	 	+	Copy từng phần trên file thứ 2 cần sửa
+		+	Chép ra file 3 nháp
+		+ 	Ctrl F để tìm và sửa
+		+	Dán ngược lại vào file 2 để tránh sửa luôn các phần không cần thiết
+	- Sau khi sửa xong 3 phần, xóa hết phần comment rồi mới chép vào automate
+-->
+
+<!DOCTYPE html>
+
+<html>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<style>
+    textarea:enabled,
+    input[type=text]:enabled,
+    select:enabled {
+        background-color: beige;
+    }
+
+    textarea:disabled,
+    input[type=text]:disabled,
+    select:disabled {
+        background-color: lightgray;
+    }
+
+    input[type=text],
+    select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 0;
+        display: block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button:enabled {
+        background-color: #4CAF50;
+    }
+
+    button:disabled {
+        background-color: lightgray;
+    }
+
+    * {
+        font-size: 100%;
+        font-family: Tahoma, sans-serif;
+    }
+
+    @media print {
+        .noPrint {
+            display: none;
+        }
+    }
+
+    input[type=button] {
+        width: 20%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button {
+        width: 20%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type="submit"][value="Chỉnh sửa"] {
+        background-color: green;
+        color: white;
+    }
+
+    input[type="button"][value="Tạm dừng"] {
+        background-color: red;
+        color: white;
+    }
+
+    input:focus:invalid {
+        box-shadow: none;
+    }
+
+    select {
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        height: max-content;
+        overflow: visible;
+        font-size: x-small;
+        word-wrap: break-word;
+        white-space: nowrap;
+        margin: 0%;
+        padding: auto;
+        overflow: visible;
+    }
+
+    select option {
+        margin: 0%;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: visible;
+        white-space: nowrap;
+        word-wrap: break-word;
+        overflow: visible;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+    tr {
+        height: 50px;
+    }
+
+
+    div {
+        border-radius: 5px;
+        background-color: rgb(255, 255, 255);
+        padding: 20px;
+    }
+
+    .table td {
+        padding: 0.2rem 0.5rem;
+        text-align: center;
+    }
+
+    textarea,
+    input[type=text],
+    input[type=date],
+    select {
+        overflow: inherit;
+        display: block;
+        box-sizing: border-box;
+        border: 0px;
+        resize: none;
+        width: 100%;
+    }
+
+
+    table,
+    th,
+    td {
+        border-collapse: collapse;
+        border: 1px solid;
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+    }
+</style>
+</style>
+<style type="text/css" media="print">
+	@page { size: landscape; }
+</style>
+<body>
+    <input onclick="enable_disable()" type="button" class="slide-toggle" value="Chỉnh sửa" style=" float: right;">
+    <form class='form' id="GFG">
+
+
+
+        <!--- Sửa phần 1: Phần tiêu đề form
+		Ở file render trên automata, sửa từ:
+			1. <textarea required id=" thành @{triggerBody()?['
+			2. "></textarea> thành ']}
+			3. <input required type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
+			@{triggerBody()?['Email cá nhân']}
+			4. <input required type="date" id="Ngày/ tháng/ năm" required=""> thành
+			@{outputs('Add_a_row_into_a_table')?['body/Ngày~1 tháng~1 năm']}
+		-->
+
+        <table table-layout="fixed">
+            <tr>
+                <td colspan="10" rowspan="4">
+                    <h1>KẾT QỦA KIỂM TRA ONLINE CSD - KCG</h1>
+                </td>
+                <td>Mã biểu mẫu:</td>
+                <td>BM tạm</td>
+            </tr>
+            <tr>
+                <td>Lần ban hành:</td>
+                <td>01</td>
+            </tr>
+            <tr>
+                <td>Ngày hiệu lực:</td>
+                <td>03/09/2020</td>
+            </tr>
+            <tr>
+                <td>Số trang:</td>
+                <td>02</td>
+            </tr>
+            <tr>
+                <td width="5%" style="font-weight: bold; overflow:auto;word-break:normal;">Ngày/ tháng/ năm</td>
+                <td><input required type="date" id="Ngày/ tháng/ năm" required=""></td>
+                <td width="5%" style="font-weight: bold;">QC online</td>
+                <td>
+                    <textarea required id="QC online"></textarea>
+                </td>
+                <td width="5%" style="font-weight: bold;">Email cá nhân</td>
+                <td>
+                    <input required type="text" autocomplete="email" maxlength="60" id="Email cá nhân"
+                        pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required="">
+                </td>
+                <td width="5%" style="font-weight: bold;">Lot sx</td>
+                <td>
+                    <textarea required id="Lot sx"></textarea>
+                </td>
+                <td width="5%" style="font-weight: bold;">Sản phẩm</td>
+                <td>
+                    <textarea required id="Sản phẩm"></textarea>
+                </td>
+                <td width="5%" style="font-weight: bold;">Line</td>
+                <td>
+                    <textarea required id="Line"></textarea>
+                </td>
+            </tr>
+        </table>
+        <!--- Sửa phần 1: Phần tiêu đề form-->
+
+
+        <br>
+
+
+
+        <!--- Sửa phần 2: Phần nội dung form:
+			Ở file render trên automata, sửa từ:
+			1. <textarea required id=" thành @{triggerBody()?['
+			2. "></textarea> thành ']}
+		-->
+
+        <table table-layout="fixed">
+            <tr>
+                <td colspan="17">Torque</td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td>Giờ kiểm tra</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+                <td>14</td>
+                <td>15</td>
+                <td>Đơn vị</td>
+            </tr>
+            <tr>
+                <td><textarea id="Tor-M1"></textarea></td>
+                <td><textarea id="1-Tor-M1"></textarea></td>
+                <td><textarea id="2-Tor-M1"></textarea></td>
+                <td><textarea id="3-Tor-M1"></textarea></td>
+                <td><textarea id="4-Tor-M1"></textarea></td>
+                <td><textarea id="5-Tor-M1"></textarea></td>
+                <td><textarea id="6-Tor-M1"></textarea></td>
+                <td><textarea id="7-Tor-M1"></textarea></td>
+                <td><textarea id="8-Tor-M1"></textarea></td>
+                <td><textarea id="9-Tor-M1"></textarea></td>
+                <td><textarea id="10-Tor-M1"></textarea></td>
+                <td><textarea id="11-Tor-M1"></textarea></td>
+                <td><textarea id="12-Tor-M1"></textarea></td>
+                <td><textarea id="13-Tor-M1"></textarea></td>
+                <td><textarea id="14-Tor-M1"></textarea></td>
+                <td><textarea id="15-Tor-M1"></textarea></td>
+                <td><textarea id="ĐV1"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="Tor-M2"></textarea></td>
+                <td><textarea id="1-Tor-M2"></textarea></td>
+                <td><textarea id="2-Tor-M2"></textarea></td>
+                <td><textarea id="3-Tor-M2"></textarea></td>
+                <td><textarea id="4-Tor-M2"></textarea></td>
+                <td><textarea id="5-Tor-M2"></textarea></td>
+                <td><textarea id="6-Tor-M2"></textarea></td>
+                <td><textarea id="7-Tor-M2"></textarea></td>
+                <td><textarea id="8-Tor-M2"></textarea></td>
+                <td><textarea id="9-Tor-M2"></textarea></td>
+                <td><textarea id="10-Tor-M2"></textarea></td>
+                <td><textarea id="11-Tor-M2"></textarea></td>
+                <td><textarea id="12-Tor-M2"></textarea></td>
+                <td><textarea id="13-Tor-M2"></textarea></td>
+                <td><textarea id="14-Tor-M2"></textarea></td>
+                <td><textarea id="15-Tor-M2"></textarea></td>
+                <td><textarea id="ĐV2"></textarea></td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td colspan="17">Góc AA</td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td>Giờ kiểm tra</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+                <td>14</td>
+                <td colspan="2">15</td>
+            </tr>
+            <tr>
+                <td><textarea id="AA-M1"></textarea></td>
+                <td><textarea id="1-AA-M1"></textarea></td>
+                <td><textarea id="2-AA-M1"></textarea></td>
+                <td><textarea id="3-AA-M1"></textarea></td>
+                <td><textarea id="4-AA-M1"></textarea></td>
+                <td><textarea id="5-AA-M1"></textarea></td>
+                <td><textarea id="6-AA-M1"></textarea></td>
+                <td><textarea id="7-AA-M1"></textarea></td>
+                <td><textarea id="8-AA-M1"></textarea></td>
+                <td><textarea id="9-AA-M1"></textarea></td>
+                <td><textarea id="10-AA-M1"></textarea></td>
+                <td><textarea id="11-AA-M1"></textarea></td>
+                <td><textarea id="12-AA-M1"></textarea></td>
+                <td><textarea id="13-AA-M1"></textarea></td>
+                <td><textarea id="14-AA-M1"></textarea></td>
+                <td colspan="2"><textarea id="15-AA-M1"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="AA-M2"></textarea></td>
+                <td><textarea id="1-AA-M2"></textarea></td>
+                <td><textarea id="2-AA-M2"></textarea></td>
+                <td><textarea id="3-AA-M2"></textarea></td>
+                <td><textarea id="4-AA-M2"></textarea></td>
+                <td><textarea id="5-AA-M2"></textarea></td>
+                <td><textarea id="6-AA-M2"></textarea></td>
+                <td><textarea id="7-AA-M2"></textarea></td>
+                <td><textarea id="8-AA-M2"></textarea></td>
+                <td><textarea id="9-AA-M2"></textarea></td>
+                <td><textarea id="10-AA-M2"></textarea></td>
+                <td><textarea id="11-AA-M2"></textarea></td>
+                <td><textarea id="12-AA-M2"></textarea></td>
+                <td><textarea id="13-AA-M2"></textarea></td>
+                <td><textarea id="14-AA-M2"></textarea></td>
+                <td colspan="2"><textarea id="15-AA-M2"></textarea></td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td colspan="17">SST (Pass=checkbox/Fail=uncheck)</td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td>Giờ kiểm tra</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+                <td>14</td>
+                <td colspan="2">15</td>
+            </tr>
+            <tr>
+                <td><textarea id="SST-M1"></textarea></td>
+                <td><input type="checkbox" id="1-SST-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="2-SST-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="3-SST-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="4-SST-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="5-SST-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="6-SST-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="7-SST-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="8-SST-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="9-SST-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="10-SST-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="11-SST-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="12-SST-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="13-SST-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="14-SST-M1" value="uncheck" /></td>
+                <td colspan="2"><input type="checkbox" id="15-SST-M1" value="uncheck" /></td>
+            </tr>
+            <tr>
+                <td><textarea id="SST-M2"></textarea></td>
+                <td><input type="checkbox" id="1-SST-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="2-SST-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="3-SST-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="4-SST-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="5-SST-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="6-SST-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="7-SST-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="8-SST-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="9-SST-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="10-SST-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="11-SST-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="12-SST-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="13-SST-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="14-SST-M2" value="uncheck" /></td>
+                <td colspan="2"><input type="checkbox" id="15-SST-M2" value="uncheck" /></td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td colspan="17">Droptest (Pass=checkbox/Fail=uncheck)</td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td>Giờ kiểm tra</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+                <td>14</td>
+                <td>15</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <td><textarea id="Drop-M1"></textarea></td>
+                <td><input type="checkbox" id="1-Drop-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="2-Drop-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="3-Drop-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="4-Drop-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="5-Drop-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="6-Drop-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="7-Drop-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="8-Drop-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="9-Drop-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="10-Drop-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="11-Drop-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="12-Drop-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="13-Drop-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="14-Drop-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="15-Drop-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="16-Drop-M1" value="uncheck" /></td>
+            </tr>
+            <tr>
+                <td><textarea id="Drop-M2"></textarea></td>
+                <td><input type="checkbox" id="1-Drop-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="2-Drop-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="3-Drop-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="4-Drop-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="5-Drop-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="6-Drop-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="7-Drop-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="8-Drop-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="9-Drop-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="10-Drop-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="11-Drop-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="12-Drop-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="13-Drop-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="14-Drop-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="15-Drop-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="16-Drop-M2" value="uncheck" /></td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td colspan="17">Stresscracking (Pass=checkbox/Fail=uncheck)</td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td>Giờ kiểm tra</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+                <td>14</td>
+                <td>15</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <td><textarea id="Stresscracking-M1"></textarea></td>
+                <td><input type="checkbox" id="1-Stresscracking-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="2-Stresscracking-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="3-Stresscracking-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="4-Stresscracking-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="5-Stresscracking-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="6-Stresscracking-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="7-Stresscracking-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="8-Stresscracking-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="9-Stresscracking-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="10-Stresscracking-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="11-Stresscracking-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="12-Stresscracking-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="13-Stresscracking-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="14-Stresscracking-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="15-Stresscracking-M1" value="uncheck" /></td>
+                <td><input type="checkbox" id="16-Stresscracking-M1" value="uncheck" /></td>
+            </tr>
+            <tr>
+                <td><textarea id="Stresscracking-M2"></textarea></td>
+                <td><input type="checkbox" id="1-Stresscracking-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="2-Stresscracking-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="3-Stresscracking-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="4-Stresscracking-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="5-Stresscracking-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="6-Stresscracking-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="7-Stresscracking-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="8-Stresscracking-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="9-Stresscracking-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="10-Stresscracking-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="11-Stresscracking-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="12-Stresscracking-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="13-Stresscracking-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="14-Stresscracking-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="15-Stresscracking-M2" value="uncheck" /></td>
+                <td><input type="checkbox" id="16-Stresscracking-M2" value="uncheck" /></td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td>Giờ kiểm tra</td>
+                <td colspan="16">Brix</td>
+            </tr>
+            <tr>
+                <td><textarea id="Brix-M1"></textarea></td>
+                <td colspan="16"><textarea id="KQ-Brix-M1"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="Brix-M2"></textarea></td>
+                <td colspan="16"><textarea id="KQ-Brix-M2"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="Brix-M3"></textarea></td>
+                <td colspan="16"><textarea id="KQ-Brix-M3"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="Brix-M4"></textarea></td>
+                <td colspan="16"><textarea id="KQ-Brix-M4"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="Brix-M5"></textarea></td>
+                <td colspan="16"><textarea id="KQ-Brix-M5"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="Brix-M6"></textarea></td>
+                <td colspan="16"><textarea id="KQ-Brix-M6"></textarea></td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td>Giờ kiểm tra</td>
+                <td colspan="16">CO2</td>
+            </tr>
+            <tr>
+                <td><textarea id="CO2-M1"></textarea></td>
+                <td colspan="16"><textarea id="KQ-CO2-M1"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="CO2-M2"></textarea></td>
+                <td colspan="16"><textarea id="KQ-CO2-M2"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="CO2-M3"></textarea></td>
+                <td colspan="16"><textarea id="KQ-CO2-M3"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="CO2-M4"></textarea></td>
+                <td colspan="16"><textarea id="KQ-CO2-M4"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="CO2-M5"></textarea></td>
+                <td colspan="16"><textarea id="KQ-CO2-M5"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="CO2-M6"></textarea></td>
+                <td colspan="16"><textarea id="KQ-CO2-M6"></textarea></td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td>Giờ kiểm tra</td>
+                <td colspan="16">TDS - 1900</td>
+            </tr>
+            <tr>
+                <td><textarea id="TDS - 1900-M1"></textarea></td>
+                <td colspan="16"><textarea id="KQ-TDS - 1900-M1"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="TDS - 1900-M2"></textarea></td>
+                <td colspan="16"><textarea id="KQ-TDS - 1900-M2"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="TDS - 1900-M3"></textarea></td>
+                <td colspan="16"><textarea id="KQ-TDS - 1900-M3"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="TDS - 1900-M4"></textarea></td>
+                <td colspan="16"><textarea id="KQ-TDS - 1900-M4"></textarea></td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td colspan="17">Ngoại quan theo AQL</td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td>Giờ kiểm tra</td>
+                <td colspan="4">Cỡ lô</td>
+                <td colspan="3">Bậc kiểm tra</td>
+                <td colspan="3">Item</td>
+                <td colspan="3">kết quả AQL (Pass=checkbox/Fail=uncheck)</td>
+                <td colspan="3">Ghi chú</td>
+            </tr>
+            <tr>
+                <td><textarea id="AQL-M1"></textarea></td>
+                <td colspan="4"><textarea id="Cỡ lô-AQL-M1"></textarea></td>
+                <td colspan="3"><textarea id="Bậc-QAL-M1"></textarea></td>
+                <td colspan="3"><textarea id="Item-QAL-M1"></textarea></td>
+                <td colspan="3"><input type="checkbox" id="KQ-AQL-M1" value="uncheck" /></td>
+                <td colspan="3"><textarea id="Ghi chú-AQL-M1"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="AQL-M2"></textarea></td>
+                <td colspan="4"><textarea id="Cỡ lô-AQL-M2"></textarea></td>
+                <td colspan="3"><textarea id="Bậc-QAL-M2"></textarea></td>
+                <td colspan="3"><textarea id="Item-QAL-M2"></textarea></td>
+                <td colspan="3"><input type="checkbox" id="KQ-AQL-M2" value="uncheck" /></td>
+                <td colspan="3"><textarea id="Ghi chú-AQL-M2"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="AQL-M3"></textarea></td>
+                <td colspan="4"><textarea id="Cỡ lô-AQL-M3"></textarea></td>
+                <td colspan="3"><textarea id="Bậc-QAL-M3"></textarea></td>
+                <td colspan="3"><textarea id="Item-QAL-M3"></textarea></td>
+                <td colspan="3"><input type="checkbox" id="KQ-AQL-M3" value="uncheck" /></td>
+                <td colspan="3"><textarea id="Ghi chú-AQL-M3"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="AQL-M4"></textarea></td>
+                <td colspan="4"><textarea id="Cỡ lô-AQL-M4"></textarea></td>
+                <td colspan="3"><textarea id="Bậc-QAL-M4"></textarea></td>
+                <td colspan="3"><textarea id="Item-QAL-M4"></textarea></td>
+                <td colspan="3"><input type="checkbox" id="KQ-AQL-M4" value="uncheck" /></td>
+                <td colspan="3"><textarea id="Ghi chú-AQL-M4"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="AQL-M5"></textarea></td>
+                <td colspan="4"><textarea id="Cỡ lô-AQL-M5"></textarea></td>
+                <td colspan="3"><textarea id="Bậc-QAL-M5"></textarea></td>
+                <td colspan="3"><textarea id="Item-QAL-M5"></textarea></td>
+                <td colspan="3"><input type="checkbox" id="KQ-AQL-M5" value="uncheck" /></td>
+                <td colspan="3"><textarea id="Ghi chú-AQL-M5"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="AQL-M6"></textarea></td>
+                <td colspan="4"><textarea id="Cỡ lô-AQL-M6"></textarea></td>
+                <td colspan="3"><textarea id="Bậc-QAL-M6"></textarea></td>
+                <td colspan="3"><textarea id="Item-QAL-M6"></textarea></td>
+                <td colspan="3"><input type="checkbox" id="KQ-AQL-M6" value="uncheck" /></td>
+                <td colspan="3"><textarea id="Ghi chú-AQL-M6"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="AQL-M7"></textarea></td>
+                <td colspan="4"><textarea id="Cỡ lô-AQL-M7"></textarea></td>
+                <td colspan="3"><textarea id="Bậc-QAL-M7"></textarea></td>
+                <td colspan="3"><textarea id="Item-QAL-M7"></textarea></td>
+                <td colspan="3"><input type="checkbox" id="KQ-AQL-M7" value="uncheck" /></td>
+                <td colspan="3"><textarea id="Ghi chú-AQL-M7"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea id="AQL-M8"></textarea></td>
+                <td colspan="4"><textarea id="Cỡ lô-AQL-M8"></textarea></td>
+                <td colspan="3"><textarea id="Bậc-QAL-M8"></textarea></td>
+                <td colspan="3"><textarea id="Item-QAL-M8"></textarea></td>
+                <td colspan="3"><input type="checkbox" id="KQ-AQL-M8" value="uncheck" /></td>
+                <td colspan="3"><textarea id="Ghi chú-AQL-M8"></textarea></td>
+            </tr>
+        </table>
+
+
+
+
+
+
+
+        <!--- Sửa phần 2: Phần nội dung form-->
+
+
+        <br>
+        <p><b>Chi tiết cây phê duyệt</b></p>
+
+        <!--- Sửa phần 3: Đối với file gốc: Chi tiết cây phê duyệt: sửa lại TC line nào trực tiếp
+				Đối với file render trên automata, sửa từ:
+				1. id=" thành >@{triggerBody()?['
+				2. "> thành ']}
+				3. <td colspan="5" id="Thời gian nộp phiếu"></td> thành
+			@{outputs('Add_a_row_into_a_table')?['body/Thời gian nộp phiếu']}
+		-->
+
+        <table>
+            <tr>
+                <td style="font-weight: bold;">Thời gian nộp phiếu</td>
+                <td colspan="5" id="Thời gian nộp phiếu"></td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td>Cấp phê duyệt</td>
+                <td>Người phê duyệt</td>
+                <td>Email</td>
+                <td>Trạng thái</td>
+                <td>Thời gian thao tác</td>
+                <td>Ghi chú NPD</td>
+            </tr>
+            <tr>
+                <td>Giám sát QC</td>
+                <td id="Người phê duyệt"></td>
+                <td id="Email"></td>
+                <td id="Trạng thái"></td>
+                <td id="Thời gian thao tác"></td>
+                <td id="Ghi chú NPD"></td>
+            </tr>
+        </table>
+
+        <!--- Sửa phần 3: Chi tiết cây phê duyệt: sửa lại TC line nào-->
+
+        <button id='nut' type="submit" style=" float: left;">Nộp kết quả</button>
+    </form>
+
+    <button onclick="window.print();" class="noPrint" style=" float: right; background-color: yellow; color:black">Kiểm
+        tra kết quả</button>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#GFG :input").prop("disabled", true);
+            $(".slide-toggle").click(function () {
+                if (this.value == "Chỉnh sửa") {
+                    this.value = "Tạm dừng";
+                    $("#GFG :input").prop("disabled", false);
+                }
+                else {
+                    this.value = "Chỉnh sửa";
+                    $("#GFG :input").prop("disabled", true);
+                }
+            });
+        });
+    </script>
+
+    <!--- Sửa phần 4: Đối với file gốc: Sửa lại tất cả các trường cho đúng với tên cột ở file excel-->
+    <script>
+        const formE1 = document.querySelector('.form');
+        formE1.addEventListener('submit', event => {
+            event.preventDefault();
+            const formData = new FormData(formE1);
+            const submissionTime = new Date().toISOString();
+            const data = new URLSearchParams(formData);
+
+            fetch('https://default810604757e7f4ede8d8dbf61f53ca5.28.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/7785ee6477a0405cb1b7ea0a2c843b7d/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=YySDlLAN7FxPbIsFApk5GnG8fjorFpNeRF2RpZUs6UU', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'Email cá nhân': document.getElementById('Email cá nhân').value,
+                    'Thời gian nộp phiếu': submissionTime,
+                    'Người phê duyệt': 'Nguyễn Phúc Quý Linh',
+                    'Email': 'linhnpq@vinhhao.com.vn',
+                    'Trạng thái': 'Pending',
+                    'Thời gian thao tác': '',
+                    'Ghi chú NPD': '',
+                    'Ngày/ tháng/ năm': document.getElementById('Ngày/ tháng/ năm').value,
+                    'QC online': document.getElementById('QC online').value,
+                    'Lot sx': document.getElementById('Lot sx').value,
+                    'Line': document.getElementById('Line').value,
+                    'Sản phẩm': document.getElementById('Sản phẩm').value,
+                    'Tor-M1': document.getElementById('Tor-M1').value,
+                    '1-Tor-M1': document.getElementById('1-Tor-M1').value,
+                    '2-Tor-M1': document.getElementById('2-Tor-M1').value,
+                    '3-Tor-M1': document.getElementById('3-Tor-M1').value,
+                    '4-Tor-M1': document.getElementById('4-Tor-M1').value,
+                    '5-Tor-M1': document.getElementById('5-Tor-M1').value,
+                    '6-Tor-M1': document.getElementById('6-Tor-M1').value,
+                    '7-Tor-M1': document.getElementById('7-Tor-M1').value,
+                    '8-Tor-M1': document.getElementById('8-Tor-M1').value,
+                    '9-Tor-M1': document.getElementById('9-Tor-M1').value,
+                    '10-Tor-M1': document.getElementById('10-Tor-M1').value,
+                    '11-Tor-M1': document.getElementById('11-Tor-M1').value,
+                    '12-Tor-M1': document.getElementById('12-Tor-M1').value,
+                    '13-Tor-M1': document.getElementById('13-Tor-M1').value,
+                    '14-Tor-M1': document.getElementById('14-Tor-M1').value,
+                    '15-Tor-M1': document.getElementById('15-Tor-M1').value,
+                    'ĐV1': document.getElementById('ĐV1').value,
+                    'Tor-M2': document.getElementById('Tor-M2').value,
+                    '1-Tor-M2': document.getElementById('1-Tor-M2').value,
+                    '2-Tor-M2': document.getElementById('2-Tor-M2').value,
+                    '3-Tor-M2': document.getElementById('3-Tor-M2').value,
+                    '4-Tor-M2': document.getElementById('4-Tor-M2').value,
+                    '5-Tor-M2': document.getElementById('5-Tor-M2').value,
+                    '6-Tor-M2': document.getElementById('6-Tor-M2').value,
+                    '7-Tor-M2': document.getElementById('7-Tor-M2').value,
+                    '8-Tor-M2': document.getElementById('8-Tor-M2').value,
+                    '9-Tor-M2': document.getElementById('9-Tor-M2').value,
+                    '10-Tor-M2': document.getElementById('10-Tor-M2').value,
+                    '11-Tor-M2': document.getElementById('11-Tor-M2').value,
+                    '12-Tor-M2': document.getElementById('12-Tor-M2').value,
+                    '13-Tor-M2': document.getElementById('13-Tor-M2').value,
+                    '14-Tor-M2': document.getElementById('14-Tor-M2').value,
+                    '15-Tor-M2': document.getElementById('15-Tor-M2').value,
+                    'ĐV2': document.getElementById('ĐV2').value,
+                    'AA-M1': document.getElementById('AA-M1').value,
+                    '1-AA-M1': document.getElementById('1-AA-M1').value,
+                    '2-AA-M1': document.getElementById('2-AA-M1').value,
+                    '3-AA-M1': document.getElementById('3-AA-M1').value,
+                    '4-AA-M1': document.getElementById('4-AA-M1').value,
+                    '5-AA-M1': document.getElementById('5-AA-M1').value,
+                    '6-AA-M1': document.getElementById('6-AA-M1').value,
+                    '7-AA-M1': document.getElementById('7-AA-M1').value,
+                    '8-AA-M1': document.getElementById('8-AA-M1').value,
+                    '9-AA-M1': document.getElementById('9-AA-M1').value,
+                    '10-AA-M1': document.getElementById('10-AA-M1').value,
+                    '11-AA-M1': document.getElementById('11-AA-M1').value,
+                    '12-AA-M1': document.getElementById('12-AA-M1').value,
+                    '13-AA-M1': document.getElementById('13-AA-M1').value,
+                    '14-AA-M1': document.getElementById('14-AA-M1').value,
+                    '15-AA-M1': document.getElementById('15-AA-M1').value,
+                    'AA-M2': document.getElementById('AA-M2').value,
+                    '1-AA-M2': document.getElementById('1-AA-M2').value,
+                    '2-AA-M2': document.getElementById('2-AA-M2').value,
+                    '3-AA-M2': document.getElementById('3-AA-M2').value,
+                    '4-AA-M2': document.getElementById('4-AA-M2').value,
+                    '5-AA-M2': document.getElementById('5-AA-M2').value,
+                    '6-AA-M2': document.getElementById('6-AA-M2').value,
+                    '7-AA-M2': document.getElementById('7-AA-M2').value,
+                    '8-AA-M2': document.getElementById('8-AA-M2').value,
+                    '9-AA-M2': document.getElementById('9-AA-M2').value,
+                    '10-AA-M2': document.getElementById('10-AA-M2').value,
+                    '11-AA-M2': document.getElementById('11-AA-M2').value,
+                    '12-AA-M2': document.getElementById('12-AA-M2').value,
+                    '13-AA-M2': document.getElementById('13-AA-M2').value,
+                    '14-AA-M2': document.getElementById('14-AA-M2').value,
+                    '15-AA-M2': document.getElementById('15-AA-M2').value,
+                    'Drop-M1': document.getElementById('Drop-M1').value,
+                    '1-Drop-M1': document.getElementById('1-Drop-M1').value,
+                    '2-Drop-M1': document.getElementById('2-Drop-M1').value,
+                    '3-Drop-M1': document.getElementById('3-Drop-M1').value,
+                    '4-Drop-M1': document.getElementById('4-Drop-M1').value,
+                    '5-Drop-M1': document.getElementById('5-Drop-M1').value,
+                    '6-Drop-M1': document.getElementById('6-Drop-M1').value,
+                    '7-Drop-M1': document.getElementById('7-Drop-M1').value,
+                    '8-Drop-M1': document.getElementById('8-Drop-M1').value,
+                    '9-Drop-M1': document.getElementById('9-Drop-M1').value,
+                    '10-Drop-M1': document.getElementById('10-Drop-M1').value,
+                    '11-Drop-M1': document.getElementById('11-Drop-M1').value,
+                    '12-Drop-M1': document.getElementById('12-Drop-M1').value,
+                    '13-Drop-M1': document.getElementById('13-Drop-M1').value,
+                    '14-Drop-M1': document.getElementById('14-Drop-M1').value,
+                    '15-Drop-M1': document.getElementById('15-Drop-M1').value,
+                    '16-Drop-M1': document.getElementById('16-Drop-M1').value,
+                    'Drop-M2': document.getElementById('Drop-M2').value,
+                    '1-Drop-M2': document.getElementById('1-Drop-M2').value,
+                    '2-Drop-M2': document.getElementById('2-Drop-M2').value,
+                    '3-Drop-M2': document.getElementById('3-Drop-M2').value,
+                    '4-Drop-M2': document.getElementById('4-Drop-M2').value,
+                    '5-Drop-M2': document.getElementById('5-Drop-M2').value,
+                    '6-Drop-M2': document.getElementById('6-Drop-M2').value,
+                    '7-Drop-M2': document.getElementById('7-Drop-M2').value,
+                    '8-Drop-M2': document.getElementById('8-Drop-M2').value,
+                    '9-Drop-M2': document.getElementById('9-Drop-M2').value,
+                    '10-Drop-M2': document.getElementById('10-Drop-M2').value,
+                    '11-Drop-M2': document.getElementById('11-Drop-M2').value,
+                    '12-Drop-M2': document.getElementById('12-Drop-M2').value,
+                    '13-Drop-M2': document.getElementById('13-Drop-M2').value,
+                    '14-Drop-M2': document.getElementById('14-Drop-M2').value,
+                    '15-Drop-M2': document.getElementById('15-Drop-M2').value,
+                    '16-Drop-M2': document.getElementById('16-Drop-M2').value,
+                    'Stresscracking-M1': document.getElementById('Stresscracking-M1').value,
+                    '1-Stresscracking-M1': document.getElementById('1-Stresscracking-M1').value,
+                    '2-Stresscracking-M1': document.getElementById('2-Stresscracking-M1').value,
+                    '3-Stresscracking-M1': document.getElementById('3-Stresscracking-M1').value,
+                    '4-Stresscracking-M1': document.getElementById('4-Stresscracking-M1').value,
+                    '5-Stresscracking-M1': document.getElementById('5-Stresscracking-M1').value,
+                    '6-Stresscracking-M1': document.getElementById('6-Stresscracking-M1').value,
+                    '7-Stresscracking-M1': document.getElementById('7-Stresscracking-M1').value,
+                    '8-Stresscracking-M1': document.getElementById('8-Stresscracking-M1').value,
+                    '9-Stresscracking-M1': document.getElementById('9-Stresscracking-M1').value,
+                    '10-Stresscracking-M1': document.getElementById('10-Stresscracking-M1').value,
+                    '11-Stresscracking-M1': document.getElementById('11-Stresscracking-M1').value,
+                    '12-Stresscracking-M1': document.getElementById('12-Stresscracking-M1').value,
+                    '13-Stresscracking-M1': document.getElementById('13-Stresscracking-M1').value,
+                    '14-Stresscracking-M1': document.getElementById('14-Stresscracking-M1').value,
+                    '15-Stresscracking-M1': document.getElementById('15-Stresscracking-M1').value,
+                    '16-Stresscracking-M1': document.getElementById('16-Stresscracking-M1').value,
+                    'Stresscracking-M2': document.getElementById('Stresscracking-M2').value,
+                    '1-Stresscracking-M2': document.getElementById('1-Stresscracking-M2').value,
+                    '2-Stresscracking-M2': document.getElementById('2-Stresscracking-M2').value,
+                    '3-Stresscracking-M2': document.getElementById('3-Stresscracking-M2').value,
+                    '4-Stresscracking-M2': document.getElementById('4-Stresscracking-M2').value,
+                    '5-Stresscracking-M2': document.getElementById('5-Stresscracking-M2').value,
+                    '6-Stresscracking-M2': document.getElementById('6-Stresscracking-M2').value,
+                    '7-Stresscracking-M2': document.getElementById('7-Stresscracking-M2').value,
+                    '8-Stresscracking-M2': document.getElementById('8-Stresscracking-M2').value,
+                    '9-Stresscracking-M2': document.getElementById('9-Stresscracking-M2').value,
+                    '10-Stresscracking-M2': document.getElementById('10-Stresscracking-M2').value,
+                    '11-Stresscracking-M2': document.getElementById('11-Stresscracking-M2').value,
+                    '12-Stresscracking-M2': document.getElementById('12-Stresscracking-M2').value,
+                    '13-Stresscracking-M2': document.getElementById('13-Stresscracking-M2').value,
+                    '14-Stresscracking-M2': document.getElementById('14-Stresscracking-M2').value,
+                    '15-Stresscracking-M2': document.getElementById('15-Stresscracking-M2').value,
+                    '16-Stresscracking-M2': document.getElementById('16-Stresscracking-M2').value,
+                    'Brix-M1': document.getElementById('Brix-M1').value,
+                    'KQ-Brix-M1': document.getElementById('KQ-Brix-M1').value,
+                    'Brix-M2': document.getElementById('Brix-M2').value,
+                    'KQ-Brix-M2': document.getElementById('KQ-Brix-M2').value,
+                    'Brix-M3': document.getElementById('Brix-M3').value,
+                    'KQ-Brix-M3': document.getElementById('KQ-Brix-M3').value,
+                    'Brix-M4': document.getElementById('Brix-M4').value,
+                    'KQ-Brix-M4': document.getElementById('KQ-Brix-M4').value,
+                    'Brix-M5': document.getElementById('Brix-M5').value,
+                    'KQ-Brix-M5': document.getElementById('KQ-Brix-M5').value,
+                    'Brix-M6': document.getElementById('Brix-M6').value,
+                    'KQ-Brix-M6': document.getElementById('KQ-Brix-M6').value,
+                    'CO2-M1': document.getElementById('CO2-M1').value,
+                    'KQ-CO2-M1': document.getElementById('KQ-CO2-M1').value,
+                    'CO2-M2': document.getElementById('CO2-M2').value,
+                    'KQ-CO2-M2': document.getElementById('KQ-CO2-M2').value,
+                    'CO2-M3': document.getElementById('CO2-M3').value,
+                    'KQ-CO2-M3': document.getElementById('KQ-CO2-M3').value,
+                    'CO2-M4': document.getElementById('CO2-M4').value,
+                    'KQ-CO2-M4': document.getElementById('KQ-CO2-M4').value,
+                    'CO2-M5': document.getElementById('CO2-M5').value,
+                    'KQ-CO2-M5': document.getElementById('KQ-CO2-M5').value,
+                    'CO2-M6': document.getElementById('CO2-M6').value,
+                    'KQ-CO2-M6': document.getElementById('KQ-CO2-M6').value,
+                    'TDS - 1900-M1': document.getElementById('TDS - 1900-M1').value,
+                    'KQ-TDS - 1900-M1': document.getElementById('KQ-TDS - 1900-M1').value,
+                    'TDS - 1900-M2': document.getElementById('TDS - 1900-M2').value,
+                    'KQ-TDS - 1900-M2': document.getElementById('KQ-TDS - 1900-M2').value,
+                    'TDS - 1900-M3': document.getElementById('TDS - 1900-M3').value,
+                    'KQ-TDS - 1900-M3': document.getElementById('KQ-TDS - 1900-M3').value,
+                    'TDS - 1900-M4': document.getElementById('TDS - 1900-M4').value,
+                    'KQ-TDS - 1900-M4': document.getElementById('KQ-TDS - 1900-M4').value,
+                    'AQL-M1': document.getElementById('AQL-M1').value,
+                    'Cỡ lô-AQL-M1': document.getElementById('Cỡ lô-AQL-M1').value,
+                    'Bậc-QAL-M1': document.getElementById('Bậc-QAL-M1').value,
+                    'Item-QAL-M1': document.getElementById('Item-QAL-M1').value,
+                    'KQ-AQL-M1': document.getElementById('KQ-AQL-M1').value,
+                    'Ghi chú-AQL-M1': document.getElementById('Ghi chú-AQL-M1').value,
+                    'AQL-M2': document.getElementById('AQL-M2').value,
+                    'Cỡ lô-AQL-M2': document.getElementById('Cỡ lô-AQL-M2').value,
+                    'Bậc-QAL-M2': document.getElementById('Bậc-QAL-M2').value,
+                    'Item-QAL-M2': document.getElementById('Item-QAL-M2').value,
+                    'KQ-AQL-M2': document.getElementById('KQ-AQL-M2').value,
+                    'Ghi chú-AQL-M2': document.getElementById('Ghi chú-AQL-M2').value,
+                    'AQL-M3': document.getElementById('AQL-M3').value,
+                    'Cỡ lô-AQL-M3': document.getElementById('Cỡ lô-AQL-M3').value,
+                    'Bậc-QAL-M3': document.getElementById('Bậc-QAL-M3').value,
+                    'Item-QAL-M3': document.getElementById('Item-QAL-M3').value,
+                    'KQ-AQL-M3': document.getElementById('KQ-AQL-M3').value,
+                    'Ghi chú-AQL-M3': document.getElementById('Ghi chú-AQL-M3').value,
+                    'AQL-M4': document.getElementById('AQL-M4').value,
+                    'Cỡ lô-AQL-M4': document.getElementById('Cỡ lô-AQL-M4').value,
+                    'Bậc-QAL-M4': document.getElementById('Bậc-QAL-M4').value,
+                    'Item-QAL-M4': document.getElementById('Item-QAL-M4').value,
+                    'KQ-AQL-M4': document.getElementById('KQ-AQL-M4').value,
+                    'Ghi chú-AQL-M4': document.getElementById('Ghi chú-AQL-M4').value,
+                    'AQL-M5': document.getElementById('AQL-M5').value,
+                    'Cỡ lô-AQL-M5': document.getElementById('Cỡ lô-AQL-M5').value,
+                    'Bậc-QAL-M5': document.getElementById('Bậc-QAL-M5').value,
+                    'Item-QAL-M5': document.getElementById('Item-QAL-M5').value,
+                    'KQ-AQL-M5': document.getElementById('KQ-AQL-M5').value,
+                    'Ghi chú-AQM5': document.getElementById('Ghi chú-AQL-M5').value,
+                    'AQL-M6': document.getElementById('AQL-M6').value,
+                    'Cỡ lô-AQL-M6': document.getElementById('Cỡ lô-AQL-M6').value,
+                    'Bậc-QAL-M6': document.getElementById('Bậc-QAL-M6').value,
+                    'Item-QAL-M6': document.getElementById('Item-QAL-M6').value,
+                    'KQ-AQL-M6': document.getElementById('KQ-AQL-M6').value,
+                    'Ghi chú-AQL-M6': document.getElementById('Ghi chú-AQL-M6').value,
+                    'AQL-M7': document.getElementById('AQL-M7').value,
+                    'Cỡ lô-AQL-M7': document.getElementById('Cỡ lô-AQL-M7').value,
+                    'Bậc-QAL-M7': document.getElementById('Bậc-QAL-M7').value,
+                    'Item-QAL-M7': document.getElementById('Item-QAL-M7').value,
+                    'KQ-AQL-M7': document.getElementById('KQ-AQL-M7').value,
+                    'Ghi chú-AQL-M7': document.getElementById('Ghi chú-AQL-M7').value,
+                    'AQL-M8': document.getElementById('AQL-M8').value,
+                    'Cỡ lô-AQL-M8': document.getElementById('Cỡ lô-AQL-M8').value,
+                    'Bậc-QAL-M8': document.getElementById('Bậc-QAL-M8').value,
+                    'Item-QAL-M8': document.getElementById('Item-QAL-M8').value,
+                    'KQ-AQL-M8': document.getElementById('KQ-AQL-M8').value,
+                    'Ghi chú-AQL-M8': document.getElementById('Ghi chú-AQL-M8').value,
+                    'SST-M1': document.getElementById('SST-M1').value,
+                    '1-SST-M1': document.getElementById('1-SST-M1').value,
+                    '2-SST-M1': document.getElementById('2-SST-M1').value,
+                    '3-SST-M1': document.getElementById('3-SST-M1').value,
+                    '4-SST-M1': document.getElementById('4-SST-M1').value,
+                    '5-SST-M1': document.getElementById('5-SST-M1').value,
+                    '6-SST-M1': document.getElementById('6-SST-M1').value,
+                    '7-SST-M1': document.getElementById('7-SST-M1').value,
+                    '8-SST-M1': document.getElementById('8-SST-M1').value,
+                    '9-SST-M1': document.getElementById('9-SST-M1').value,
+                    '10-SST-M1': document.getElementById('10-SST-M1').value,
+                    '11-SST-M1': document.getElementById('11-SST-M1').value,
+                    '12-SST-M1': document.getElementById('12-SST-M1').value,
+                    '13-SST-M1': document.getElementById('13-SST-M1').value,
+                    '14-SST-M1': document.getElementById('14-SST-M1').value,
+                    '15-SST-M1': document.getElementById('15-SST-M1').value,
+                    'SST-M2': document.getElementById('SST-M2').value,
+                    '1-SST-M2': document.getElementById('1-SST-M2').value,
+                    '2-SST-M2': document.getElementById('2-SST-M2').value,
+                    '3-SST-M2': document.getElementById('3-SST-M2').value,
+                    '4-SST-M2': document.getElementById('4-SST-M2').value,
+                    '5-SST-M2': document.getElementById('5-SST-M2').value,
+                    '6-SST-M2': document.getElementById('6-SST-M2').value,
+                    '7-SST-M2': document.getElementById('7-SST-M2').value,
+                    '8-SST-M2': document.getElementById('8-SST-M2').value,
+                    '9-SST-M2': document.getElementById('9-SST-M2').value,
+                    '10-SST-M2': document.getElementById('10-SST-M2').value,
+                    '11-SST-M2': document.getElementById('11-SST-M2').value,
+                    '12-SST-M2': document.getElementById('12-SST-M2').value,
+                    '13-SST-M2': document.getElementById('13-SST-M2').value,
+                    '14-SST-M2': document.getElementById('14-SST-M2').value,
+                    '15-SST-M2': document.getElementById('15-SST-M2').value,
+                })
+            }).then(res => res.json())
+                .then(data => console.log(data))
+                .catch(error => console.log(error));
+            alert("Đã nộp thành công");
+            window.location.reload();
+        });
+    </script>
+
+
+</body>
+
+</html>

@@ -185,8 +185,11 @@
 </style>
 </style>
 <style type="text/css" media="print">
-	@page { size: landscape; }
-  </style>
+    @page {
+        size: landscape;
+    }
+</style>
+
 <body>
     <input onclick="enable_disable()" type="button" class="slide-toggle" value="Chỉnh sửa" style=" float: right;">
     <form class='form' id="GFG">
@@ -256,7 +259,7 @@
 			2. "></textarea> thành ']}
 		-->
 
-        <table>
+        <table table-layout="fixed">
             <tr style="font-weight: bold;">
                 <td rowspan="2">Giờ kiểm tra</td>
                 <td colspan="12">DROTEST - MÁY CHIAMING - PET 350ML</td>
@@ -277,18 +280,78 @@
             </tr>
             <tr>
                 <td><textarea id="Giờ - PET 350ml"></textarea></td>
-                <td><input type="checkbox" id="2,1-PET 350ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="2,2-PET 350ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="2,3-PET 350ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="2,4-PET 350ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="2,5-PET 350ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="2,6-PET 350ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="3,1-PET 350ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="3,2-PET 350ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="3,3-PET 350ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="3,4-PET 350ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="3,5-PET 350ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="3,6-PET 350ml" value="uncheck" /></td>
+                <td><select id="2,1-PET 350ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="2,2-PET 350ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="2,3-PET 350ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="2,4-PET 350ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="2,5-PET 350ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="2,6-PET 350ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="3,1-PET 350ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="3,2-PET 350ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="3,3-PET 350ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="3,4-PET 350ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="3,5-PET 350ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="3,6-PET 350ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
             </tr>
             <tr style="font-weight: bold;">
                 <td rowspan="2">Giờ kiểm tra</td>
@@ -310,18 +373,78 @@
             </tr>
             <tr>
                 <td><textarea id="Giờ - PET 500ml"></textarea></td>
-                <td><input type="checkbox" id="2,1-PET 500ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="2,2-PET 500ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="2,3-PET 500ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="2,4-PET 500ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="2,5-PET 500ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="2,6-PET 500ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="1,3-PET 500ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="1,5-PET 500ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="1,6-PET 500ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="3,1-PET 500ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="3,4-PET 500ml" value="uncheck" /></td>
-                <td><input type="checkbox" id="3,5-PET 500ml" value="uncheck" /></td>
+                <td><select id="2,1-PET 500ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="2,2-PET 500ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="2,3-PET 500ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="2,4-PET 500ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="2,5-PET 500ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="2,6-PET 500ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="1,3-PET 500ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="1,5-PET 500ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="1,6-PET 500ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="3,1-PET 500ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="3,4-PET 500ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td><select id="3,5-PET 500ml">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
             </tr>
             <tr style="font-weight: bold;">
                 <td rowspan="2">Giờ kiểm tra</td>
@@ -335,10 +458,30 @@
             </tr>
             <tr>
                 <td><textarea id="Giờ - PET 1,5L"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="M512/2-PET 1,5L" value="uncheck" /></td>
-                <td colspan="3"><input type="checkbox" id="M522/2-PET 1,5L" value="uncheck" /></td>
-                <td colspan="3"><input type="checkbox" id="2,1-PET 1,5L" value="uncheck" /></td>
-                <td colspan="3"><input type="checkbox" id="2,2-PET 1,5L" value="uncheck" /></td>
+                <td colspan="3"><select id="M512/2-PET 1,5L">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td colspan="3"><select id="M522/2-PET 1,5L">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td colspan="3"><select id="2,1-PET 1,5L">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+                <td colspan="3"><select id="2,2-PET 1,5L">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
             </tr>
             <tr style="font-weight: bold;">
                 <td colspan="13">NGOẠI QUAN AQL - PET 350ML</td>
@@ -348,7 +491,7 @@
                 <td colspan="2">Cỡ lô</td>
                 <td colspan="2">Bậc kiểm tra</td>
                 <td colspan="2">Item</td>
-                <td colspan="3">Kết quả AQL (checkbox=Pass/uncheck=Fail)</td>
+                <td colspan="3">Kết quả AQL</td>
                 <td colspan="3">Ghi chú</td>
             </tr>
             <tr>
@@ -356,7 +499,12 @@
                 <td colspan="2"><textarea id="Cỡ lô-350ml-AQL - M1"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-350ml-AQL - M1"></textarea></td>
                 <td colspan="2"><textarea id="Item-350ml-AQL - M1"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-350ml-AQL - M1" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-350ml-AQL - M1">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
                 <td colspan="3"><textarea id="Ghi chú-350ml-AQL - M1"></textarea></td>
             </tr>
             <tr>
@@ -364,7 +512,13 @@
                 <td colspan="2"><textarea id="Cỡ lô-350ml-AQL - M2"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-350ml-AQL - M2"></textarea></td>
                 <td colspan="2"><textarea id="Item-350ml-AQL - M2"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-350ml-AQL - M2" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-350ml-AQL - M2">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+
                 <td colspan="3"><textarea id="Ghi chú-350ml-AQL - M2"></textarea></td>
             </tr>
             <tr>
@@ -372,7 +526,13 @@
                 <td colspan="2"><textarea id="Cỡ lô-350ml-AQL - M3"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-350ml-AQL - M3"></textarea></td>
                 <td colspan="2"><textarea id="Item-350ml-AQL - M3"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-350ml-AQL - M3" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-350ml-AQL - M3">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+
                 <td colspan="3"><textarea id="Ghi chú-350ml-AQL - M3"></textarea></td>
             </tr>
             <tr>
@@ -380,7 +540,13 @@
                 <td colspan="2"><textarea id="Cỡ lô-350ml-AQL - M4"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-350ml-AQL - M4"></textarea></td>
                 <td colspan="2"><textarea id="Item-350ml-AQL - M4"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-350ml-AQL - M4" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-350ml-AQL - M4">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+
                 <td colspan="3"><textarea id="Ghi chú-350ml-AQL - M4"></textarea></td>
             </tr>
             <tr>
@@ -388,7 +554,12 @@
                 <td colspan="2"><textarea id="Cỡ lô-350ml-AQL - M5"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-350ml-AQL - M5"></textarea></td>
                 <td colspan="2"><textarea id="Item-350ml-AQL - M5"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-350ml-AQL - M5" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-350ml-AQL - M5">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
                 <td colspan="3"><textarea id="Ghi chú-350ml-AQL - M5"></textarea></td>
             </tr>
             <tr>
@@ -396,7 +567,13 @@
                 <td colspan="2"><textarea id="Cỡ lô-350ml-AQL - M6"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-350ml-AQL - M6"></textarea></td>
                 <td colspan="2"><textarea id="Item-350ml-AQL - M6"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-350ml-AQL - M6" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-350ml-AQL - M6">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+
                 <td colspan="3"><textarea id="Ghi chú-350ml-AQL - M6"></textarea></td>
             </tr>
             <tr>
@@ -404,7 +581,12 @@
                 <td colspan="2"><textarea id="Cỡ lô-350ml-AQL - M7"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-350ml-AQL - M7"></textarea></td>
                 <td colspan="2"><textarea id="Item-350ml-AQL - M7"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-350ml-AQL - M7" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-350ml-AQL - M7">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
                 <td colspan="3"><textarea id="Ghi chú-350ml-AQL - M7"></textarea></td>
             </tr>
             <tr>
@@ -412,7 +594,13 @@
                 <td colspan="2"><textarea id="Cỡ lô-350ml-AQL - M8"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-350ml-AQL - M8"></textarea></td>
                 <td colspan="2"><textarea id="Item-350ml-AQL - M8"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-350ml-AQL - M8" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-350ml-AQL - M8">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+
                 <td colspan="3"><textarea id="Ghi chú-350ml-AQL - M8"></textarea></td>
             </tr>
             <tr style="font-weight: bold;">
@@ -423,7 +611,7 @@
                 <td colspan="2">Cỡ lô</td>
                 <td colspan="2">Bậc kiểm tra</td>
                 <td colspan="2">Item</td>
-                <td colspan="3">Kết quả AQL (checkbox=Pass/uncheck=Fail)</td>
+                <td colspan="3">Kết quả AQL</td>
                 <td colspan="3">Ghi chú</td>
             </tr>
             <tr>
@@ -431,7 +619,13 @@
                 <td colspan="2"><textarea id="Cỡ lô-500ml-AQL - M1"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-500ml-AQL - M1"></textarea></td>
                 <td colspan="2"><textarea id="Item-500ml-AQL - M1"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-500ml-AQL - M1" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-500ml-AQL - M1">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+
                 <td colspan="3"><textarea id="Ghi chú-500ml-AQL - M1"></textarea></td>
             </tr>
             <tr>
@@ -439,7 +633,13 @@
                 <td colspan="2"><textarea id="Cỡ lô-500ml-AQL - M2"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-500ml-AQL - M2"></textarea></td>
                 <td colspan="2"><textarea id="Item-500ml-AQL - M2"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-500ml-AQL - M2" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-500ml-AQL - M2">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+
                 <td colspan="3"><textarea id="Ghi chú-500ml-AQL - M2"></textarea></td>
             </tr>
             <tr>
@@ -447,7 +647,13 @@
                 <td colspan="2"><textarea id="Cỡ lô-500ml-AQL - M3"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-500ml-AQL - M3"></textarea></td>
                 <td colspan="2"><textarea id="Item-500ml-AQL - M3"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-500ml-AQL - M3" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-500ml-AQL - M3">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+
                 <td colspan="3"><textarea id="Ghi chú-500ml-AQL - M3"></textarea></td>
             </tr>
             <tr>
@@ -455,7 +661,13 @@
                 <td colspan="2"><textarea id="Cỡ lô-500ml-AQL - M4"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-500ml-AQL - M4"></textarea></td>
                 <td colspan="2"><textarea id="Item-500ml-AQL - M4"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-500ml-AQL - M4" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-500ml-AQL - M4">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+
                 <td colspan="3"><textarea id="Ghi chú-500ml-AQL - M4"></textarea></td>
             </tr>
             <tr>
@@ -463,7 +675,13 @@
                 <td colspan="2"><textarea id="Cỡ lô-500ml-AQL - M5"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-500ml-AQL - M5"></textarea></td>
                 <td colspan="2"><textarea id="Item-500ml-AQL - M5"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-500ml-AQL - M5" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-500ml-AQL - M5">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+
                 <td colspan="3"><textarea id="Ghi chú-500ml-AQL - M5"></textarea></td>
             </tr>
             <tr>
@@ -471,7 +689,13 @@
                 <td colspan="2"><textarea id="Cỡ lô-500ml-AQL - M6"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-500ml-AQL - M6"></textarea></td>
                 <td colspan="2"><textarea id="Item-500ml-AQL - M6"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-500ml-AQL - M6" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-500ml-AQL - M6">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+
                 <td colspan="3"><textarea id="Ghi chú-500ml-AQL - M6"></textarea></td>
             </tr>
             <tr>
@@ -479,7 +703,13 @@
                 <td colspan="2"><textarea id="Cỡ lô-500ml-AQL - M7"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-500ml-AQL - M7"></textarea></td>
                 <td colspan="2"><textarea id="Item-500ml-AQL - M7"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-500ml-AQL - M7" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-500ml-AQL - M7">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+
                 <td colspan="3"><textarea id="Ghi chú-500ml-AQL - M7"></textarea></td>
             </tr>
             <tr>
@@ -487,7 +717,12 @@
                 <td colspan="2"><textarea id="Cỡ lô-500ml-AQL - M8"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-500ml-AQL - M8"></textarea></td>
                 <td colspan="2"><textarea id="Item-500ml-AQL - M8"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-500ml-AQL - M8" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-500ml-AQL - M8">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
                 <td colspan="3"><textarea id="Ghi chú-500ml-AQL - M8"></textarea></td>
             </tr>
             <tr style="font-weight: bold;">
@@ -498,7 +733,7 @@
                 <td colspan="2">Cỡ lô</td>
                 <td colspan="2">Bậc kiểm tra</td>
                 <td colspan="2">Item</td>
-                <td colspan="3">Kết quả AQL (checkbox=Pass/uncheck=Fail)</td>
+                <td colspan="3">Kết quả AQL</td>
                 <td colspan="3">Ghi chú</td>
             </tr>
             <tr>
@@ -506,7 +741,13 @@
                 <td colspan="2"><textarea id="Cỡ lô-1,5L-AQL - M1"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-1,5L-AQL - M1"></textarea></td>
                 <td colspan="2"><textarea id="Item-1,5L-AQL - M1"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-1,5L-AQL - M1" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-1,5L-AQL - M1">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
+
                 <td colspan="3"><textarea id="Ghi chú-1,5L-AQL - M1"></textarea></td>
             </tr>
             <tr>
@@ -514,7 +755,12 @@
                 <td colspan="2"><textarea id="Cỡ lô-1,5L-AQL - M2"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-1,5L-AQL - M2"></textarea></td>
                 <td colspan="2"><textarea id="Item-1,5L-AQL - M2"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-1,5L-AQL - M2" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-1,5L-AQL - M2">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
                 <td colspan="3"><textarea id="Ghi chú-1,5L-AQL - M2"></textarea></td>
             </tr>
             <tr>
@@ -522,7 +768,12 @@
                 <td colspan="2"><textarea id="Cỡ lô-1,5L-AQL - M3"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-1,5L-AQL - M3"></textarea></td>
                 <td colspan="2"><textarea id="Item-1,5L-AQL - M3"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-1,5L-AQL - M3" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-1,5L-AQL - M3">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
                 <td colspan="3"><textarea id="Ghi chú-1,5L-AQL - M3"></textarea></td>
             </tr>
             <tr>
@@ -530,7 +781,12 @@
                 <td colspan="2"><textarea id="Cỡ lô-1,5L-AQL - M4"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-1,5L-AQL - M4"></textarea></td>
                 <td colspan="2"><textarea id="Item-1,5L-AQL - M4"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-1,5L-AQL - M4" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-1,5L-AQL - M4">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
                 <td colspan="3"><textarea id="Ghi chú-1,5L-AQL - M4"></textarea></td>
             </tr>
             <tr>
@@ -538,7 +794,12 @@
                 <td colspan="2"><textarea id="Cỡ lô-1,5L-AQL - M5"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-1,5L-AQL - M5"></textarea></td>
                 <td colspan="2"><textarea id="Item-1,5L-AQL - M5"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-1,5L-AQL - M5" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-1,5L-AQL - M5">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
                 <td colspan="3"><textarea id="Ghi chú-1,5L-AQL - M5"></textarea></td>
             </tr>
             <tr>
@@ -546,7 +807,12 @@
                 <td colspan="2"><textarea id="Cỡ lô-1,5L-AQL - M6"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-1,5L-AQL - M6"></textarea></td>
                 <td colspan="2"><textarea id="Item-1,5L-AQL - M6"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-1,5L-AQL - M6" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-1,5L-AQL - M6">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
                 <td colspan="3"><textarea id="Ghi chú-1,5L-AQL - M6"></textarea></td>
             </tr>
             <tr>
@@ -554,7 +820,12 @@
                 <td colspan="2"><textarea id="Cỡ lô-1,5L-AQL - M7"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-1,5L-AQL - M7"></textarea></td>
                 <td colspan="2"><textarea id="Item-1,5L-AQL - M7"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-1,5L-AQL - M7" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-1,5L-AQL - M7">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
                 <td colspan="3"><textarea id="Ghi chú-1,5L-AQL - M7"></textarea></td>
             </tr>
             <tr>
@@ -562,7 +833,12 @@
                 <td colspan="2"><textarea id="Cỡ lô-1,5L-AQL - M8"></textarea></td>
                 <td colspan="2"><textarea id="Bậc-1,5L-AQL - M8"></textarea></td>
                 <td colspan="2"><textarea id="Item-1,5L-AQL - M8"></textarea></td>
-                <td colspan="3"><input type="checkbox" id="KQ-1,5L-AQL - M8" value="uncheck" /></td>
+                <td colspan="3"><select id="KQ-1,5L-AQL - M8">
+                        <option value="  ">select</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
+                    </select>
+                </td>
                 <td colspan="3"><textarea id="Ghi chú-1,5L-AQL - M8"></textarea></td>
             </tr>
         </table>
@@ -832,6 +1108,30 @@
                     'Item-1,5L-AQL - M8': document.getElementById('Item-1,5L-AQL - M8').value,
                     'KQ-1,5L-AQL - M8': document.getElementById('KQ-1,5L-AQL - M8').value,
                     'Ghi chú-1,5L-AQL - M8': document.getElementById('Ghi chú-1,5L-AQL - M8').value,
+                    '2,1-PET 350ml': document.getElementById('2,1-PET 350ml').value,
+                    '2,2-PET 350ml': document.getElementById('2,2-PET 350ml').value,
+                    '2,3-PET 350ml': document.getElementById('2,3-PET 350ml').value,
+                    '2,4-PET 350ml': document.getElementById('2,4-PET 350ml').value,
+                    '2,5-PET 350ml': document.getElementById('2,5-PET 350ml').value,
+                    '2,6-PET 350ml': document.getElementById('2,6-PET 350ml').value,
+                    '3,1-PET 350ml': document.getElementById('3,1-PET 350ml').value,
+                    '3,2-PET 350ml': document.getElementById('3,2-PET 350ml').value,
+                    '3,3-PET 350ml': document.getElementById('3,3-PET 350ml').value,
+                    '3,4-PET 350ml': document.getElementById('3,4-PET 350ml').value,
+                    '3,5-PET 350ml': document.getElementById('3,5-PET 350ml').value,
+                    '3,6-PET 350ml': document.getElementById('3,6-PET 350ml').value,
+                    '2,1-PET 500ml': document.getElementById('2,1-PET 500ml').value,
+                    '2,2-PET 500ml': document.getElementById('2,2-PET 500ml').value,
+                    '2,3-PET 500ml': document.getElementById('2,3-PET 500ml').value,
+                    '2,4-PET 500ml': document.getElementById('2,4-PET 500ml').value,
+                    '2,5-PET 500ml': document.getElementById('2,5-PET 500ml').value,
+                    '2,6-PET 500ml': document.getElementById('2,6-PET 500ml').value,
+                    '1,3-PET 500ml': document.getElementById('1,3-PET 500ml').value,
+                    '1,5-PET 500ml': document.getElementById('1,5-PET 500ml').value,
+                    '1,6-PET 500ml': document.getElementById('1,6-PET 500ml').value,
+                    '3,1-PET 500ml': document.getElementById('3,1-PET 500ml').value,
+                    '3,4-PET 500ml': document.getElementById('3,4-PET 500ml').value,
+                    '3,5-PET 500ml': document.getElementById('3,5-PET 500ml').value,
                 })
             }).then(res => res.json())
                 .then(data => console.log(data))
