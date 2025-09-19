@@ -1,0 +1,590 @@
+<!--- File excel phải có những trường sau, chính xác từng chữ, không dư thừa dấu cách:
+	Id
+	Email cá nhân
+	Thời gian nộp phiếu
+	Người phê duyệt 1
+	Email_NPD1
+	Trạng thái_NPD1
+	Thời gian thao tác_NPD1
+	Ghi chú_NPD1
+	Người phê duyệt 2
+	Email_NPD2
+	Trạng thái_NPD2
+	Thời gian thao tác_NPD2
+	Ghi chú_NPD2
+	Trạng thái chung
+	Ngày/ tháng/ năm
+	Vận hành
+	QC
+	Trưởng ca
+-->
+
+<!--- Khi sửa html: gồm 3 file: file 1 giao diện chính để người dùng điền, file 2 chép vào automate, file 3 nháp
+	- Sửa hoàn hảo trên file 1, bật F5 để kiểm tra có lỗi font, giao diện...
+	- Sau khi hoàn chỉnh mới copy file này sang file thứ 2.
+	- Sau đó:
+	 	+	Copy từng phần trên file thứ 2 cần sửa
+		+	Chép ra file 3 nháp
+		+ 	Ctrl F để tìm và sửa
+		+	Dán ngược lại vào file 2 để tránh sửa luôn các phần không cần thiết
+	- Sau khi sửa xong 3 phần, xóa hết phần comment rồi mới chép vào automate
+-->
+
+<!DOCTYPE html>
+
+<html>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<style>
+    textarea:enabled,
+    input[type=text]:enabled,
+    select:enabled {
+        background-color: beige;
+    }
+
+    textarea:disabled,
+    input[type=text]:disabled,
+    select:disabled {
+        background-color: lightgray;
+    }
+
+    input[type=text],
+    select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 0;
+        display: block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button:enabled {
+        background-color: #4CAF50;
+    }
+
+    button:disabled {
+        background-color: lightgray;
+    }
+
+    * {
+        font-size: 100%;
+        font-family: Tahoma, sans-serif;
+    }
+
+    @media print {
+        .noPrint {
+            display: none;
+        }
+    }
+
+    input[type=button] {
+        width: 20%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button {
+        width: 20%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type="submit"][value="Chỉnh sửa"] {
+        background-color: green;
+        color: white;
+    }
+
+    input[type="button"][value="Tạm dừng"] {
+        background-color: red;
+        color: white;
+    }
+
+    input:focus:invalid {
+        box-shadow: none;
+    }
+
+    select {
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        height: max-content;
+        overflow: visible;
+        font-size: x-small;
+        word-wrap: break-word;
+        white-space: nowrap;
+        margin: 0%;
+        padding: auto;
+        overflow: visible;
+    }
+
+    select option {
+        margin: 0%;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: visible;
+        white-space: nowrap;
+        word-wrap: break-word;
+        overflow: visible;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+    tr {
+        height: 50px;
+    }
+
+
+    div {
+        border-radius: 5px;
+        background-color: rgb(255, 255, 255);
+        padding: 20px;
+    }
+
+    .table td {
+        padding: 0.2rem 0.5rem;
+        text-align: center;
+    }
+
+    textarea,
+    input[type=text],
+    input[type=date],
+    select {
+        overflow: inherit;
+        display: block;
+        box-sizing: border-box;
+        border: 0px;
+        resize: none;
+        width: 100%;
+    }
+
+
+    table,
+    th,
+    td {
+        border-collapse: collapse;
+        border: 1px solid;
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+    }
+</style>
+</style>
+<style type="text/css" media="print">
+    @page {
+        size: landscape;
+    }
+</style>
+
+<body>
+    <input onclick="enable_disable()" type="button" class="slide-toggle" value="Chỉnh sửa" style=" float: right;">
+    <form class='form' id="GFG">
+
+
+
+        <!--- Sửa phần 1: Phần tiêu đề form
+		Ở file render trên automata, sửa từ:
+			1. <textarea required id=" thành @{triggerBody()?['
+			2. "></textarea> thành ']}
+			3. <input required type="text" autocomplete="email" maxlength="60" id="Email cá nhân" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required=""> thành
+			@{triggerBody()?['Email cá nhân']}
+			4. <input required type="date" id="Ngày/ tháng/ năm" required=""> thành
+			@{outputs('Add_a_row_into_a_table')?['body/Ngày~1 tháng~1 năm']}
+		-->
+
+        <table table-layout="fixed">
+            <table>
+                <tr>
+                    <td colspan="6" rowspan="4" style="font-weight: bold;">BẢNG KÊ CHỨNG TỪ GIAO DỊCH KHO</td>
+                    <td>Mã biểu mẫu</td>
+                    <td>VHW/KV/QĐ-005/BM05</td>
+                </tr>
+                <tr>
+                    <td>Lần ban hành</td>
+                    <td>01</td>
+                </tr>
+                <tr>
+                    <td>Ngày hiệu lực</td>
+                    <td>01/10/2021</td>
+                </tr>
+                <tr>
+                    <td>Số trang</td>
+                    <td>01</td>
+                </tr>
+                <tr>
+                    <td width="5%" style="font-weight: bold; overflow:auto;word-break:normal;">Ngày/ tháng/ năm</td>
+                    <td><input required type="date" id="Ngày/ tháng/ năm" required=""></td>
+                    <td style="font-weight: bold;">Nhân viên data</td>
+                    <td><textarea required id="Nhân viên data"></textarea></td>
+                    <td width="5%" style="font-weight: bold;">Email cá nhân</td>
+                    <td>
+                        <input required type="text" autocomplete="email" maxlength="60" id="Email cá nhân"
+                            pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required="">
+                    </td>
+                    <td style="font-weight: bold;">Loại chứng từ</td>
+                    <td><textarea required id="Loại chứng từ"></textarea></td>
+                </tr>
+            </table>
+            <!--- Sửa phần 1: Phần tiêu đề form-->
+
+
+            <br>
+
+
+
+            <!--- Sửa phần 2: Phần nội dung form:
+			Ở file render trên automata, sửa từ:
+			1. <textarea required id=" thành @{triggerBody()?['
+			2. "></textarea> thành ']}
+		-->
+
+            <table table-layout="fixed">
+                <tr style="font-weight: bold;">
+                    <td>SST</td>
+                    <td>Journal No</td>
+                    <td>Org Code</td>
+                    <td>Diễn giải</td>
+                    <td>Ghi chú</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">1</td>
+                    <td><textarea id="Journal-1"></textarea></td>
+                    <td><textarea id="Org-1"></textarea></td>
+                    <td><textarea id="DD-1"></textarea></td>
+                    <td><textarea id="Ghi chú-1"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">2</td>
+                    <td><textarea id="Journal-2"></textarea></td>
+                    <td><textarea id="Org-2"></textarea></td>
+                    <td><textarea id="DD-2"></textarea></td>
+                    <td><textarea id="Ghi chú-2"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">3</td>
+                    <td><textarea id="Journal-3"></textarea></td>
+                    <td><textarea id="Org-3"></textarea></td>
+                    <td><textarea id="DD-3"></textarea></td>
+                    <td><textarea id="Ghi chú-3"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">4</td>
+                    <td><textarea id="Journal-4"></textarea></td>
+                    <td><textarea id="Org-4"></textarea></td>
+                    <td><textarea id="DD-4"></textarea></td>
+                    <td><textarea id="Ghi chú-4"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">5</td>
+                    <td><textarea id="Journal-5"></textarea></td>
+                    <td><textarea id="Org-5"></textarea></td>
+                    <td><textarea id="DD-5"></textarea></td>
+                    <td><textarea id="Ghi chú-5"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">6</td>
+                    <td><textarea id="Journal-6"></textarea></td>
+                    <td><textarea id="Org-6"></textarea></td>
+                    <td><textarea id="DD-6"></textarea></td>
+                    <td><textarea id="Ghi chú-6"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">7</td>
+                    <td><textarea id="Journal-7"></textarea></td>
+                    <td><textarea id="Org-7"></textarea></td>
+                    <td><textarea id="DD-7"></textarea></td>
+                    <td><textarea id="Ghi chú-7"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">8</td>
+                    <td><textarea id="Journal-8"></textarea></td>
+                    <td><textarea id="Org-8"></textarea></td>
+                    <td><textarea id="DD-8"></textarea></td>
+                    <td><textarea id="Ghi chú-8"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">9</td>
+                    <td><textarea id="Journal-9"></textarea></td>
+                    <td><textarea id="Org-9"></textarea></td>
+                    <td><textarea id="DD-9"></textarea></td>
+                    <td><textarea id="Ghi chú-9"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">10</td>
+                    <td><textarea id="Journal-10"></textarea></td>
+                    <td><textarea id="Org-10"></textarea></td>
+                    <td><textarea id="DD-10"></textarea></td>
+                    <td><textarea id="Ghi chú-10"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">11</td>
+                    <td><textarea id="Journal-11"></textarea></td>
+                    <td><textarea id="Org-11"></textarea></td>
+                    <td><textarea id="DD-11"></textarea></td>
+                    <td><textarea id="Ghi chú-11"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">12</td>
+                    <td><textarea id="Journal-12"></textarea></td>
+                    <td><textarea id="Org-12"></textarea></td>
+                    <td><textarea id="DD-12"></textarea></td>
+                    <td><textarea id="Ghi chú-12"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">13</td>
+                    <td><textarea id="Journal-13"></textarea></td>
+                    <td><textarea id="Org-13"></textarea></td>
+                    <td><textarea id="DD-13"></textarea></td>
+                    <td><textarea id="Ghi chú-13"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">14</td>
+                    <td><textarea id="Journal-14"></textarea></td>
+                    <td><textarea id="Org-14"></textarea></td>
+                    <td><textarea id="DD-14"></textarea></td>
+                    <td><textarea id="Ghi chú-14"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">15</td>
+                    <td><textarea id="Journal-15"></textarea></td>
+                    <td><textarea id="Org-15"></textarea></td>
+                    <td><textarea id="DD-15"></textarea></td>
+                    <td><textarea id="Ghi chú-15"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">16</td>
+                    <td><textarea id="Journal-16"></textarea></td>
+                    <td><textarea id="Org-16"></textarea></td>
+                    <td><textarea id="DD-16"></textarea></td>
+                    <td><textarea id="Ghi chú-16"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">17</td>
+                    <td><textarea id="Journal-17"></textarea></td>
+                    <td><textarea id="Org-17"></textarea></td>
+                    <td><textarea id="DD-17"></textarea></td>
+                    <td><textarea id="Ghi chú-17"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">18</td>
+                    <td><textarea id="Journal-18"></textarea></td>
+                    <td><textarea id="Org-18"></textarea></td>
+                    <td><textarea id="DD-18"></textarea></td>
+                    <td><textarea id="Ghi chú-18"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">19</td>
+                    <td><textarea id="Journal-19"></textarea></td>
+                    <td><textarea id="Org-19"></textarea></td>
+                    <td><textarea id="DD-19"></textarea></td>
+                    <td><textarea id="Ghi chú-19"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">20</td>
+                    <td><textarea id="Journal-20"></textarea></td>
+                    <td><textarea id="Org-20"></textarea></td>
+                    <td><textarea id="DD-20"></textarea></td>
+                    <td><textarea id="Ghi chú-20"></textarea></td>
+                </tr>
+            </table>
+
+
+
+
+
+
+
+
+            <!--- Sửa phần 2: Phần nội dung form-->
+
+
+            <br>
+            <p><b>Chi tiết cây phê duyệt</b></p>
+
+            <!--- Sửa phần 3: Đối với file gốc: Chi tiết cây phê duyệt: sửa lại TC line nào trực tiếp
+				Đối với file render trên automata, sửa từ:
+				1. id=" thành >@{triggerBody()?['
+				2. "> thành ']}
+				3. <td colspan="5" id="Thời gian nộp phiếu"></td> thành
+			@{outputs('Add_a_row_into_a_table')?['body/Thời gian nộp phiếu']}
+		-->
+
+            <table table-layout="fixed">
+                <tr>
+                    <td style="font-weight: bold;">Thời gian nộp phiếu</td>
+                    <td colspan="5" id="Thời gian nộp phiếu"></td>
+                </tr>
+                <tr style="font-weight: bold;">
+                    <td>Cấp phê duyệt</td>
+                    <td>Người phê duyệt</td>
+                    <td>Email</td>
+                    <td>Trạng thái</td>
+                    <td>Thời gian thao tác</td>
+                    <td>Ghi chú NPD</td>
+                </tr>
+                <tr>
+                    <td>Chuyên Viên Kiểm Soát Số Liệu</td>
+                    <td id="Người phê duyệt"></td>
+                    <td id="Email"></td>
+                    <td id="Trạng thái"></td>
+                    <td id="Thời gian thao tác"></td>
+                    <td id="Ghi chú NPD"></td>
+                </tr>
+            </table>
+
+            <!--- Sửa phần 3: Chi tiết cây phê duyệt: sửa lại TC line nào-->
+
+            <button id='nut' type="submit" style=" float: left;">Nộp kết quả</button>
+    </form>
+
+    <button onclick="window.print();" class="noPrint" style=" float: right; background-color: yellow; color:black">Kiểm
+        tra kết quả</button>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#GFG :input").prop("disabled", true);
+            $(".slide-toggle").click(function () {
+                if (this.value == "Chỉnh sửa") {
+                    this.value = "Tạm dừng";
+                    $("#GFG :input").prop("disabled", false);
+                }
+                else {
+                    this.value = "Chỉnh sửa";
+                    $("#GFG :input").prop("disabled", true);
+                }
+            });
+        });
+    </script>
+
+    <!--- Sửa phần 4: Đối với file gốc: Sửa lại tất cả các trường cho đúng với tên cột ở file excel-->
+    <script>
+        const formE1 = document.querySelector('.form');
+        formE1.addEventListener('submit', event => {
+            event.preventDefault();
+            const formData = new FormData(formE1);
+            const submissionTime = new Date().toISOString();
+            const data = new URLSearchParams(formData);
+
+            fetch('https://default810604757e7f4ede8d8dbf61f53ca5.28.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/8e2b74a5bcbb453c92764293623269f7/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=aHBeXZIryin_HaKo7I124k97bF1HJDHCWiYe6UWYWQ8', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'Email cá nhân': document.getElementById('Email cá nhân').value,
+                    'Thời gian nộp phiếu': submissionTime,
+                    'Người phê duyệt': 'Phan Ngọc Cường',
+                    'Email': 'cuongpn@vinhhao.com.vn',
+                    'Trạng thái': 'Pending',
+                    'Thời gian thao tác': '',
+                    'Ghi chú NPD': '',
+                    'Ngày/ tháng/ năm': document.getElementById('Ngày/ tháng/ năm').value,
+                    'Nhân viên data': document.getElementById('Nhân viên data').value,
+                    'Loại chứng từ': document.getElementById('Loại chứng từ').value,
+                    'Journal-1': document.getElementById('Journal-1').value,
+                    'Org-1': document.getElementById('Org-1').value,
+                    'DD-1': document.getElementById('DD-1').value,
+                    'Ghi chú-1': document.getElementById('Ghi chú-1').value,
+                    'Journal-2': document.getElementById('Journal-2').value,
+                    'Org-2': document.getElementById('Org-2').value,
+                    'DD-2': document.getElementById('DD-2').value,
+                    'Ghi chú-2': document.getElementById('Ghi chú-2').value,
+                    'Journal-3': document.getElementById('Journal-3').value,
+                    'Org-3': document.getElementById('Org-3').value,
+                    'DD-3': document.getElementById('DD-3').value,
+                    'Ghi chú-3': document.getElementById('Ghi chú-3').value,
+                    'Journal-4': document.getElementById('Journal-4').value,
+                    'Org-4': document.getElementById('Org-4').value,
+                    'DD-4': document.getElementById('DD-4').value,
+                    'Ghi chú-4': document.getElementById('Ghi chú-4').value,
+                    'Journal-5': document.getElementById('Journal-5').value,
+                    'Org-5': document.getElementById('Org-5').value,
+                    'DD-5': document.getElementById('DD-5').value,
+                    'Ghi chú-5': document.getElementById('Ghi chú-5').value,
+                    'Journal-6': document.getElementById('Journal-6').value,
+                    'Org-6': document.getElementById('Org-6').value,
+                    'DD-6': document.getElementById('DD-6').value,
+                    'Ghi chú-6': document.getElementById('Ghi chú-6').value,
+                    'Journal-7': document.getElementById('Journal-7').value,
+                    'Org-7': document.getElementById('Org-7').value,
+                    'DD-7': document.getElementById('DD-7').value,
+                    'Ghi chú-7': document.getElementById('Ghi chú-7').value,
+                    'Journal-8': document.getElementById('Journal-8').value,
+                    'Org-8': document.getElementById('Org-8').value,
+                    'DD-8': document.getElementById('DD-8').value,
+                    'Ghi chú-8': document.getElementById('Ghi chú-8').value,
+                    'Journal-9': document.getElementById('Journal-9').value,
+                    'Org-9': document.getElementById('Org-9').value,
+                    'DD-9': document.getElementById('DD-9').value,
+                    'Ghi chú-9': document.getElementById('Ghi chú-9').value,
+                    'Journal-10': document.getElementById('Journal-10').value,
+                    'Org-10': document.getElementById('Org-10').value,
+                    'DD-10': document.getElementById('DD-10').value,
+                    'Ghi chú-10': document.getElementById('Ghi chú-10').value,
+                    'Journal-11': document.getElementById('Journal-11').value,
+                    'Org-11': document.getElementById('Org-11').value,
+                    'DD-11': document.getElementById('DD-11').value,
+                    'Ghi chú-11': document.getElementById('Ghi chú-11').value,
+                    'Journal-12': document.getElementById('Journal-12').value,
+                    'Org-12': document.getElementById('Org-12').value,
+                    'DD-12': document.getElementById('DD-12').value,
+                    'Ghi chú-12': document.getElementById('Ghi chú-12').value,
+                    'Journal-13': document.getElementById('Journal-13').value,
+                    'Org-13': document.getElementById('Org-13').value,
+                    'DD-13': document.getElementById('DD-13').value,
+                    'Ghi chú-13': document.getElementById('Ghi chú-13').value,
+                    'Journal-14': document.getElementById('Journal-14').value,
+                    'Org-14': document.getElementById('Org-14').value,
+                    'DD-14': document.getElementById('DD-14').value,
+                    'Ghi chú-14': document.getElementById('Ghi chú-14').value,
+                    'Journal-15': document.getElementById('Journal-15').value,
+                    'Org-15': document.getElementById('Org-15').value,
+                    'DD-15': document.getElementById('DD-15').value,
+                    'Ghi chú-15': document.getElementById('Ghi chú-15').value,
+                    'Journal-16': document.getElementById('Journal-16').value,
+                    'Org-16': document.getElementById('Org-16').value,
+                    'DD-16': document.getElementById('DD-16').value,
+                    'Ghi chú-16': document.getElementById('Ghi chú-16').value,
+                    'Journal-17': document.getElementById('Journal-17').value,
+                    'Org-17': document.getElementById('Org-17').value,
+                    'DD-17': document.getElementById('DD-17').value,
+                    'Ghi chú-17': document.getElementById('Ghi chú-17').value,
+                    'Journal-18': document.getElementById('Journal-18').value,
+                    'Org-18': document.getElementById('Org-18').value,
+                    'DD-18': document.getElementById('DD-18').value,
+                    'Ghi chú-18': document.getElementById('Ghi chú-18').value,
+                    'Journal-19': document.getElementById('Journal-19').value,
+                    'Org-19': document.getElementById('Org-19').value,
+                    'DD-19': document.getElementById('DD-19').value,
+                    'Ghi chú-19': document.getElementById('Ghi chú-19').value,
+                    'Journal-20': document.getElementById('Journal-20').value,
+                    'Org-20': document.getElementById('Org-20').value,
+                    'DD-20': document.getElementById('DD-20').value,
+                    'Ghi chú-20': document.getElementById('Ghi chú-20').value,
+                })
+            }).then(res => res.json())
+                .then(data => console.log(data))
+                .catch(error => console.log(error));
+            alert("Đã nộp thành công");
+            window.location.reload();
+        });
+    </script>
+
+
+</body>
+
+</html>
